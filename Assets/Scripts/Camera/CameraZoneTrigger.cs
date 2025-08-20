@@ -13,7 +13,7 @@ public class CameraZoneTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log($"Enter {gameObject.name}");
-            // 이 구역에 들어오면, 연결된 카메라의 우선순위 +1 함으로써 
+            // 이 구역에 들엉邦툈E 연결된 카메라의 퓖E굴坪� +1 함으로퐗E
             if (targetCamera != null) targetCamera.Priority = nowCamera.Priority + 1;
         }
     }
