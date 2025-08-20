@@ -13,6 +13,9 @@ public class Enemy_move : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private Transform shield;
+    private float initialShieldX;
 
     void Awake()
     {
@@ -23,6 +26,8 @@ public class Enemy_move : MonoBehaviour
         anim = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        initialShieldX = shield.localPosition.x;
     }
 
     void FixedUpdate()
@@ -40,6 +45,7 @@ public class Enemy_move : MonoBehaviour
         {
             nextMove *= -1;
             spriteRenderer.flipX = nextMove == 1;
+            UpdateShieldPosition();
             CancelInvoke();
             Invoke("Think", 2);
 
@@ -55,6 +61,7 @@ public class Enemy_move : MonoBehaviour
         if (nextMove != 0)
         {
             spriteRenderer.flipX = nextMove == 1;
+            UpdateShieldPosition();
         }
             
         float nextThinkTime = Random.Range(2f, 5f);
@@ -62,6 +69,28 @@ public class Enemy_move : MonoBehaviour
         Invoke("Think", nextThinkTime);
     }
 
+    void UpdateShieldPosition()
+    {
+        if (shield == null) 
+        {
+            return;
+        }
+
+        float direction;
+
+        if (spriteRenderer.flipX)
+        {
+            direction = -1f;
+        }
+        else
+        {
+            direction = 1f;
+        }
+
+        Vector3 pos = shield.localPosition;
+        pos.x = initialShieldX * direction;
+        shield.localPosition = pos;
+    }
 
     // Start is called before the first frame update
     void Start()

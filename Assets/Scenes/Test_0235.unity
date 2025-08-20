@@ -496,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 0}
 --- !u!95 &157520873
 Animator:
   serializedVersion: 5
@@ -2125,6 +2126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 0}
 --- !u!95 &588585068
 Animator:
   serializedVersion: 5
@@ -15320,6 +15322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 1811850808}
 --- !u!95 &1111993156
 Animator:
   serializedVersion: 5
@@ -15896,6 +15899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 3175299951771595096, guid: a5db39d26559bba4280a16088c2d68ab, type: 3}
 --- !u!95 &1123291719
 Animator:
   serializedVersion: 5
@@ -16378,6 +16382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 3175299951771595096, guid: a5db39d26559bba4280a16088c2d68ab, type: 3}
 --- !u!95 &1242616626
 Animator:
   serializedVersion: 5
@@ -18762,6 +18767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 3175299951771595096, guid: a5db39d26559bba4280a16088c2d68ab, type: 3}
 --- !u!50 &1749825126
 Rigidbody2D:
   serializedVersion: 4
@@ -19360,6 +19366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  shield: {fileID: 0}
 --- !u!95 &1838291291
 Animator:
   serializedVersion: 5
