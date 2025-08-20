@@ -31,10 +31,10 @@ public class SpearProjectile : MonoBehaviour
         if (stuck) return;
 
         // ¡Ú¡Ú¡Ú ¿©±â°¡ ¼öÁ¤µÈ ·ÎÁ÷ÀÔ´Ï´Ù ¡Ú¡Ú¡Ú
-        // 1. ºÎµúÈù ´ë»óÀÌ ÆÄ±« Æ®¸®°ÅÀÎÁö ¸ÕÀú È®ÀÎ
+        // 1. ºÎµúÈE´EóÀÌ ÆÄ±« Æ®¸®°ÅÀÎÁE¸ÕÀEÈ®ÀÎ
         if (col.CompareTag("DestructionTriggerTag"))
         {
-            // Æ®¸®°ÅÀÇ ÆÄ±« ÇÔ¼ö¸¦ È£Ãâ
+            // Æ®¸®°ÅÀÇ ÆÄ±« ÇÔ¼ö¸¦ È£ÃE
             col.GetComponent<DestructionTrigger>()?.TriggerDestruction();
 
             // Ã¢ ÀÚ½Åµµ ÆÄ±«
@@ -42,7 +42,7 @@ public class SpearProjectile : MonoBehaviour
             return;
         }
 
-        // --- ÀÌÇÏ ±âÁ¸ÀÇ ´Ù¸¥ Ãæµ¹ ·ÎÁ÷ ---
+        // --- ÀÌÇÏ ±âÁ¸ÀÇ ´Ù¸¥ Ãæµ¹ ·ÎÁE---
         if (col.gameObject.layer == LayerMask.NameToLayer("SpearPlatform"))
         {
             Destroy(col.gameObject);
