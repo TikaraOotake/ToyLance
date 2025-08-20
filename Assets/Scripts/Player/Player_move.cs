@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ¡ÚÃß°¡: Æ¢¾î¿À¸£´Â Á¾·ù¸¦ ±¸ºĞÇÏ±â À§ÇÑ ¿­°ÅÇü(Enum)
+// ¡ÚÃß°¡: Æ¢¾ûÛÀ¸£´Â Á¾·ù¸¦ ±¸ºĞÇÏ±EÀ§ÇÑ ¿­°ÅÇEEnum)
 public enum BounceType
 {
     Small,
@@ -109,7 +109,7 @@ public class Player_move : MonoBehaviour
         anim.SetBool("isJumping", !groundCheck.isGrounded && !isWallSticking && !isDownAttacking);
     }
 
-    // --- ÀÌÇÏ ´Ù¸¥ ÇÔ¼öµéÀº º¯°æ ¾øÀ½ ---
+    // --- ÀÌÇÏ ´Ù¸¥ ÇÔ¼öµéÀº º¯°E¾øÀ½ ---
     public void InitiateWallStick(Transform wall, Vector2 hitPoint) { if (groundCheck.isGrounded) return; isWallSticking = true; wallStickTimer = wallStickTime; rigid.gravityScale = 0; rigid.velocity = Vector2.zero; spriteRenderer.flipX = wall.position.x < transform.position.x; }
     private void HandleWallStickAndSlide() { if (wallStickTimer > 0) { wallStickTimer -= Time.fixedDeltaTime; rigid.velocity = Vector2.zero; } else { rigid.velocity = new Vector2(0, -wallSlideSpeed); } jumpRequested = false; }
     private void HandleMovement() { rigid.gravityScale = originalGravityScale; rigid.velocity = new Vector2(horizontalInput * maxSpeed, rigid.velocity.y); }
