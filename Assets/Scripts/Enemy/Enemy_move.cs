@@ -16,6 +16,9 @@ public class Enemy_move : MonoBehaviour
     [SerializeField]
     private Enemy_shield enemyshield;
 
+    [SerializeField]
+    private float moveSpeed = 1f;
+
     //[SerializeField]
     //private GameObject FlipObj;//反転するオブジェクト
 
@@ -32,7 +35,7 @@ public class Enemy_move : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        rigid.velocity = new Vector2(nextMove * moveSpeed, rigid.velocity.y);
 
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
 
@@ -92,6 +95,22 @@ public class Enemy_move : MonoBehaviour
             //盾の反転処理
             enemyshield.UpdateShieldPosition(nowFacingRight);
         }
+    }
+
+    public void PauseMovement(float duration)
+    {
+        CancelInvoke("Think");
+        nextMove = 0;
+        anim.SetInteger("WalkSpeed", 0);
+        rigid.velocity=Vector2.zero;
+
+        Invoke("ResumeMovement", duration);
+    }
+
+    private void ResumeMovement()
+    {
+        moveSpeed = 1.5f;
+        Think();
     }
 
     // Start is called before the first frame update
