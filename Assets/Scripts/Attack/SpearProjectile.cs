@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,5 +86,24 @@ public class SpearProjectile : MonoBehaviour
 
         gameObject.layer = LayerMask.NameToLayer("SpearPlatform");
         Destroy(gameObject, stuckLife);
+    }
+
+    //ëÑÇ™èÇÇ…éhÇ≥Ç¡ÇΩéûÇÃîΩì]èàóù(Reversal process when a spear is stuck in a shield)
+    public void FlipInShield()
+    {
+        Vector3 spearPos = transform.localPosition;
+        spearPos.x *= -1;
+        transform.localPosition = spearPos;
+
+        Vector3 spearRot = transform.localEulerAngles;
+        if (spearRot.y == 0f)
+        {
+            spearRot.y = 180f;
+        }
+        else
+        {
+            spearRot.y = 0f;
+        }
+        transform.localEulerAngles = spearRot;
     }
 }

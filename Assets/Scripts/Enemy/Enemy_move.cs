@@ -14,8 +14,10 @@ public class Enemy_move : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    private Transform shield;
-    private float initialShieldX;
+    private Enemy_shield enemyshield;
+
+    //[SerializeField]
+    //private GameObject FlipObj;//反転するオブジェクト
 
     void Awake()
     {
@@ -26,8 +28,6 @@ public class Enemy_move : MonoBehaviour
         anim = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        initialShieldX = shield.localPosition.x;
     }
 
     void FixedUpdate()
@@ -45,7 +45,7 @@ public class Enemy_move : MonoBehaviour
         {
             nextMove *= -1;
             spriteRenderer.flipX = nextMove == 1;
-            UpdateShieldPosition();
+            UpdateShield();
             CancelInvoke();
             Invoke("Think", 2);
 
@@ -61,35 +61,37 @@ public class Enemy_move : MonoBehaviour
         if (nextMove != 0)
         {
             spriteRenderer.flipX = nextMove == 1;
-            UpdateShieldPosition();
+            UpdateShield();
         }
+
+        //if (spriteRenderer != null)
+        //{
+        //    if (FlipObj != null)
+        //    {
+        //        if (spriteRenderer.flipX)
+        //        {
+        //            FlipObj.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+        //        }
+        //        else
+        //        {
+        //            FlipObj.transform.eulerAngles = Vector3.zero;
+        //        }
+        //    }
+        //}
             
         float nextThinkTime = Random.Range(2f, 5f);
 
         Invoke("Think", nextThinkTime);
     }
 
-    void UpdateShieldPosition()
+    void UpdateShield()
     {
-        if (shield == null) 
+        if (enemyshield != null) 
         {
-            return;
+            bool nowFacingRight = !spriteRenderer.flipX;
+            //盾の反転処理
+            enemyshield.UpdateShieldPosition(nowFacingRight);
         }
-
-        float direction;
-
-        if (spriteRenderer.flipX)
-        {
-            direction = -1f;
-        }
-        else
-        {
-            direction = 1f;
-        }
-
-        Vector3 pos = shield.localPosition;
-        pos.x = initialShieldX * direction;
-        shield.localPosition = pos;
     }
 
     // Start is called before the first frame update

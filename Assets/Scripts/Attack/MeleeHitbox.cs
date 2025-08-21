@@ -23,16 +23,16 @@ public class MeleeHitbox : MonoBehaviour
 
         if (playerMoveScript.isDownAttacking)
         {
-            // ¡Ú¼öÁ¤: ºÎµúÈù ´ë»óÀÌ 'BreakableObject' ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ´ÂÁö È®ÀÎ
+            // ¡Ú¼öÁ¤: ºÎµúÈE´EóÀÌ 'BreakableObject' ½ºÅ©¸³Æ®¸¦ °¡Áö°EÀÖ´ÂÁEÈ®ÀÎ
             BreakableObject breakableBlock = col.GetComponent<BreakableObject>();
             if (breakableBlock != null)
             {
-                // ºí·ÏÀÇ Break() ÇÔ¼ö¸¦ È£ÃâÇÏ¿© ÆÄ±«ÇÏ°í, °ø°İÀº °è¼Ó ÀÌ¾î°¨
+                // ºúÓÏÀÇ Break() ÇÔ¼ö¸¦ È£ÃâÇÏ¿© ÆÄ±«ÇÏ°E °ø°İÀº °è¼Ó ÀÌ¾ûÌ¨
                 breakableBlock.Break();
-                return; // ¸ØÃßÁö ¾Ê°í °è¼Ó ÇÏ°­
+                return; // ¸ØÃßÁE¾Ê°E°è¼Ó ÇÏ°­
             }
 
-            // ºÎµúÈù ´ë»óÀÌ Àû('Enemy' ¶Ç´Â 'Enemy_c01')ÀÌ¶ó¸é
+            // ºÎµúÈE´EóÀÌ ÀE'Enemy' ¶Ç´Â 'Enemy_c01')ÀÌ¶ó¸E
             if (col.CompareTag("Enemy") || col.CompareTag("Enemy_c01"))
             {
                 col.GetComponent<EnemyHealth>()?.TakeDamage(damage, transform.position, false);
@@ -40,12 +40,12 @@ public class MeleeHitbox : MonoBehaviour
                 playerMoveScript.EndDownAttackAndBounce(BounceType.Large);
                 hitLock = true;
             }
-            // ºÎµúÈù ´ë»óÀÌ ÆÄ±« °¡´ÉÇÑ 'Ã¢'ÀÌ¶ó¸é
+            // ºÎµúÈE´EóÀÌ ÆÄ±« °¡´ÉÇÑ 'Ã¢'ÀÌ¶ó¸E
             else if (col.GetComponent<SpearProjectile>() != null || col.GetComponent<StickableSpear>() != null)
             {
                 Destroy(col.gameObject);
             }
-            // ºÎµúÈù ´ë»óÀÌ ÁøÂ¥ '¹Ù´Ú'ÀÌ¶ó¸é
+            // ºÎµúÈE´EóÀÌ ÁøÂ¥ '¹Ù´Ú'ÀÌ¶ó¸E
             else if (col.gameObject.layer == LayerMask.NameToLayer("Platform"))
             {
                 playerMoveScript.EndDownAttackAndBounce(BounceType.Small);
@@ -54,7 +54,7 @@ public class MeleeHitbox : MonoBehaviour
             return;
         }
 
-        // --- ÀÌÇÏ ÀÏ¹İ °ø°İ ·ÎÁ÷ (º¯°æ ¾øÀ½) ---
+        // --- ÀÌÇÏ ÀÏ¹İ °ø°İ ·ÎÁE(º¯°E¾øÀ½) ---
         if (col.CompareTag("Enemy_c01")) { col.GetComponent<CliffMonsterHealth>()?.TakeMelee(damage, transform.position); hitLock = true; return; }
         if (col.CompareTag("Enemy")) { col.GetComponent<EnemyHealth>()?.TakeDamage(damage, transform.position); hitLock = true; return; }
         if (col.GetComponent<SpearProjectile>() != null || col.GetComponent<StickableSpear>() != null) { Destroy(col.gameObject); hitLock = true; return; }

@@ -12,6 +12,7 @@ TagManager:
   - KillZone
   - SpearChargeZone
   - DestructionTriggerTag
+  - Shield
   layers:
   - Default
   - TransparentFX
