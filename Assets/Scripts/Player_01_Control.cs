@@ -38,7 +38,12 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private float KonokBackTime = 0.5f;//ノックバック時間
     private float KnockBackTimer;//ノックバックタイマー
-   
+    private float KnockBackTimer_old;
+    [SerializeField]
+    private float InvincibleTime = 1.0f;//無敵時間
+    private float InvincibleTimer = 0.0f;//無敵タイマー
+
+    private float AtkTimer;//攻撃タイマー
     enum PlayerStatus
     {
         Fine,
@@ -46,6 +51,15 @@ public class Player_01_Control : MonoBehaviour
         Dead,
     }
     PlayerStatus playerStatus;
+
+    enum AtkStatus
+    {
+        None,//無し
+        Thrust,//突き
+        Throw,//投げ
+        Falling,//落下
+    }
+    AtkStatus atkStatus = AtkStatus.None;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -56,8 +70,6 @@ public class Player_01_Control : MonoBehaviour
 
         _sr = GetComponent<SpriteRenderer>();
         if (_anim == null) Debug.Log("アニメーターの取得に失敗");
-
-        KnockBackTimer = KonokBackTime;//タイマー初期化
     }
 
     void Start()
@@ -68,11 +80,23 @@ public class Player_01_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (playerStatus == PlayerStatus.Fine)
         {
-            Move();
-            Jump();
-            Throw();
+            InputAtkSetting();
+            if(atkStatus==AtkStatus.None)
+            {
+                //基本動作
+                Move();
+                Jump();
+                Throw();
+            }
+            else
+            {
+                FallingAtk();
+            }
+
+               
         }
         else
         {
@@ -84,10 +108,36 @@ public class Player_01_Control : MonoBehaviour
         SetAnim();
 
         //タイマー更新
+        AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
+        InvincibleTimer = Mathf.Max(0.0f, InvincibleTimer - Time.deltaTime);
+        KnockBackTimer_old = KnockBackTimer;
         KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
-        if (KnockBackTimer <= 0.0f) playerStatus = PlayerStatus.Fine;//簡易実装
-    }
 
+        if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//タイマーが0になった瞬間だけ
+        {
+            //簡易実装
+            playerStatus = PlayerStatus.Fine;//ステータスを通常に
+            InvincibleTimer = InvincibleTime;//タイマーセット
+        }
+    }
+    private void InputAtkSetting()
+    {
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            //突き攻撃
+            atkStatus = AtkStatus.Thrust;
+            AtkTimer = 1.0f;
+            return;
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            //落下攻撃
+            atkStatus = AtkStatus.Falling;
+            AtkTimer = 1.0f;
+            if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 0.5f);
+            return;
+        }
+    }
     private void Move()
     {
         float MoveWay = 0.0f;
@@ -135,7 +185,8 @@ public class Player_01_Control : MonoBehaviour
     }
     private void Jump()
     {
-        if (GetTouchingObjectWithLayer(LandingCheckCollider,"Platform"))
+        if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
+            GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
         {
             if (_rb != null)
             {
@@ -164,17 +215,35 @@ public class Player_01_Control : MonoBehaviour
         {
             if (LancePrefab != null)
             {
-                Quaternion Rot = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+                Quaternion Rot = Quaternion.Euler(0.0f, 180.0f, 0.0f);//向きを定義
+                Vector2 ThrowVec = new Vector2(-LanceSpeed, 0.0f);//投げる速度を定義
                 if (!FlipX)
                 {
-                    Rot = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+                    Rot = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                    ThrowVec.x *= -1;//速度の向きを反転
                 }
-                GameObject Lance = Instantiate(LancePrefab, transform.position, Rot);
+                GameObject Lance = Instantiate(LancePrefab, transform.position, Rot);//槍を生成
 
-                if (Lance.TryGetComponent(out SpearProjectile stick))
-                {
-                    stick.Init(1, LanceSpeed);
-                }
+                Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
+                if (_rb != null) _rb.velocity = ThrowVec;//速度代入
+
+                return;
+            }
+        }
+    }
+    private void FallingAtk()
+    {
+        if (atkStatus == AtkStatus.Falling)
+        {
+            if (AtkTimer <= 0.8f)
+            {
+                if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//降下
+            }
+
+            //終了処理
+            if (AtkTimer <= 0.0f && !Input.GetKeyDown(KeyCode.S))
+            {
+                atkStatus = AtkStatus.None;
             }
         }
     }
@@ -235,26 +304,71 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("isWalk", true);
         }
+
+        //色の変更
+        if (_sr != null)
+        {
+            //被弾中は赤色にさせる
+            if (KnockBackTimer > 0.0f)
+            {
+                _sr.color = Color.red;//赤色にセット
+            }
+            else
+            {
+                _sr.color = Color.white;//白色にセット
+            }
+
+
+            //無敵時間中は点滅させる
+            Color tempColor = _sr.color;
+            if (InvincibleTimer > 0.0f)
+            {
+                if ((int)(InvincibleTimer * 10.0f) % 2 == 0)
+                {
+                    tempColor.a = 0.5f;
+                }
+                else
+                {
+                    tempColor.a = 1.0f;
+                }
+            }
+            else
+            {
+                tempColor.a = 1.0f;
+            }
+            _sr.color = tempColor;
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void SetDamage(GameObject _Enemy)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (InvincibleTimer > 0.0f)
+        {
+            return;//無敵時間中は処理を行わず終了
+        }
+
+        if (playerStatus == PlayerStatus.Fine)
         {
             //どちらの方向からぶつかったか調べる
-            float Way = collision.transform.position.x - transform.position.x;
+            float Way = _Enemy.transform.position.x - transform.position.x;
 
             //方向にあわせて吹っ飛ばす
             if (_rb)
             {
+                Vector2 KnockBackVelocity = Vector2.zero;
                 if (Way > 0)//左に
                 {
-                    _rb.velocity += new Vector2(-KnockBackValue, 0.0f);
+                    Debug.Log("右からぶつかりました");
+                    KnockBackVelocity += new Vector2(-KnockBackValue, 0.0f);
                 }
                 else if (Way < 0)//右に
                 {
-                    _rb.velocity += new Vector2(KnockBackValue, 0.0f);
+                    Debug.Log("左からぶつかりました");
+                    KnockBackVelocity += new Vector2(KnockBackValue, 0.0f);
                 }
+                KnockBackVelocity += new Vector2(0.0f, JumpValue);//上方向の力を代入
+
+                _rb.velocity = KnockBackVelocity;
             }
 
             KnockBackTimer = KonokBackTime;//タイマーセット
@@ -263,6 +377,21 @@ public class Player_01_Control : MonoBehaviour
 
             //マネージャーにカメラ振動依頼
             CameraManager.SetShakeCamera();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            SetDamage(collision.gameObject);
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            SetDamage(collision.gameObject);
         }
     }
 }
