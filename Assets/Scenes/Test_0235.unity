@@ -497,6 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &157520873
 Animator:
   serializedVersion: 5
@@ -2192,6 +2193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &588585068
 Animator:
   serializedVersion: 5
@@ -14265,6 +14267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 1872039965}
+  moveSpeed: 1
 --- !u!95 &745406428
 Animator:
   serializedVersion: 5
@@ -15965,6 +15968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1123291719
 Animator:
   serializedVersion: 5
@@ -16509,6 +16513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1242616626
 Animator:
   serializedVersion: 5
@@ -18827,6 +18832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!50 &1749825126
 Rigidbody2D:
   serializedVersion: 4
@@ -19421,6 +19427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1838291291
 Animator:
   serializedVersion: 5
