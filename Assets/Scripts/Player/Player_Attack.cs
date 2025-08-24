@@ -7,7 +7,7 @@ public class Player_Attack : MonoBehaviour
     public GameObject capsule;
     public float attackCoolTime = 0.5f;
 
-    // ¡ÚÃß°¡: ºü¸¥ °ø°İÀÇ ¹è¼ÓÀ» Inspector¿¡¼­ Á¶ÀıÇÒ º¯¼ö
+    // ¡ÚÃß°¡: ºE¥ °ø°İÀÇ ¹è¼ÓÀ» Inspector¿¡¼­ Á¶ÀıÇÒ º¯¼E
     public float fastAttackSpeed = 1.5f;
 
     private float curTime;
@@ -29,15 +29,15 @@ public class Player_Attack : MonoBehaviour
         {
             if (curTime >= attackCoolTime)
             {
-                // ¡Ú¼öÁ¤: °ø°İ Á÷Àü, ÇÃ·¹ÀÌ¾îÀÇ »óÅÂ¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼Ç ¼Óµµ ¼³Á¤
+                // ¡Ú¼öÁ¤: °ø°İ Á÷ÀE ÇÃ·¹ÀÌ¾ûÜÇ »óÅÂ¿¡ µû¶E¾Ö´Ï¸ŞÀÌ¼Ç ¼Óµµ ¼³Á¤
                 if (playerMoveScript != null && playerMoveScript.IsMovingOrJumping())
                 {
-                    // ¿òÁ÷ÀÌ°Å³ª Á¡ÇÁ ÁßÀÏ ¶§´Â ºü¸¥ ¼Óµµ·Î ¼³Á¤
+                    // ¿òÁ÷ÀÌ°Å³ª Á¡ÇÁ ÁßÀÏ ¶§´Â ºE¥ ¼Óµµ·Î ¼³Á¤
                     anim.SetFloat("AttackSpeedMultiplier", fastAttackSpeed);
                 }
                 else
                 {
-                    // °¡¸¸È÷ ¼­ ÀÖÀ» ¶§´Â ±âº» ¼Óµµ(1)·Î ¼³Á¤
+                    // °¡¸¸ÈE¼­ ÀÖÀ» ¶§´Â ±âº» ¼Óµµ(1)·Î ¼³Á¤
                     anim.SetFloat("AttackSpeedMultiplier", 1f);
                 }
 
@@ -48,7 +48,7 @@ public class Player_Attack : MonoBehaviour
         }
     }
 
-    // --- ÀÌÇÏ ÇÔ¼öµéÀº º¯°æ ¾øÀ½ ---
+    // --- ÀÌÇÏ ÇÔ¼öµéÀº º¯°E¾øÀ½ ---
     void ActivateSideAttackHitbox()
     {
         if (capsule == null) return;

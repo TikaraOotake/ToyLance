@@ -7,6 +7,12 @@ public class Player_01_Control : MonoBehaviour
 {
     [SerializeField]
     private GameObject LancePrefab;//投げ槍のプレハブ
+    [SerializeField]
+    private GameObject AttackPrefab;//近距離：落下攻撃　用のコライダープレハブ
+    [SerializeField]
+    private GameObject AttackObj;//
+
+    [SerializeField] private GameObject FlipObj;//Playerの向きに合わせて反転する子オブジェクト
 
     [SerializeField]
     private float MoveValue = 1.0f;//移動量
@@ -29,9 +35,11 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsMove = false;
     [SerializeField] private bool IsThrustAtk = false;
     [SerializeField] private bool IsThrowAtk = false;
+    [SerializeField] private bool IsFallAtk = false;
 
-    [SerializeField]
-    private Collider2D LandingCheckCollider;//着地チェックコライダー
+    [SerializeField] private Collider2D LandingCheckCollider;//着地チェックコライダー
+    [SerializeField] private GameObject FallAttackPos;//落下攻撃コライダーの座標
+    [SerializeField] private GameObject TrustAttackPos;//突き攻撃コライダーの座標
 
     [SerializeField]
     private float KnockBackValue = 1.0f;//ノックバック量
@@ -42,6 +50,7 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private float InvincibleTime = 1.0f;//無敵時間
     private float InvincibleTimer = 0.0f;//無敵タイマー
+    private float BlinkingTimer = 0.0f;//点滅タイマー
 
     private float AtkTimer;//攻撃タイマー
     enum PlayerStatus
@@ -94,6 +103,7 @@ public class Player_01_Control : MonoBehaviour
             else
             {
                 FallingAtk();
+                TrustAtk();
             }
 
                
@@ -110,6 +120,7 @@ public class Player_01_Control : MonoBehaviour
         //タイマー更新
         AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
         InvincibleTimer = Mathf.Max(0.0f, InvincibleTimer - Time.deltaTime);
+        BlinkingTimer = Mathf.Max(0.0f, BlinkingTimer - Time.deltaTime);
         KnockBackTimer_old = KnockBackTimer;
         KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
 
@@ -118,15 +129,18 @@ public class Player_01_Control : MonoBehaviour
             //簡易実装
             playerStatus = PlayerStatus.Fine;//ステータスを通常に
             InvincibleTimer = InvincibleTime;//タイマーセット
+            BlinkingTimer = InvincibleTimer;//点滅タイマーセット
         }
     }
     private void InputAtkSetting()
     {
+        if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
+
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
             //突き攻撃
             atkStatus = AtkStatus.Thrust;
-            AtkTimer = 1.0f;
+            AtkTimer = 0.5f;
             return;
         }
         if(Input.GetKeyDown(KeyCode.S))
@@ -173,6 +187,18 @@ public class Player_01_Control : MonoBehaviour
             }
             _sr.flipX = FlipX;
         }
+        if (FlipObj != null)
+        {
+            if (MoveWay > 0.0f)
+            {
+                FlipObj.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            }
+            else if (MoveWay < 0.0f)
+            {
+                FlipObj.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            }
+        }
+
 
         //移動量の代入
         if (_rb != null)
@@ -193,6 +219,10 @@ public class Player_01_Control : MonoBehaviour
                 if (_rb.velocity.y <= 0.0f)
                 {
                     IsJump = false;//降下中かつ地上ならジャンプをオフ
+                }
+                if (_rb.velocity.y >= JumpValue * 0.1f)//上昇速度が一定以上ある場合ジャンプしない
+                {
+                    return;
                 }
             }
 
@@ -238,12 +268,94 @@ public class Player_01_Control : MonoBehaviour
             if (AtkTimer <= 0.8f)
             {
                 if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//降下
+                InvincibleTimer = 0.3f;//無敵時間セット(一瞬)
+
+                //攻撃判定の生成
+                if (AttackObj == null && AttackPrefab != null)
+                {
+                    AttackObj = Instantiate(AttackPrefab);
+                }
+                //攻撃判定の設定更新
+                if (AttackObj != null && FallAttackPos != null)
+                {
+                    AttackObj.transform.localScale = FallAttackPos.transform.lossyScale;//スケール
+                    AttackObj.transform.position = FallAttackPos.transform.position;//座標
+                    AttackObj.transform.eulerAngles = FallAttackPos.transform.eulerAngles;//角度
+                }
+
+                IsFallAtk = true;//落下攻撃Anim
+            }
+
+            //下を押し続けていたら時間延長
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (AtkTimer <= 0.0f)//0以下
+                {
+                    AtkTimer = Time.deltaTime;
+                }
+            }
+
+            //着地判定が敵と接触したらキャンセル処理
+            if (GetTouchingObjectWithLayer(LandingCheckCollider, "Enemy"))
+            {
+                if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 1.5f);//通常ジャンプより少し高く跳ねる
+
+                //マネージャーにカメラ振動依頼
+                CameraManager.SetShakeCamera();
+
+                AtkTimer = 0.0f;//タイマーを0に
             }
 
             //終了処理
-            if (AtkTimer <= 0.0f && !Input.GetKeyDown(KeyCode.S))
+            if (AtkTimer <= 0.0f)
             {
                 atkStatus = AtkStatus.None;
+
+                if (AttackObj != null) Destroy(AttackObj);//攻撃判定の破棄
+
+                IsFallAtk = false;
+            }
+        }
+    }
+    private void TrustAtk()
+    {
+        if (atkStatus == AtkStatus.Thrust)
+        {
+            if (_rb) _rb.velocity = new Vector2(0.0f, _rb.velocity.y);//止まる
+
+            if (AtkTimer <= 0.5f)
+            {
+                IsThrustAtk = true;//刺突攻撃Anim
+            }
+
+            if (AtkTimer <= 0.3f)
+            {
+                InvincibleTimer = 0.3f;//無敵時間セット(一瞬)
+
+                //攻撃判定の生成
+                if (AttackObj == null && AttackPrefab != null)
+                {
+                    AttackObj = Instantiate(AttackPrefab);
+                }
+                //攻撃判定の設定更新
+                if (AttackObj != null && TrustAttackPos != null)
+                {
+                    AttackObj.transform.localScale = TrustAttackPos.transform.lossyScale;//スケール
+                    AttackObj.transform.position = TrustAttackPos.transform.position;//座標
+                    AttackObj.transform.eulerAngles = TrustAttackPos.transform.eulerAngles;//角度
+                }
+
+
+            }
+
+            //終了処理
+            if (AtkTimer <= 0.0f)
+            {
+                atkStatus = AtkStatus.None;
+
+                if (AttackObj != null) Destroy(AttackObj);//攻撃判定の破棄
+
+                IsThrustAtk = false;
             }
         }
     }
@@ -285,16 +397,26 @@ public class Player_01_Control : MonoBehaviour
         //全て一旦リセット
         _anim.SetBool("isWalk", false);
         _anim.SetBool("isJumping", false);
-        _anim.SetBool("DoMeleeAttack", false);
+        _anim.SetBool("isTrustAttack", false);
+        _anim.SetBool("isDownAttacking", false);
+        _anim.SetBool("doDamaged", false);
 
         //優先な物ほど上にならべる
-        if (IsThrowAtk)//投げ
+        if (KnockBackTimer > 0.0f)//被弾状態
+        {
+            _anim.SetBool("doDamaged", true);
+        }
+        else if (IsThrowAtk)//投げ
         {
 
         }
-        else if(IsThrustAtk)//突き
+        else if (IsThrustAtk)//突き
         {
-            _anim.SetBool("DoMeleeAttack", true);
+            _anim.SetBool("isTrustAttack", true);
+        }
+        else if(IsFallAtk)//落下攻撃
+        {
+            _anim.SetBool("isDownAttacking", true);
         }
         else if(IsJump)//ジャンプ
         {
@@ -319,11 +441,11 @@ public class Player_01_Control : MonoBehaviour
             }
 
 
-            //無敵時間中は点滅させる
+            //点滅時間中は点滅させる
             Color tempColor = _sr.color;
-            if (InvincibleTimer > 0.0f)
+            if (BlinkingTimer > 0.0f)
             {
-                if ((int)(InvincibleTimer * 10.0f) % 2 == 0)
+                if ((int)(BlinkingTimer * 10.0f) % 2 == 0)
                 {
                     tempColor.a = 0.5f;
                 }
@@ -371,7 +493,9 @@ public class Player_01_Control : MonoBehaviour
                 _rb.velocity = KnockBackVelocity;
             }
 
-            KnockBackTimer = KonokBackTime;//タイマーセット
+            //タイマーセット
+            KnockBackTimer = KonokBackTime;//ノックバック時間
+            InvincibleTimer = KnockBackTimer;//無敵時間
 
             playerStatus = PlayerStatus.HitDamage;//ステータスセット
 
@@ -382,6 +506,8 @@ public class Player_01_Control : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.CompareTag("Spear")) return;
+
         if (collision.gameObject.tag == "Enemy")
         {
             SetDamage(collision.gameObject);

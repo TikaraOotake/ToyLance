@@ -7,13 +7,13 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private int maxHP = 4;
     [SerializeField] private float knockback = 10f;
-    [SerializeField] private float iTime = 0.1f;   // ¹«Àû ½Ã°£
+    [SerializeField] private float iTime = 0.1f;   // ¹«ÀE½Ã°£
     private int currentHP;
     private Rigidbody2D rb;
     private bool invincible;
 
     /* ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-   ¡ÚÃß°¡ : ÇÇ°Ý »ö»ó º¯°æ¿ë SpriteRenderer
+   ¡ÚÃß°¡ : ÇÇ°Ý »ö»Eº¯°æ¿ESpriteRenderer
     ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ */
     private SpriteRenderer sr;                                   // ¡ÚÃß°¡
 
@@ -26,20 +26,20 @@ public class EnemyHealth : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();                     // ¡ÚÃß°¡
     }
 
-    /// <summary> ÇÃ·¹ÀÌ¾î¿¡°Ô ¸Â¾ÒÀ» ¶§ È£Ãâ </summary>
+    /// <summary> ÇÃ·¹ÀÌ¾ûÛ¡°Ô ¸Â¾ÒÀ» ¶§ È£ÃE</summary>
     public void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
         if (invincible) return;
         StartCoroutine(IFrame());
 
         currentHP -= dmg;
-        StartCoroutine(HitFlash());            // ¸ÂÀ» ¶§ »¡°£»ö À¯Áö
+        StartCoroutine(HitFlash());            // ¸ÂÀ» ¶§ »¡°£»EÀ¯ÁE
 
-        /* ¦¡ ³Ë¹é ¿©ºÎ¸¦ ÅõÃ´/±ÙÁ¢¿¡ µû¶ó ¼±ÅÃ ¦¡ */
+        /* ¦¡ ³Ë¹E¿©ºÎ¸¦ ÅõÃ´/±ÙÁ¢¿¡ µû¶E¼±ÅÃ ¦¡ */
         if (doKnockback)
         {
             float side = (transform.position.x < attackerPos.x) ? -1f : 1f;
-            Vector2 dir = new Vector2(side, 0f);       // ¼öÆò ³Ë¹é
+            Vector2 dir = new Vector2(side, 0f);       // ¼öÆE³Ë¹E
 
             rb.velocity = Vector2.zero;
             rb.AddForce(dir * knockback, ForceMode2D.Impulse);
@@ -50,14 +50,14 @@ public class EnemyHealth : MonoBehaviour
     }
 
     /* ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-   ¡ÚÃß°¡ : ½ºÇÁ¶óÀÌÆ®¸¦ Àá±ñ »¡°£»ö¡æº¹±Í
+   ¡ÚÃß°¡ : ½ºÇÁ¶óÀÌÆ®¸¦ Àá±E»¡°£»ö¡æº¹±Í
     ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ */
     IEnumerator HitFlash()                                        // ¡ÚÃß°¡
     {
-        Color original = sr.color;        // ¿ø·¡ »ö»ó ÀúÀå
-        sr.color = Color.red;             // »¡°£»öÀ¸·Î º¯°æ
+        Color original = sr.color;        // ¿ø·¡ »ö»EÀúÀE
+        sr.color = Color.red;             // »¡°£»öÀ¸·Î º¯°E
         yield return new WaitForSeconds(0.1f);
-        sr.color = original;              // ¿ø·¡ »ö»ó º¹±Í
+        sr.color = original;              // ¿ø·¡ »ö»Eº¹±Í
     }
 
     IEnumerator IFrame()
@@ -69,8 +69,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        // TODO: »ç¸Á ¾Ö´Ï¡¤ÆÄÆ¼Å¬¡¤½ºÄÚ¾î
-        Destroy(gameObject);      // ÇÊ¿äÇÏ¸é ¾Ö´Ï ÈÄ Destroy(gameObject,0.3f);
+        // TODO: »ç¸Á ¾Ö´Ï¡¤ÆÄÆ¼Å¬¡¤½ºÄÚ¾E
+        Destroy(gameObject);      // ÇÊ¿äÇÏ¸E¾Ö´Ï ÈÄ Destroy(gameObject,0.3f);
     }
 
 
