@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class CameraManager
 {
@@ -55,6 +56,13 @@ public static class CameraManager
         if (_cameraControl != null)
         {
             _cameraControl.SetShakeCamera();
+        }
+    }
+    public static void SetShakeCamera(float _Length, float _Speed, float _LowValue)
+    {
+        if (_cameraControl != null)
+        {
+            _cameraControl.SetShakeCamera(_Length, _Speed, _LowValue);
         }
     }
 }

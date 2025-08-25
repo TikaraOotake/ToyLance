@@ -52,6 +52,10 @@ public class Player_01_Control : MonoBehaviour
     private float InvincibleTimer = 0.0f;//無敵タイマー
     private float BlinkingTimer = 0.0f;//点滅タイマー
 
+    [SerializeField]
+    private float ThrowCooltime = 1.0f;//投槍のクールタイム
+    private float ThrowCooltimer;
+
     private float AtkTimer;//攻撃タイマー
     enum PlayerStatus
     {
@@ -92,7 +96,7 @@ public class Player_01_Control : MonoBehaviour
 
         if (playerStatus == PlayerStatus.Fine)
         {
-            InputAtkSetting();
+            
             if(atkStatus==AtkStatus.None)
             {
                 //基本動作
@@ -106,7 +110,7 @@ public class Player_01_Control : MonoBehaviour
                 TrustAtk();
             }
 
-               
+            InputAtkSetting();
         }
         else
         {
@@ -123,6 +127,7 @@ public class Player_01_Control : MonoBehaviour
         BlinkingTimer = Mathf.Max(0.0f, BlinkingTimer - Time.deltaTime);
         KnockBackTimer_old = KnockBackTimer;
         KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
+        ThrowCooltimer = Mathf.Max(0.0f, ThrowCooltimer - Time.deltaTime);
 
         if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//タイマーが0になった瞬間だけ
         {
@@ -143,8 +148,12 @@ public class Player_01_Control : MonoBehaviour
             AtkTimer = 0.5f;
             return;
         }
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
+            if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
+                GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
+                return;//着地中であれば除外
+
             //落下攻撃
             atkStatus = AtkStatus.Falling;
             AtkTimer = 1.0f;
@@ -243,6 +252,8 @@ public class Player_01_Control : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            if (ThrowCooltimer > 0.0f) return;//クールタイム中であるなら終了
+
             if (LancePrefab != null)
             {
                 Quaternion Rot = Quaternion.Euler(0.0f, 180.0f, 0.0f);//向きを定義
@@ -256,6 +267,8 @@ public class Player_01_Control : MonoBehaviour
 
                 Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
                 if (_rb != null) _rb.velocity = ThrowVec;//速度代入
+
+                ThrowCooltimer = ThrowCooltime;//クールタイマーセット
 
                 return;
             }

@@ -46,6 +46,8 @@ public class HalfHitFloor_Lance : HalfHitFloor
     {
         if (_IgnoreObj != null)
         {
+            if (_IgnoreObj.layer == LayerMask.NameToLayer("PlayerAttack")) return;//ìäëÑÇæÇ¡ÇΩÇÁè»Ç≠
+
             Rigidbody2D rb = _IgnoreObj.GetComponent<Rigidbody2D>();
             if (!rb) return;
 

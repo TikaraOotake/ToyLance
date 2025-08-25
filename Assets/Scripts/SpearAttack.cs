@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpearAttack : MonoBehaviour
 {
+    [SerializeField]
+    private int AttackValue = 1;//çUåÇóÕ
     private void OnTriggerEnter2D(Collider2D collision)
     {
         BreakableObject _breakable = collision.GetComponent<BreakableObject>();
@@ -15,7 +17,7 @@ public class SpearAttack : MonoBehaviour
         EnemyHealth _enemyHealth = collision.GetComponent<EnemyHealth>();
         if (_enemyHealth != null)
         {
-            _enemyHealth.TakeDamage(1, transform.position, true);
+            _enemyHealth.TakeDamage(AttackValue, transform.position, true);
         }
     }
 }

@@ -183,5 +183,8 @@ public class CameraControl : MonoBehaviour
     public void SetCameraGazePos(Vector2 _pos)
     {
         CameraGazePos = _pos;
+        Vector3 cameraPos = _pos;
+        cameraPos.z = transform.position.z;
+        transform.position = cameraPos;
     }
 }
