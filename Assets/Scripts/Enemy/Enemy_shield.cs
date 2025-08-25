@@ -10,7 +10,7 @@ public class Enemy_shield : MonoBehaviour
 
     private Enemy_move enemyMove;
 
-    private bool isBroken = false;
+    public bool isBroken = false;
 
     Animator anim;
 
@@ -109,6 +109,7 @@ public class Enemy_shield : MonoBehaviour
 
         if (enemyMove != null)
         {
+            //í‚é~èàóù
             enemyMove.PauseMovement(1f);
         }
 

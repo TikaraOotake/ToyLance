@@ -107,7 +107,7 @@ public class Enemy_move : MonoBehaviour
         anim.SetInteger("WalkSpeed", 0);
         rigid.velocity=Vector2.zero;
 
-        Invoke("ResumeMovement", duration);
+        Invoke(nameof(ResumeMovement), duration);
     }
 
     //ˆÚ“®‘¬“xã¸ˆ—
