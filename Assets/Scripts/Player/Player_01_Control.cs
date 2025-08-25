@@ -58,6 +58,10 @@ public class Player_01_Control : MonoBehaviour
     private float ThrowCooltimer;
 
     private float AtkTimer;//UŒ‚ƒ^ƒCƒ}[
+
+    [SerializeField] private int TrustAttackValue;//h“ËUŒ‚—Í
+    [SerializeField] private int ThrowAttackValue;//“Š±UŒ‚—Í
+    [SerializeField] private int FallAttackValue;//—‰ºUŒ‚—Í
     enum PlayerStatus
     {
         Fine,
@@ -294,6 +298,7 @@ public class Player_01_Control : MonoBehaviour
                     if (spearAttack != null)
                     {
                         spearAttack.SetAttackType(AttackType.Fall);
+                        spearAttack.SetAttackValue(FallAttackValue);
                     }
                 }
                 //UŒ‚”»’è‚Ìİ’èXV
@@ -363,6 +368,7 @@ public class Player_01_Control : MonoBehaviour
                     if (spearAttack != null)
                     {
                         spearAttack.SetAttackType(AttackType.Trust);
+                        spearAttack.SetAttackValue(TrustAttackValue);
                     }
                 }
                 //UŒ‚”»’è‚Ìİ’èXV

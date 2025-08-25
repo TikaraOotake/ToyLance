@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9605002e90fd006499d7923a0dc0e550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LancePrefab: {fileID: 6507798245021174591, guid: 07eee50e2080d304291906048cc56dc6, type: 3}
+  LancePrefab: {fileID: 349775081051111172, guid: c10f73fbd2836794abfdb09c3fca9c70, type: 3}
   AttackPrefab: {fileID: 7737072475025706764, guid: cbdc50a529bc860429e31bce31d0d5fb, type: 3}
   AttackObj: {fileID: 0}
   FlipObj: {fileID: 5224276788351002623}
@@ -436,6 +436,7 @@ MonoBehaviour:
   KnockBackValue: 4.43
   KonokBackTime: 0.5
   InvincibleTime: 1
+  ThrowCooltime: 1
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4

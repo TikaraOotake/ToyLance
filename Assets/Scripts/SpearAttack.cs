@@ -9,6 +9,14 @@ public class SpearAttack : MonoBehaviour
     [SerializeField]
     private AttackType attackType;//çUåÇÉ^ÉCÉv
 
+    public void SetAttackValue(int _AttackValue)
+    {
+        AttackValue = _AttackValue;
+    }
+    public int GetAttackValue()
+    {
+        return AttackValue;
+    }
     public void SetAttackType(AttackType _attackType)
     {
         attackType = _attackType;
