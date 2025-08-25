@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AttackTypeEnums;
 
 public class Enemy_shield : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class Enemy_shield : MonoBehaviour
 
     private bool isBroken = false;
 
+    Animator anim;
+
     private void Awake()
     {
+        anim = GetComponent<Animator>();
+
         initialShieldX = transform.localPosition.x;
 
         if (enemyMove == null)
@@ -39,19 +44,18 @@ public class Enemy_shield : MonoBehaviour
         }
         else
         {
-            direction = -1f;
+            direction = -11f;
         }
 
         Vector3 pos = transform.localPosition;
         pos.x = initialShieldX * direction;
         transform.localPosition = pos;
-
         foreach (Transform child in transform)
         {
             var spear = child.GetComponent<SpearProjectile>();
             if (spear != null)
             {
-                //‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—(Reversal process when a spear is stuck in a shield)
+                //‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—
                 spear.FlipInShield();
             }
         }
@@ -64,24 +68,36 @@ public class Enemy_shield : MonoBehaviour
             return;
         }
 
+        SpearAttack spear = collision.GetComponent<SpearAttack>();
+        if (spear != null) 
+        {
+            AttackType attackType= spear.GetAttackType();
+            if (attackType == AttackType.Trust) 
+            {
+                BreakShield();
+            }
+        }
+
         if (collision.CompareTag("PlayerMeleeAttack")) 
         {
-            var meleeHitbox=collision.GetComponent<MeleeHitbox>();
-            if(meleeHitbox != null)
+            var meleeHitbox = collision.GetComponent<MeleeHitbox>();
+            if (meleeHitbox != null) 
             {
                 var player = meleeHitbox.GetComponentInParent<Player_move>();
-                if (player != null && !player.isDownAttacking) 
+                if (player != null && !player.isDownAttacking)
                 {
                     BreakShield();
                 }
             }
         }
+
         if (collision.GetComponent<SpearProjectile>() != null)
         {
             return;
         }
     }
 
+    //‚‚Ì”j‰óˆ—
     private void BreakShield()
     {
         if (isBroken)
@@ -101,11 +117,21 @@ public class Enemy_shield : MonoBehaviour
         Invoke(nameof(RestoreShield), 6f);
     }
 
+    //‚‚ÌÄ¶ˆ—
     private void RestoreShield()
     {
         isBroken = false;
 
         gameObject.SetActive(true);
+    }
+
+    //‚‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶ˆ—
+    public void SetWalkSpeed(int speed)
+    {
+        if (anim != null)
+        {
+            anim.SetInteger("WalkSpeed", speed);
+        }
     }
 
     // Start is called before the first frame update

@@ -88,7 +88,7 @@ public class SpearProjectile : MonoBehaviour
         Destroy(gameObject, stuckLife);
     }
 
-    //‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—(Reversal process when a spear is stuck in a shield)
+    //‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—
     public void FlipInShield()
     {
         Vector3 spearPos = transform.localPosition;

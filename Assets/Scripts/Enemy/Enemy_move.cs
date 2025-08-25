@@ -94,9 +94,12 @@ public class Enemy_move : MonoBehaviour
             bool nowFacingRight = !spriteRenderer.flipX;
             //盾の反転処理
             enemyshield.UpdateShieldPosition(nowFacingRight);
+            //盾のアニメーションの再生処理
+            enemyshield.SetWalkSpeed(nextMove);
         }
     }
 
+    //停止処理
     public void PauseMovement(float duration)
     {
         CancelInvoke("Think");
@@ -107,6 +110,7 @@ public class Enemy_move : MonoBehaviour
         Invoke("ResumeMovement", duration);
     }
 
+    //移動速度上昇処理
     private void ResumeMovement()
     {
         moveSpeed = 1.5f;

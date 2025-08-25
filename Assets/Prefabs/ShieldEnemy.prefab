@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5191947387409020277}
   - component: {fileID: 6814717834976465433}
+  - component: {fileID: 7690216804840054401}
   - component: {fileID: 1346106674409177981}
   - component: {fileID: 6073534771303109238}
-  - component: {fileID: 7690216804840054401}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1734726876, guid: 2442948b09db9484ead3351635a5909e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -87,6 +87,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7690216804840054401
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2314616685542737132}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9cde9cb5d4fe9534286406e948cff225, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1346106674409177981
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +140,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.37566566, y: -0.29985997}
+  m_Offset: {x: -0.37566566, y: -0.14139637}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.52096176, y: 0.92459613}
+  m_Size: {x: 0.52096176, y: 1.2415233}
   m_EdgeRadius: 0
 --- !u!114 &6073534771303109238
 MonoBehaviour:
@@ -144,27 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c118f02be3398245845c1fdaec62a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &7690216804840054401
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2314616685542737132}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9cde9cb5d4fe9534286406e948cff225, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5383391964868293515
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 4658345698890839402}
   - component: {fileID: 553801751930056524}
   - component: {fileID: 300001188588061059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShieldEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!114 &553801751930056524
 MonoBehaviour:
   m_ObjectHideFlags: 0
