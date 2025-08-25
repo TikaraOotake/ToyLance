@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Recorder.OutputPath;
+using AttackTypeEnums;
 
 public class Player_01_Control : MonoBehaviour
 {
@@ -287,6 +288,13 @@ public class Player_01_Control : MonoBehaviour
                 if (AttackObj == null && AttackPrefab != null)
                 {
                     AttackObj = Instantiate(AttackPrefab);
+
+                    //攻撃タイプの設定
+                    SpearAttack spearAttack = AttackObj.GetComponent<SpearAttack>();
+                    if (spearAttack != null)
+                    {
+                        spearAttack.SetAttackType(AttackType.Fall);
+                    }
                 }
                 //攻撃判定の設定更新
                 if (AttackObj != null && FallAttackPos != null)
@@ -349,6 +357,13 @@ public class Player_01_Control : MonoBehaviour
                 if (AttackObj == null && AttackPrefab != null)
                 {
                     AttackObj = Instantiate(AttackPrefab);
+
+                    //攻撃タイプの設定
+                    SpearAttack spearAttack = AttackObj.GetComponent<SpearAttack>();
+                    if (spearAttack != null)
+                    {
+                        spearAttack.SetAttackType(AttackType.Trust);
+                    }
                 }
                 //攻撃判定の設定更新
                 if (AttackObj != null && TrustAttackPos != null)
@@ -357,8 +372,6 @@ public class Player_01_Control : MonoBehaviour
                     AttackObj.transform.position = TrustAttackPos.transform.position;//座標
                     AttackObj.transform.eulerAngles = TrustAttackPos.transform.eulerAngles;//角度
                 }
-
-
             }
 
             //終了処理

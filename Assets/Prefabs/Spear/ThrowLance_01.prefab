@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackValue: 1
+  attackType: 1
 --- !u!1 &3606591563729274036
 GameObject:
   m_ObjectHideFlags: 0
