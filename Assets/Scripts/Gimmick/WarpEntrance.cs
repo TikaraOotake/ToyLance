@@ -84,11 +84,11 @@ public class WarpEntrance : MonoBehaviour
                 //フェードアウトさせる
                 if (Camera)
                 {
-                   // UIManager _uiMng = Camera.GetComponent<UIManager>();
-                  //  if (_uiMng)
-                  //  {
-                  //      _uiMng.SetBlindFade(true);
-                  //  }
+                    UIManager _uiMng = Camera.GetComponent<UIManager>();
+                    if (_uiMng)
+                    {
+                        _uiMng.SetBlindFade(true);
+                    }
                 }
 
                 //座標を記録
@@ -110,7 +110,7 @@ public class WarpEntrance : MonoBehaviour
         {
             if (Player)
             {
-                Player.transform.position = FadeOutPlayerPos;
+                Player.transform.position = new Vector2(FadeOutPlayerPos.x, Player.transform.position.y);
             }
         }
 

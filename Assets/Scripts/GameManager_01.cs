@@ -77,13 +77,13 @@ public static class GameManager_01
 
     public static void SetBlindFade(bool _flag)
     {
-        if (Camera)
+        if (Camera != null)
         {
-            //UIManager _UIManager = Camera.GetComponent<UIManager>();
-            //if (_UIManager)
-            //{
-            //    _UIManager.SetBlindFade(_flag);
-            //}
+            UIManager _UIManager = Camera.GetComponent<UIManager>();
+            if (_UIManager)
+            {
+                _UIManager.SetBlindFade(_flag);
+            }
         }
     }
 

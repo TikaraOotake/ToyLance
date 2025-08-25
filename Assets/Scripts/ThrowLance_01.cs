@@ -43,8 +43,15 @@ public class ThrowLance_01 : MonoBehaviour
             {
                 GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, transform.rotation);//‘„°‚ğ¶¬
                 HalfHitGroundLance.transform.localScale = this.transform.localScale;//‘å‚«‚³‚ğˆø‚«Œp‚®
+                HalfHitGroundLance.transform.SetParent(collision.transform);//eq•t‚¯
             }
 
+            Destroy(this.gameObject);
+            return;
+        }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
             Destroy(this.gameObject);
             return;
         }
