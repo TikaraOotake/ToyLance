@@ -88,22 +88,22 @@ public class SpearProjectile : MonoBehaviour
         Destroy(gameObject, stuckLife);
     }
 
-    //‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—
-    public void FlipInShield()
-    {
-        Vector3 spearPos = transform.localPosition;
-        spearPos.x *= -1;
-        transform.localPosition = spearPos;
+    ////‘„‚ª‚‚Éh‚³‚Á‚½‚Ì”½“]ˆ—
+    //public void FlipInShield()
+    //{
+    //    Vector3 spearPos = transform.localPosition;
+    //    spearPos.x *= -1;
+    //    transform.localPosition = spearPos;
 
-        Vector3 spearRot = transform.localEulerAngles;
-        if (spearRot.y == 0f)
-        {
-            spearRot.y = 180f;
-        }
-        else
-        {
-            spearRot.y = 0f;
-        }
-        transform.localEulerAngles = spearRot;
-    }
+    //    Vector3 spearRot = transform.localEulerAngles;
+    //    if (spearRot.y == 0f)
+    //    {
+    //        spearRot.y = 180f;
+    //    }
+    //    else
+    //    {
+    //        spearRot.y = 0f;
+    //    }
+    //    transform.localEulerAngles = spearRot;
+    //}
 }
