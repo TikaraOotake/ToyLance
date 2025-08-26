@@ -78,7 +78,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.34, y: 2.03}
+  m_Size: {x: 16.48, y: 2.03}
   m_EdgeRadius: 0
 --- !u!114 &5007506725087322905
 MonoBehaviour:
@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3897537859783176225}
   - component: {fileID: 2496436381867164472}
+  - component: {fileID: 4630263188296921082}
   m_Layer: 13
   m_Name: Floor
   m_TagString: Untagged
@@ -172,6 +173,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4630263188296921082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118367503197662490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e71d6a2ba839244ca94495eff7e5157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8870588412461637057
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +258,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 44ffc007105e285449ee2b253a1286fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d49208c749531e4ea730a74c179def0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -18,8 +18,11 @@ public class HalfHitFloor_Lance : HalfHitFloor
 
         RemainingTimer = RemainingTime;//タイマーセット
     }
+
+   
     private void Update()
     {
+
         RemainingTimer = Mathf.Max(0.0f, RemainingTimer - Time.deltaTime);
         
         if(_sr)
@@ -65,4 +68,5 @@ public class HalfHitFloor_Lance : HalfHitFloor
             }
         }
     }
+   
 }

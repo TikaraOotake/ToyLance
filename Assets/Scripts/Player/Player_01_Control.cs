@@ -20,6 +20,9 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private float JumpValue = 1.0f;//ジャンプ量
 
+    [SerializeField] private float HP;//体力
+    [SerializeField] private float HP_Max = 5.0f;//最大体力
+
     [SerializeField]
     private float LanceSpeed;//槍速度
 
@@ -90,6 +93,8 @@ public class Player_01_Control : MonoBehaviour
 
         _sr = GetComponent<SpriteRenderer>();
         if (_anim == null) Debug.Log("アニメーターの取得に失敗");
+
+        HP = HP_Max;
     }
 
     void Start()
@@ -119,14 +124,31 @@ public class Player_01_Control : MonoBehaviour
 
             InputAtkSetting();
         }
-        else
+        else if(playerStatus==PlayerStatus.Dead)//死亡状態
         {
-            //...
+            if (_rb != null)
+            {
+                _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
+            }
+            if (_sr != null)
+            {
+                _sr.flipY = true;
+            }
         }
 
-
+        GameObject Enemy = GetTouchingObjectWithLayer(GetComponent<Collider2D>(), "Enemy");
+        if (Enemy != null)
+        {
+            SetDamage(Enemy);
+        }
 
         SetAnim();
+
+        //死亡チェック
+        if (HP <= 0.0f)
+        {
+            playerStatus = PlayerStatus.Dead;
+        }
 
         //タイマー更新
         AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
@@ -516,6 +538,8 @@ public class Player_01_Control : MonoBehaviour
 
         if (playerStatus == PlayerStatus.Fine)
         {
+            HP -= 1.0f;//体力を減らす
+
             //どちらの方向からぶつかったか調べる
             float Way = _Enemy.transform.position.x - transform.position.x;
 
@@ -555,14 +579,14 @@ public class Player_01_Control : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
-            SetDamage(collision.gameObject);
+            //SetDamage(collision.gameObject);
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            SetDamage(collision.gameObject);
+            //SetDamage(collision.gameObject);
         }
     }
 }

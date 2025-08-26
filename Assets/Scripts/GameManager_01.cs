@@ -9,6 +9,8 @@ public static class GameManager_01
     private static Vector2 StartPlayerPos;
     private static bool SettingPlayerPosFlag = false;
 
+    private static Vector2 CheckPointPos;
+
     // ゲーム開始時に初期化するメソッド
     public static void Initialize()
     {
@@ -38,6 +40,9 @@ public static class GameManager_01
             {
                 Debug.Log("カメラがありません");
             }
+
+            //復帰地点初期化
+            CheckPointPos = StartPlayerPos;
         }
 
         //フラグを初期化
@@ -120,5 +125,13 @@ public static class GameManager_01
                 _cc.SetShakeCamera(_Length, _Speed, _LowValue);
             }
         }
+    }
+    public static void SetCheckPointPos(Vector2 _Pos)
+    {
+        CheckPointPos = _Pos;
+    }
+    public static void SetGameover()
+    {
+
     }
 }
