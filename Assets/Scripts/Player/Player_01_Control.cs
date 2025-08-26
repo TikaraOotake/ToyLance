@@ -262,8 +262,17 @@ public class Player_01_Control : MonoBehaviour
             if (LancePrefab != null)
             {
                 Quaternion Rot = Quaternion.Euler(0.0f, 180.0f, 0.0f);//向きを定義
-                Vector2 ThrowVec = new Vector2(-LanceSpeed, 0.0f);//投げる速度を定義
-                if (!FlipX)
+                Vector2 ThrowVec = new Vector2(1.0f, 0.0f);//投げるベクトルを定義
+
+                if (Input.GetKey(KeyCode.W))//上入力中であれば斜めに
+                {
+                    ThrowVec += new Vector2(0.0f, 1.0f);
+                    ThrowVec.Normalize();//正規化
+                }
+
+                ThrowVec *= LanceSpeed;//速度を適用
+
+                if (FlipX)
                 {
                     Rot = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                     ThrowVec.x *= -1;//速度の向きを反転
