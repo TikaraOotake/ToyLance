@@ -308,7 +308,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -52.998466, y: -0.058979087, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1141984750954134897}
@@ -420,8 +420,8 @@ MonoBehaviour:
   AttackObj: {fileID: 0}
   FlipObj: {fileID: 5224276788351002623}
   MoveValue: 5
-  JumpValue: 20
-  LanceSpeed: 0
+  JumpValue: 8
+  LanceSpeed: 13.19
   _rb: {fileID: 0}
   _anim: {fileID: 0}
   _sr: {fileID: 0}
@@ -437,6 +437,9 @@ MonoBehaviour:
   KonokBackTime: 0.5
   InvincibleTime: 1
   ThrowCooltime: 1
+  TrustAttackValue: 0
+  ThrowAttackValue: 0
+  FallAttackValue: 0
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4
