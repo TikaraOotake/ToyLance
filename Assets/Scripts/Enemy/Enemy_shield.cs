@@ -36,29 +36,46 @@ public class Enemy_shield : MonoBehaviour
 
         isFacingRight = FacingRight;
 
-        float direction;
+        //float direction;
+
+        //if (FacingRight)
+        //{
+        //    direction = 1f;
+        //}
+        //else
+        //{
+        //    direction = -11f;
+        //}
+
+        //Vector3 pos = transform.localPosition;
+        //pos.x = initialShieldX * direction;
+        //transform.localPosition = pos;
+
+        float yRotation;
 
         if (FacingRight)
         {
-            direction = 1f;
+            yRotation = 0f;
         }
         else
         {
-            direction = -11f;
+            yRotation = 180f;
         }
 
-        Vector3 pos = transform.localPosition;
-        pos.x = initialShieldX * direction;
-        transform.localPosition = pos;
-        foreach (Transform child in transform)
-        {
-            var spear = child.GetComponent<SpearProjectile>();
-            if (spear != null)
-            {
-                //ëÑÇ™èÇÇ…éhÇ≥Ç¡ÇΩéûÇÃîΩì]èàóù
-                spear.FlipInShield();
-            }
-        }
+        Vector3 currentRotation = transform.localEulerAngles;
+        currentRotation.y = yRotation;
+        transform.localEulerAngles = currentRotation;
+
+        //foreach (Transform child in transform)
+        //{
+        //    var spear = child.GetComponent<SpearProjectile>();
+        //    Debug.Log(spear);
+        //    if (spear != null)
+        //    {
+        //        //ëÑÇ™èÇÇ…éhÇ≥Ç¡ÇΩéûÇÃîΩì]èàóù
+        //        spear.FlipInShield();
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,22 +91,23 @@ public class Enemy_shield : MonoBehaviour
             AttackType attackType= spear.GetAttackType();
             if (attackType == AttackType.Trust) 
             {
+                //èÇÇÃîjâÛèàóù
                 BreakShield();
             }
         }
 
-        if (collision.CompareTag("PlayerMeleeAttack")) 
-        {
-            var meleeHitbox = collision.GetComponent<MeleeHitbox>();
-            if (meleeHitbox != null) 
-            {
-                var player = meleeHitbox.GetComponentInParent<Player_move>();
-                if (player != null && !player.isDownAttacking)
-                {
-                    BreakShield();
-                }
-            }
-        }
+        //if (collision.CompareTag("PlayerMeleeAttack")) 
+        //{
+        //    var meleeHitbox = collision.GetComponent<MeleeHitbox>();
+        //    if (meleeHitbox != null) 
+        //    {
+        //        var player = meleeHitbox.GetComponentInParent<Player_move>();
+        //        if (player != null && !player.isDownAttacking)
+        //        {
+        //            BreakShield();
+        //        }
+        //    }
+        //}
 
         if (collision.GetComponent<SpearProjectile>() != null)
         {

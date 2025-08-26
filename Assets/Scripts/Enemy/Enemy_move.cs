@@ -48,6 +48,7 @@ public class Enemy_move : MonoBehaviour
         {
             nextMove *= -1;
             spriteRenderer.flipX = nextMove == 1;
+            //盾の更新処理
             UpdateShield();
             CancelInvoke();
             Invoke("Think", 2);
@@ -64,6 +65,7 @@ public class Enemy_move : MonoBehaviour
         if (nextMove != 0)
         {
             spriteRenderer.flipX = nextMove == 1;
+            //盾の更新処理
             UpdateShield();
         }
 
@@ -87,6 +89,7 @@ public class Enemy_move : MonoBehaviour
         Invoke("Think", nextThinkTime);
     }
 
+    //盾の更新処理
     void UpdateShield()
     {
         if (enemyshield != null) 
