@@ -41,8 +41,9 @@ public class ThrowLance_01 : MonoBehaviour
         {
             if (HalfHitGroundLancePrefab != null)
             {
-                GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, transform.rotation);//‘„°‚ğ¶¬
+                GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, Quaternion.identity);//‘„°‚ğ¶¬
                 HalfHitGroundLance.transform.localScale = this.transform.localScale;//‘å‚«‚³‚ğˆø‚«Œp‚®
+                HalfHitGroundLance.transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);//Šp“x‚ğˆø‚«Œp‚®(Y²‚Ì‚İ)
                 HalfHitGroundLance.transform.SetParent(collision.transform);//eq•t‚¯
             }
 

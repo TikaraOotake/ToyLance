@@ -62,6 +62,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private int TrustAttackValue;//刺突攻撃力
     [SerializeField] private int ThrowAttackValue;//投擲攻撃力
     [SerializeField] private int FallAttackValue;//落下攻撃力
+
+    [SerializeField] private float TestRot;
     enum PlayerStatus
     {
         Fine,
@@ -261,23 +263,25 @@ public class Player_01_Control : MonoBehaviour
 
             if (LancePrefab != null)
             {
-                Quaternion Rot = Quaternion.Euler(0.0f, 180.0f, 0.0f);//向きを定義
+                Vector3 Rot = new Vector3(0.0f, 0.0f, 0.0f);//向きを定義
                 Vector2 ThrowVec = new Vector2(1.0f, 0.0f);//投げるベクトルを定義
 
                 if (Input.GetKey(KeyCode.W))//上入力中であれば斜めに
                 {
                     ThrowVec += new Vector2(0.0f, 1.0f);
                     ThrowVec.Normalize();//正規化
+                    Rot.z += 45.0f;//角度を曲げる
                 }
 
                 ThrowVec *= LanceSpeed;//速度を適用
 
                 if (FlipX)
                 {
-                    Rot = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                    Rot.y += 180.0f;
                     ThrowVec.x *= -1;//速度の向きを反転
                 }
-                GameObject Lance = Instantiate(LancePrefab, transform.position, Rot);//槍を生成
+                GameObject Lance = Instantiate(LancePrefab, transform.position, Quaternion.identity);//槍を生成
+                Lance.transform.eulerAngles = Rot;
 
                 Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
                 if (_rb != null) _rb.velocity = ThrowVec;//速度代入

@@ -437,9 +437,9 @@ MonoBehaviour:
   KonokBackTime: 0.5
   InvincibleTime: 1
   ThrowCooltime: 1
-  TrustAttackValue: 0
-  ThrowAttackValue: 0
-  FallAttackValue: 0
+  TrustAttackValue: 3
+  ThrowAttackValue: 1
+  FallAttackValue: 3
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4
