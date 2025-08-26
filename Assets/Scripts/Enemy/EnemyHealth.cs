@@ -34,7 +34,7 @@ public class EnemyHealth : MonoBehaviour
 
         currentHP -= dmg;
         StartCoroutine(HitFlash());            // ｸﾂﾀｻ ｶｧ ｻ｡ｰ｣ｻ・ﾀｯﾁ・
-
+        Debug.Log("a");
         /* ｦ｡ ｳﾋｹ・ｿｩｺﾎｸｦ ﾅｴ/ｱﾙﾁ｢ｿ｡ ｵ郞・ｼｱﾅﾃ ｦ｡ */
         if (doKnockback)
         {
