@@ -6,11 +6,11 @@ public class EnemyHealth : MonoBehaviour
 {
 
     [SerializeField] private int maxHP = 4;
-    [SerializeField] private float knockback = 10f;
+    [SerializeField] protected float knockback = 10f;
     [SerializeField] private float iTime = 0.1f;   // ｹｫﾀ・ｽﾃｰ｣
-    private int currentHP;
-    private Rigidbody2D rb;
-    private bool invincible;
+    protected int currentHP;
+    protected Rigidbody2D rb;
+    protected bool invincible;
 
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ﾇﾇｰﾝ ｻ・ｺｯｰ豼・SpriteRenderer
@@ -27,14 +27,13 @@ public class EnemyHealth : MonoBehaviour
     }
 
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
-    public void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
+    public virtual void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
         if (invincible) return;
         StartCoroutine(IFrame());
 
         currentHP -= dmg;
         StartCoroutine(HitFlash());            // ｸﾂﾀｻ ｶｧ ｻ｡ｰ｣ｻ・ﾀｯﾁ・
-        Debug.Log("a");
         /* ｦ｡ ｳﾋｹ・ｿｩｺﾎｸｦ ﾅｴ/ｱﾙﾁ｢ｿ｡ ｵ郞・ｼｱﾅﾃ ｦ｡ */
         if (doKnockback)
         {
@@ -52,7 +51,7 @@ public class EnemyHealth : MonoBehaviour
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ｽｺﾇﾁｶﾌﾆｮｸｦ ﾀ盂・ｻ｡ｰ｣ｻ貅ｹｱﾍ
     ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ */
-    IEnumerator HitFlash()                                        // ｡ﾚﾃﾟｰ｡
+    protected IEnumerator HitFlash()                                        // ｡ﾚﾃﾟｰ｡
     {
         Color original = sr.color;        // ｿ｡ ｻ・ﾀ惕・
         sr.color = Color.red;             // ｻ｡ｰ｣ｻｸｷﾎ ｺｯｰ・
@@ -60,18 +59,19 @@ public class EnemyHealth : MonoBehaviour
         sr.color = original;              // ｿ｡ ｻ・ｺｹｱﾍ
     }
 
-    IEnumerator IFrame()
+    protected IEnumerator IFrame()
     {
         invincible = true;
         yield return new WaitForSeconds(iTime);
         invincible = false;
     }
 
-    void Die()
+    protected void Die()
     {
         // TODO: ｻ邵ﾁ ｾﾖｴﾏ｡､ﾆﾄﾆｼﾅｬ｡､ｽｺﾄﾚｾ・
         Destroy(gameObject);      // ﾇﾊｿ萇ﾏｸ・ｾﾖｴﾏ ﾈﾄ Destroy(gameObject,0.3f);
     }
+
 
 
     // Start is called before the first frame update

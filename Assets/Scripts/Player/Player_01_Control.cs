@@ -85,6 +85,9 @@ public class Player_01_Control : MonoBehaviour
     AtkStatus atkStatus = AtkStatus.None;
     private void Awake()
     {
+        //マネージャーに自身を登録
+        GameManager_01.SetPlayer(this.gameObject);
+
         _rb = GetComponent<Rigidbody2D>();
         if (_rb == null) Debug.Log("リジットボディの取得に失敗");
 

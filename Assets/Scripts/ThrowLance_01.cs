@@ -17,14 +17,6 @@ public class ThrowLance_01 : MonoBehaviour
     void Update()
     {
         return;
-
-        if (coll != null)
-        {
-            if (Collision_Manager.GetTouchingObjectWithLayer(coll, "Platform"))
-            {
-                Destroy(this.gameObject);
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

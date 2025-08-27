@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c118f02be3398245845c1fdaec62a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBroken: 0
 --- !u!1 &5383391964868293515
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ GameObject:
   - component: {fileID: -1011820019592074360}
   - component: {fileID: 4658345698890839402}
   - component: {fileID: 553801751930056524}
-  - component: {fileID: 300001188588061059}
+  - component: {fileID: 1353811159120861197}
   m_Layer: 6
   m_Name: ShieldEnemy
   m_TagString: Enemy
@@ -363,7 +364,7 @@ MonoBehaviour:
   nextMove: 1
   enemyshield: {fileID: 6073534771303109238}
   moveSpeed: 1
---- !u!114 &300001188588061059
+--- !u!114 &1353811159120861197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,9 +373,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5383391964868293515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12f1de1e31f401440a385599f51c376f, type: 3}
+  m_Script: {fileID: 11500000, guid: 240cd21fa91965a4b9e2fc588921d6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 4
-  knockback: 18
+  knockback: 10
   iTime: 0.1
+  Shield: {fileID: 2314616685542737132}
