@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 849502995e9b51c44a8891c22061ae37
+guid: 433d5e6b5de5eca4db2973ef9e78f1da
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,8 +46,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.75}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -110,22 +110,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hunt_0
+      name: Attack_02_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 7
         y: 3
-        width: 17
-        height: 28
+        width: 16
+        height: 42
       alignment: 9
-      pivot: {x: 0.5, y: 0.53}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 751766bb5c9e2e8458338c5edcfaab39
-      internalID: -618498310
+      spriteID: da242576dab88c84f885b36004409fbb
+      internalID: -1963772001
       vertices: []
       indices: 
       edges: []
@@ -134,14 +134,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hunt_0: -618498310
+      Attack_02_0: -1963772001
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

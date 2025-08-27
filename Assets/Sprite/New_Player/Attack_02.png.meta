@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 433d5e6b5de5eca4db2973ef9e78f1da
+guid: 465fa2190953fb747bd84c2f1a802736
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,8 +46,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.75}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,7 +113,7 @@ TextureImporter:
       name: Attack_02_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 9
         y: 3
         width: 16
         height: 42
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da242576dab88c84f885b36004409fbb
-      internalID: -1963772001
+      spriteID: 12d90f1007322614ab61ba6aead683c6
+      internalID: -1907121783
       vertices: []
       indices: 
       edges: []
@@ -134,14 +134,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_02_0: -1963772001
+      Attack_02_0: -1907121783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 849502995e9b51c44a8891c22061ae37
+guid: 160c4def40ad38b4bb6cbd8418d92bbf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,10 +110,52 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hunt_0
+      name: Jump-Sheet_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 9
+        y: 3
+        width: 16
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.56}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8651c7fb603bb748b24bb24790d9456
+      internalID: 740505575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 3
+        width: 16
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.56}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac9087017c0d2db499f3d131030c5961
+      internalID: 848502216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 72
         y: 3
         width: 17
         height: 28
@@ -124,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 751766bb5c9e2e8458338c5edcfaab39
-      internalID: -618498310
+      spriteID: c8695d03d6b9f9d418d1bd5a8baa4f6f
+      internalID: 241945396
       vertices: []
       indices: 
       edges: []
@@ -141,7 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hunt_0: -618498310
+      Jump-Sheet_0: 740505575
+      Jump-Sheet_1: 848502216
+      Jump-Sheet_2: 241945396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

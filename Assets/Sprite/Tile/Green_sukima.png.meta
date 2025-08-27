@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 849502995e9b51c44a8891c22061ae37
+guid: 8753741cda1e46c4dbc6f0eff641461c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,22 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hunt_0
+      name: Green_sukima_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 3
-        width: 17
-        height: 28
-      alignment: 9
-      pivot: {x: 0.5, y: 0.53}
+        x: 1
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 751766bb5c9e2e8458338c5edcfaab39
-      internalID: -618498310
+      spriteID: 9883b2efe5c6d5b47a72da0617ebd64b
+      internalID: -1650404583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green_sukima_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6970363f2e98f439f5548a48a2075e
+      internalID: 1961626691
       vertices: []
       indices: 
       edges: []
@@ -141,7 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hunt_0: -618498310
+      Green_sukima_0: -1650404583
+      Green_sukima_1: 1961626691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

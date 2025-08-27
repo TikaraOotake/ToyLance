@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 849502995e9b51c44a8891c22061ae37
+guid: 92a4686fd654eba49a44ca9ff6c2ed1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,22 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hunt_0
+      name: Attack01-Sheet_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 10
         y: 3
-        width: 17
-        height: 28
+        width: 29
+        height: 26
       alignment: 9
-      pivot: {x: 0.5, y: 0.53}
+      pivot: {x: 0.65, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 751766bb5c9e2e8458338c5edcfaab39
-      internalID: -618498310
+      spriteID: e6c843583bb0134428df2f881feaa6af
+      internalID: -666264074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack01-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 3
+        width: 29
+        height: 25
+      alignment: 9
+      pivot: {x: 0.75, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0d6773436620f4d9f19a035db295bb
+      internalID: 908539477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack01-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 3
+        width: 35
+        height: 25
+      alignment: 9
+      pivot: {x: 0.83, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4858d92ad97e6345b6bafcf272656cc
+      internalID: -1651546547
       vertices: []
       indices: 
       edges: []
@@ -141,7 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hunt_0: -618498310
+      Attack01-Sheet_0: -666264074
+      Attack01-Sheet_1: 908539477
+      Attack01-Sheet_2: -1651546547
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

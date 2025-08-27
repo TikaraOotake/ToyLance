@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46fceb5927aba16408d33c0165107c95
+guid: 1687ba10adab7b74198a65a1ca87808d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,106 +110,211 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle-Sheet_0
+      name: Spikes_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 3
-        width: 16
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.56}
+        x: 4
+        y: 5
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6a0d66d69f52ee47a269f13244a5981
-      internalID: 53385145
+      spriteID: b2aec2c3f566a9748a7376aadd0cb953
+      internalID: 967168101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_1
+      name: Spikes_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 3
-        width: 16
-        height: 28
-      alignment: 9
-      pivot: {x: 0.5, y: 0.54}
+        x: 14
+        y: 5
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e63b9fe5fa7a93a449e7d78c8ccb1beb
-      internalID: 878981493
+      spriteID: b96d415c272d414439e1f3be6f697a17
+      internalID: 394819684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_2
+      name: Spikes_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 3
-        width: 16
-        height: 28
-      alignment: 9
-      pivot: {x: 0.5, y: 0.54}
+        x: 24
+        y: 5
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9a9cf9db08333a488d4a37fc7b09ce2
-      internalID: -1618369780
+      spriteID: f29d6c1d558ba55439d43bfca2717818
+      internalID: -1916924573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_3
+      name: Spikes_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 3
-        width: 16
-        height: 28
-      alignment: 9
-      pivot: {x: 0.5, y: 0.56}
+        x: 34
+        y: 5
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f93f69c5043bc32449be46786fe77bc9
-      internalID: 951055409
+      spriteID: a9fed91a25941b449807fb5a68112c61
+      internalID: 390632051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_4
+      name: Spikes_4
       rect:
         serializedVersion: 2
-        x: 137
-        y: 3
-        width: 16
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.56}
+        x: 44
+        y: 5
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa7d82a314f25af4ea66f28fd87ed028
-      internalID: -1385152119
+      spriteID: 7f742cd1ba72fda469382cb3d9b2b58d
+      internalID: 141209507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_5
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 5
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86ddd9843ae61144bdca6a9a7545726
+      internalID: -705094603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_6
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 5
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d0c0c6cd01b694798df2cc9f070e71
+      internalID: -1599844769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_7
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 5
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f864911f9d4ccc4aabac46fe334c263
+      internalID: 906251267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_8
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 5
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a888c6b18c62e746b3a333ff9d405c8
+      internalID: -1966083976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_9
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 5
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d39c40f2044197349aea3f6c64786037
+      internalID: -245235078
       vertices: []
       indices: 
       edges: []
@@ -225,11 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle-Sheet_0: 53385145
-      Idle-Sheet_1: 878981493
-      Idle-Sheet_2: -1618369780
-      Idle-Sheet_3: 951055409
-      Idle-Sheet_4: -1385152119
+      Spikes_0: 967168101
+      Spikes_1: 394819684
+      Spikes_2: -1916924573
+      Spikes_3: 390632051
+      Spikes_4: 141209507
+      Spikes_5: -705094603
+      Spikes_6: -1599844769
+      Spikes_7: 906251267
+      Spikes_8: -1966083976
+      Spikes_9: -245235078
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
