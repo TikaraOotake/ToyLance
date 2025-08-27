@@ -6,6 +6,8 @@ public class PatchBear : MonoBehaviour
 {
     [SerializeField]
     private GameObject Player;
+    [SerializeField]
+    private GameObject FlipObj;//移動に合わせて反転させるオブジェクト
 
     [SerializeField]
     private float MoveValue;//移動速度
@@ -23,14 +25,21 @@ public class PatchBear : MonoBehaviour
 
     [SerializeField]
     private float MoveWay = 0.0f;
+    [SerializeField]
+    private float SearchDistance;//Playerを探す距離
+
+    [SerializeField] Collider2D CliffCheckColl;//崖端を確認するコライダー
+    [SerializeField] Collider2D WallCheckColl;//壁を確認するコライダー
 
     [SerializeField]
     private Rigidbody2D _rb;//物理コンポ
+    [SerializeField]
+    private SpriteRenderer _sr;//スプライトレンダラー
 
     enum ActionStatus
     {
         Idol,//待機
-        Walk,歩行
+        Walk,//歩行
     }
     [SerializeField]
     private ActionStatus actionStatus;
@@ -43,43 +52,95 @@ public class PatchBear : MonoBehaviour
     {
         //取得
         _rb = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Walk();
+        SearchPlayer();
 
         if (ActionTimer <= 0.0f)
         {
             SetAction();
         }
         ActionTimer = Mathf.Max(0.0f, ActionTimer - Time.deltaTime);
+
+        SetAnim();
     }
     private void Walk()
     {
+        if (CliffCheckColl != null) 
+        {
+            if (!Collision_Manager.GetTouchingObjectWithLayer(CliffCheckColl, "Platform"))
+                MoveWay *= -1;//移動方向反転
+        }
+
+        if (FlipObj != null)
+        {
+            if (MoveWay > 0)
+            {
+                FlipObj.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            }
+            else if (MoveWay < 0)
+            {
+                FlipObj.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            }
+        }
+
+        if (_sr != null)
+        {
+            if (MoveWay > 0)
+            {
+                _sr.flipX = true;
+            }
+            else if (MoveWay < 0)
+            {
+                _sr.flipX = false;
+            }
+        }
+
+
         if (_rb)
         {
             _rb.velocity = new Vector2(MoveWay * MoveValue, _rb.velocity.y);
         }
     }
+    private void SearchPlayer()
+    {
+        Player = GameManager_01.GetPlayer();
+
+    }
     private void SetAction()
     {
-        float Rand = Random.Range(0.0f, 1.0f);
-        if (Rand <= 0.33f)//右移動
+        if (0.5f >= Random.Range(0.0f, 1.0f))
         {
-            MoveWay = 1.0f;
-        }
-        else if (Rand <= 0.66f)//左移動
-        {
-            MoveWay = -1.0f;
-        }
-        else//待機
-        {
+            //待機
             MoveWay = 0.0f;
+            actionStatus = ActionStatus.Idol;
+        }
+        else
+        {
+            //移動
+            if (0.5f >= Random.Range(0.0f, 1.0f))
+            {
+                //右移動
+                MoveWay = +1.0f;
+            }
+            else
+            {
+                //左移動
+                MoveWay = -1.0f;
+            }
+
+            actionStatus = ActionStatus.Walk;
         }
 
         //時間セット
-        ActionTimer = Random.Range(3.0f, 6.0f);
+        ActionTimer = Random.Range(1.0f, 3.0f);
+    }
+    private void SetAnim()
+    {
     }
 }

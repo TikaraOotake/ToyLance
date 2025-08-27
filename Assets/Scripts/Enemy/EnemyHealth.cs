@@ -8,7 +8,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHP = 4;
     [SerializeField] protected float knockback = 10f;
     [SerializeField] private float iTime = 0.1f;   // 무픸E시간
+    [SerializeField]
     protected int currentHP;
+    protected int currentHP_old;
     protected Rigidbody2D rb;
     protected bool invincible;
 
@@ -72,7 +74,18 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);      // 필요하툈E애니 후 Destroy(gameObject,0.3f);
     }
 
-
+    public void SetHP(int _HP)
+    {
+        //뤵뙽돷뙽
+        _HP = Mathf.Max(_HP, 0);
+        _HP = Mathf.Min(_HP, maxHP);
+        
+        currentHP = _HP;
+    }
+    public int GetHP()
+    {
+        return currentHP;
+    }
 
     // Start is called before the first frame update
     void Start()
