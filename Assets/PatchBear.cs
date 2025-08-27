@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PatchBear : MonoBehaviour
@@ -22,6 +23,8 @@ public class PatchBear : MonoBehaviour
 
     [SerializeField]
     private float ActionTimer;//çsìÆéûä‘
+
+    private bool IsChase = false;
 
     [SerializeField]
     private float MoveWay = 0.0f;
@@ -110,7 +113,28 @@ public class PatchBear : MonoBehaviour
     private void SearchPlayer()
     {
         Player = GameManager_01.GetPlayer();
+        if (Player != null)
+        {
+            float Length = Vector2.Distance(Player.transform.position, transform.position);
+            if (SearchLength <= Length)
+            {
+                //çıìGîÕàÕì‡Ç…ì¸ÇÍÇŒí«ê’ÉÇÅ[ÉhÇ…
+                IsChase = true;
+            }
 
+            if (IsChase)
+            {
+                float Direction = Player.transform.position.x - transform.position.x;
+                if (Direction >= 1.0f)
+                {
+                    MoveWay = +1.0f;
+                }
+                else if (Direction <= -1.0f)
+                {
+                    MoveWay = -1.0f;
+                }
+            }
+        }
     }
     private void SetAction()
     {
