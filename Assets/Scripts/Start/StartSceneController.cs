@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StartSceneController : MonoBehaviour
 {
-    public Text countdownText;      // [Inspector에 드래그] 오른쪽 위 카운트다운 표시용
+    public Text countdownText;      // [Inspector에 드래그] 오른쪽 위 카웝獸다퓖E표시퓖E
     private float countdown = 3f;
     private bool isCounting = false;
 
@@ -25,7 +25,7 @@ public class StartSceneController : MonoBehaviour
 
             if (countdown <= 0f)
             {
-                SceneManager.LoadScene("Stage03");
+                SceneManager.LoadScene("Stage01");
             }
         }
     }

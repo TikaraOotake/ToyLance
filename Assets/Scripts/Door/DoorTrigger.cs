@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;   // ¡ç ¾À ÀüÈ¯
+using UnityEngine.SceneManagement;   // ¡E¾À ÀE¯
 
-/// ÇÃ·¹ÀÌ¾î°¡ 'Door' ¾Õ¿¡ ´êÀ¸¸é Å¬¸®¾î ¾ÀÀ¸·Î ÀÌµ¿
+/// ÇÃ·¹ÀÌ¾ûÌ¡ 'Door' ¾Õ¿¡ ´E¸¸EÅ¬¸®¾E¾ÀÀ¸·Î ÀÌµ¿
 [RequireComponent(typeof(Collider2D))]
 public class DoorTrigger : MonoBehaviour
 {
-    [SerializeField] string clearSceneName = "Clear";   // Build Settings¿¡ µî·ÏÇÑ ÀÌ¸§
+    [SerializeField] string clearSceneName = "Clear";   // Build Settings¿¡ µûÓÏÇÑ ÀÌ¸§
 
     void OnTriggerEnter2D(Collider2D col)
     {

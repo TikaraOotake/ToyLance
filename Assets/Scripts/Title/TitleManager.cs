@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // ¾À °ü¸®¸¦ À§ÇØ ÇÊ¿äÇÕ´Ï´Ù.
+using UnityEngine.SceneManagement; // ¾À °E®¸¦ À§ÇØ ÇÊ¿äÇÕ´Ï´Ù.
 
 public class TitleManager : MonoBehaviour
 {
@@ -9,24 +9,24 @@ public class TitleManager : MonoBehaviour
     // Inspector¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ıÇÒ Animator¸¦ ¿¬°áÇÕ´Ï´Ù.
     public Animator titleAnimator;
 
-    // Inspector¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³­ ÈÄ ³Ñ¾î°¥ ¾ÀÀÇ ÀÌ¸§À» ÀÔ·ÂÇÕ´Ï´Ù.
+    // Inspector¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³­ ÈÄ ³Ñ¾ûÌ¥ ¾ÀÀÇ ÀÌ¸§À» ÀÔ·ÂÇÕ´Ï´Ù.
     public string nextSceneName;
 
     // ¾Ö´Ï¸ŞÀÌ¼Ç TriggerÀÇ ÀÌ¸§À» Inspector¿¡¼­ ¼³Á¤ÇÕ´Ï´Ù.
     public string animationTriggerName = "Start";
 
-    // Å° ÀÔ·ÂÀÌ °¡´ÉÇÑ »óÅÂÀÎÁö È®ÀÎÇÏ´Â º¯¼öÀÔ´Ï´Ù.
+    // Å° ÀÔ·ÂÀÌ °¡´ÉÇÑ »óÅÂÀÎÁEÈ®ÀÎÇÏ´Â º¯¼öÀÔ´Ï´Ù.
     private bool canPressKey = true;
 
     void Update()
     {
-        // Å° ÀÔ·ÂÀÌ °¡´ÉÇÑ »óÅÂÀÌ°í, ¾Æ¹« Å°³ª ´­·ÈÀ» ¶§
+        // Å° ÀÔ·ÂÀÌ °¡´ÉÇÑ »óÅÂÀÌ°E ¾Æ¹« Å°³ª ´­·ÈÀ» ¶§
         if (canPressKey && Input.anyKeyDown)
         {
             // Å° ÀÔ·ÂÀ» ºñÈ°¼ºÈ­ÇÏ¿© Áßº¹ ½ÇÇàÀ» ¹æÁöÇÕ´Ï´Ù.
             canPressKey = false;
 
-            // Animator°¡ ¿¬°áµÇ¾î ÀÖ´Ù¸é, ¼³Á¤µÈ ÀÌ¸§ÀÇ Trigger¸¦ ½ÇÇàÇÕ´Ï´Ù.
+            // Animator°¡ ¿¬°áµÇ¾EÀÖ´Ù¸E ¼³Á¤µÈ ÀÌ¸§ÀÇ Trigger¸¦ ½ÇÇàÇÕ´Ï´Ù.
             if (titleAnimator != null)
             {
                 titleAnimator.SetTrigger(animationTriggerName);

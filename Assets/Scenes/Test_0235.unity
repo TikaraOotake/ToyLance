@@ -1816,7 +1816,8 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1895,10 +1896,11 @@ Transform:
   m_LocalPosition: {x: -49.09, y: 0.89000005, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1045399267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
+--- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1907,31 +1909,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 81504688f15034846a519e214ff80da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  player: {fileID: 1347691127}
+  CameraArea: {fileID: 0}
+  ChaseRate: 0.04
+  AdjustCameraPosX: 0
+  CameraWayX: 0
+  CameraGazePos: {x: 0, y: 0}
+  ShakeRot_Speed: 1
+  ShakeRot_LowValue: 1
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f7fd15715797b45bac30a7da03a131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &526490356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15434,7 +15434,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1045399267}
   - component: {fileID: 1045399266}
-  - component: {fileID: 1045399265}
   m_Layer: 0
   m_Name: BG_Sky
   m_TagString: Untagged
@@ -15442,19 +15441,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1045399265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045399264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a96efc297eb1a14f8b772792ffbe105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: 0
 --- !u!212 &1045399266
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15516,11 +15502,11 @@ Transform:
   m_GameObject: {fileID: 1045399264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.62, y: -0.6191285, z: 19.400488}
+  m_LocalPosition: {x: -0.046985626, y: -0.22000003, z: 20}
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1217555062}
+  m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103520074
 GameObject:
@@ -16455,7 +16441,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1045399267}
   - {fileID: 1193019703}
   - {fileID: 1858379169}
   - {fileID: 1526615645}
@@ -17158,6 +17143,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
+--- !u!1 &1347691127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7974809287086638784, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
+  m_PrefabInstance: {fileID: 1347691126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1374990289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1501756333145605961, guid: 0e6cfb7e7d199e74eae3a5ae8272ff43, type: 3}
