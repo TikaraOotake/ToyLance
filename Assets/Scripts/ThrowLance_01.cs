@@ -49,6 +49,12 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
+        EnemyHealth enemyHealth= collision.GetComponent<EnemyHealth>();
+        if(enemyHealth)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
         if (collision.CompareTag("DestructionTriggerTag"))
         {
