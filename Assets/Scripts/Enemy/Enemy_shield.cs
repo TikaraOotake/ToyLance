@@ -147,6 +147,12 @@ public class Enemy_shield : MonoBehaviour
 
         isBroken = true;
 
+        var enemyHealth = GetComponentInParent<EnemyHealth_ToySoldier>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.SetShieldJustBrokeFlag();
+        }
+
         if (enemyMove != null)
         {
             //停止処理
@@ -154,6 +160,9 @@ public class Enemy_shield : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+
+        //GetComponent<SpriteRenderer>().enabled = false;
+        //GetComponent<Collider2D>().enabled = false;
 
         Invoke(nameof(RestoreShield), 6f);
     }
@@ -164,6 +173,9 @@ public class Enemy_shield : MonoBehaviour
         isBroken = false;
 
         gameObject.SetActive(true);
+
+        //GetComponent<SpriteRenderer>().enabled = true;
+        //GetComponent<Collider2D>().enabled = true;
     }
 
     //盾のアニメーションの再生処理

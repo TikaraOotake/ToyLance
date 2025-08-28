@@ -4,35 +4,43 @@ using UnityEngine;
 
 public class EnemyHealth_ToySoldier : EnemyHealth
 {
-    [SerializeField] private GameObject Shield;
+    [SerializeField] 
+    private GameObject Shield;
+
+    private Enemy_shield shieldScript;
+
+    private bool shieldJustBroke = false;
+
+    private void Start()
+    {
+        shieldScript = GetComponentInChildren<Enemy_shield>();
+    }
+
     public override void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
-        bool shieldAndPlayerExist = false;
+        if (shieldJustBroke)
+        {
+            return;
+        }
+
         GameObject Player = GameManager_01.GetPlayer();
         float PlayerPosX = 0.0f;
         float EnemyPosX = 0.0f;
         float ShieldPosX = 0.0f;
 
-        if (Player != null && Shield != null)
+        if (Player != null && Shield != null && !shieldScript.isBroken) 
         {
             PlayerPosX = Player.transform.position.x;
             EnemyPosX = transform.position.x;
             ShieldPosX = Shield.transform.position.x;
-
-            shieldAndPlayerExist = true;
         }
 
-        bool isShieldBetween = false;
+        //盾とプレイヤーがある状態
 
-        if (shieldAndPlayerExist)
-        {
-            //盾とプレイヤーがある状態
+        float minX = Mathf.Min(PlayerPosX, EnemyPosX);
+        float maxX = Mathf.Max(PlayerPosX, EnemyPosX);
 
-            float minX = Mathf.Min(PlayerPosX, EnemyPosX);
-            float maxX = Mathf.Max(PlayerPosX, EnemyPosX);
-
-            isShieldBetween = ShieldPosX > minX && ShieldPosX < maxX;
-        }
+        bool isShieldBetween = ShieldPosX > minX && ShieldPosX < maxX;
         
         if(!isShieldBetween)
         {
@@ -54,5 +62,18 @@ public class EnemyHealth_ToySoldier : EnemyHealth
 
             if (currentHP <= 0) Die();
         }
+    }
+
+    public void SetShieldJustBrokeFlag()
+    {
+        shieldJustBroke = true;
+        StartCoroutine(ResetShieldBreakFlag());
+    }
+
+    private IEnumerator ResetShieldBreakFlag()
+    {
+        // 1フレームだけ待って解除
+        yield return null;
+        shieldJustBroke = false;
     }
 }
