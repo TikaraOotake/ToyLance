@@ -13,18 +13,17 @@ public class PatchBear : MonoBehaviour
     [SerializeField]
     private float MoveValue;//移動速度
     [SerializeField]
-    private int AngerLevel;//怒りレベル
+    private int AngerLevel = 0;//怒りレベル
     [SerializeField]
-    private bool ChaseFlag;//追跡フラグ
+    private bool IsChase;//追跡フラグ
     [SerializeField]
     private float SearchLength;//索敵範囲
 
     private Vector2 BaseScale;
+    private float BaseSpeed;
 
     [SerializeField]
     private float ActionTimer;//行動時間
-
-    private bool IsChase = false;
 
     [SerializeField]
     private float MoveWay = 0.0f;
@@ -39,6 +38,17 @@ public class PatchBear : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sr;//スプライトレンダラー
 
+    [SerializeField]
+    private EnemyHealth _eh;//敵体力
+    private int HP_old;
+
+    public struct AngerStatus
+    {
+        public float MoveValue;
+        public float Scale;
+    }
+    [SerializeField] private AngerStatus[] PhaseStatusList = new AngerStatus[3]; 
+
     enum ActionStatus
     {
         Idol,//待機
@@ -50,17 +60,45 @@ public class PatchBear : MonoBehaviour
     private void Awake()
     {
         BaseScale = transform.localScale;//BaseScale設定
+        BaseSpeed = MoveValue;
     }
     void Start()
     {
         //取得
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _eh = GetComponent<EnemyHealth>();
+
+        if (_eh) HP_old = _eh.GetHP();//体力を記録
+
+        if (0 < PhaseStatusList.Length)
+        {
+            PhaseStatusList[0].MoveValue = 1.0f;
+            PhaseStatusList[0].Scale = 1.0f;
+        }
+        if (1 < PhaseStatusList.Length)
+        {
+            PhaseStatusList[1].MoveValue = 3.0f;
+            PhaseStatusList[1].Scale = 1.1f;
+        }
+        if (2 < PhaseStatusList.Length)
+        {
+            PhaseStatusList[2].MoveValue = 5.0f;
+            PhaseStatusList[2].Scale = 1.2f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Statusから速度とサイズを適用
+        if (AngerLevel >= 0 && AngerLevel < PhaseStatusList.Length)//要素チェック
+        {
+            float Scale = PhaseStatusList[AngerLevel].Scale;
+            transform.localScale = BaseScale * Scale;
+            MoveValue = PhaseStatusList[AngerLevel].MoveValue * BaseSpeed;
+        }
+
         Walk();
         SearchPlayer();
 
@@ -71,6 +109,17 @@ public class PatchBear : MonoBehaviour
         ActionTimer = Mathf.Max(0.0f, ActionTimer - Time.deltaTime);
 
         SetAnim();
+
+        if (_eh != null)
+        {
+            int hp = _eh.GetHP();
+            
+            if (hp != HP_old && hp < HP_old)//ダメージを受けた時
+            {
+                AngerLevel = Mathf.Min(3, AngerLevel + 1);//怒りレベルを上げる(最大値:3)
+            }
+            HP_old = hp;//体力を記録
+        }
     }
     private void Walk()
     {
@@ -141,12 +190,13 @@ public class PatchBear : MonoBehaviour
         if (0.5f >= Random.Range(0.0f, 1.0f))
         {
             //待機
-            MoveWay = 0.0f;
             actionStatus = ActionStatus.Idol;
+            MoveWay = 0.0f;
         }
         else
         {
             //移動
+            actionStatus = ActionStatus.Walk;
             if (0.5f >= Random.Range(0.0f, 1.0f))
             {
                 //右移動
@@ -158,7 +208,7 @@ public class PatchBear : MonoBehaviour
                 MoveWay = -1.0f;
             }
 
-            actionStatus = ActionStatus.Walk;
+            
         }
 
         //時間セット

@@ -66,6 +66,11 @@ public static class GameManager_01
     {
         Camera = _camera;
     }
+    public static void SetCamera()
+    {
+        if (Camera != null) return;
+        Camera = GameObject.Find("Main Camera");
+    }
 
     //カメラの注視点の座標を設定
     public static void SetCameraGazePos(Vector2 _pos)
@@ -133,5 +138,16 @@ public static class GameManager_01
     public static void SetGameover()
     {
 
+    }
+    public static void SetHP_UI(int _hp)
+    {
+        SetCamera();//念のため
+
+        if (Camera == null) return;
+
+        UIManager _UIManager_cs = Camera.GetComponent<UIManager>();//UIマネージャー取得
+        if (_UIManager_cs == null) return;
+
+        _UIManager_cs.SetHP_UI(_hp);
     }
 }

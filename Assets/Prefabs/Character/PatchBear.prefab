@@ -51,16 +51,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   FlipObj: {fileID: 1995841796038499859}
-  MoveValue: 1
+  MoveValue: 0.5
   AngerLevel: 0
-  ChaseFlag: 0
+  IsChase: 0
   SearchLength: 0
   ActionTimer: 0
   MoveWay: 0
+  SearchDistance: 0
   CliffCheckColl: {fileID: 4020623321524942129}
   WallCheckColl: {fileID: 0}
   _rb: {fileID: 0}
   _sr: {fileID: 0}
+  _eh: {fileID: 0}
   actionStatus: 0
 --- !u!50 &-3536571214530233829
 Rigidbody2D:
@@ -188,9 +190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f1de1e31f401440a385599f51c376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 4
+  maxHP: 6
   knockback: 10
   iTime: 0.1
+  currentHP: 0
 --- !u!1 &1995841796038499859
 GameObject:
   m_ObjectHideFlags: 0

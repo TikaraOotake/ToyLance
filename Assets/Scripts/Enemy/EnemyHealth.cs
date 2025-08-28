@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     void Awake()
     {
         currentHP = maxHP;
+        currentHP_old = currentHP;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -86,6 +87,10 @@ public class EnemyHealth : MonoBehaviour
     {
         return currentHP;
     }
+    public int GetHP_old()
+    {
+        return currentHP_old;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +101,6 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentHP_old = currentHP;
     }
 }

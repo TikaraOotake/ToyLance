@@ -419,7 +419,7 @@ MonoBehaviour:
   AttackPrefab: {fileID: 7737072475025706764, guid: cbdc50a529bc860429e31bce31d0d5fb, type: 3}
   AttackObj: {fileID: 0}
   FlipObj: {fileID: 5224276788351002623}
-  MoveValue: 5
+  MoveValue: 4.5
   JumpValue: 8
   HP: 0
   HP_Max: 5

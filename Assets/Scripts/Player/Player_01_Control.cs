@@ -40,6 +40,9 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsThrowAtk = false;
     [SerializeField] private bool IsFallAtk = false;
 
+    [SerializeField] private bool IsLanding = false;//着地中か判定する
+    [SerializeField] private bool IsLanding_old = false;
+
     [SerializeField] private Collider2D LandingCheckCollider;//着地チェックコライダー
     [SerializeField] private GameObject FallAttackPos;//落下攻撃コライダーの座標
     [SerializeField] private GameObject TrustAttackPos;//突き攻撃コライダーの座標
@@ -126,7 +129,7 @@ public class Player_01_Control : MonoBehaviour
 
             InputAtkSetting();
         }
-        else if(playerStatus==PlayerStatus.Dead)//死亡状態
+        else if (playerStatus == PlayerStatus.Dead)//死亡状態
         {
             if (_rb != null)
             {
@@ -146,11 +149,9 @@ public class Player_01_Control : MonoBehaviour
 
         SetAnim();
 
-        //死亡チェック
-        if (HP <= 0.0f)
-        {
-            playerStatus = PlayerStatus.Dead;
-        }
+        CheckLanding_Update();
+
+        GameManager_01.SetHP_UI((int)HP);
 
         //タイマー更新
         AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
@@ -166,6 +167,12 @@ public class Player_01_Control : MonoBehaviour
             playerStatus = PlayerStatus.Fine;//ステータスを通常に
             InvincibleTimer = InvincibleTime;//タイマーセット
             BlinkingTimer = InvincibleTimer;//点滅タイマーセット
+
+            //死亡チェック
+            if (HP <= 0.0f)
+            {
+                playerStatus = PlayerStatus.Dead;
+            }
         }
     }
     private void InputAtkSetting()
@@ -251,8 +258,7 @@ public class Player_01_Control : MonoBehaviour
     }
     private void Jump()
     {
-        if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
-            GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
+        if (IsLanding)//接地中か見る
         {
             if (_rb != null)
             {
@@ -322,7 +328,11 @@ public class Player_01_Control : MonoBehaviour
         {
             if (AtkTimer <= 0.8f)
             {
-                if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//降下
+                if(!IsLanding)
+                {
+                    if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//空中時のみ急降下
+                }
+                
                 InvincibleTimer = 0.3f;//無敵時間セット(一瞬)
 
                 //攻撃判定の生成
@@ -367,6 +377,11 @@ public class Player_01_Control : MonoBehaviour
                 CameraManager.SetShakeCamera();
 
                 AtkTimer = 0.0f;//タイマーを0に
+            }
+
+            if (IsLanding != IsLanding_old && IsLanding == true)//着地した瞬間だけ
+            {
+                CameraManager.SetShakeCamera();//カメラを揺らす
             }
 
             //終了処理
@@ -459,6 +474,18 @@ public class Player_01_Control : MonoBehaviour
         return null;
     }
 
+    private void CheckLanding_Update()
+    {
+        IsLanding_old = IsLanding;//変更前の状態を記録
+        IsLanding = true;//初期化
+
+        //足場があるかチェックし、あれば関数をそのまま終了
+        if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") != null) return;
+        if (GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform") != null) return;
+
+        //空中(非着地)として記録
+        IsLanding = false;
+    }
     private void SetAnim()
     {
         if (_anim == null) return;//Animが設定されていなかったら終了
