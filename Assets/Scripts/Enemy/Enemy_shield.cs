@@ -6,13 +6,15 @@ using AttackTypeEnums;
 public class Enemy_shield : MonoBehaviour
 {
     private float initialShieldX;
-    private bool isFacingRight = false;
+    //private bool isFacingRight = false;
 
     private Enemy_move enemyMove;
 
     public bool isBroken = false;
 
     Animator anim;
+
+    [SerializeField] private GameObject Enemy;
 
     private void Awake()
     {
@@ -27,56 +29,56 @@ public class Enemy_shield : MonoBehaviour
     }
 
     //èÇÇÃîΩì]èàóù
-    public void UpdateShieldPosition(bool FacingRight)
-    {
-        if (FacingRight == isFacingRight)
-        {
-            return;
-        }
+    //public void UpdateShieldPosition(bool FacingRight)
+    //{
+    //    if (FacingRight == isFacingRight)
+    //    {
+    //        return;
+    //    }
 
-        isFacingRight = FacingRight;
+    //    isFacingRight = FacingRight;
 
-        //float direction;
+    //    //float direction;
 
-        //if (FacingRight)
-        //{
-        //    direction = 1f;
-        //}
-        //else
-        //{
-        //    direction = -11f;
-        //}
+    //    //if (FacingRight)
+    //    //{
+    //    //    direction = 1f;
+    //    //}
+    //    //else
+    //    //{
+    //    //    direction = -11f;
+    //    //}
 
-        //Vector3 pos = transform.localPosition;
-        //pos.x = initialShieldX * direction;
-        //transform.localPosition = pos;
+    //    //Vector3 pos = transform.localPosition;
+    //    //pos.x = initialShieldX * direction;
+    //    //transform.localPosition = pos;
 
-        float yRotation;
+    //    float yRotation;
 
-        if (FacingRight)
-        {
-            yRotation = 0f;
-        }
-        else
-        {
-            yRotation = 180f;
-        }
+    //    if (FacingRight)
+    //    {
+    //        yRotation = 0f;
+    //    }
+    //    else
+    //    {
+    //        yRotation = 180f;
+    //    }
 
-        Vector3 currentRotation = transform.localEulerAngles;
-        currentRotation.y = yRotation;
-        transform.localEulerAngles = currentRotation;
+    //    Vector3 currentRotation = transform.localEulerAngles;
+    //    currentRotation.y = yRotation;
+    //    transform.localEulerAngles = currentRotation;
 
-        //foreach (Transform child in transform)
-        //{
-        //    var spear = child.GetComponent<SpearProjectile>();
-        //    Debug.Log(spear);
-        //    if (spear != null)
-        //    {
-        //        //ëÑÇ™èÇÇ…éhÇ≥Ç¡ÇΩéûÇÃîΩì]èàóù
-        //        spear.FlipInShield();
-        //    }
-        //}
-    }
+    //    //foreach (Transform child in transform)
+    //    //{
+    //    //    var spear = child.GetComponent<SpearProjectile>();
+    //    //    Debug.Log(spear);
+    //    //    if (spear != null)
+    //    //    {
+    //    //        //ëÑÇ™èÇÇ…éhÇ≥Ç¡ÇΩéûÇÃîΩì]èàóù
+    //    //        spear.FlipInShield();
+    //    //    }
+    //    //}
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -91,8 +93,28 @@ public class Enemy_shield : MonoBehaviour
             AttackType attackType= spear.GetAttackType();
             if (attackType == AttackType.Trust) 
             {
-                //èÇÇÃîjâÛèàóù
-                BreakShield();
+                GameObject Player = GameManager_01.GetPlayer();
+                float PlayerPosX = 0.0f;
+                float EnemyPosX = 0.0f;
+                float ShieldPosX = 0.0f;
+
+                if (Player != null && Enemy != null)
+                {
+                    PlayerPosX = Player.transform.position.x;
+                    EnemyPosX = Enemy.transform.position.x;
+                    ShieldPosX = transform.position.x;
+                }
+
+                float minX = Mathf.Min(PlayerPosX, ShieldPosX);
+                float maxX = Mathf.Max(PlayerPosX, ShieldPosX);
+
+                bool isEnemyBetween = EnemyPosX > minX && EnemyPosX < maxX;
+
+                if (!isEnemyBetween)
+                {
+                    //èÇÇÃîjâÛèàóù
+                    BreakShield();
+                }
             }
         }
 

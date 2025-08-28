@@ -17,6 +17,9 @@ public class Enemy_move : MonoBehaviour
     private Enemy_shield enemyshield;
 
     [SerializeField]
+    private Enemy_shieldFlipper enemyshieldflipper;
+
+    [SerializeField]
     private float moveSpeed = 1f;
 
     //[SerializeField]
@@ -96,7 +99,7 @@ public class Enemy_move : MonoBehaviour
         {
             bool nowFacingRight = !spriteRenderer.flipX;
             //盾の反転処理
-            enemyshield.UpdateShieldPosition(nowFacingRight);
+            enemyshieldflipper.UpdateShieldPosition(nowFacingRight);
             //盾のアニメーションの再生処理
             enemyshield.SetWalkSpeed(nextMove);
         }

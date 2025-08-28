@@ -15,7 +15,7 @@ public static class GameManager_01
     public static void Initialize()
     {
         // Player‚ðŽæ“¾
-        Player = GameObject.Find("Player");
+        Player = GameObject.Find("Player01");
         // Camera‚ðŽæ“¾
         Camera = GameObject.Find("Main Camera");
 
