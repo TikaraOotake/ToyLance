@@ -12,9 +12,17 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     GameObject Blind_UI;
+
+    public static UIManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         Blind_UI = GameObject.Find("Blind");
+        SetHP_UI(5);
     }
 
     // Update is called once per frame

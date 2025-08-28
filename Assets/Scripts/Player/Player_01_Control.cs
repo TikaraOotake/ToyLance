@@ -541,6 +541,7 @@ public class Player_01_Control : MonoBehaviour
         if (playerStatus == PlayerStatus.Fine)
         {
             HP -= 1.0f;//‘Ì—Í‚ðŒ¸‚ç‚·
+            UIManager.Instance.SetHP_UI((int)HP);
 
             //‚Ç‚¿‚ç‚Ì•ûŒü‚©‚ç‚Ô‚Â‚©‚Á‚½‚©’²‚×‚é
             float Way = _Enemy.transform.position.x - transform.position.x;
