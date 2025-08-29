@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PatchBear : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Player;
-    [SerializeField]
-    private GameObject FlipObj;//移動に合わせて反転させるオブジェクト
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject FlipObj;//移動に合わせて反転させるオブジェクト
+
+    [SerializeField] private GameObject CottonPrefab;       //コットンのPrefab
+    [SerializeField] private float CottonSpownRate = 1.0f;  //コットンの生成頻度
+    private bool CottonSpownFlag = false;                   //コットン生成フラグ
+    private Vector2 Position_old;                           //前にいた座標
+    private float TotalMoveValue;                           //累計移動距離
 
     [SerializeField]
     private float MoveValue;//移動速度
@@ -22,8 +27,9 @@ public class PatchBear : MonoBehaviour
     private Vector2 BaseScale;
     private float BaseSpeed;
 
-    [SerializeField]
-    private float ActionTimer;//行動時間
+    [SerializeField] private float ActionTimer;//行動時間
+    [SerializeField] private float MoveFlipCoolTime = 0.5f;//振り向きのクールタイム
+    [SerializeField] private float MoveFlipCoolTimer;//振り向きのクールタイマー
 
     [SerializeField]
     private float MoveWay = 0.0f;
@@ -33,6 +39,10 @@ public class PatchBear : MonoBehaviour
     [SerializeField] Collider2D CliffCheckColl;//崖端を確認するコライダー
     [SerializeField] Collider2D WallCheckColl;//壁を確認するコライダー
 
+    [SerializeField] private bool IsWalk;
+
+    [SerializeField]
+    private Animator _anim;//アニメーター
     [SerializeField]
     private Rigidbody2D _rb;//物理コンポ
     [SerializeField]
@@ -65,6 +75,7 @@ public class PatchBear : MonoBehaviour
     void Start()
     {
         //取得
+        _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
         _eh = GetComponent<EnemyHealth>();
@@ -99,34 +110,53 @@ public class PatchBear : MonoBehaviour
             MoveValue = PhaseStatusList[AngerLevel].MoveValue * BaseSpeed;
         }
 
-        Walk();
+        if(actionStatus == ActionStatus.Idol)
+        {
+            if (_rb)
+            {
+                _rb.velocity = new Vector2(0.0f, _rb.velocity.y);//静止する
+            }
+        }
+        else if(actionStatus == ActionStatus.Walk)
+        {
+            Walk();
+        }
+       
         SearchPlayer();
-
+        SpownCotton();
+        
         if (ActionTimer <= 0.0f)
         {
             SetAction();
         }
+        //タイマー更新
         ActionTimer = Mathf.Max(0.0f, ActionTimer - Time.deltaTime);
+        MoveFlipCoolTimer = Mathf.Max(0.0f, MoveFlipCoolTimer - Time.deltaTime);
 
         SetAnim();
 
         if (_eh != null)
         {
-            int hp = _eh.GetHP();
+            int hp = _eh.GetHP();//HPを取得
             
             if (hp != HP_old && hp < HP_old)//ダメージを受けた時
             {
                 AngerLevel = Mathf.Min(3, AngerLevel + 1);//怒りレベルを上げる(最大値:3)
+                IsChase = true;                           //追跡状態に
+                CottonSpownFlag = true;                   //コットンの生成開始
             }
             HP_old = hp;//体力を記録
         }
     }
     private void Walk()
     {
-        if (CliffCheckColl != null) 
+        if (CliffCheckColl != null && MoveFlipCoolTimer <= 0.0f)
         {
             if (!Collision_Manager.GetTouchingObjectWithLayer(CliffCheckColl, "Platform"))
+            {
+                MoveFlipCoolTimer = MoveFlipCoolTime;//タイマーセット
                 MoveWay *= -1;//移動方向反転
+            }
         }
 
         if (FlipObj != null)
@@ -165,14 +195,15 @@ public class PatchBear : MonoBehaviour
         if (Player != null)
         {
             float Length = Vector2.Distance(Player.transform.position, transform.position);
-            if (SearchLength <= Length)
+            if (SearchLength > Length)
             {
                 //索敵範囲内に入れば追跡モードに
                 IsChase = true;
             }
 
-            if (IsChase)
+            if (IsChase && MoveFlipCoolTimer <= 0.0f)
             {
+                //プレイヤーの方向に向きを合わせる
                 float Direction = Player.transform.position.x - transform.position.x;
                 if (Direction >= 1.0f)
                 {
@@ -185,8 +216,41 @@ public class PatchBear : MonoBehaviour
             }
         }
     }
+    private void SpownCotton()
+    {
+        if (CottonSpownFlag)
+        {
+            //移動距離を計算
+            Vector2 Pos = transform.position;
+            Vector2 LengthVec = Pos - Position_old;
+            TotalMoveValue += LengthVec.magnitude;//距離を加算
+
+            //座標を更新
+            Position_old = transform.position;
+
+            //一定距離を超えたら
+            if (TotalMoveValue >= CottonSpownRate)
+            {
+                //コットンを生成
+                if (CottonPrefab != null)
+                {
+                    GameObject Cotton = Instantiate(CottonPrefab, transform.position, Quaternion.identity);
+                    Rigidbody2D _rb = Cotton.GetComponent<Rigidbody2D>();
+                    if (_rb != null)
+                    {
+                        _rb.velocity = new Vector2(_rb.velocity.x, 1.0f);//上に跳ねる
+                    }
+                }
+
+                TotalMoveValue = 0.0f;//累計移動距離リセット
+            }
+        }
+    }
     private void SetAction()
     {
+        //一旦リセット
+        IsWalk = false;
+
         if (0.5f >= Random.Range(0.0f, 1.0f))
         {
             //待機
@@ -207,8 +271,6 @@ public class PatchBear : MonoBehaviour
                 //左移動
                 MoveWay = -1.0f;
             }
-
-            
         }
 
         //時間セット
@@ -216,5 +278,23 @@ public class PatchBear : MonoBehaviour
     }
     private void SetAnim()
     {
+        if(_anim)
+        {
+            //一旦falseに
+            _anim.SetBool("IsIdle", false);
+            _anim.SetBool("IsWalk", false);
+
+            if(actionStatus == ActionStatus.Walk)
+            {
+                _anim.SetBool("IsWalk", true);
+            }
+            else
+            {
+                _anim.SetBool("IsIdle", true);
+            }
+
+            //怒りレベルを更新
+            _anim.SetInteger("AngerLevel", AngerLevel);
+        }
     }
 }

@@ -18,6 +18,9 @@ public class HalfHitFloor : MonoBehaviour
     {
         if (_IgnoreObj != null)
         {
+            if (_IgnoreObj.layer == LayerMask.NameToLayer("Platform")) return;
+            if (_IgnoreObj.layer == LayerMask.NameToLayer("SpearPlatform")) return;
+
             if (ignoredSet.Contains(_IgnoreObj.GetComponent<Collider2D>())) return;
 
             Rigidbody2D rb = _IgnoreObj.GetComponent<Rigidbody2D>();

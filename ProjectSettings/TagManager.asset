@@ -29,8 +29,8 @@ TagManager:
   - BG
   - SpearPlatform
   - T_Platform
-  - 
-  - 
+  - PlayerPlatform
+  - OnlyTouchPlatform
   - 
   - 
   - 

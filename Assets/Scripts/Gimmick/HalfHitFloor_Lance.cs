@@ -40,7 +40,6 @@ public class HalfHitFloor_Lance : HalfHitFloor
                 }
                 _sr.color = tempColor;
             }
-            
         }
         
         if (RemainingTimer <= 0.0f) Destroy(this.gameObject);//Ž©g‚ðíœ

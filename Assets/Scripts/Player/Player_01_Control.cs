@@ -482,6 +482,7 @@ public class Player_01_Control : MonoBehaviour
         //足場があるかチェックし、あれば関数をそのまま終了
         if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") != null) return;
         if (GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform") != null) return;
+        if (GetTouchingObjectWithLayer(LandingCheckCollider, "PlayerPlatform") != null) return;
 
         //空中(非着地)として記録
         IsLanding = false;
