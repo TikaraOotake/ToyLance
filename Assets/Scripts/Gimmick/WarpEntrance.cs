@@ -76,7 +76,7 @@ public class WarpEntrance : MonoBehaviour
         //プレイヤーが登録されていたら移動処理
         if (Player)
         {
-            if (Input.GetKeyDown(KeyCode.W) && !IsDoorLock)//移動入力かつ施錠されていないとき
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f) && !IsDoorLock)//移動入力かつ施錠されていないとき
             {
                 //タイマーセット
                 TransferStartTimer = 1.0f;

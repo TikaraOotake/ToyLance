@@ -179,14 +179,7 @@ public class Player_01_Control : MonoBehaviour
     {
         if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
 
-        if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            //突き攻撃
-            atkStatus = AtkStatus.Thrust;
-            AtkTimer = 0.5f;
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || (Input.GetAxis("Vertical") < -0.1f)) 
         {
             if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
                 GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
@@ -198,15 +191,23 @@ public class Player_01_Control : MonoBehaviour
             if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 0.5f);
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Melee")) 
+        {
+            //突き攻撃
+            atkStatus = AtkStatus.Thrust;
+            AtkTimer = 0.5f;
+            return;
+        }
     }
     private void Move()
     {
-        float MoveWay = 0.0f;
-        if (Input.GetKey(KeyCode.D))
+    float MoveWay = 0.0f;
+        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.1f)
         {
             MoveWay = +1.0f;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < -0.1f) 
         {
             MoveWay = -1.0f;
         }
@@ -273,7 +274,7 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //入力
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")) 
             {
                 //移動量取得
                 Vector2 MoveVelocity = _rb.velocity;
@@ -287,7 +288,7 @@ public class Player_01_Control : MonoBehaviour
 
     public void Throw()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("Ranged")) 
         {
             if (ThrowCooltimer > 0.0f) return;//クールタイム中であるなら終了
 
