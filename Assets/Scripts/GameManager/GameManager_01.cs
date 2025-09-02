@@ -9,7 +9,7 @@ public static class GameManager_01
     private static Vector2 StartPlayerPos;
     private static bool SettingPlayerPosFlag = false;
 
-    private static Vector2 CheckPointPos;
+    private static GameObject CheckPoint;
 
     // ゲーム開始時に初期化するメソッド
     public static void Initialize()
@@ -40,10 +40,16 @@ public static class GameManager_01
             {
                 Debug.Log("カメラがありません");
             }
-
-            //復帰地点初期化
-            CheckPointPos = StartPlayerPos;
         }
+        else
+        {
+            if (Player != null)
+            {
+                StartPlayerPos = Player.transform.position;
+            }
+        }
+
+
 
         //フラグを初期化
         SettingPlayerPosFlag = false;
@@ -131,9 +137,35 @@ public static class GameManager_01
             }
         }
     }
-    public static void SetCheckPointPos(Vector2 _Pos)
+    public static void SetCheckPoint(GameObject _CheckPoint)
     {
-        CheckPointPos = _Pos;
+        if (CheckPoint != null)
+        {
+            CheckPoint _cp = CheckPoint.GetComponent<CheckPoint>();
+            if (_cp)
+            {
+                _cp.SetActive(false);//既にあったものはオフ状態に
+            }
+        }
+
+        CheckPoint = _CheckPoint;
+    }
+    public static void RespawnPlayer()
+    {
+        if (Player == null) return; //Playerが設定されていなかったら終了
+
+        Vector2 RespawnPoint = StartPlayerPos;
+        if (CheckPoint != null)
+        {
+            RespawnPoint = CheckPoint.transform.position;
+        }
+
+        Player_01_Control _player = Player.GetComponent<Player_01_Control>();
+        if (_player != null)
+        {
+            _player.RespawnPlayer(RespawnPoint);
+            CameraManager.SetCameraGazePos(RespawnPoint);
+        }
     }
     public static void SetGameover()
     {
