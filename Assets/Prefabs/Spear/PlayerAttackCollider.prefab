@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackValue: 1
+  attackType: 0
 --- !u!50 &2030645751149624355
 Rigidbody2D:
   serializedVersion: 4

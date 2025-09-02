@@ -496,6 +496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &157520873
 Animator:
   serializedVersion: 5
@@ -770,9 +772,13 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 5
     m_Data: {fileID: 1821815250, guid: f73dfe034c22cfc41bd7e8799020a5ac, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -2125,6 +2131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &588585068
 Animator:
   serializedVersion: 5
@@ -15685,6 +15693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1123291719
 Animator:
   serializedVersion: 5
@@ -16167,6 +16177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1242616626
 Animator:
   serializedVersion: 5
@@ -18474,6 +18486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!50 &1749825126
 Rigidbody2D:
   serializedVersion: 4
@@ -19067,6 +19081,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMove: 1
+  enemyshield: {fileID: 0}
+  moveSpeed: 1
 --- !u!95 &1838291291
 Animator:
   serializedVersion: 5
