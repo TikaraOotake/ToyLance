@@ -141,6 +141,12 @@ public class Player_01_Control : MonoBehaviour
             {
                 _sr.flipY = true;
             }
+
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                GameManager_01.RespawnPlayer();//リスポーンTest
+            }
+            
         }
 
         GameObject Enemy = GetTouchingObjectWithLayer(GetComponent<Collider2D>(), "Enemy");
@@ -565,6 +571,23 @@ public class Player_01_Control : MonoBehaviour
                 tempColor.a = 1.0f;
             }
             _sr.color = tempColor;
+        }
+    }
+
+    public void RespawnPlayer(Vector2 _pos)
+    {
+        //リスポーン
+        transform.position = _pos;//座標設定
+        HP = HP_Max;//体力初期化
+        playerStatus = PlayerStatus.Fine;
+
+        if (_rb)
+        {
+            _rb.velocity = Vector2.zero;//速度初期化
+        }
+        if(_sr)
+        {
+            _sr.flipY = false;
         }
     }
 

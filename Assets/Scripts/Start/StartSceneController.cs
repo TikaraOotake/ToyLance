@@ -25,7 +25,7 @@ public class StartSceneController : MonoBehaviour
 
             if (countdown <= 0f)
             {
-                SceneManager.LoadScene("Stage01");
+                SceneManager.LoadScene("Real_Stage01");
             }
         }
     }

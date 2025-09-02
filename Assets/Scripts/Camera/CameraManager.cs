@@ -65,4 +65,11 @@ public static class CameraManager
             _cameraControl.SetShakeCamera(_Length, _Speed, _LowValue);
         }
     }
+    public static void SetCameraGazePos(Vector2 _pos)
+    {
+        if (_cameraControl != null)
+        {
+            _cameraControl.SetCameraGazePos(_pos);
+        }
+    }
 }
