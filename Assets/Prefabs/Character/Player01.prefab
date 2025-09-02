@@ -354,8 +354,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1049473361
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 5562870277655393794, guid: fa818a16a08d2cb43bcc3c36c5daba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -423,7 +423,7 @@ MonoBehaviour:
   JumpValue: 8
   HP: 0
   HP_Max: 5
-  LanceSpeed: 13.19
+  LanceSpeed: 6
   _rb: {fileID: 0}
   _anim: {fileID: 0}
   _sr: {fileID: 0}
@@ -432,6 +432,8 @@ MonoBehaviour:
   IsThrustAtk: 0
   IsThrowAtk: 0
   IsFallAtk: 0
+  IsLanding: 0
+  IsLanding_old: 0
   LandingCheckCollider: {fileID: 7767720296120950642}
   FallAttackPos: {fileID: 2222352993346558956}
   TrustAttackPos: {fileID: 613748725318787812}
