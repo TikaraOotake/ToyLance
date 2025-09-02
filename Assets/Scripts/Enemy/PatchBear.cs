@@ -234,7 +234,7 @@ public class PatchBear : MonoBehaviour
                 //ÉRÉbÉgÉìÇê∂ê¨
                 if (CottonPrefab != null)
                 {
-                    GameObject Cotton = Instantiate(CottonPrefab, transform.position, Quaternion.identity);
+                    GameObject Cotton = Instantiate(CottonPrefab, transform.position + new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
                     Rigidbody2D _rb = Cotton.GetComponent<Rigidbody2D>();
                     if (_rb != null)
                     {

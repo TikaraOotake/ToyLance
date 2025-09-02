@@ -64,6 +64,8 @@ public class Player_01_Control : MonoBehaviour
 
     private float AtkTimer;//UŒ‚ƒ^ƒCƒ}[
 
+    private float KeyboardInputTimer;
+
     [SerializeField] private int TrustAttackValue;//h“ËUŒ‚—Í
     [SerializeField] private int ThrowAttackValue;//“Š±UŒ‚—Í
     [SerializeField] private int FallAttackValue;//—‰ºUŒ‚—Í
@@ -160,6 +162,7 @@ public class Player_01_Control : MonoBehaviour
         KnockBackTimer_old = KnockBackTimer;
         KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
         ThrowCooltimer = Mathf.Max(0.0f, ThrowCooltimer - Time.deltaTime);
+        KeyboardInputTimer= Mathf.Max(0.0f, KeyboardInputTimer - Time.deltaTime);
 
         if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//ƒ^ƒCƒ}[‚ª0‚É‚È‚Á‚½uŠÔ‚¾‚¯
         {
@@ -202,12 +205,17 @@ public class Player_01_Control : MonoBehaviour
     }
     private void Move()
     {
-    float MoveWay = 0.0f;
-        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.1f)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            KeyboardInputTimer = 1.0f;
+        }
+
+        float MoveWay = 0.0f;
+        if (Input.GetKey(KeyCode.D) || (Input.GetAxis("Horizontal") > 0.1f && KeyboardInputTimer <= 0.0f))
         {
             MoveWay = +1.0f;
         }
-        if (Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < -0.1f) 
+        if (Input.GetKey(KeyCode.A) || (Input.GetAxis("Horizontal") < -0.1f && KeyboardInputTimer <= 0.0f))
         {
             MoveWay = -1.0f;
         }
