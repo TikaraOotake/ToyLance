@@ -12,6 +12,14 @@ public class DoorTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
-        SceneManager.LoadScene(clearSceneName);
+
+        if (Application.CanStreamedLevelBeLoaded(clearSceneName))
+        {
+            SceneManager.LoadScene(clearSceneName);
+        }
+        else
+        {
+            Debug.LogError($"ÉVÅ[Éìñº '{clearSceneName}' ÇÕë∂ç›ÇµÇ‹ÇπÇÒÅB");
+        }
     }
 }

@@ -44,7 +44,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
         
         if (RemainingTimer <= 0.0f) Destroy(this.gameObject);//Ž©g‚ðíœ
     }
-    protected override void SetIgnored(GameObject _IgnoreObj)
+    /*protected override void SetIgnored(GameObject _IgnoreObj)
     {
         if (_IgnoreObj != null)
         {
@@ -67,5 +67,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
             }
         }
     }
+     */
+    
    
 }

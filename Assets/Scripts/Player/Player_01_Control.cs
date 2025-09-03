@@ -12,6 +12,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private GameObject AttackObj;//
 
+    [SerializeField] private WarpEntrance Door;//ÉhÉAÇäiî[
+
     [SerializeField] private GameObject FlipObj;//PlayerÇÃå¸Ç´Ç…çáÇÌÇπÇƒîΩì]Ç∑ÇÈéqÉIÉuÉWÉFÉNÉg
 
     [SerializeField]
@@ -39,6 +41,7 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsThrustAtk = false;
     [SerializeField] private bool IsThrowAtk = false;
     [SerializeField] private bool IsFallAtk = false;
+    [SerializeField] private bool IsDoorEnter = false;
 
     [SerializeField] private bool IsLanding = false;//íÖíníÜÇ©îªíËÇ∑ÇÈ
     [SerializeField] private bool IsLanding_old = false;
@@ -124,6 +127,7 @@ public class Player_01_Control : MonoBehaviour
                 Move();
                 Jump();
                 Throw();
+                DoorEnter();
             }
             else
             {
@@ -349,6 +353,17 @@ public class Player_01_Control : MonoBehaviour
     {
         if (atkStatus == AtkStatus.Falling)
         {
+            //èIóπèàóù
+            if (AtkTimer <= 0.0f)
+            {
+                atkStatus = AtkStatus.None;
+
+                if (AttackObj != null) Destroy(AttackObj);//çUåÇîªíËÇÃîjä¸
+
+                IsFallAtk = false;
+                return;
+            }
+
             if (AtkTimer <= 0.8f)
             {
                 if(!IsLanding)
@@ -407,16 +422,6 @@ public class Player_01_Control : MonoBehaviour
                 CameraManager.SetShakeCamera();//ÉJÉÅÉâÇóhÇÁÇ∑
                 if (_rb) _rb.velocity = new Vector2(0.0f, 0.0f);//à⁄ìÆÇµÇ»Ç¢
             }
-
-            //èIóπèàóù
-            if (AtkTimer <= 0.0f)
-            {
-                atkStatus = AtkStatus.None;
-
-                if (AttackObj != null) Destroy(AttackObj);//çUåÇîªíËÇÃîjä¸
-
-                IsFallAtk = false;
-            }
         }
     }
     private void TrustAtk()
@@ -464,6 +469,16 @@ public class Player_01_Control : MonoBehaviour
                 if (AttackObj != null) Destroy(AttackObj);//çUåÇîªíËÇÃîjä¸
 
                 IsThrustAtk = false;
+            }
+        }
+    }
+    private void DoorEnter()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f)
+        {
+            if (Door != null)
+            {
+                Door.TeleportSetting(this.gameObject);
             }
         }
     }
@@ -521,9 +536,14 @@ public class Player_01_Control : MonoBehaviour
         _anim.SetBool("isTrustAttack", false);
         _anim.SetBool("isDownAttacking", false);
         _anim.SetBool("doDamaged", false);
+        _anim.SetBool("IsDoorEnter", false);
 
         //óDêÊÇ»ï®ÇŸÇ«è„Ç…Ç»ÇÁÇ◊ÇÈ
-        if (KnockBackTimer > 0.0f)//îÌíeèÛë‘
+        if (IsDoorEnter)
+        {
+            _anim.SetBool("IsDoorEnter", true);
+        }
+        else if (KnockBackTimer > 0.0f)//îÌíeèÛë‘
         {
             _anim.SetBool("doDamaged", true);
         }
@@ -535,15 +555,15 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("isTrustAttack", true);
         }
-        else if(IsFallAtk)//óéâ∫çUåÇ
+        else if (IsFallAtk)//óéâ∫çUåÇ
         {
             _anim.SetBool("isDownAttacking", true);
         }
-        else if(IsJump)//ÉWÉÉÉìÉv
+        else if (IsJump)//ÉWÉÉÉìÉv
         {
             _anim.SetBool("isJumping", true);
         }
-        else if(IsMove)//ï‡Ç≠
+        else if (IsMove)//ï‡Ç≠
         {
             _anim.SetBool("isWalk", true);
         }
@@ -653,12 +673,44 @@ public class Player_01_Control : MonoBehaviour
         {
             //SetDamage(collision.gameObject);
         }
+
+        WarpEntrance warpEntrance = collision.gameObject.GetComponent<WarpEntrance>();
+        if (warpEntrance != null)
+        {
+            Door = warpEntrance;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        WarpEntrance warpEntrance = collision.gameObject.GetComponent<WarpEntrance>();
+        if (warpEntrance == Door)
+        {
+            Door = null;
+        }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        WarpEntrance warpEntrance = collision.gameObject.GetComponent<WarpEntrance>();
+        if (warpEntrance != null)
+        {
+            Door = warpEntrance;
+        }
+        if (collision.gameObject.tag == "Default")
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+
+            if (collision.gameObject.tag == "Enemy")
         {
             //SetDamage(collision.gameObject);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        WarpEntrance warpEntrance = collision.gameObject.GetComponent<WarpEntrance>();
+        if (warpEntrance == Door)
+        {
+            Door = null;
         }
     }
 }

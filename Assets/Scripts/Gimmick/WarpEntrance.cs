@@ -74,7 +74,7 @@ public class WarpEntrance : MonoBehaviour
         Sprite_Update();//スプライト更新
 
         //プレイヤーが登録されていたら移動処理
-        if (Player)
+        if (Player && false)
         {
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f) && !IsDoorLock)//移動入力かつ施錠されていないとき
             {
@@ -123,7 +123,11 @@ public class WarpEntrance : MonoBehaviour
 
     private void TransferPlayer()
     {
-        if(!Player)
+        if (IsDoorLock)
+        {
+            return;
+        }
+        if (!Player)
         {
             return;//プレイヤーが設定されていないので終了
         }
@@ -160,7 +164,7 @@ public class WarpEntrance : MonoBehaviour
             GameManager_01.SetStartPlayerPos(ExitPos);
 
             //シーン読み込み
-            SceneManager.LoadScene(NextSceneName);
+            GameManager_01.LoadScene(NextSceneName);
         }
 
         //プレイヤーの登録解除
@@ -171,6 +175,7 @@ public class WarpEntrance : MonoBehaviour
         IsDoorLock = _flag;
         Sprite_Update();//スプライト更新
     }
+
     //スプライトの更新
     private void Sprite_Update()
     {
@@ -186,6 +191,31 @@ public class WarpEntrance : MonoBehaviour
             {
                 if (Open) { _sr.sprite = Open; }
             }
+        }
+    }
+    public void TeleportSetting(GameObject _Player)
+    {
+        if (_Player == null) return;//無効なプレイヤーであれば終了
+
+        Player = _Player;
+
+        //タイマーセット
+        TransferStartTimer = 1.0f;
+
+        //フェードアウトさせる
+        if (Camera)
+        {
+            UIManager _uiMng = Camera.GetComponent<UIManager>();
+            if (_uiMng)
+            {
+                _uiMng.SetBlindFade(true);
+            }
+        }
+
+        //座標を記録
+        if (Player)
+        {
+            FadeOutPlayerPos = Player.transform.position;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

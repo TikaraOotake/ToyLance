@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class GameManager_01
 {
@@ -14,10 +15,10 @@ public static class GameManager_01
     // ゲーム開始時に初期化するメソッド
     public static void Initialize()
     {
-        // Playerを取得
-        Player = GameObject.Find("Player01");
         // Cameraを取得
         Camera = GameObject.Find("Main Camera");
+
+        CheckPoint = null;//チェックポイント初期化
 
         Debug.Log("ゲームマネージャーの初期化");
         Debug.Log(SettingPlayerPosFlag);
@@ -181,5 +182,16 @@ public static class GameManager_01
         if (_UIManager_cs == null) return;
 
         _UIManager_cs.SetHP_UI(_hp);
+    }
+    public static void LoadScene(string _SceneName)
+    {
+        if (Application.CanStreamedLevelBeLoaded(_SceneName))
+        {
+            SceneManager.LoadScene(_SceneName);
+        }
+        else
+        {
+            Debug.LogError($"シーン名 '{_SceneName}' は存在しません。");
+        }
     }
 }
