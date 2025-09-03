@@ -21,6 +21,12 @@ public class CheckPoint : MonoBehaviour
     public void SetActive(bool _flag)
     {
         IsActive = _flag;
+
+        //アニメーション適用
+        if(_anim)
+        {
+            _anim.SetBool("IsActive", IsActive);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +36,7 @@ public class CheckPoint : MonoBehaviour
         if (collision.tag == "Player")
         {
             Debug.Log("チェックポイント設定");
-            IsActive = true;
+            SetActive(true);
             GameManager_01.SetCheckPoint(this.gameObject);
         }
     }

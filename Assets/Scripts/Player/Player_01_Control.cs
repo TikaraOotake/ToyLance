@@ -65,6 +65,8 @@ public class Player_01_Control : MonoBehaviour
     private float AtkTimer;//攻撃タイマー
 
     private float KeyboardInputTimer;
+    private bool IsInputDown = false;//下入力情報を記録する
+    private bool IsInputDown_old = false;
 
     [SerializeField] private int TrustAttackValue;//刺突攻撃力
     [SerializeField] private int ThrowAttackValue;//投擲攻撃力
@@ -115,8 +117,8 @@ public class Player_01_Control : MonoBehaviour
 
         if (playerStatus == PlayerStatus.Fine)
         {
-            
-            if(atkStatus==AtkStatus.None)
+
+            if (atkStatus == AtkStatus.None)
             {
                 //基本動作
                 Move();
@@ -142,13 +144,10 @@ public class Player_01_Control : MonoBehaviour
                 _sr.flipY = true;
             }
 
-            if(Input.GetKeyDown(KeyCode.T))
-            {
-                GameManager_01.RespawnPlayer();//リスポーンTest
-            }
-            
+            GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 
+        //被弾判定
         GameObject Enemy = GetTouchingObjectWithLayer(GetComponent<Collider2D>(), "Enemy");
         if (Enemy != null)
         {
@@ -161,14 +160,11 @@ public class Player_01_Control : MonoBehaviour
 
         GameManager_01.SetHP_UI((int)HP);
 
-        //タイマー更新
-        AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
-        InvincibleTimer = Mathf.Max(0.0f, InvincibleTimer - Time.deltaTime);
-        BlinkingTimer = Mathf.Max(0.0f, BlinkingTimer - Time.deltaTime);
-        KnockBackTimer_old = KnockBackTimer;
-        KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
-        ThrowCooltimer = Mathf.Max(0.0f, ThrowCooltimer - Time.deltaTime);
-        KeyboardInputTimer= Mathf.Max(0.0f, KeyboardInputTimer - Time.deltaTime);
+        Timer_Update();//タイマー更新
+
+        //入力を検知する
+        IsInputDown_old = IsInputDown;
+        IsInputDown = Input.GetAxis("Vertical") < -0.1f;
 
         if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//タイマーが0になった瞬間だけ
         {
@@ -184,11 +180,23 @@ public class Player_01_Control : MonoBehaviour
             }
         }
     }
+
+    private void Timer_Update()
+    {
+        //タイマー更新
+        AtkTimer = Mathf.Max(0.0f, AtkTimer - Time.deltaTime);
+        InvincibleTimer = Mathf.Max(0.0f, InvincibleTimer - Time.deltaTime);
+        BlinkingTimer = Mathf.Max(0.0f, BlinkingTimer - Time.deltaTime);
+        KnockBackTimer_old = KnockBackTimer;
+        KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
+        ThrowCooltimer = Mathf.Max(0.0f, ThrowCooltimer - Time.deltaTime);
+        KeyboardInputTimer = Mathf.Max(0.0f, KeyboardInputTimer - Time.deltaTime);
+    }
     private void InputAtkSetting()
     {
         if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
 
-        if (Input.GetKeyDown(KeyCode.S) || (Input.GetAxis("Vertical") < -0.1f)) 
+        if (Input.GetKeyDown(KeyCode.S) || (IsInputDown != IsInputDown_old && IsInputDown))
         {
             if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
                 GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
@@ -397,6 +405,7 @@ public class Player_01_Control : MonoBehaviour
             if (IsLanding != IsLanding_old && IsLanding == true)//着地した瞬間だけ
             {
                 CameraManager.SetShakeCamera();//カメラを揺らす
+                if (_rb) _rb.velocity = new Vector2(0.0f, 0.0f);//移動しない
             }
 
             //終了処理
