@@ -69,10 +69,15 @@ public class Player_01_Control : MonoBehaviour
     private float ThrowCooltimer;
 
     private float AtkTimer;//UŒ‚ƒ^ƒCƒ}[
+    private float TrustAtkTimer = 0.5f;//“Ë‚«UŒ‚ŽžŠÔ
 
     private float KeyboardInputTimer;
     private bool IsInputDown = false;//‰º“ü—Íî•ñ‚ð‹L˜^‚·‚é
     private bool IsInputDown_old = false;
+
+    private float AttackMoveValue_TrustBase = 10.0f;//UŒ‚’†‚ÌŠî‘bˆÚ“®—Ê
+    private float AttackMoveValue;//UŒ‚’†‚ÌˆÚ“®—Ê
+    private float AttackMoveValueDecayRate = 30.0f;//•bŠÔ‚ÌŒ¸Š—Ê
 
     [SerializeField] private int TrustAttackValue;//Žh“ËUŒ‚—Í
     [SerializeField] private int ThrowAttackValue;//“Š±UŒ‚—Í
@@ -120,6 +125,10 @@ public class Player_01_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            KeyboardInputTimer = 1.0f;
+        }
 
         if (playerStatus == PlayerStatus.Fine)
         {
@@ -221,17 +230,29 @@ public class Player_01_Control : MonoBehaviour
         {
             //“Ë‚«UŒ‚
             atkStatus = AtkStatus.Thrust;
-            AtkTimer = 0.5f;
+            AtkTimer = TrustAtkTimer;
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                KeyboardInputTimer = 1.0f;
+            }
+
+            if (Input.GetKey(KeyCode.D) ||
+                Input.GetKey(KeyCode.A) ||
+                (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f && KeyboardInputTimer <= 0.0f))
+            {
+                AttackMoveValue = AttackMoveValue_TrustBase;//ˆÚ“®—ÊƒZƒbƒg
+            }
+            else
+            {
+                AttackMoveValue = 0.0f;//ˆÚ“®–³‚µ
+            }
+
             return;
         }
     }
     private void Move()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            KeyboardInputTimer = 1.0f;
-        }
-
         float MoveWay = 0.0f;
         if (Input.GetKey(KeyCode.D) || (Input.GetAxis("Horizontal") > 0.1f && KeyboardInputTimer <= 0.0f))
         {
@@ -257,11 +278,11 @@ public class Player_01_Control : MonoBehaviour
         {
             if (MoveWay > 0.0f)//‰EŒü‚«
             {
-                FlipX = false;
+                FlipX = true;
             }
             else if (MoveWay < 0.0f)//¶Œü‚«
             {
-                FlipX = true;
+                FlipX = false;
             }
             _sr.flipX = FlipX;
         }
@@ -338,7 +359,7 @@ public class Player_01_Control : MonoBehaviour
 
                 ThrowVec *= LanceSpeed;//‘¬“x‚ð“K—p
 
-                if (FlipX)
+                if (!FlipX)
                 {
                     Rot.y += 180.0f;
                     ThrowVec.x *= -1;//‘¬“x‚ÌŒü‚«‚ð”½“]
@@ -434,9 +455,19 @@ public class Player_01_Control : MonoBehaviour
     {
         if (atkStatus == AtkStatus.Thrust)
         {
-            if (_rb) _rb.velocity = new Vector2(0.0f, _rb.velocity.y);//Ž~‚Ü‚é
+            //ˆÚ“®•ûŒü‚ÌŽæ“¾
+            float Way = -1.0f;
+            if (_sr)
+            {
+                if (_sr.flipX) Way *= -1.0f;
+            }
 
-            if (AtkTimer <= 0.5f)
+            if (_rb) _rb.velocity = new Vector2(AttackMoveValue * Way, _rb.velocity.y);//ˆÚ“®
+
+            //ˆÚ“®—Ê‚ðŒ¸Š‚³‚¹‚é
+            AttackMoveValue = Mathf.Max(0.0f, AttackMoveValue - AttackMoveValueDecayRate * Time.deltaTime);
+
+            if (AtkTimer <= TrustAtkTimer)
             {
                 IsThrustAtk = true;//Žh“ËUŒ‚Anim
             }
@@ -625,6 +656,7 @@ public class Player_01_Control : MonoBehaviour
         transform.position = _pos;//À•WÝ’è
         HP = HP_Max;//‘Ì—Í‰Šú‰»
         playerStatus = PlayerStatus.Fine;
+        if (AttackObj != null) Destroy(AttackObj);//UŒ‚”»’è‚Ì”jŠü
 
         if (_rb)
         {
@@ -675,6 +707,13 @@ public class Player_01_Control : MonoBehaviour
             InvincibleTimer = KnockBackTimer;//–³“GŽžŠÔ
 
             playerStatus = PlayerStatus.HitDamage;//ƒXƒe[ƒ^ƒXƒZƒbƒg
+            atkStatus = AtkStatus.None;//UŒ‚ƒŠƒZƒbƒg
+            if (AttackObj != null) Destroy(AttackObj);//UŒ‚”»’è‚Ì”jŠü
+
+            //ƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒOƒŠƒZƒbƒg
+            IsFallAtk = false;
+            IsThrowAtk = false;
+            IsThrustAtk = false;
 
             //ƒ}ƒl[ƒWƒƒ[‚ÉƒJƒƒ‰U“®ˆË—Š
             CameraManager.SetShakeCamera();
