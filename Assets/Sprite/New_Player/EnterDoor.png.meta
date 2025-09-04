@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 950615d8ea431cd4fa45493e348aee2d
+guid: f9ae30b2c05d07a45bb9305f1c93ccf6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,8 +115,8 @@ TextureImporter:
         serializedVersion: 2
         x: 9
         y: 3
-        width: 14
-        height: 25
+        width: 16
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 207d5087a77ca844b94a627ab25865e1
-      internalID: -1185521004
+      spriteID: 62392fd4032bc6245a2b5431451f6218
+      internalID: -1293895597
       vertices: []
       indices: 
       edges: []
@@ -135,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 41
-        y: 3
-        width: 14
-        height: 25
+        y: 2
+        width: 15
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a0e82cda69556649941c279df63a59e
-      internalID: -2124735073
+      spriteID: d69c29aaa51e0554a8c4521cc48be04c
+      internalID: 1769499093
       vertices: []
       indices: 
       edges: []
@@ -158,7 +158,7 @@ TextureImporter:
         x: 73
         y: 3
         width: 14
-        height: 24
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,113 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65add7c7004b6544fa96b0bcbdc169fb
-      internalID: -1496251634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnterDoor_3
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 3
-        width: 14
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c471067538404c8489c3496a15180a64
-      internalID: -173352802
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnterDoor_4
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 3
-        width: 14
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28f3a9f7f77665a46989e82799a81b7d
-      internalID: -483154094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnterDoor_5
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 3
-        width: 14
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6625e4f50793c794e87acfa2bfeb7d1f
-      internalID: -331122093
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnterDoor_6
-      rect:
-        serializedVersion: 2
-        x: 201
-        y: 3
-        width: 14
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f36dbbf809dc4644bb5c675fae4063d8
-      internalID: 211714854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnterDoor_7
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 3
-        width: 14
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b58d07aa39225ec4d9fbacaa12299e8f
-      internalID: 1389372716
+      spriteID: f270d105b7836af4ca16350e5d9a618b
+      internalID: 256042961
       vertices: []
       indices: 
       edges: []
@@ -288,14 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      EnterDoor_0: -1185521004
-      EnterDoor_1: -2124735073
-      EnterDoor_2: -1496251634
-      EnterDoor_3: -173352802
-      EnterDoor_4: -483154094
-      EnterDoor_5: -331122093
-      EnterDoor_6: 211714854
-      EnterDoor_7: 1389372716
+      EnterDoor_0: -1293895597
+      EnterDoor_1: 1769499093
+      EnterDoor_2: 256042961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
