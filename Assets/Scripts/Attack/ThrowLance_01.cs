@@ -29,7 +29,9 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        Enemy_shield shield = collision.GetComponent<Enemy_shield>();
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform")||
+            shield != null)
         {
             if (HalfHitGroundLancePrefab != null)
             {
