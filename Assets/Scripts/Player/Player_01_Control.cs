@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AttackTypeEnums;
+using UnityEngine.SceneManagement;
 
 public class Player_01_Control : MonoBehaviour
 {
@@ -159,8 +160,8 @@ public class Player_01_Control : MonoBehaviour
             {
                 _sr.flipY = true;
             }
-
-            GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
+            SceneManager.LoadScene("GameOver");
+            //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 
         //被弾判定

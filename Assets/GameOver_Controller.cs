@@ -16,6 +16,6 @@ public class GameOver_Controller : MonoBehaviour
     }
     public void SetGameOver()
     {
-
+         GameManager_01.RespawnPlayer();
     }
 }
