@@ -17,6 +17,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private GameObject FlipObj;//Playerの向きに合わせて反転する子オブジェクト
 
     [SerializeField]
+    private bool HaveLance = true;
+    [SerializeField]
     private float MoveValue = 1.0f;//移動量
     [SerializeField]
     private float JumpValue = 1.0f;//ジャンプ量
@@ -36,6 +38,7 @@ public class Player_01_Control : MonoBehaviour
 
     private bool FlipX;//プレイヤーの向きを記録
 
+    //アニメーション変数
     [SerializeField] private bool IsJump = false;
     [SerializeField] private bool IsMove = false;
     [SerializeField] private bool IsThrustAtk = false;
@@ -314,6 +317,8 @@ public class Player_01_Control : MonoBehaviour
 
     public void Throw()
     {
+        if (!HaveLance) return;//槍を持っていない為終了
+
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("Ranged")) 
         {
             if (ThrowCooltimer > 0.0f) return;//クールタイム中であるなら終了
@@ -537,9 +542,14 @@ public class Player_01_Control : MonoBehaviour
         _anim.SetBool("isDownAttacking", false);
         _anim.SetBool("doDamaged", false);
         _anim.SetBool("IsDoorEnter", false);
+        _anim.SetBool("IsDead", false);
 
         //優先な物ほど上にならべる
-        if (IsDoorEnter)
+        if (playerStatus == PlayerStatus.Dead)
+        {
+            _anim.SetBool("IsDead", true);
+        }
+        else if (IsDoorEnter)
         {
             _anim.SetBool("IsDoorEnter", true);
         }
@@ -663,6 +673,11 @@ public class Player_01_Control : MonoBehaviour
             //マネージャーにカメラ振動依頼
             CameraManager.SetShakeCamera();
         }
+    }
+
+    public void SetLance(bool _flag)
+    {
+        HaveLance = _flag;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
