@@ -73,32 +73,6 @@ public class WarpEntrance : MonoBehaviour
 
         Sprite_Update();//スプライト更新
 
-        //プレイヤーが登録されていたら移動処理
-        if (Player && false)
-        {
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f) && !IsDoorLock)//移動入力かつ施錠されていないとき
-            {
-                //タイマーセット
-                TransferStartTimer = 1.0f;
-
-                //フェードアウトさせる
-                if (Camera)
-                {
-                    UIManager _uiMng = Camera.GetComponent<UIManager>();
-                    if (_uiMng)
-                    {
-                        _uiMng.SetBlindFade(true);
-                    }
-                }
-
-                //座標を記録
-                if (Player)
-                {
-                    FadeOutPlayerPos = Player.transform.position;
-                }
-            }
-        }
-
         //タイマー更新前に時間を記録しておく
         float StartTimer_old = TransferStartTimer;
 
@@ -150,13 +124,19 @@ public class WarpEntrance : MonoBehaviour
                 _rb.velocity = Vector3.zero;
             }
 
-
             //カメラの座標
             pos = ExitPos;
             GameManager_01.SetCameraGazePos(pos);
 
-            //フェードアウトさせる
+            //フェードインさせる
             GameManager_01.SetBlindFade(false);
+
+            //プレイヤーに移動終了を伝える
+            Player_01_Control playerControl=Player.GetComponent<Player_01_Control>();
+            if(playerControl!=null)
+            {
+                playerControl.DoorExit();
+            }
         }
         else
         {

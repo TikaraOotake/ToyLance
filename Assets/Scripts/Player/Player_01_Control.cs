@@ -201,6 +201,7 @@ public class Player_01_Control : MonoBehaviour
     }
     private void InputAtkSetting()
     {
+        if (!HaveLance) return;//槍を持っていない為終了
         if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
 
         if (Input.GetKeyDown(KeyCode.S) || (IsInputDown != IsInputDown_old && IsInputDown))
@@ -484,8 +485,13 @@ public class Player_01_Control : MonoBehaviour
             if (Door != null)
             {
                 Door.TeleportSetting(this.gameObject);
+                IsDoorEnter = true;//ドア進入状態
             }
         }
+    }
+    public void DoorExit()
+    {
+        IsDoorEnter = false;//ドアから出た
     }
 
     /// <summary>
