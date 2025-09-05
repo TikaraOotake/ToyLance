@@ -160,7 +160,6 @@ public class Player_01_Control : MonoBehaviour
             {
                 _sr.flipY = true;
             }
-            SceneManager.LoadScene("GameOver");
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 

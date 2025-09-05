@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2611070974967051862}
   - component: {fileID: 320240759083420762}
   - component: {fileID: 7050441782919871726}
+  - component: {fileID: 5582877857348868631}
   m_Layer: 5
   m_Name: GameOver_UI
   m_TagString: Untagged
@@ -250,6 +251,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269a974ab95b89a42aaaaaee39d9e620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endButton: {fileID: 7093130380039025059}
+  continueButton: {fileID: 3237822318088619629}
+--- !u!225 &5582877857348868631
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819555013027939835}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5898832716149032553
 GameObject:
   m_ObjectHideFlags: 0
