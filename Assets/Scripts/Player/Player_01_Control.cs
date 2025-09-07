@@ -156,10 +156,6 @@ public class Player_01_Control : MonoBehaviour
             {
                 _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
             }
-            if (_sr != null)
-            {
-                _sr.flipY = true;
-            }
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 
