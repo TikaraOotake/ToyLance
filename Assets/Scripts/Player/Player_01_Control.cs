@@ -388,7 +388,7 @@ public class Player_01_Control : MonoBehaviour
                 return;
             }
 
-            if (AtkTimer <= 0.8f)
+            if (AtkTimer <= 0.9f)
             {
                 if(!IsLanding)
                 {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5443651545664245296}
   - component: {fileID: 6942449331072215225}
+  - component: {fileID: 6482506490086967735}
   m_Layer: 0
   m_Name: SpriteBoard
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6482506490086967735
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272459062918887592}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 591bdcc4798ad8142a3c5c526ba443ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8419251930008407380
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,9 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sequence: 0
   SequencePointObj: []
-  SpriteBoard: {fileID: 1272459062918887592}
   Player: {fileID: 0}
   BoardShiftHeight: 0
   JumpValue: 0
   MigrationProgress: 0
   ProgressSpeed: 1
+  DeparturePos: {x: 0, y: 0}
+  TargetPos: {x: 0, y: 0}
+  FindLength: 1
+  IdleTime: 1
+  IdleTimer: 0
+  SpriteBoard: {fileID: 1272459062918887592}

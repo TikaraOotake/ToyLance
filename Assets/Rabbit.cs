@@ -7,14 +7,18 @@ using static UnityEngine.UI.Image;
 
 public class Rabbit : MonoBehaviour
 {
-    [SerializeField] private int Sequence=0;//段階
+    [SerializeField] private int Sequence = 0;//段階
     [SerializeField] private GameObject[] SequencePointObj;//段階ごとの座標を入れる
     private List<GameObject> SequencePointObj_copy;
 
-    [SerializeField] private GameObject SpriteBoard;//画像を表示するオブジェクト
+    bool IsIdle;
+
+
     [SerializeField] private GameObject Player;//Player
 
-    [SerializeField] private float BoardShiftHeight;//画像をずらす高さ
+    [SerializeField]
+    private float BoardShiftHeight;//画像をずらす高さ
+    private float BoardShiftHeight_old;
 
     [SerializeField] private float JumpValue;//ジャンプ量
 
@@ -27,10 +31,20 @@ public class Rabbit : MonoBehaviour
 
     [SerializeField] private float FindLength = 1.0f;//プレイヤーを見つける距離
 
+    [SerializeField] private float IdleTime = 1.0f;//待機時間
+    [SerializeField] private float IdleTimer;//待機タイマー
+
+    [SerializeField] 
+    private GameObject SpriteBoard;//画像を表示するオブジェクト
+    private Animator _anim;//アニメーター
+
     void Start()
     {
         Player = GameManager_01.GetPlayer();//プレイヤー取得
-
+        if (SpriteBoard != null)
+        {
+            _anim = SpriteBoard.GetComponent<Animator>();//アニメーター取得
+        }
 
 
         DeparturePos = transform.position;//出発座標設定
@@ -49,7 +63,75 @@ public class Rabbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HoppingSprite();
+
+        //進行度を満了したら再設定
+        if (MigrationProgress >= 1.0f)
+        {
+            MigrationProgress = 0.0f;//進捗度リセット
+            IdleTimer = IdleTime;//待機タイマーセット
+            FacingPlayerSprite();//プレイヤーの方向を向く
+        }
+
+        if (IdleTimer <= 0.0f)//待機中でない場合
+        {
+            //行先設定
+            if (MigrationProgress == 0.0f)
+            {
+                DeparturePos = transform.position;//出発座標設定
+                
+
+
+                //プレイヤーが一定より近づいていたら
+                if (Player != null)
+                {
+                    Vector2 PlayerPos = Player.transform.position;
+                    Vector2 ThisPos = transform.position;
+                    Vector2 Length = PlayerPos - ThisPos;//距離を算出
+                    if (FindLength >= Length.magnitude)
+                    {
+                        Debug.Log("プレイヤーが近付きました");
+
+                        ++Sequence;//次の段階に
+
+
+                        TargetPos = DeparturePos;//念のため仮上書き
+
+                        if (Sequence < SequencePointObj.Length)//配列外チェック
+                        {
+                            GameObject TargetObj = SequencePointObj[Sequence];
+                            if (TargetObj != null)
+                            {
+                                TargetPos = TargetObj.transform.position;//目標座標設定
+                            }
+                        }
+
+                        //スプライトの向きを合わせる
+                        if(TargetPos != DeparturePos)//移動先が設定されていた場合
+                        {
+                            FacingMoveWaySprite();
+                        }
+                    }
+                }
+            }
+
+            //進行度に合わせてウサギを移動
+            Vector2 TargetVec = TargetPos - DeparturePos;//目標までのベクトルを算出
+            transform.position = TargetVec * MigrationProgress + DeparturePos;
+
+            //進行度更新
+            MigrationProgress = Mathf.Min(1.0f, MigrationProgress + ProgressSpeed * Time.deltaTime);
+        }
+
+        //待機タイマー更新
+        IdleTimer = Mathf.Max(0.0f, IdleTimer - Time.deltaTime);
+
+        SetAnim();//アニメーションセット
+    }
+    private void HoppingSprite()
+    {
         //進行度から画像をずらす量を計算
+        BoardShiftHeight_old = BoardShiftHeight;//前の値を記録
         BoardShiftHeight = Mathf.Sin(MigrationProgress * Mathf.PI);
 
         //画像をずらす
@@ -57,51 +139,63 @@ public class Rabbit : MonoBehaviour
         {
             SpriteBoard.transform.position = new Vector3(0.0f, BoardShiftHeight, 0.0f) + transform.position;
         }
+    }
+    private void FacingPlayerSprite()//プレイヤーの方向を向く
+    {
+        if (SpriteBoard == null) return;//スプライトボードがないため終了
 
-        //進行度が満たしたら戻す
-        if (MigrationProgress >= 1.0f)
+        //プレイヤーの方向に合わせる
+        if (Player != null)
         {
-            MigrationProgress = 0.0f;
-        }
-
-        //行先設定
-        if (MigrationProgress == 0.0f)
-        {
-            DeparturePos = transform.position;//出発座標設定
-
-            //プレイヤーが一定より近づいていたら
-            if (Player != null)
+            if (Player.transform.position.x > transform.position.x)
             {
-                Vector2 PlayerPos = Player.transform.position;
-                Vector2 ThisPos = transform.position;
-                Vector2 Length = PlayerPos - ThisPos;//距離を算出
-                if (FindLength >= Length.magnitude)
-                {
-                    Debug.Log("プレイヤーが近付きました");
-
-                    ++Sequence;//次の段階に
-
-                    
-                    TargetPos = DeparturePos;//念のため仮上書き
-
-                    if (Sequence < SequencePointObj.Length)//配列外チェック
-                    {
-                        GameObject TargetObj = SequencePointObj[Sequence];
-                        if (TargetObj != null)
-                        {
-                            TargetPos = TargetObj.transform.position;//目標座標設定
-                        }
-                    }
-                }
+                SpriteBoard.transform.eulerAngles = new Vector3(0.0f, 180, 0.0f);
+            }
+            else
+            {
+                SpriteBoard.transform.eulerAngles = Vector3.zero;
             }
         }
+    }
 
-        //進行度に合わせてウサギを移動
-        Vector2 TargetVec = TargetPos - DeparturePos;//目標までのベクトルを算出
-        transform.position = TargetVec * MigrationProgress + DeparturePos;
+    private void FacingMoveWaySprite()//移動方向を向く
+    {
+        if (SpriteBoard == null) return;//スプライトボードがないため終了
 
-        //進行度更新
-        MigrationProgress = Mathf.Min(1.0f, MigrationProgress + ProgressSpeed * Time.deltaTime);
+        if (TargetPos.x > DeparturePos.x)
+        {
+            SpriteBoard.transform.eulerAngles = new Vector3(0.0f, 180, 0.0f);
+        }
+        else
+        {
+            SpriteBoard.transform.eulerAngles = Vector3.zero;
+        }
+    }
+    private void SetAnim()
+    {
+        if (_anim == null) return;
+        //フラグを一旦リセット
+        _anim.SetBool("IsIdle", false);
+        _anim.SetBool("IsHopping_Rising", false);
+        _anim.SetBool("IsHopping_Floating", false);
+        _anim.SetBool("IsHopping_Falling", false);
+
+        if (IdleTimer > 0.0f)
+        {
+            _anim.SetBool("IsIdle", true);
+        }
+        else if (BoardShiftHeight >= 0.8f)
+        {
+            _anim.SetBool("IsHopping_Floating", true);
+        }
+        else if(BoardShiftHeight >= BoardShiftHeight_old)
+        {
+            _anim.SetBool("IsHopping_Rising", true);
+        }
+        else
+        {
+            _anim.SetBool("IsHopping_Falling", true);
+        }
     }
 
     private void OnValidate()
