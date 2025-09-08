@@ -27,9 +27,10 @@ public class GameOver_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) 
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown("joystick button 7")) 
         {
             SetGameOver();
+            Time.timeScale = 0.0f;
         }
     }
     public void SetGameOver()
@@ -42,6 +43,7 @@ public class GameOver_Controller : MonoBehaviour
     private void OnEndButtonPushed()
     {
         SceneManager.LoadScene("Title");
+        Time.timeScale = 1.0f;
     }
 
     private void OnContinueButtonPushed()
@@ -51,5 +53,7 @@ public class GameOver_Controller : MonoBehaviour
         _canvasGroup.alpha = 0.0f;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
+
+        Time.timeScale = 1.0f;
     }
 }
