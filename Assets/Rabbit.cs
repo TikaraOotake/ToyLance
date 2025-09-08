@@ -63,7 +63,7 @@ public class Rabbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HoppingSprite();
+        HoppingSprite();//スプライトを上下にずらして跳ねさせる
 
         //進行度を満了したら再設定
         if (MigrationProgress >= 1.0f)
@@ -79,39 +79,31 @@ public class Rabbit : MonoBehaviour
             if (MigrationProgress == 0.0f)
             {
                 DeparturePos = transform.position;//出発座標設定
-                
 
-
-                //プレイヤーが一定より近づいていたら
-                if (Player != null)
+                if (CheckPlayerOverlap())
                 {
-                    Vector2 PlayerPos = Player.transform.position;
-                    Vector2 ThisPos = transform.position;
-                    Vector2 Length = PlayerPos - ThisPos;//距離を算出
-                    if (FindLength >= Length.magnitude)
+                    Debug.Log("プレイヤーが近付きました");
+
+                    ++Sequence;//次の段階に
+
+
+                    TargetPos = DeparturePos;//念のため仮上書き
+
+                    if (Sequence < SequencePointObj.Length)//配列外チェック
                     {
-                        Debug.Log("プレイヤーが近付きました");
-
-                        ++Sequence;//次の段階に
-
-
-                        TargetPos = DeparturePos;//念のため仮上書き
-
-                        if (Sequence < SequencePointObj.Length)//配列外チェック
+                        GameObject TargetObj = SequencePointObj[Sequence];
+                        if (TargetObj != null)
                         {
-                            GameObject TargetObj = SequencePointObj[Sequence];
-                            if (TargetObj != null)
-                            {
-                                TargetPos = TargetObj.transform.position;//目標座標設定
-                            }
-                        }
-
-                        //スプライトの向きを合わせる
-                        if(TargetPos != DeparturePos)//移動先が設定されていた場合
-                        {
-                            FacingMoveWaySprite();
+                            TargetPos = TargetObj.transform.position;//目標座標設定
                         }
                     }
+
+                    //スプライトの向きを合わせる
+                    if (TargetPos != DeparturePos)//移動先が設定されていた場合
+                    {
+                        FacingMoveWaySprite();
+                    }
+
                 }
             }
 
@@ -121,6 +113,12 @@ public class Rabbit : MonoBehaviour
 
             //進行度更新
             MigrationProgress = Mathf.Min(1.0f, MigrationProgress + ProgressSpeed * Time.deltaTime);
+        }
+
+        //プレイヤーが一定範囲内にいる　&　次の行先が決まっている場合
+        if (CheckPlayerOverlap() && TargetPos != DeparturePos)
+        {
+            IdleTimer = 0.0f;//待機時間を踏み倒す
         }
 
         //待機タイマー更新
@@ -196,6 +194,22 @@ public class Rabbit : MonoBehaviour
         {
             _anim.SetBool("IsHopping_Falling", true);
         }
+    }
+
+    private bool CheckPlayerOverlap()//プレイヤーが一定範囲内に入ったか確認
+    {
+        if (Player != null)
+        {
+            Vector2 PlayerPos = Player.transform.position;
+            Vector2 ThisPos = transform.position;
+            Vector2 Length = PlayerPos - ThisPos;//距離を算出
+            if (FindLength >= Length.magnitude)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnValidate()
