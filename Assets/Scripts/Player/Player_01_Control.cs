@@ -189,6 +189,7 @@ public class Player_01_Control : MonoBehaviour
             if (HP <= 0.0f)
             {
                 playerStatus = PlayerStatus.Dead;
+                GameManager_01.CollGameOver();
             }
         }
     }
