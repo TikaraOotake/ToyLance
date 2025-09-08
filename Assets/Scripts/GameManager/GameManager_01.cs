@@ -194,4 +194,16 @@ public static class GameManager_01
             Debug.LogError($"ÉVÅ[Éìñº '{_SceneName}' ÇÕë∂ç›ÇµÇ‹ÇπÇÒÅB");
         }
     }
+
+    public static void CollGameOver()
+    {
+        if (Camera != null)
+        {
+            UIManager UI_mng = Camera.GetComponent<UIManager>();
+            if (UI_mng)
+            {
+                UI_mng.CallGameOver();
+            }
+        }
+    }
 }

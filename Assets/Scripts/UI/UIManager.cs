@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject Text_UI;
+    private GameObject Text_UI;
     [SerializeField]
-    GameObject HP_UI;
+    private GameObject HP_UI;
 
     [SerializeField]
-    GameObject Blind_UI;
+    private GameObject Blind_UI;
+
+    [SerializeField]
+    private GameObject GameOver_UI;
 
     public static UIManager Instance;
 
@@ -23,6 +26,8 @@ public class UIManager : MonoBehaviour
     {
         Blind_UI = GameObject.Find("Blind");
         SetHP_UI(5);
+
+        GameOver_UI = GameObject.Find("GameOver_UI");
     }
 
     // Update is called once per frame
@@ -75,6 +80,17 @@ public class UIManager : MonoBehaviour
             if(blink)
             {
                 blink.SetBlinking(_flag);
+            }
+        }
+    }
+    public void CallGameOver()
+    {
+        if (GameOver_UI != null)
+        {
+            GameOver_Controller gameover = GameOver_UI.GetComponent<GameOver_Controller>();
+            if (gameover != null)
+            {
+                gameover.SetGameOver();
             }
         }
     }
