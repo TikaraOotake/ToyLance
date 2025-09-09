@@ -427,7 +427,7 @@ public class Player_01_Control : MonoBehaviour
             {
                 if (AtkTimer <= 0.0f)//0ˆÈ‰º
                 {
-                    AtkTimer = Time.deltaTime;
+                    AtkTimer = Time.deltaTime * 2.0f;
                 }
             }
 
