@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faeb06cf9ad5944aa5bd0814dfc5933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoftFlashPrefab: {fileID: 7190140900777956260, guid: a69b99a0cf0649c44a2ee9db37196112, type: 3}
   _anim: {fileID: 0}
 --- !u!50 &1200183522007163269
 Rigidbody2D:
