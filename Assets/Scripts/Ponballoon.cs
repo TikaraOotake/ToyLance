@@ -12,6 +12,7 @@ public class Ponballoon : MonoBehaviour
     [SerializeField] private int BalloonNam_Max = 1;//最大風船個数
     private int BalloonNam_old;
 
+    private float IsBreak;
 
     [SerializeField] private float RevivalTime;//復活時間(0の場合は復活なし)
     [SerializeField] private float RevivalTimer;//復活タイマー

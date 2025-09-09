@@ -6,6 +6,8 @@ public class CheckPoint : MonoBehaviour
 {
     private bool IsActive = false;
 
+    [SerializeField] GameObject SoftFlashPrefab;
+
     [SerializeField] Animator _anim;//
 
     void Start()
@@ -36,8 +38,14 @@ public class CheckPoint : MonoBehaviour
         if (collision.tag == "Player")
         {
             Debug.Log("チェックポイント設定");
+
             SetActive(true);
             GameManager_01.SetCheckPoint(this.gameObject);
+
+            if (SoftFlashPrefab != null)
+            {
+                Instantiate(SoftFlashPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 }
