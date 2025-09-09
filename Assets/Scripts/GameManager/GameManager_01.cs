@@ -206,4 +206,15 @@ public static class GameManager_01
             }
         }
     }
+    public static void SetPlayerIsPause(bool _flag)
+    {
+        if (Player != null)
+        {
+            Player_01_Control player = Player.GetComponent<Player_01_Control>();
+            if (player)
+            {
+                player.SetIsPause(_flag);
+            }
+        }
+    }
 }

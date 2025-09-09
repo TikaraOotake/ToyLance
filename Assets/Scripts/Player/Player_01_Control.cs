@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AttackTypeEnums;
 using UnityEngine.SceneManagement;
+using PlayerStatusEnum;
 
 public class Player_01_Control : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class Player_01_Control : MonoBehaviour
     private SpriteRenderer _sr;//SpriteRendererコンポーネント
 
     private bool FlipX;//プレイヤーの向きを記録
+
+    [SerializeField] private bool IsPause;//ポーズフラグ
 
     //アニメーション変数
     [SerializeField] private bool IsJump = false;
@@ -85,12 +88,7 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private int FallAttackValue;//落下攻撃力
 
     [SerializeField] private float TestRot;
-    enum PlayerStatus
-    {
-        Fine,
-        HitDamage,
-        Dead,
-    }
+
     PlayerStatus playerStatus;
 
     enum AtkStatus
@@ -126,6 +124,9 @@ public class Player_01_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsPause == true) return;//ポーズは何もせず終了
+        if (Time.timeScale == 0.0f) return;//時間停止中は何もしない
+
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             KeyboardInputTimer = 1.0f;
@@ -388,14 +389,14 @@ public class Player_01_Control : MonoBehaviour
                 return;
             }
 
-            if (AtkTimer <= 0.9f)
+            if (AtkTimer <= 0.8f)
             {
                 if(!IsLanding)
                 {
                     if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//空中時のみ急降下
                 }
                 
-                InvincibleTimer = 0.3f;//無敵時間セット(一瞬)
+                InvincibleTimer = 0.1f;//無敵時間セット(一瞬)
 
                 //攻撃判定の生成
                 if (AttackObj == null && AttackPrefab != null)
@@ -469,10 +470,8 @@ public class Player_01_Control : MonoBehaviour
                 IsThrustAtk = true;//刺突攻撃Anim
             }
 
-            if (AtkTimer <= 0.3f)
+            if (AtkTimer <= 0.9f)
             {
-                InvincibleTimer = 0.3f;//無敵時間セット(一瞬)
-
                 //攻撃判定の生成
                 if (AttackObj == null && AttackPrefab != null)
                 {
@@ -720,6 +719,10 @@ public class Player_01_Control : MonoBehaviour
     public void SetLance(bool _flag)
     {
         HaveLance = _flag;
+    }
+    public void SetIsPause(bool _flag)
+    {
+        IsPause = _flag;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
