@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +7,19 @@ public class Effecter : MonoBehaviour
     [SerializeField] GameObject EffectPrefab;
 
     [SerializeField]
-    private float SpownInterval = 0.1f;//¶¬ŠÔŠu
+    private float SpownInterval = 0.1f;//ç”Ÿæˆé–“éš”
     private float SpownTimer;
 
     void Start()
     {
-        if (EffectPrefab == null) Debug.Log("Effect‚ÌƒvƒŒƒnƒu‚ª‚ ‚è‚Ü‚¹‚ñ");
+        if (EffectPrefab == null) Debug.Log("Effectã®ãƒ—ãƒ¬ãƒãƒ–ãŒã‚ã‚Šã¾ã›ã‚“");
     }
 
     void Update()
     {
 
 
-     @ //ƒ^ƒCƒ}[İ’è
+        //ã‚¿ã‚¤ãƒãƒ¼è¨­å®š
         if (SpownTimer <= 0.0f)
         {
             if (EffectPrefab != null)
@@ -29,7 +29,7 @@ public class Effecter : MonoBehaviour
             SpownTimer = SpownInterval;
         }
 
-        //ƒ^ƒCƒ}[XV
+        //ã‚¿ã‚¤ãƒãƒ¼æ›´æ–°
         SpownTimer = Mathf.Max(0.0f, SpownTimer - Time.deltaTime);
     }
 }
