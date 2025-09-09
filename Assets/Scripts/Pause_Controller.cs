@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOver_Controller : MonoBehaviour
+public class Pause_Controller : MonoBehaviour
 {
     private CanvasGroup _canvasGroup;
 
     [SerializeField]
-    private Button endButton;
-    [SerializeField]
     private Button continueButton;
+    [SerializeField]
+    private Button endButton;
+
+    private bool isPaused = false;
 
     void Start()
     {
@@ -27,33 +30,61 @@ public class GameOver_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown("joystick button 7")) 
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown("joystick button 7"))
         {
-            SetGameOver();
-            Time.timeScale = 0.0f;
+            EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
+            TogglePause();
         }
     }
-    public void SetGameOver()
+
+    private void TogglePause()
     {
-        _canvasGroup.alpha = 1.0f;
-        _canvasGroup.interactable = true;
-        _canvasGroup.blocksRaycasts = true;
+        if(isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            SetPause();
+        }
     }
 
-    private void OnEndButtonPushed()
+    private void ResumeGame()
     {
-        SceneManager.LoadScene("Title");
         Time.timeScale = 1.0f;
-    }
-
-    private void OnContinueButtonPushed()
-    {
-        GameManager_01.RespawnPlayer();
 
         _canvasGroup.alpha = 0.0f;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
 
+        isPaused = false;
+    }
+    
+    private void SetPause()
+    {
+        Time.timeScale = 0.0f;
+
+        _canvasGroup.alpha = 1.0f;
+        _canvasGroup.interactable = true;
+        _canvasGroup.blocksRaycasts = true;
+
+        isPaused = true;
+    }
+
+    private void OnEndButtonPushed()
+    {
         Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Title");
+    }
+
+    private void OnContinueButtonPushed()
+    {
+        Time.timeScale = 1.0f;
+
+        GameManager_01.RespawnPlayer();
+
+        _canvasGroup.alpha = 0.0f;
+        _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
     }
 }
