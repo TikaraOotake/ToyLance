@@ -15,6 +15,7 @@ public class GameOver_Controller : MonoBehaviour
     private Button continueButton;
 
     private GameObject Camera;
+    private UIManager _uiMng;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class GameOver_Controller : MonoBehaviour
         continueButton.onClick.AddListener(OnContinueButtonPushed);
 
         Camera = GameObject.Find("Main Camera");
+        _uiMng = Camera.GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -38,14 +40,13 @@ public class GameOver_Controller : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
 
-        if (Camera)
-        {
-            UIManager _uiMng = Camera.GetComponent<UIManager>();
-            if (_uiMng)
-            {
-                _uiMng.SetBlindFade(true);
-            }
-        }
+        //if (Camera)
+        //{
+        //    if (_uiMng)
+        //    {
+        //        _uiMng.SetBlindFade(true);
+        //    }
+        //}
 
         Invoke(nameof(DelayMethod), 1.5f);
     }
@@ -72,5 +73,13 @@ public class GameOver_Controller : MonoBehaviour
         _canvasGroup.alpha = 0.0f;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
+
+        //if (Camera)
+        //{
+        //    if (_uiMng)
+        //    {
+        //        _uiMng.SetBlindFade(false);
+        //    }
+        //}
     }
 }
