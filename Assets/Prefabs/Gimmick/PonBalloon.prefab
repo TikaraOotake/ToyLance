@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5371361037846586274}
   - component: {fileID: 8761888886852025088}
   - component: {fileID: 4629114475297285948}
-  - component: {fileID: -206555391071541021}
   m_Layer: 10
   m_Name: PonBalloon
   m_TagString: Untagged
@@ -188,27 +187,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!95 &-206555391071541021
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608860449561589904}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3133c7c1f24e9ef43a064ed9d4591d5a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5079566347423198980
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4997044036075199249}
   - component: {fileID: 3935269236672242176}
+  - component: {fileID: 5915999355720029311}
   m_Layer: 10
   m_Name: Spriteboard
   m_TagString: Untagged
@@ -235,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 5079566347423198980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.73, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 2.6079943, y: 2.6079943, z: 2.6079943}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -293,6 +272,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5915999355720029311
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5079566347423198980}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3133c7c1f24e9ef43a064ed9d4591d5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7713131232670882094
 GameObject:
   m_ObjectHideFlags: 0
