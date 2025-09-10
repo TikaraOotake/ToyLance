@@ -13,6 +13,8 @@ public class Pause_Controller : MonoBehaviour
     private Button continueButton;
     [SerializeField]
     private Button endButton;
+    [SerializeField]
+    private RectTransform LanceUIRect;
 
     private bool isPaused = false;
 
@@ -35,6 +37,7 @@ public class Pause_Controller : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
             TogglePause();
         }
+        MoveLanceToSelectedButton();
     }
 
     private void TogglePause()
@@ -77,11 +80,26 @@ public class Pause_Controller : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
+    private void MoveLanceToSelectedButton()
+    {
+        var selected = EventSystem.current.currentSelectedGameObject;
+
+        if (selected == continueButton.gameObject)
+        {
+            LanceUIRect.anchoredPosition = new Vector2(30, -300);
+        }
+
+        if (selected == endButton.gameObject)
+        {
+            LanceUIRect.anchoredPosition = new Vector2(-680, -300);
+        }
+    }
+
     private void OnContinueButtonPushed()
     {
         Time.timeScale = 1.0f;
 
-        GameManager_01.RespawnPlayer();
+        //GameManager_01.RespawnPlayer();
 
         _canvasGroup.alpha = 0.0f;
         _canvasGroup.interactable = false;
