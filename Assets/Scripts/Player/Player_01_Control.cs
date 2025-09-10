@@ -304,6 +304,8 @@ public class Player_01_Control : MonoBehaviour
             Vector2 MoveVelocity = _rb.velocity;
             MoveVelocity.x = MoveWay * MoveValue;
             _rb.velocity = MoveVelocity;//ë„ì¸
+
+            transform.Translate(new Vector2(MoveWay * MoveValue * 0.01f, 0.0f) * Time.deltaTime);//ìÀÇ¡Ç©Ç©ÇËñhé~ÇÃÇΩÇﬂè≠ÇµÇﬂÇËçûÇ›
         }
     }
     private void Jump()

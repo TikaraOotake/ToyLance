@@ -46,9 +46,12 @@ public class HalfHitFloor_Lance : HalfHitFloor
 
         if (RemainingTimer <= 0.0f) Destroy(this.gameObject);//Ž©g‚ðíœ
 
-        if (Collision_Manager.GetTouchingObjectWithLayer(FloorCollider, "Player") && IsFalling)
+        if (FloorCollider != null)
         {
-            transform.Translate(new Vector2(0.0f, -Time.deltaTime));
+            if (Collision_Manager.GetTouchingObjectWithLayer(FloorCollider, "Player") && IsFalling)
+            {
+                transform.Translate(new Vector2(0.0f, -Time.deltaTime));
+            }
         }
     }
     /*protected override void SetIgnored(GameObject _IgnoreObj)
