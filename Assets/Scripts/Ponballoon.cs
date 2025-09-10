@@ -28,10 +28,10 @@ public class Ponballoon : MonoBehaviour
 
     [SerializeField] float BasePos;//基本座標
 
+    [SerializeField]
+    private Animator _anim;
+    private Rigidbody2D _rb;
    
-
-    Rigidbody2D _rb;
-    Animator _anim;
 
     private void Awake()
     {
@@ -154,6 +154,7 @@ public class Ponballoon : MonoBehaviour
             RevivalTimer_old = RevivalTimer;
             RevivalTimer = Mathf.Max(0.0f, RevivalTimer - Time.deltaTime);
         }
+        IsBreak = Mathf.Max(0.0f, IsBreak - Time.deltaTime);
 
         //吊り下げている足場を引き寄せる
         if (HangLift != null)
@@ -181,7 +182,19 @@ public class Ponballoon : MonoBehaviour
 
     private void SetAnim()
     {
-        //_anim.SetInteger();
+        if (_anim != null)
+        {
+            if (IsBreak <= 0.0f)
+            {
+                _anim.SetBool("IsBreak", false);
+                _anim.SetInteger("BalloonNam", BalloonNam);
+            }
+            else
+            {
+                _anim.SetBool("IsBreak", true);
+            }
+        }
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -194,6 +207,8 @@ public class Ponballoon : MonoBehaviour
 
             //復活タイマー設定
             RevivalTimer = RevivalTime;
+
+            IsBreak = 1.0f;//割れたアニメーションの再生時間
         }
     }
 }
