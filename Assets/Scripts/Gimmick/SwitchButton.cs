@@ -12,6 +12,8 @@ public class SwitchButton : MonoBehaviour
 	[SerializeField]
     SpriteRenderer _sr;//台座のスプライトレンダラー
 
+    Collider2D _coll;//コライダー
+
     enum SwitchMode
     {
         Momentary,//接触している時だけ
@@ -24,19 +26,46 @@ public class SwitchButton : MonoBehaviour
     [SerializeField]
     private SwitchMode mode;
 
-    [SerializeField]
-    private float ReceptionCoolTime = 0.0f;//値の変更から指定した時間は変更を受け付けない
-    private float ReceptionCoolTimer;//計測用
+    [SerializeField] private float ReceptionCoolTime = 0.1f;//値の変更から指定した時間は変更を受け付けない
+    [SerializeField] private float ReceptionCoolTimer;//計測用
+    private float ReceptionCoolTimer_old;//計測用
 
     void Start()
     {
         //色更新
         Color_Update();
+
+        _coll = GetComponent<Collider2D>();//コライダー取得
     }
 
     // Update is called once per frame
     void Update()
     {
+        //値更新
+        SwitchFlag_old = SwitchFlag;
+        ReceptionCoolTimer_old = ReceptionCoolTimer;
+        ReceptionCoolTimer = Mathf.Max(0.0f, ReceptionCoolTimer - Time.deltaTime);
+        CheckPushSwitch();//スイッチが押されているかチェック
+        if (mode == SwitchMode.Momentary)//モーメントリーモード
+        {
+            if (ReceptionCoolTimer > 0.0f)
+            {
+                
+                SwitchFlag = true;//タイマー継続中はオン状態を継続する
+            }
+            else
+            {
+                SwitchFlag = false;
+            }
+        }
+        else if (mode == SwitchMode.Toggle)//トグルモード
+        {
+            if (ReceptionCoolTimer > 0.0f && ReceptionCoolTimer_old <= 0.0f)//タイマーが0から変わった瞬間
+            {
+                SwitchFlag = !SwitchFlag;//フラグ反転
+            }
+        }
+
         //フラグが変更された場合
         if (SwitchFlag != SwitchFlag_old)
         {
@@ -49,25 +78,12 @@ public class SwitchButton : MonoBehaviour
                 }
             }
 
-            //色更新
-            Color_Update();
 
-            //クールタイムセット
-            ReceptionCoolTimer = ReceptionCoolTime;
         }
 
+        //色更新
+        Color_Update();
 
-
-        //値更新
-        SwitchFlag_old = SwitchFlag;
-        if (ReceptionCoolTimer > 0.0f)
-        {
-            ReceptionCoolTimer -= Time.deltaTime;
-        }
-        else if (ReceptionCoolTimer < 0.0f)
-        {
-            ReceptionCoolTimer = 0.0f;
-        }
     }
     public void SetSwitchFlag(bool _flag)
     {
@@ -92,78 +108,38 @@ public class SwitchButton : MonoBehaviour
                 _sr.color = new Color(0.5f, 0.0f, 0.0f, 1.0f);//赤黒
             }
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (ReceptionCoolTimer > 0)
-        {
-            return;//クールタイム中であれば終了
-        }
-
-        if(collision.gameObject.layer != LayerMask.NameToLayer("Player") &&
-           collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        {
-            return;//プレイヤーでも地形でもなければ終了
-        }
-
-        if (mode == SwitchMode.Toggle)
-        {
-            SwitchFlag = !SwitchFlag;
-        }
-        else if (mode == SwitchMode.Lock)
-        {
-            SwitchFlag = true;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (ReceptionCoolTimer > 0)
-        {
-            return;//クールタイム中であれば終了
-        }
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") &&
-           collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        {
-            return;//プレイヤーでも地形でもなければ終了
-        }
 
         //ボタンを押した状態(非表示)に
         SpriteRenderer _This_sr = GetComponent<SpriteRenderer>();
         if (_This_sr)
         {
-            Color color = _This_sr.color;
-            color.a = 0.0f;//非表示
+            if (ReceptionCoolTimer > 0.0f)
+            {
+                Color color = _This_sr.color;
+                color.a = 0.0f;//非表示
 
-            _This_sr.color = color;//代入
-        }
+                _This_sr.color = color;//代入
+            }
+            else
+            {
+                Color color = _This_sr.color;
+                color.a = 1.0f;//表示
 
-        //フラグを変更
-        if (mode == SwitchMode.Momentary)
-        {
-            SwitchFlag = true;
+                _This_sr.color = color;//代入
+            }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    private void CheckPushSwitch()
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") &&
-           collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (_coll != null)
         {
-            return;//プレイヤーでも地形でもなければ終了
-        }
-
-        //ボタンを離した状態(表示)に
-        SpriteRenderer _This_sr = GetComponent<SpriteRenderer>();
-        if (_This_sr)
-        {
-            Color color = _This_sr.color;
-            color.a = 1.0f;//表示
-
-            _This_sr.color = color;//代入
-        }
-
-        if (mode == SwitchMode.Momentary)
-        {
-            SwitchFlag = false;
+            if (Collision_Manager.GetTouchingObjectWithLayer(_coll, "Player") ||
+                Collision_Manager.GetTouchingObjectWithLayer(_coll, "Ground") ||
+                Collision_Manager.GetTouchingObjectWithLayer(_coll, "SpearPlatform"))
+            {
+                ReceptionCoolTimer = ReceptionCoolTime;//タイマーセット
+            }
         }
     }
 }

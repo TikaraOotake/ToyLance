@@ -513,8 +513,12 @@ public class Player_01_Control : MonoBehaviour
         {
             if (Door != null)
             {
-                Door.TeleportSetting(this.gameObject);
-                IsDoorEnter = true;//ドア進入状態
+                bool result = false;//成功したかを記録
+                result = Door.TeleportSetting(this.gameObject);
+                if (result == true)
+                {
+                    IsDoorEnter = true;//ドア進入状態
+                }
             }
         }
     }

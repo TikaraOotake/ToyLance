@@ -95,6 +95,7 @@ MonoBehaviour:
   FloorCollider: {fileID: 2496436381867164472}
   RemainingTime: 10
   _sr: {fileID: 8372038091800979928}
+  IsFalling: 0
 --- !u!1 &3118367503197662490
 GameObject:
   m_ObjectHideFlags: 0

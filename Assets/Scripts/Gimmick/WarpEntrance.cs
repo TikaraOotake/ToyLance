@@ -31,6 +31,7 @@ public class WarpEntrance : MonoBehaviour
     [SerializeField]
     private SwitchButton[] SwitchList;//登録されたスイッチが全てオンであれば扉を開ける(逆もしかり)
 
+    private Animator _anim;//アニメーター
 
     void Start()
     {
@@ -42,6 +43,9 @@ public class WarpEntrance : MonoBehaviour
         {
             ExitPos = ExitObject.transform.position;
         }
+
+        //アニメーター取得
+        _anim = GetComponent<Animator>();
 
         Sprite_Update();//スプライト更新
     }
@@ -70,7 +74,7 @@ public class WarpEntrance : MonoBehaviour
             }
         }
 
-
+        SetAnim();//アニメーションの更新
         Sprite_Update();//スプライト更新
 
         //タイマー更新前に時間を記録しておく
@@ -156,6 +160,14 @@ public class WarpEntrance : MonoBehaviour
         Sprite_Update();//スプライト更新
     }
 
+    private void SetAnim()
+    {
+        if (_anim)
+        {
+            _anim.SetBool("IsDoorLock", IsDoorLock);
+        }
+    }
+
     //スプライトの更新
     private void Sprite_Update()
     {
@@ -173,9 +185,10 @@ public class WarpEntrance : MonoBehaviour
             }
         }
     }
-    public void TeleportSetting(GameObject _Player)
+    public bool TeleportSetting(GameObject _Player)
     {
-        if (_Player == null) return;//無効なプレイヤーであれば終了
+        if (_Player == null) return false;//無効なプレイヤーであれば終了
+        if (IsDoorLock == true) return false;//施錠中のドアの為終了
 
         Player = _Player;
 
@@ -197,6 +210,8 @@ public class WarpEntrance : MonoBehaviour
         {
             FadeOutPlayerPos = Player.transform.position;
         }
+
+        return true;//成功として処理
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
