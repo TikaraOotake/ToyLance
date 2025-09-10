@@ -11,6 +11,8 @@ public class HalfHitFloor_Lance : HalfHitFloor
     [SerializeField]
     private SpriteRenderer _sr;//スプライトレンダラーコンポ
 
+    [SerializeField] bool IsFalling;//
+
     private void Awake()
     {
         GameObject tempObj = Collision_Manager.GetTouchingObjectWithLayer(FloorCollider, "Player");
@@ -41,8 +43,13 @@ public class HalfHitFloor_Lance : HalfHitFloor
                 _sr.color = tempColor;
             }
         }
-        
+
         if (RemainingTimer <= 0.0f) Destroy(this.gameObject);//自身を削除
+
+        if (Collision_Manager.GetTouchingObjectWithLayer(FloorCollider, "Player") && IsFalling)
+        {
+            transform.Translate(new Vector2(0.0f, -Time.deltaTime));
+        }
     }
     /*protected override void SetIgnored(GameObject _IgnoreObj)
     {
@@ -68,6 +75,6 @@ public class HalfHitFloor_Lance : HalfHitFloor
         }
     }
      */
-    
-   
+
+
 }

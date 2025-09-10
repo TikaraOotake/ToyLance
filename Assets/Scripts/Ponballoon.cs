@@ -28,7 +28,10 @@ public class Ponballoon : MonoBehaviour
 
     [SerializeField] float BasePos;//基本座標
 
+   
+
     Rigidbody2D _rb;
+    Animator _anim;
 
     private void Awake()
     {
@@ -42,6 +45,11 @@ public class Ponballoon : MonoBehaviour
         if (_rb)
         {
             _rb.bodyType = RigidbodyType2D.Kinematic;//重力無効化
+        }
+
+        if (_anim != null)
+        {
+            Debug.Log("アニメーターが設定されていません");
         }
 
         if (MoveSpeed <= 0) Debug.Log("速度が0以下です　正常な動作ができません");
@@ -167,6 +175,13 @@ public class Ponballoon : MonoBehaviour
                 if (_rb) _rb.velocity = Vector2.zero;
             }
         }
+
+        SetAnim();
+    }
+
+    private void SetAnim()
+    {
+        //_anim.SetInteger();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
