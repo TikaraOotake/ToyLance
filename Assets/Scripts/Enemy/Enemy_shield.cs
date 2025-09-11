@@ -5,12 +5,9 @@ using AttackTypeEnums;
 
 public class Enemy_shield : MonoBehaviour
 {
-    private float initialShieldX;
-    //private bool isFacingRight = false;
-
     private Enemy_move enemyMove;
 
-    public bool isBroken = false;
+    public bool isBroken = false;   //壊れているかのフラグ
 
     Animator anim;
 
@@ -20,65 +17,11 @@ public class Enemy_shield : MonoBehaviour
     {
         anim = GetComponent<Animator>();
 
-        initialShieldX = transform.localPosition.x;
-
         if (enemyMove == null)
         {
             enemyMove = GetComponentInParent<Enemy_move>();
         }
     }
-
-    //盾の反転処理
-    //public void UpdateShieldPosition(bool FacingRight)
-    //{
-    //    if (FacingRight == isFacingRight)
-    //    {
-    //        return;
-    //    }
-
-    //    isFacingRight = FacingRight;
-
-    //    //float direction;
-
-    //    //if (FacingRight)
-    //    //{
-    //    //    direction = 1f;
-    //    //}
-    //    //else
-    //    //{
-    //    //    direction = -11f;
-    //    //}
-
-    //    //Vector3 pos = transform.localPosition;
-    //    //pos.x = initialShieldX * direction;
-    //    //transform.localPosition = pos;
-
-    //    float yRotation;
-
-    //    if (FacingRight)
-    //    {
-    //        yRotation = 0f;
-    //    }
-    //    else
-    //    {
-    //        yRotation = 180f;
-    //    }
-
-    //    Vector3 currentRotation = transform.localEulerAngles;
-    //    currentRotation.y = yRotation;
-    //    transform.localEulerAngles = currentRotation;
-
-    //    //foreach (Transform child in transform)
-    //    //{
-    //    //    var spear = child.GetComponent<SpearProjectile>();
-    //    //    Debug.Log(spear);
-    //    //    if (spear != null)
-    //    //    {
-    //    //        //槍が盾に刺さった時の反転処理
-    //    //        spear.FlipInShield();
-    //    //    }
-    //    //}
-    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -87,10 +30,12 @@ public class Enemy_shield : MonoBehaviour
             return;
         }
 
+        //槍を取得
         SpearAttack spear = collision.GetComponent<SpearAttack>();
         if (spear != null) 
         {
             AttackType attackType= spear.GetAttackType();
+            //突き攻撃なら
             if (attackType == AttackType.Trust) 
             {
                 GameObject Player = GameManager_01.GetPlayer();
@@ -110,6 +55,7 @@ public class Enemy_shield : MonoBehaviour
 
                 bool isEnemyBetween = EnemyPosX > minX && EnemyPosX < maxX;
 
+                //プレイヤーと敵の間に盾があったら
                 if (!isEnemyBetween)
                 {
                     //盾の破壊処理
@@ -117,19 +63,6 @@ public class Enemy_shield : MonoBehaviour
                 }
             }
         }
-
-        //if (collision.CompareTag("PlayerMeleeAttack")) 
-        //{
-        //    var meleeHitbox = collision.GetComponent<MeleeHitbox>();
-        //    if (meleeHitbox != null) 
-        //    {
-        //        var player = meleeHitbox.GetComponentInParent<Player_move>();
-        //        if (player != null && !player.isDownAttacking)
-        //        {
-        //            BreakShield();
-        //        }
-        //    }
-        //}
 
         if (collision.GetComponent<SpearProjectile>() != null)
         {
@@ -145,6 +78,7 @@ public class Enemy_shield : MonoBehaviour
             return;
         }
 
+        //壊れている
         isBroken = true;
 
         var enemyHealth = GetComponentInParent<EnemyHealth_ToySoldier>();
@@ -159,23 +93,21 @@ public class Enemy_shield : MonoBehaviour
             enemyMove.PauseMovement(1f);
         }
 
+        //非表示
         gameObject.SetActive(false);
 
-        //GetComponent<SpriteRenderer>().enabled = false;
-        //GetComponent<Collider2D>().enabled = false;
-
+        //6秒後に盾を再生
         Invoke(nameof(RestoreShield), 6f);
     }
 
     //盾の再生処理
     private void RestoreShield()
     {
+        //壊れていない
         isBroken = false;
 
+        //表示
         gameObject.SetActive(true);
-
-        //GetComponent<SpriteRenderer>().enabled = true;
-        //GetComponent<Collider2D>().enabled = true;
     }
 
     //盾のアニメーションの再生処理

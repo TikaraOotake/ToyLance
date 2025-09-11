@@ -14,16 +14,13 @@ public class Enemy_move : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    private Enemy_shield enemyshield;
+    private Enemy_shield enemyshield;                   //盾
 
     [SerializeField]
-    private Enemy_shieldFlipper enemyshieldflipper;
+    private Enemy_shieldFlipper enemyshieldflipper;     //盾の反転
 
     [SerializeField]
-    private float moveSpeed = 1f;
-
-    //[SerializeField]
-    //private GameObject FlipObj;//反転するオブジェクト
+    private float moveSpeed = 1f;                       //移動速度
 
     void Awake()
     {
@@ -72,21 +69,6 @@ public class Enemy_move : MonoBehaviour
             UpdateShield();
         }
 
-        //if (spriteRenderer != null)
-        //{
-        //    if (FlipObj != null)
-        //    {
-        //        if (spriteRenderer.flipX)
-        //        {
-        //            FlipObj.transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
-        //        }
-        //        else
-        //        {
-        //            FlipObj.transform.eulerAngles = Vector3.zero;
-        //        }
-        //    }
-        //}
-            
         float nextThinkTime = Random.Range(2f, 5f);
 
         Invoke("Think", nextThinkTime);

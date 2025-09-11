@@ -5,11 +5,11 @@ using UnityEngine;
 public class EnemyHealth_ToySoldier : EnemyHealth
 {
     [SerializeField] 
-    private GameObject Shield;
+    private GameObject Shield;              //盾
 
     private Enemy_shield shieldScript;
 
-    private bool shieldJustBroke = false;
+    private bool shieldJustBroke = false;   //盾が壊れているかのフラグ
 
     private void Start()
     {
@@ -35,14 +35,13 @@ public class EnemyHealth_ToySoldier : EnemyHealth
             ShieldPosX = Shield.transform.position.x;
         }
 
-        //盾とプレイヤーがある状態
-
         float minX = Mathf.Min(PlayerPosX, EnemyPosX);
         float maxX = Mathf.Max(PlayerPosX, EnemyPosX);
 
         bool isShieldBetween = ShieldPosX > minX && ShieldPosX < maxX;
-        
-        if(!isShieldBetween)
+
+        //プレイヤーと敵の間に盾がなかったら
+        if (!isShieldBetween)
         {
             //ダメージ処理
             if (invincible) return;
