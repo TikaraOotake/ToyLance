@@ -49,10 +49,10 @@ public class BGMManager : MonoBehaviour
         }
     }
 
-    // ¡ÚÃß°¡: BGMÀ» ÄÑ°í ²ô´Â ÇÔ¼ö
+    // ¡ÚÃß°¡: BGMÀ» ÄÑ°E²ô´Â ÇÔ¼E
     public void ToggleBGM()
     {
-        // AudioSourceÀÇ Mute(À½¼Ò°Å) »óÅÂ¸¦ ¹İÀü½ÃÅµ´Ï´Ù.
+        // AudioSourceÀÇ Mute(À½¼Ò°Å) »óÅÂ¸¦ ¹İÀEÃÅµ´Ï´Ù.
         audioSource.mute = !audioSource.mute;
     }
 

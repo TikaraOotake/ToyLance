@@ -381,6 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LancePrefab: {fileID: 349775081051111172, guid: c10f73fbd2836794abfdb09c3fca9c70, type: 3}
+  LanceList: []
   AttackPrefab: {fileID: 7737072475025706764, guid: cbdc50a529bc860429e31bce31d0d5fb, type: 3}
   AttackObj: {fileID: 0}
   Door: {fileID: 0}
