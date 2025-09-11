@@ -9,15 +9,6 @@ public class ThrowLance_01 : MonoBehaviour
 
     [SerializeField]
     private GameObject HalfHitGroundLancePrefab;//半当たり判定の槍地形プレハブ
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        return;
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,6 +24,7 @@ public class ThrowLance_01 : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform")||
             shield != null)
         {
+            //槍足場の生成
             if (HalfHitGroundLancePrefab != null)
             {
                 GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, Quaternion.identity);//槍床を生成

@@ -5,6 +5,11 @@ using UnityEngine;
 public class HalfHitFloor_Lance : HalfHitFloor
 {
     [SerializeField]
+    private GameObject ReturnLancePrefab;//戻り槍のプレハブ
+    [SerializeField]
+    private GameObject CenterPos;//中央として扱うオブジェクト
+
+    [SerializeField]
     private float RemainingTime = 1.0f;//残留時間
     private float RemainingTimer;//タイマー
 
@@ -24,6 +29,24 @@ public class HalfHitFloor_Lance : HalfHitFloor
    
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (ReturnLancePrefab != null)
+            {
+                GameObject Lance=Instantiate(ReturnLancePrefab, transform.position, Quaternion.identity);
+                Lance.transform.localScale = transform.localScale;//大きさを引継ぎ
+                Lance.transform.eulerAngles = new Vector3(0.0f, 0.0f, transform.eulerAngles.y);
+
+                if (CenterPos != null)
+                {
+                    Lance.transform.position = CenterPos.transform.position;//座標を設定
+                }
+
+                Destroy(this.gameObject);
+                return;
+            }
+        }
+
 
         RemainingTimer = Mathf.Max(0.0f, RemainingTimer - Time.deltaTime);
         

@@ -10,6 +10,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private GameObject LancePrefab;//投げ槍のプレハブ
     [SerializeField]
+    private List<GameObject> LanceList = new List<GameObject>();//投げた槍をリストで記録
+    [SerializeField]
     private GameObject AttackPrefab;//近距離：落下攻撃　用のコライダープレハブ
     [SerializeField]
     private GameObject AttackObj;//
@@ -158,6 +160,15 @@ public class Player_01_Control : MonoBehaviour
                 _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
             }
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
+        }
+
+        //落下速度を制限
+        if (_rb)
+        {
+            if (_rb.velocity.y < -JumpValue * 2.0f)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, -JumpValue * 2.0f);
+            }
         }
 
         //被弾判定

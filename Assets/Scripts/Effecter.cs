@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Effecter : MonoBehaviour
 {
-    [SerializeField] GameObject EffectPrefab;
+    [SerializeField] private GameObject EffectPrefab;
+
+    [SerializeField] GameObject SpawnPosObj;
 
     [SerializeField]
-    private float SpownInterval = 0.1f;//生成間隔
-    private float SpownTimer;
+    private float SpawnInterval = 0.1f;//生成間隔
+    private float SpawnTimer;
 
     void Start()
     {
@@ -17,19 +19,23 @@ public class Effecter : MonoBehaviour
 
     void Update()
     {
-
-
         //タイマー設定
-        if (SpownTimer <= 0.0f)
+        if (SpawnTimer <= 0.0f)
         {
             if (EffectPrefab != null)
             {
-                Instantiate(EffectPrefab, transform.position, transform.rotation);
+                Vector2 SpawnPos = transform.position;
+                if (SpawnPosObj != null)
+                {
+                    SpawnPos = SpawnPosObj.transform.position;
+                }
+                Instantiate(EffectPrefab, SpawnPos, transform.rotation);
             }
-            SpownTimer = SpownInterval;
+            SpawnTimer = SpawnInterval;
         }
 
         //タイマー更新
-        SpownTimer = Mathf.Max(0.0f, SpownTimer - Time.deltaTime);
+        SpawnTimer = Mathf.Max(0.0f, SpawnTimer - Time.deltaTime);
     }
+
 }

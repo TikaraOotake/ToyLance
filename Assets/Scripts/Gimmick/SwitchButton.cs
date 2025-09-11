@@ -50,7 +50,6 @@ public class SwitchButton : MonoBehaviour
         {
             if (ReceptionCoolTimer > 0.0f)
             {
-                
                 SwitchFlag = true;//タイマー継続中はオン状態を継続する
             }
             else
@@ -65,9 +64,16 @@ public class SwitchButton : MonoBehaviour
                 SwitchFlag = !SwitchFlag;//フラグ反転
             }
         }
+        else if (mode == SwitchMode.Lock)//ロックモード
+        {
+            if (ReceptionCoolTimer > 0.0f)
+            {
+                SwitchFlag = true;//タイマー継続中はオン状態を継続する
+            }
+        }
 
-        //フラグが変更された場合
-        if (SwitchFlag != SwitchFlag_old)
+            //フラグが変更された場合
+            if (SwitchFlag != SwitchFlag_old)
         {
             //オンの際ラジオリストに登録されているスイッチを全てオフ
             if (SwitchFlag == true)
@@ -88,6 +94,10 @@ public class SwitchButton : MonoBehaviour
     public void SetSwitchFlag(bool _flag)
     {
         SwitchFlag = _flag;
+        if (!_flag)
+        {
+            ReceptionCoolTimer = 0.0f;//タイマーも初期化
+        }
     }
     public bool GetSwitchFlag()
     {
