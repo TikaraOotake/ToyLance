@@ -208,7 +208,7 @@ public class Ponballoon : MonoBehaviour
             //復活タイマー設定
             RevivalTimer = RevivalTime;
 
-            IsBreak = 1.0f;//割れたアニメーションの再生時間
+            IsBreak = 0.25f;//割れたアニメーションの再生時間
         }
     }
 }

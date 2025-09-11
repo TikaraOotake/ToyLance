@@ -75,7 +75,7 @@ public class Player_01_Control : MonoBehaviour
     private float ThrowCooltimer;
 
     private float AtkTimer;//UŒ‚ƒ^ƒCƒ}[
-    private float TrustAtkTimer = 0.5f;//“Ë‚«UŒ‚ŠÔ
+    private float TrustAtkTimer = 0.7f;//“Ë‚«UŒ‚ŠÔ
 
     private float KeyboardInputTimer;
     private bool IsInputDown = false;//‰º“ü—Íî•ñ‚ğ‹L˜^‚·‚é
