@@ -101,10 +101,6 @@ public class WarpEntrance : MonoBehaviour
 
     private void TransferPlayer()
     {
-        if (IsDoorLock)
-        {
-            return;
-        }
         if (!Player)
         {
             return;//プレイヤーが設定されていないので終了
