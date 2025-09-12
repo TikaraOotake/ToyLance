@@ -145,7 +145,6 @@ public class SwitchButton : MonoBehaviour
         if (_coll != null)
         {
             if (Collision_Manager.GetTouchingObjectWithLayer(_coll, "Player") ||
-                Collision_Manager.GetTouchingObjectWithLayer(_coll, "Ground") ||
                 Collision_Manager.GetTouchingObjectWithLayer(_coll, "SpearPlatform"))
             {
                 ReceptionCoolTimer = ReceptionCoolTime;//タイマーセット
