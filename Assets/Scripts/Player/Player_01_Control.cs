@@ -51,6 +51,7 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsThrowAtk = false;
     [SerializeField] private bool IsFallAtk = false;
     [SerializeField] private bool IsDoorEnter = false;
+    [SerializeField] private float IsThrowTimer = 0.0f;
 
     [SerializeField] private bool IsLanding = false;//着地中か判定する
     [SerializeField] private bool IsLanding_old = false;
@@ -99,6 +100,7 @@ public class Player_01_Control : MonoBehaviour
         Thrust,//突き
         Throw,//投げ
         Falling,//落下
+        WallGrab,//壁突き差し状態
     }
     AtkStatus atkStatus = AtkStatus.None;
     private void Awake()
@@ -149,6 +151,8 @@ public class Player_01_Control : MonoBehaviour
             {
                 FallingAtk();
                 TrustAtk();
+
+                WallGrab();
             }
 
             InputAtkSetting();
@@ -162,9 +166,10 @@ public class Player_01_Control : MonoBehaviour
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 
-        //落下速度を制限
+        
         if (_rb)
         {
+            //落下速度を制限
             if (_rb.velocity.y < -JumpValue * 2.0f)
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, -JumpValue * 2.0f);
@@ -206,6 +211,14 @@ public class Player_01_Control : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (_rb)
+        {
+            transform.Translate(_rb.velocity * 0.1f * Time.deltaTime);//突っかかり防止のため少しめり込み
+        }
+    }
+
     private void Timer_Update()
     {
         //タイマー更新
@@ -216,6 +229,7 @@ public class Player_01_Control : MonoBehaviour
         KnockBackTimer = Mathf.Max(0.0f, KnockBackTimer - Time.deltaTime);
         ThrowCooltimer = Mathf.Max(0.0f, ThrowCooltimer - Time.deltaTime);
         KeyboardInputTimer = Mathf.Max(0.0f, KeyboardInputTimer - Time.deltaTime);
+        IsThrowTimer = Mathf.Max(0.0f, IsThrowTimer - Time.deltaTime);
     }
     private void InputAtkSetting()
     {
@@ -315,8 +329,6 @@ public class Player_01_Control : MonoBehaviour
             Vector2 MoveVelocity = _rb.velocity;
             MoveVelocity.x = MoveWay * MoveValue;
             _rb.velocity = MoveVelocity;//代入
-
-            transform.Translate(new Vector2(MoveWay * MoveValue * 0.01f, 0.0f) * Time.deltaTime);//突っかかり防止のため少しめり込み
         }
     }
     private void Jump()
@@ -380,6 +392,8 @@ public class Player_01_Control : MonoBehaviour
 
                 Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
                 if (_rb != null) _rb.velocity = ThrowVec;//速度代入
+
+                IsThrowTimer = 0.3f;//アニメーションタイマーセット
 
                 ThrowCooltimer = ThrowCooltime;//クールタイマーセット
 
@@ -518,9 +532,40 @@ public class Player_01_Control : MonoBehaviour
             }
         }
     }
+    private void WallGrab()//壁突き刺し
+    {
+        if (atkStatus == AtkStatus.WallGrab)
+        {
+            //上にジャンプ
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f ||
+                Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            {
+                //移動量取得
+                Vector2 MoveVelocity = _rb.velocity;
+                MoveVelocity.y = JumpValue;
+                _rb.velocity = MoveVelocity;//代入
+
+                atkStatus = AtkStatus.None;//通常に戻す
+            }
+
+            //突き刺し解除
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.4f)
+            {
+                atkStatus = AtkStatus.None;//通常に戻す
+            }
+
+            if (atkStatus == AtkStatus.None)
+            {
+                if(_rb)
+                {
+                    _rb.GetP
+                }
+            }
+        }
+    }
     private void DoorEnter()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f)
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f)
         {
             if (Door != null)
             {
@@ -593,6 +638,7 @@ public class Player_01_Control : MonoBehaviour
         _anim.SetBool("doDamaged", false);
         _anim.SetBool("IsDoorEnter", false);
         _anim.SetBool("IsDead", false);
+        _anim.SetBool("IsThrowAttack", false);
 
         //優先な物ほど上にならべる
         if (playerStatus == PlayerStatus.Dead)
@@ -602,6 +648,10 @@ public class Player_01_Control : MonoBehaviour
         else if (IsDoorEnter)
         {
             _anim.SetBool("IsDoorEnter", true);
+        }
+        else if (IsThrowTimer > 0.0f)
+        {
+            _anim.SetBool("IsThrowAttack", true);
         }
         else if (KnockBackTimer > 0.0f)//被弾状態
         {

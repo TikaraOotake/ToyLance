@@ -34,7 +34,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
             if (ReturnLancePrefab != null)
             {
                 GameObject Lance=Instantiate(ReturnLancePrefab, transform.position, Quaternion.identity);
-                Lance.transform.localScale = transform.localScale;//‘å‚«‚³‚ðˆøŒp‚¬
+                //Lance.transform.localScale = transform.localScale;//‘å‚«‚³‚ðˆøŒp‚¬
                 Lance.transform.eulerAngles = new Vector3(0.0f, 0.0f, transform.eulerAngles.y);
 
                 if (CenterPos != null)
