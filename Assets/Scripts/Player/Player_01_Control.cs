@@ -558,7 +558,7 @@ public class Player_01_Control : MonoBehaviour
             {
                 if(_rb)
                 {
-                    _rb.GetP
+                    //_rb.GetP
                 }
             }
         }
