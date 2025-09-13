@@ -21,6 +21,10 @@ public class SEManager : MonoBehaviour
             case "footsteps":
                 audioSource.PlayOneShot(seClips[0]);
                 break;
+
+            case "jump":
+                audioSource.PlayOneShot(seClips[1]);
+                break;
         }
     }
 

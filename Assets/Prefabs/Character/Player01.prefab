@@ -403,6 +403,7 @@ MonoBehaviour:
   IsThrowAtk: 0
   IsFallAtk: 0
   IsDoorEnter: 0
+  IsThrowTimer: 0
   IsLanding: 0
   IsLanding_old: 0
   LandingCheckCollider: {fileID: 7767720296120950642}
@@ -416,6 +417,8 @@ MonoBehaviour:
   ThrowAttackValue: 1
   FallAttackValue: 3
   TestRot: 0
+  seManager: {fileID: -6705255628988528019, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+  footstepInterval: 0.5
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4

@@ -94,6 +94,12 @@ public class Player_01_Control : MonoBehaviour
 
     PlayerStatus playerStatus;
 
+    [SerializeField]
+    private SEManager _seManager;
+    [SerializeField]
+    private float footstepInterval = 0.5f;      //鳴らす間隔
+    private float footstepTimer = 0.0f;         //鳴らすタイマー
+
     enum AtkStatus
     {
         None,//無し
@@ -116,6 +122,9 @@ public class Player_01_Control : MonoBehaviour
 
         _sr = GetComponent<SpriteRenderer>();
         if (_anim == null) Debug.Log("アニメーターの取得に失敗");
+
+        _seManager = Camera.main.GetComponent<SEManager>();
+        if (_seManager == null) Debug.Log("SEの取得に失敗");
 
         HP = HP_Max;
     }
@@ -277,13 +286,32 @@ public class Player_01_Control : MonoBehaviour
     private void Move()
     {
         float MoveWay = 0.0f;
+        bool isMoving = false;
         if (Input.GetKey(KeyCode.D) || (Input.GetAxis("Horizontal") > 0.1f && KeyboardInputTimer <= 0.0f))
         {
             MoveWay = +1.0f;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.A) || (Input.GetAxis("Horizontal") < -0.1f && KeyboardInputTimer <= 0.0f))
         {
             MoveWay = -1.0f;
+            isMoving = true;
+        }
+
+        //移動中かつ接地中
+        if (isMoving && IsLanding) 
+        {
+            footstepTimer -= Time.deltaTime;
+            if(footstepTimer <= 0.0f)
+            {
+                //足音
+                _seManager.PlaySE("footsteps");
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0.0f;
         }
 
         //アニメーションの変更
@@ -356,6 +384,9 @@ public class Player_01_Control : MonoBehaviour
                 _rb.velocity = MoveVelocity;//代入
 
                 IsJump = true;//アニメーションをジャンプに
+
+                //ジャンプ
+                _seManager.PlaySE("jump");
             }
         }
     }
