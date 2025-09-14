@@ -52,6 +52,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsFallAtk = false;
     [SerializeField] private bool IsDoorEnter = false;
     [SerializeField] private float IsThrowTimer = 0.0f;
+    [SerializeField] private bool IsWallGrab = false;
+    [SerializeField] private bool IsWallGrab_jamp = false;
 
     [SerializeField] private bool IsLanding = false;//着地中か判定する
     [SerializeField] private bool IsLanding_old = false;
@@ -140,7 +142,14 @@ public class Player_01_Control : MonoBehaviour
         if (IsPause == true) return;//ポーズは何もせず終了
         if (Time.timeScale == 0.0f) return;//時間停止中は何もしない
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.UpArrow) ||
+            Input.GetKey(KeyCode.DownArrow) ||
+            Input.GetKey(KeyCode.RightArrow) ||
+            Input.GetKey(KeyCode.LeftArrow))
         {
             KeyboardInputTimer = 1.0f;
         }
@@ -155,6 +164,8 @@ public class Player_01_Control : MonoBehaviour
                 Jump();
                 Throw();
                 DoorEnter();
+
+                InputAtkSetting();
             }
             else
             {
@@ -164,7 +175,7 @@ public class Player_01_Control : MonoBehaviour
                 WallGrab();
             }
 
-            InputAtkSetting();
+            
         }
         else if (playerStatus == PlayerStatus.Dead)//死亡状態
         {
@@ -245,7 +256,7 @@ public class Player_01_Control : MonoBehaviour
         if (!HaveLance) return;//槍を持っていない為終了
         if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
 
-        if (Input.GetKeyDown(KeyCode.S) || (IsInputDown != IsInputDown_old && IsInputDown))
+        if (Input.GetKeyDown(KeyCode.S) || (IsInputDown != IsInputDown_old && IsInputDown) && KeyboardInputTimer <= 0.0f)
         {
             if (GetTouchingObjectWithLayer(LandingCheckCollider, "Platform") ||
                 GetTouchingObjectWithLayer(LandingCheckCollider, "SpearPlatform"))
@@ -549,11 +560,38 @@ public class Player_01_Control : MonoBehaviour
                     AttackObj.transform.localScale = TrustAttackPos.transform.lossyScale;//スケール
                     AttackObj.transform.position = TrustAttackPos.transform.position;//座標
                     AttackObj.transform.eulerAngles = TrustAttackPos.transform.eulerAngles;//角度
+
+                    //壁突き刺し判定チェック
+                    if (AtkTimer >= 0.5f)
+                    {
+                        if (IsLanding == false)
+                        {
+                            SpearAttack spearAttack = AttackObj.GetComponent<SpearAttack>();
+                            if (spearAttack != null)
+                            {
+                                GameObject Ground = spearAttack.GetHitGround();
+                                if (Ground != null)
+                                {
+                                    AtkTimer = 0.0f;
+                                    atkStatus = AtkStatus.WallGrab;
+                                    if (AttackObj != null) Destroy(AttackObj);//攻撃判定の破棄
+                                    if (_rb)
+                                    {
+                                        //落下や移動を無効
+                                        _rb.velocity = Vector2.zero;
+                                        _rb.bodyType = RigidbodyType2D.Kinematic;
+                                    }
+
+                                    IsThrustAtk = false;
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
             //終了処理
-            if (AtkTimer <= 0.0f)
+            if (AtkTimer <= 0.0f && atkStatus != AtkStatus.WallGrab)
             {
                 atkStatus = AtkStatus.None;
 
@@ -567,20 +605,22 @@ public class Player_01_Control : MonoBehaviour
     {
         if (atkStatus == AtkStatus.WallGrab)
         {
+            IsWallGrab = true;//崖差し状態
+
             //上にジャンプ
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f ||
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f && KeyboardInputTimer <= 0.0f ||
                 Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
                 //移動量取得
                 Vector2 MoveVelocity = _rb.velocity;
-                MoveVelocity.y = JumpValue;
+                MoveVelocity.y = JumpValue * 1.2f;
                 _rb.velocity = MoveVelocity;//代入
 
                 atkStatus = AtkStatus.None;//通常に戻す
             }
 
             //突き刺し解除
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.4f)
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.4f && KeyboardInputTimer <= 0.0f)
             {
                 atkStatus = AtkStatus.None;//通常に戻す
             }
@@ -589,7 +629,7 @@ public class Player_01_Control : MonoBehaviour
             {
                 if(_rb)
                 {
-                    //_rb.GetP
+                    _rb.bodyType = RigidbodyType2D.Dynamic;
                 }
             }
         }
@@ -670,6 +710,7 @@ public class Player_01_Control : MonoBehaviour
         _anim.SetBool("IsDoorEnter", false);
         _anim.SetBool("IsDead", false);
         _anim.SetBool("IsThrowAttack", false);
+        _anim.SetBool("IsWallGrab", false);
 
         //優先な物ほど上にならべる
         if (playerStatus == PlayerStatus.Dead)
@@ -687,6 +728,10 @@ public class Player_01_Control : MonoBehaviour
         else if (KnockBackTimer > 0.0f)//被弾状態
         {
             _anim.SetBool("doDamaged", true);
+        }
+        else if(atkStatus == AtkStatus.WallGrab)
+        {
+            _anim.SetBool("IsWallGrab", true);
         }
         else if (IsThrowAtk)//投げ
         {

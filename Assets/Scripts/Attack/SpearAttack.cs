@@ -9,6 +9,8 @@ public class SpearAttack : MonoBehaviour
     [SerializeField]
     private AttackType attackType;//攻撃タイプ
 
+    private GameObject HitGround;//接触した地形
+
     public void SetAttackValue(int _AttackValue)
     {
         AttackValue = _AttackValue;
@@ -25,6 +27,10 @@ public class SpearAttack : MonoBehaviour
     {
         return attackType;
     }
+    public GameObject GetHitGround()
+    {
+        return HitGround;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,6 +44,18 @@ public class SpearAttack : MonoBehaviour
         if (_enemyHealth != null)
         {
             _enemyHealth.TakeDamage(AttackValue, transform.position, true);
+        }
+
+        
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            Debug.Log("地形と接触！");
+
+            //オブジェクトを登録
+            HitGround = collision.gameObject;
         }
     }
 }
