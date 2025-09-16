@@ -12,6 +12,24 @@ public class ThrowLance_01 : MonoBehaviour
 
     private GameObject Player;//プレイヤー
 
+    private void Awake()
+    {
+        Player = GameManager_01.GetPlayer();//仮取得
+    }
+
+    //槍リストを引き継がせる
+    private void HandoverLance(GameObject _new)
+    {
+        if (Player != null)
+        {
+            Player_01_Control player = Player.GetComponent<Player_01_Control>();
+            if (player != null)
+            {
+                player.HandoverLance(this.gameObject, _new);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //対象物が槍床であればお互い削除
@@ -33,6 +51,8 @@ public class ThrowLance_01 : MonoBehaviour
                 HalfHitGroundLance.transform.localScale = this.transform.localScale;//大きさを引き継ぐ
                 HalfHitGroundLance.transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);//角度を引き継ぐ(Y軸のみ)
                 HalfHitGroundLance.transform.SetParent(collision.transform);//親子付け
+
+                HandoverLance(HalfHitGroundLance);
             }
 
             Destroy(this.gameObject);

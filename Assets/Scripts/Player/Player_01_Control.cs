@@ -12,6 +12,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private List<GameObject> LanceList = new List<GameObject>();//投げた槍をリストで記録
     [SerializeField]
+    private int LanceMaxNam = 1;//槍の最大値
+    [SerializeField]
     private GameObject AttackPrefab;//近距離：落下攻撃　用のコライダープレハブ
     [SerializeField]
     private GameObject AttackObj;//
@@ -176,7 +178,7 @@ public class Player_01_Control : MonoBehaviour
                 WallGrab();
             }
 
-            
+
         }
         else if (playerStatus == PlayerStatus.Dead)//死亡状態
         {
@@ -187,7 +189,7 @@ public class Player_01_Control : MonoBehaviour
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
         }
 
-        
+
         if (_rb)
         {
             //落下速度を制限
@@ -217,6 +219,8 @@ public class Player_01_Control : MonoBehaviour
         IsInputDown = Input.GetAxis("Vertical") < -0.1f;
         StickInputValue_old.x = Input.GetAxis("Horizontal");//横軸
         StickInputValue_old.y = Input.GetAxis("Vertical");//縦軸
+
+        CleanLanceList();//破棄済の槍はリストから外す
 
         if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//タイマーが0になった瞬間だけ
         {
@@ -257,6 +261,7 @@ public class Player_01_Control : MonoBehaviour
     private void InputAtkSetting()
     {
         if (!HaveLance) return;//槍を持っていない為終了
+        if (LanceList.Count >= LanceMaxNam) return;//出せる槍の最大値を超えているため終了
         if (AtkTimer > 0.0f) return;//攻撃中は処理をしない
 
         if (Input.GetKeyDown(KeyCode.S) || (IsInputDown != IsInputDown_old && IsInputDown) && KeyboardInputTimer <= 0.0f)
@@ -272,7 +277,7 @@ public class Player_01_Control : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Melee")) 
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Melee"))
         {
             //突き攻撃
             atkStatus = AtkStatus.Thrust;
@@ -313,10 +318,10 @@ public class Player_01_Control : MonoBehaviour
         }
 
         //移動中かつ接地中
-        if (isMoving && IsLanding) 
+        if (isMoving && IsLanding)
         {
             footstepTimer -= Time.deltaTime;
-            if(footstepTimer <= 0.0f)
+            if (footstepTimer <= 0.0f)
             {
                 //足音
                 _seManager.PlaySE("footsteps");
@@ -390,7 +395,7 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //入力
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")) 
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
                 //移動量取得
                 Vector2 MoveVelocity = _rb.velocity;
@@ -409,11 +414,11 @@ public class Player_01_Control : MonoBehaviour
     {
         if (!HaveLance) return;//槍を持っていない為終了
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("Ranged")) 
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("Ranged"))
         {
             if (ThrowCooltimer > 0.0f) return;//クールタイム中であるなら終了
 
-            if (LancePrefab != null)
+            if (LancePrefab != null && LanceList.Count < LanceMaxNam)//プレハブが有効か　最大値に達していないか　チェック
             {
                 Vector3 Rot = new Vector3(0.0f, 0.0f, 0.0f);//向きを定義
                 Vector2 ThrowVec = new Vector2(1.0f, 0.0f);//投げるベクトルを定義
@@ -442,6 +447,9 @@ public class Player_01_Control : MonoBehaviour
 
                 ThrowCooltimer = ThrowCooltime;//クールタイマーセット
 
+                //槍リストに槍オブジェクトを登録
+                LanceList.Add(Lance);
+
                 return;
             }
         }
@@ -463,11 +471,11 @@ public class Player_01_Control : MonoBehaviour
 
             if (AtkTimer <= 0.8f)
             {
-                if(!IsLanding)
+                if (!IsLanding)
                 {
                     if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//空中時のみ急降下
                 }
-                
+
                 InvincibleTimer = 0.1f;//無敵時間セット(一瞬)
 
                 //攻撃判定の生成
@@ -632,7 +640,7 @@ public class Player_01_Control : MonoBehaviour
 
             if (atkStatus == AtkStatus.None)
             {
-                if(_rb)
+                if (_rb)
                 {
                     _rb.bodyType = RigidbodyType2D.Dynamic;
                 }
@@ -641,7 +649,9 @@ public class Player_01_Control : MonoBehaviour
     }
     private void DoorEnter()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f)
+        if (IsDoorEnter == true) return;//ドア進入中なら終了
+
+        if (Input.GetKeyDown(KeyCode.W) || (Input.GetAxis("Vertical") > 0.4f && StickInputValue_old.y <= 0.4f && KeyboardInputTimer <= 0.0f))
         {
             if (Door != null)
             {
@@ -734,7 +744,7 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("doDamaged", true);
         }
-        else if(atkStatus == AtkStatus.WallGrab)
+        else if (atkStatus == AtkStatus.WallGrab)
         {
             _anim.SetBool("IsWallGrab", true);
         }
@@ -758,6 +768,9 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("isWalk", true);
         }
+
+        //槍の所持状況を伝える
+        _anim.SetBool("IsHaveLance", LanceList.Count < LanceMaxNam);
 
         //色の変更
         if (_sr != null)
@@ -806,7 +819,7 @@ public class Player_01_Control : MonoBehaviour
         {
             _rb.velocity = Vector2.zero;//速度初期化
         }
-        if(_sr)
+        if (_sr)
         {
             _sr.flipY = false;
         }
@@ -862,7 +875,6 @@ public class Player_01_Control : MonoBehaviour
             //マネージャーにカメラ振動依頼
             CameraManager.SetShakeCamera();
 
-            //ダメージ
             _seManager.PlaySE("damage");
         }
     }
@@ -876,6 +888,47 @@ public class Player_01_Control : MonoBehaviour
         IsPause = _flag;
     }
 
+    //現在HP
+    public void SetPlayerHP(float _HP)
+    {
+        HP = Mathf.Min(HP_Max, _HP);//上限を超えないように代入
+    }
+    public float GetPlayerHP()
+    {
+        return HP;
+    }
+
+    //最大HP
+    public void SetPlayerHP_Max(float _HP_Max)
+    {
+        HP_Max = _HP_Max;//
+    }
+    public float GetPlayerHP_Max()
+    {
+        return HP_Max;
+    }
+
+
+    private void CleanLanceList()//破棄済の槍はリストから外す
+    {
+        for (int i = LanceList.Count - 1; i >= 0; i--)
+        {
+            if (LanceList[i] == null) // Destroy済みならnull判定がtrueになる
+            {
+                LanceList.RemoveAt(i);
+            }
+        }
+    }
+    public void HandoverLance(GameObject _old, GameObject _new)
+    {
+        if (_old == null || _new == null) return;
+
+        int Index = LanceList.IndexOf(_old);//一致する要素の番号を取得
+        if (Index >= 0)
+        {
+            LanceList[Index] = _new;
+        }
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Spear")) return;
@@ -911,7 +964,7 @@ public class Player_01_Control : MonoBehaviour
             Debug.Log(collision.gameObject.name);
         }
 
-            if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             //SetDamage(collision.gameObject);
         }

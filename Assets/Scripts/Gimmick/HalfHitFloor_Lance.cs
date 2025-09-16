@@ -18,19 +18,36 @@ public class HalfHitFloor_Lance : HalfHitFloor
 
     [SerializeField] bool IsFalling;//
 
+    private GameObject Player;
+
     private void Awake()
     {
+        Player = GameManager_01.GetPlayer();//仮取得
+
         GameObject tempObj = Collision_Manager.GetTouchingObjectWithLayer(FloorCollider, "Player");
         SetIgnored(tempObj);
 
         RemainingTimer = RemainingTime;//タイマーセット
     }
 
-   
+    //槍リストを引き継がせる
+    private void HandoverLance(GameObject _new)
+    {
+        if (Player != null)
+        {
+            Player_01_Control player = Player.GetComponent<Player_01_Control>();
+            if (player != null)
+            {
+                player.HandoverLance(this.gameObject, _new);
+            }
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            GenerateReturnLance();//戻り槍を生成
             return;
         }
 
@@ -78,34 +95,9 @@ public class HalfHitFloor_Lance : HalfHitFloor
                 Lance.transform.position = CenterPos.transform.position;//座標を設定
             }
 
+            HandoverLance(Lance);//槍リストの引継ぎ
+
             Destroy(this.gameObject);
         }
     }
-
-    /*protected override void SetIgnored(GameObject _IgnoreObj)
-    {
-        if (_IgnoreObj != null)
-        {
-            if (_IgnoreObj.layer == LayerMask.NameToLayer("PlayerAttack")) return;//投槍だったら省く
-
-            Rigidbody2D rb = _IgnoreObj.GetComponent<Rigidbody2D>();
-            if (!rb) return;
-
-            // 相手の中心座標と自分の中心座標を比較
-            Vector2 relativePos = _IgnoreObj.GetComponent<Collider2D>().bounds.center - FloorCollider.bounds.center;
-
-            // 高さのしきい値（例: 自分より0.1以下の高さ or 水平方向に接近）
-            bool isBelowOrSide = relativePos.y < -0.05f || Mathf.Abs(relativePos.x) > Mathf.Abs(relativePos.y);
-
-            // 落下中 or 横または下から接近
-            if (rb.velocity.y <= 0 || isBelowOrSide)
-            {
-                Physics2D.IgnoreCollision(FloorCollider, _IgnoreObj.GetComponent<Collider2D>(), true);
-                ignoredSet.Add(_IgnoreObj.GetComponent<Collider2D>());
-            }
-        }
-    }
-     */
-
-
 }

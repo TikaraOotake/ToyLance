@@ -52,7 +52,7 @@ public class SpearAttack : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
-            Debug.Log("地形と接触！");
+           // Debug.Log("地形と接触！");
 
             //オブジェクトを登録
             HitGround = collision.gameObject;
