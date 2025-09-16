@@ -11,6 +11,11 @@ public class SwitchButton : MonoBehaviour
 
 	[SerializeField]
     SpriteRenderer _sr;//台座のスプライトレンダラー
+    [SerializeField]
+    private GameObject Button;
+
+    [SerializeField]
+    private float PushSpeed = 1.0f;//押し込み速度
 
     Collider2D _coll;//コライダー
 
@@ -121,7 +126,7 @@ public class SwitchButton : MonoBehaviour
 
         //ボタンを押した状態(非表示)に
         SpriteRenderer _This_sr = GetComponent<SpriteRenderer>();
-        if (_This_sr)
+        if (_This_sr&&false)
         {
             if (ReceptionCoolTimer > 0.0f)
             {
@@ -137,6 +142,19 @@ public class SwitchButton : MonoBehaviour
 
                 _This_sr.color = color;//代入
             }
+        }
+        if (Button != null)
+        {
+            Vector2 Scale = Button.transform.localScale;//取得
+            if (ReceptionCoolTimer > 0.0f)
+            {
+                Scale.y = Mathf.Max(0.0f, Scale.y - PushSpeed * Time.deltaTime);
+            }
+            else
+            {
+                Scale.y = Mathf.Min(1.0f, Scale.y + PushSpeed * Time.deltaTime);
+            }
+            Button.transform.localScale = Scale;//代入
         }
     }
 

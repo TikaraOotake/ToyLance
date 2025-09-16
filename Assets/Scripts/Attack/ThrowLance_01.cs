@@ -29,6 +29,18 @@ public class ThrowLance_01 : MonoBehaviour
             }
         }
     }
+    private void GenerateLancePlatform(GameObject _obj)
+    {
+        if (HalfHitGroundLancePrefab != null)
+        {
+            GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, Quaternion.identity);//‘„°‚ğ¶¬
+            HalfHitGroundLance.transform.localScale = this.transform.localScale;//‘å‚«‚³‚ğˆø‚«Œp‚®
+            HalfHitGroundLance.transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);//Šp“x‚ğˆø‚«Œp‚®(Y²‚Ì‚İ)
+            HalfHitGroundLance.transform.SetParent(_obj.transform);//eq•t‚¯
+
+            HandoverLance(HalfHitGroundLance);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,20 +52,14 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
+        Poppi poppi = collision.GetComponent<Poppi>();
         Enemy_shield shield = collision.GetComponent<Enemy_shield>();
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform")||
-            shield != null)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform") ||
+            shield != null ||
+            poppi != null)
         {
             //‘„‘«ê‚Ì¶¬
-            if (HalfHitGroundLancePrefab != null)
-            {
-                GameObject HalfHitGroundLance = Instantiate(HalfHitGroundLancePrefab, transform.position, Quaternion.identity);//‘„°‚ğ¶¬
-                HalfHitGroundLance.transform.localScale = this.transform.localScale;//‘å‚«‚³‚ğˆø‚«Œp‚®
-                HalfHitGroundLance.transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);//Šp“x‚ğˆø‚«Œp‚®(Y²‚Ì‚İ)
-                HalfHitGroundLance.transform.SetParent(collision.transform);//eq•t‚¯
-
-                HandoverLance(HalfHitGroundLance);
-            }
+            GenerateLancePlatform(collision.gameObject);
 
             Destroy(this.gameObject);
             return;

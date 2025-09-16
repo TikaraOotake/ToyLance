@@ -47,7 +47,8 @@ public class HalfHitFloor_Lance : HalfHitFloor
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            GenerateReturnLance();//–ß‚è‘„‚ğ¶¬
+            //GenerateReturnLance();//–ß‚è‘„‚ğ¶¬
+            Destroy(this.gameObject);
             return;
         }
 
@@ -71,7 +72,12 @@ public class HalfHitFloor_Lance : HalfHitFloor
             }
         }
 
-        if (RemainingTimer <= 0.0f) GenerateReturnLance();//–ß‚è‘„‚ğ¶¬
+        if (RemainingTimer <= 0.0f)
+        {
+            //GenerateReturnLance();//–ß‚è‘„‚ğ¶
+            Destroy(this.gameObject);
+            return;
+        } 
 
         if (FloorCollider != null)
         {
@@ -97,7 +103,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
 
             HandoverLance(Lance);//‘„ƒŠƒXƒg‚ÌˆøŒp‚¬
 
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }

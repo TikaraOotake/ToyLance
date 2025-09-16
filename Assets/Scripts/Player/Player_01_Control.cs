@@ -665,6 +665,15 @@ public class Player_01_Control : MonoBehaviour
                 if (result == true)
                 {
                     IsDoorEnter = true;//ƒhƒAi“üó‘Ô
+
+                    //ã•ûŒü‚ÌˆÚ“®‚ð—}§
+                    if (_rb)
+                    {
+                        if (_rb.velocity.y > 0.0f)
+                        {
+                            _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
+                        }
+                    }
                 }
             }
         }
