@@ -13,6 +13,8 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]
     private SEManager _seManager;
 
+    [SerializeField]
+    private Effecter effecter;
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -54,6 +56,11 @@ public class CheckPoint : MonoBehaviour
             if (SoftFlashPrefab != null)
             {
                 Instantiate(SoftFlashPrefab, transform.position, Quaternion.identity);
+            }
+
+            if (effecter != null)
+            {
+                effecter.GenerateEffect();
             }
         }
     }

@@ -9,8 +9,13 @@ public class Effecter : MonoBehaviour
     [SerializeField] GameObject SpawnPosObj;
 
     [SerializeField]
-    private float SpawnInterval = 0.1f;//生成間隔
+    private float SpawnInterval = 0.1f;//生成間隔 ※0は無効とする
     private float SpawnTimer;
+
+    [SerializeField]
+    private int SpawnRange_Max;
+    [SerializeField]
+    private int SpawnRange_Min;
 
     void Start()
     {
@@ -19,6 +24,8 @@ public class Effecter : MonoBehaviour
 
     void Update()
     {
+        if (SpawnInterval == 0.0f) return;
+
         //タイマー設定
         if (SpawnTimer <= 0.0f)
         {
@@ -38,4 +45,21 @@ public class Effecter : MonoBehaviour
         SpawnTimer = Mathf.Max(0.0f, SpawnTimer - Time.deltaTime);
     }
 
+    public void GenerateEffect()
+    {
+        if (EffectPrefab != null)
+        {
+            int Rand = Random.Range(SpawnRange_Min, SpawnRange_Max); 
+
+            Vector2 SpawnPos = transform.position;
+            if (SpawnPosObj != null)
+            {
+                SpawnPos = SpawnPosObj.transform.position;
+            }
+            for (int i = 0; i < Rand; ++i)
+            {
+                Instantiate(EffectPrefab, SpawnPos, transform.rotation);
+            }
+        }
+    }
 }

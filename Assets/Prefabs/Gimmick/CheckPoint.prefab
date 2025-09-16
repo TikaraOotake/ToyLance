@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8902742087469531854}
   - component: {fileID: 1200183522007163269}
   - component: {fileID: 3082409399007435844}
+  - component: {fileID: 7911113440212417709}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -147,6 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoftFlashPrefab: {fileID: 7190140900777956260, guid: a69b99a0cf0649c44a2ee9db37196112, type: 3}
   _anim: {fileID: 0}
+  _seManager: {fileID: 0}
+  effecter: {fileID: 7911113440212417709}
 --- !u!50 &1200183522007163269
 Rigidbody2D:
   serializedVersion: 4
@@ -195,3 +198,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7911113440212417709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792188627796207318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20226aee2e6dba7459767c0183fe77d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectPrefab: {fileID: 2018524149602447507, guid: 4d634ef81c034504a96c5c2f83830459, type: 3}
+  SpawnPosObj: {fileID: 0}
+  SpawnInterval: 0
+  SpawnRange_Max: 8
+  SpawnRange_Min: 5
