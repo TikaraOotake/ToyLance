@@ -83,6 +83,7 @@ public class Player_01_Control : MonoBehaviour
     private float KeyboardInputTimer;
     private bool IsInputDown = false;//下入力情報を記録する
     private bool IsInputDown_old = false;
+    private Vector2 StickInputValue_old;//右スティックの入力値を記録
 
     private float AttackMoveValue_TrustBase = 10.0f;//攻撃中の基礎移動量
     private float AttackMoveValue;//攻撃中の移動量
@@ -211,9 +212,11 @@ public class Player_01_Control : MonoBehaviour
 
         Timer_Update();//タイマー更新
 
-        //入力を検知する
+        //入力を記録
         IsInputDown_old = IsInputDown;
         IsInputDown = Input.GetAxis("Vertical") < -0.1f;
+        StickInputValue_old.x = Input.GetAxis("Horizontal");//横軸
+        StickInputValue_old.y = Input.GetAxis("Vertical");//縦軸
 
         if (KnockBackTimer <= 0.0f && KnockBackTimer != KnockBackTimer_old)//タイマーが0になった瞬間だけ
         {
@@ -492,7 +495,7 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //下を押し続けていたら時間延長
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.1f && KeyboardInputTimer <= 0.0f)
             {
                 if (AtkTimer <= 0.0f)//0以下
                 {
@@ -607,8 +610,10 @@ public class Player_01_Control : MonoBehaviour
         {
             IsWallGrab = true;//崖差し状態
 
+
+
             //上にジャンプ
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.4f && KeyboardInputTimer <= 0.0f ||
+            if (Input.GetKeyDown(KeyCode.W) || (Input.GetAxis("Vertical") > 0.4f && StickInputValue_old.y <= 0.4f && KeyboardInputTimer <= 0.0f) ||
                 Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
                 //移動量取得
@@ -620,7 +625,7 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //突き刺し解除
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.4f && KeyboardInputTimer <= 0.0f)
+            if (Input.GetKeyDown(KeyCode.S) || (Input.GetAxis("Vertical") < -0.4f && StickInputValue_old.y >= -0.4f && KeyboardInputTimer <= 0.0f))
             {
                 atkStatus = AtkStatus.None;//通常に戻す
             }

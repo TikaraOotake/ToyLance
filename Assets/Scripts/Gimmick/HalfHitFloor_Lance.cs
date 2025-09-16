@@ -31,20 +31,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (ReturnLancePrefab != null)
-            {
-                GameObject Lance=Instantiate(ReturnLancePrefab, transform.position, Quaternion.identity);
-                //Lance.transform.localScale = transform.localScale;//ëÂÇ´Ç≥Çà¯åpÇ¨
-                Lance.transform.eulerAngles = new Vector3(0.0f, 0.0f, transform.eulerAngles.y);
-
-                if (CenterPos != null)
-                {
-                    Lance.transform.position = CenterPos.transform.position;//ç¿ïWÇê›íË
-                }
-
-                Destroy(this.gameObject);
-                return;
-            }
+            return;
         }
 
 
@@ -67,7 +54,7 @@ public class HalfHitFloor_Lance : HalfHitFloor
             }
         }
 
-        if (RemainingTimer <= 0.0f) Destroy(this.gameObject);//é©êgÇçÌèú
+        if (RemainingTimer <= 0.0f) GenerateReturnLance();//ñﬂÇËëÑÇê∂ê¨
 
         if (FloorCollider != null)
         {
@@ -77,6 +64,24 @@ public class HalfHitFloor_Lance : HalfHitFloor
             }
         }
     }
+
+    private void GenerateReturnLance()
+    {
+        if (ReturnLancePrefab != null)
+        {
+            GameObject Lance = Instantiate(ReturnLancePrefab, transform.position, Quaternion.identity);
+            //Lance.transform.localScale = transform.localScale;//ëÂÇ´Ç≥Çà¯åpÇ¨
+            Lance.transform.eulerAngles = new Vector3(0.0f, 0.0f, transform.eulerAngles.y);
+
+            if (CenterPos != null)
+            {
+                Lance.transform.position = CenterPos.transform.position;//ç¿ïWÇê›íË
+            }
+
+            Destroy(this.gameObject);
+        }
+    }
+
     /*protected override void SetIgnored(GameObject _IgnoreObj)
     {
         if (_IgnoreObj != null)

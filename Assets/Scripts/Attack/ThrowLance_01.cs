@@ -10,6 +10,8 @@ public class ThrowLance_01 : MonoBehaviour
     [SerializeField]
     private GameObject HalfHitGroundLancePrefab;//半当たり判定の槍地形プレハブ
 
+    private GameObject Player;//プレイヤー
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //対象物が槍床であればお互い削除
