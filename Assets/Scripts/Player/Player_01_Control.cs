@@ -438,7 +438,7 @@ public class Player_01_Control : MonoBehaviour
                 Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
                 if (_rb != null) _rb.velocity = ThrowVec;//速度代入
 
-                IsThrowTimer = 0.3f;//アニメーションタイマーセット
+                IsThrowTimer = 0.8f;//アニメーションタイマーセット
 
                 ThrowCooltimer = ThrowCooltime;//クールタイマーセット
 
