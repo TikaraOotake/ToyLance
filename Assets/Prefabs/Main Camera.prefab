@@ -249,6 +249,10 @@ MonoBehaviour:
     seClip: {fileID: 8300000, guid: 22f482c27fd0b0848bbcfd03d177ee55, type: 3}
   - seName: damage
     seClip: {fileID: 8300000, guid: ac2d17e4949a1dc41ad1441f243514a8, type: 3}
+  - seName: trust
+    seClip: {fileID: 8300000, guid: bd42b9e687243004dba670e48e4f1cf2, type: 3}
+  - seName: throw
+    seClip: {fileID: 8300000, guid: 45e7eb08ad9facf42b9bb3bfc0327979, type: 3}
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0

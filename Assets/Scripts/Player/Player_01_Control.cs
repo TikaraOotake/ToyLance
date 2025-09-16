@@ -282,6 +282,8 @@ public class Player_01_Control : MonoBehaviour
             //“Ë‚«UŒ‚
             atkStatus = AtkStatus.Thrust;
             AtkTimer = TrustAtkTimer;
+            //h“ËUŒ‚‰¹
+            _seManager.PlaySE("trust");
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
@@ -449,6 +451,9 @@ public class Player_01_Control : MonoBehaviour
 
                 //‘„ƒŠƒXƒg‚É‘„ƒIƒuƒWƒFƒNƒg‚ğ“o˜^
                 LanceList.Add(Lance);
+
+                //“Š‚°UŒ‚‰¹
+                _seManager.PlaySE("throw");
 
                 return;
             }
