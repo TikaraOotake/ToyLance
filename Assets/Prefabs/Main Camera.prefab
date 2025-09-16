@@ -242,9 +242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07691fec28cf1754aafda4563a04eee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seClips:
-  - {fileID: 8300000, guid: ba015a87ae979bb44aa2476fe2179d8b, type: 3}
-  - {fileID: 8300000, guid: 22f482c27fd0b0848bbcfd03d177ee55, type: 3}
+  seDatas:
+  - seName: footsteps
+    seClip: {fileID: 8300000, guid: ba015a87ae979bb44aa2476fe2179d8b, type: 3}
+  - seName: jump
+    seClip: {fileID: 8300000, guid: 22f482c27fd0b0848bbcfd03d177ee55, type: 3}
+  - seName: damage
+    seClip: {fileID: 8300000, guid: ac2d17e4949a1dc41ad1441f243514a8, type: 3}
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0

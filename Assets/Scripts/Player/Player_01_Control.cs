@@ -861,6 +861,9 @@ public class Player_01_Control : MonoBehaviour
 
             //マネージャーにカメラ振動依頼
             CameraManager.SetShakeCamera();
+
+            //ダメージ
+            _seManager.PlaySE("damage");
         }
     }
 
