@@ -913,6 +913,15 @@ public class Player_01_Control : MonoBehaviour
         return HP_Max;
     }
 
+    //‘„‚ÌŠ”
+    public void SetLanceNum(int _lance)
+    {
+        LanceMaxNam = _lance;
+    }
+    public int GetLanceNum()
+    {
+        return LanceMaxNam;
+    }
 
     private void CleanLanceList()//”jŠüÏ‚Ì‘„‚ÍƒŠƒXƒg‚©‚çŠO‚·
     {
