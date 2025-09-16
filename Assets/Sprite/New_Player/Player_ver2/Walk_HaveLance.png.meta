@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_0"
+      name: Walk_HaveLance_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2895de303217bad4c92805babd187bce
-      internalID: -925666434
+      spriteID: d724f6bb2e3f6d14fb9f81a8e3698e1f
+      internalID: 1510452734
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_1"
+      name: Walk_HaveLance_1
       rect:
         serializedVersion: 2
         x: 64
@@ -126,20 +126,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bea842d7c60483d44b171c2aeb446cbc
-      internalID: -562853687
+      spriteID: 998f3b70f39ba284dbfff9deaaca05b7
+      internalID: -1623443607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_2"
+      name: Walk_HaveLance_2
       rect:
         serializedVersion: 2
         x: 128
@@ -147,20 +147,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14713741798bccc4d8216e432cb0d9ce
-      internalID: 1600892881
+      spriteID: 75655258187f1cf48a3a18381513d2e4
+      internalID: 1920704531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_3"
+      name: Walk_HaveLance_3
       rect:
         serializedVersion: 2
         x: 192
@@ -168,20 +168,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdb24868a69792640a1e6d5d1220d354
-      internalID: -1235345732
+      spriteID: 08a38a7da6523ac458feb3c10a0469ea
+      internalID: -581731557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_4"
+      name: Walk_HaveLance_4
       rect:
         serializedVersion: 2
         x: 256
@@ -189,20 +189,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0f850e16a2f9164a9c6afa800c707a8
-      internalID: 2143530178
+      spriteID: ac1b20a23fc0e0446bda9c9ef67f99c1
+      internalID: -311150432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_5"
+      name: Walk_HaveLance_5
       rect:
         serializedVersion: 2
         x: 320
@@ -210,20 +210,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc3b0790221c1f849952f7d575ae77d9
-      internalID: -1048954253
+      spriteID: 8137e25d2e30e8a48b3a21ba726f4353
+      internalID: -1207483515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_6"
+      name: Walk_HaveLance_6
       rect:
         serializedVersion: 2
         x: 384
@@ -231,20 +231,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76cdcf54018f85d43bf6a480b74a6ada
-      internalID: -1912024937
+      spriteID: 7a5c339602a491a4da292ef08919a398
+      internalID: -467366382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_7"
+      name: Walk_HaveLance_7
       rect:
         serializedVersion: 2
         x: 448
@@ -252,14 +252,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c8e21a8a9cc9f04f898b4705799b47b
-      internalID: -955166751
+      spriteID: 4b493be44ee09764eb46376c6c7652f2
+      internalID: -1064243552
       vertices: []
       indices: 
       edges: []
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_0": -925666434
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_1": -562853687
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_2": 1600892881
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_3": -1235345732
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_4": 2143530178
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_5": -1048954253
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_6": -1912024937
-      "\u30D7\u30EC\u30A4\u30E4\u30FC\u69CD\u6301\u3061\u6B69\u884C\u30A2\u30C8\u30E9\u30B9_7": -955166751
+      Walk_HaveLance_0: 1510452734
+      Walk_HaveLance_1: -1623443607
+      Walk_HaveLance_2: 1920704531
+      Walk_HaveLance_3: -581731557
+      Walk_HaveLance_4: -311150432
+      Walk_HaveLance_5: -1207483515
+      Walk_HaveLance_6: -467366382
+      Walk_HaveLance_7: -1064243552
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
