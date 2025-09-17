@@ -137,8 +137,8 @@ MonoBehaviour:
   JampColl: {fileID: 884378435958718778}
   JampValue: 0
   ActionTimer: 0
-  FindLength: 1
-  EnemyAttackCollPrefab: {fileID: 0}
+  FindLength: 2
+  EnemyAttackCollPrefab: {fileID: 2180254171313629503, guid: 60cbf142e452578418a433deb383c9b3, type: 3}
   EnemyAttackColl: {fileID: 0}
   Head: {fileID: 0}
 --- !u!50 &-7827780191774864800

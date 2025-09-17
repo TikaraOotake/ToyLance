@@ -38,7 +38,7 @@ public class Poppi : MonoBehaviour
         if (actionStatus == ActionStatus.Standby)//待機
         {
             //槍が突き刺さっているか確認
-            if (HasChildWithComponent<HalfHitFloor_Lance>())
+            if (HasChildWithComponent<HalfHitFloor_Lance>() != null)
             {
                 if (JampColl != null)
                 {
@@ -55,12 +55,18 @@ public class Poppi : MonoBehaviour
                             _rb.velocity = vel;
                         }
 
+                        GameObject Lance = HasChildWithComponent<HalfHitFloor_Lance>();//槍を破棄
+                        if (Lance)
+                        {
+                            Destroy(Lance);
+                        }
+
                         //攻撃に移行
                         actionStatus = ActionStatus.Attacking;
+                        //攻撃時間設定
+                        ActionTimer = 1.0f;
                     }
-
                 }
-
 
                 //エネミー状態を解除
                 this.gameObject.layer = LayerMask.NameToLayer("Default");
@@ -76,7 +82,6 @@ public class Poppi : MonoBehaviour
                 {
                     //攻撃に設定
                     actionStatus = ActionStatus.Attacking;
-
                     //攻撃時間設定
                     ActionTimer = 1.0f;
                 }
@@ -84,7 +89,29 @@ public class Poppi : MonoBehaviour
         }
         else if (actionStatus == ActionStatus.Attacking)//攻撃
         {
+            if (ActionTimer <= 0.5f)
+            {
+                //攻撃判定生成
+                if (EnemyAttackCollPrefab != null && EnemyAttackColl == null)
+                {
+                    EnemyAttackColl = Instantiate(EnemyAttackCollPrefab, transform.position, Quaternion.identity);
+                }
+            }
+            if (ActionTimer <= 0.0f)
+            {
+                //攻撃判定を破棄
+                if (EnemyAttackColl != null)
+                {
+                    Destroy(EnemyAttackColl);
+                    EnemyAttackColl = null;
+                }
 
+                //行動を復帰中に
+                actionStatus = ActionStatus.Returning;
+
+                //行動時間設定
+                ActionTimer = 2.0f;
+            }
         }
         else if (actionStatus == ActionStatus.Stoping)//行動停止
         {
@@ -92,7 +119,10 @@ public class Poppi : MonoBehaviour
         }
         else if (actionStatus == ActionStatus.Returning)//復帰中
         {
-
+            if (ActionTimer <= 0.0f)
+            {
+                actionStatus = ActionStatus.Standby;//待機状態に戻る
+            }
         }
 
         //タイマー更新
@@ -115,15 +145,15 @@ public class Poppi : MonoBehaviour
         return false;
     }
 
-    public bool HasChildWithComponent<T>() where T : Component
+    public GameObject HasChildWithComponent<T>() where T : Component
     {
         T[] components = GetComponentsInChildren<T>(true);
         foreach (var comp in components)
         {
             if (comp.gameObject != gameObject)
-                return true;
+                return comp.gameObject;
         }
-        return false;
+        return null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
