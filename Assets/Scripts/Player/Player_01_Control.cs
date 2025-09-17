@@ -104,6 +104,8 @@ public class Player_01_Control : MonoBehaviour
     private float footstepInterval = 0.5f;      //鳴らす間隔
     private float footstepTimer = 0.0f;         //鳴らすタイマー
 
+    [SerializeField] private GameObject EdgeColl;//落下攻撃時に使う尖ったコリジョン
+
     enum AtkStatus
     {
         None,//無し
@@ -136,6 +138,8 @@ public class Player_01_Control : MonoBehaviour
     void Start()
     {
         playerStatus = PlayerStatus.Fine;//ステータスを通常に
+
+        if (EdgeColl != null) EdgeColl.SetActive(false);//コリジョン無効化
     }
 
     // Update is called once per frame
@@ -156,6 +160,7 @@ public class Player_01_Control : MonoBehaviour
             KeyboardInputTimer = 1.0f;
         }
 
+       
         if (playerStatus == PlayerStatus.Fine)
         {
 
@@ -468,6 +473,7 @@ public class Player_01_Control : MonoBehaviour
                 atkStatus = AtkStatus.None;
 
                 if (AttackObj != null) Destroy(AttackObj);//攻撃判定の破棄
+                if (EdgeColl != null) EdgeColl.SetActive(false);//コリジョン無効化
 
                 IsFallAtk = false;
                 return;
@@ -479,6 +485,8 @@ public class Player_01_Control : MonoBehaviour
                 {
                     if (_rb) _rb.velocity = new Vector2(0.0f, -JumpValue * 2.0f);//空中時のみ急降下
                 }
+
+                if (EdgeColl != null) EdgeColl.SetActive(true);//コリジョン有効化
 
                 InvincibleTimer = 0.1f;//無敵時間セット(一瞬)
 
@@ -582,7 +590,7 @@ public class Player_01_Control : MonoBehaviour
                     AttackObj.transform.eulerAngles = TrustAttackPos.transform.eulerAngles;//角度
 
                     //壁突き刺し判定チェック
-                    if (AtkTimer >= 0.5f)
+                    /* if (AtkTimer >= 0.5f)
                     {
                         if (IsLanding == false)
                         {
@@ -607,6 +615,8 @@ public class Player_01_Control : MonoBehaviour
                             }
                         }
                     }
+                     */
+                   
                 }
             }
 

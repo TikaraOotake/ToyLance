@@ -187,7 +187,7 @@ public class WarpEntrance : MonoBehaviour
         Player = _Player;
 
         //タイマーセット
-        TransferStartTimer = 1.5f;
+        TransferStartTimer = 0.2f;
 
         //フェードアウトさせる
         if (Camera)

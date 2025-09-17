@@ -38,7 +38,7 @@ public class ParticleEffect : MonoBehaviour
 
         // 現在の速度で位置を更新
         //transform.position += (Vector3)(SpeedVec * Time.deltaTime); オブジェクトの向きを考慮した飛び方をしたいため変更
-        transform.Translate(SpeedVec * Time.deltaTime, Space.World);
+        transform.Translate(SpeedVec * Time.deltaTime);
 
         //タイマー更新
         DeleteTimer = Mathf.Max(0.0f, DeleteTimer - Time.deltaTime);

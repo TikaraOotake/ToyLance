@@ -9,7 +9,7 @@ public class DestroyEffecter : MonoBehaviour
     [SerializeField] private int SpawnRate_Min;
     [SerializeField] private int SpawnRate_Max;
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         //エフェクトの生成
         if (EffectPrefab != null)

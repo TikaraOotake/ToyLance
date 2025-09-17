@@ -11,6 +11,13 @@ public class SpearAttack : MonoBehaviour
 
     private GameObject HitGround;//接触した地形
 
+    private Effecter effecter;//エフェクター
+
+    private void Start()
+    {
+        effecter = GetComponent<Effecter>();
+    }
+
     public void SetAttackValue(int _AttackValue)
     {
         AttackValue = _AttackValue;
@@ -37,12 +44,22 @@ public class SpearAttack : MonoBehaviour
         BreakableObject _breakable = collision.GetComponent<BreakableObject>();
         if (_breakable != null)
         {
+            HitStopManager.StartHitStop(0.1f);//ヒットストップ
             _breakable.Break();
         }
 
         EnemyHealth _enemyHealth = collision.GetComponent<EnemyHealth>();
         if (_enemyHealth != null)
         {
+            if (attackType == AttackType.Trust)
+            {
+                if (effecter != null)
+                {
+                    effecter.GenerateEffect();
+                }
+            }
+
+            HitStopManager.StartHitStop(0.1f);//ヒットストップ
             _enemyHealth.TakeDamage(AttackValue, transform.position, true);
         }
 

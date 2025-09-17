@@ -200,6 +200,83 @@ Transform:
   - {fileID: 4580601978776187086}
   m_Father: {fileID: 6030464273105642497}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5736440977160021102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4343936582734662690}
+  - component: {fileID: 2853737668985049266}
+  m_Layer: 7
+  m_Name: Square
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4343936582734662690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736440977160021102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: -0.42, z: 0}
+  m_LocalScale: {x: 0.22, y: 0.22, z: 0.22}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6030464273105642497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+--- !u!61 &2853737668985049266
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736440977160021102}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6173220032855492378
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +392,7 @@ Transform:
   - {fileID: 1141984750954134897}
   - {fileID: 1990850184498263380}
   - {fileID: 7670333806473201531}
+  - {fileID: 4343936582734662690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3652444589498005648
@@ -383,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LancePrefab: {fileID: 349775081051111172, guid: c10f73fbd2836794abfdb09c3fca9c70, type: 3}
   LanceList: []
-  LanceMaxNam: 0
+  LanceMaxNam: 2147483647
   AttackPrefab: {fileID: 7737072475025706764, guid: cbdc50a529bc860429e31bce31d0d5fb, type: 3}
   AttackObj: {fileID: 0}
   Door: {fileID: 0}
@@ -420,8 +498,8 @@ MonoBehaviour:
   ThrowAttackValue: 1
   FallAttackValue: 3
   TestRot: 0
-  _seManager: {fileID: 0}
   footstepInterval: 0.5
+  EdgeColl: {fileID: 5736440977160021102}
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4

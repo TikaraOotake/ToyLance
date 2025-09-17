@@ -6,6 +6,7 @@ public class BlindFadeControl : MonoBehaviour
     [SerializeField]
     private bool FadeFlag;//true:à√ì]Å@false:ñæì]
 
+    [SerializeField]
     private float FadeSpeed = 1.0f;
 
     private float AlphaValue;//ïsìßñæìx
