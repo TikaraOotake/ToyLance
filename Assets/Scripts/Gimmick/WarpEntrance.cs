@@ -49,8 +49,6 @@ public class WarpEntrance : MonoBehaviour
 
         Sprite_Update();//スプライト更新
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (SwitchList.Length > 0)//スイッチが登録されているときのみ
@@ -189,7 +187,7 @@ public class WarpEntrance : MonoBehaviour
         Player = _Player;
 
         //タイマーセット
-        TransferStartTimer = 1.0f;
+        TransferStartTimer = 1.5f;
 
         //フェードアウトさせる
         if (Camera)
