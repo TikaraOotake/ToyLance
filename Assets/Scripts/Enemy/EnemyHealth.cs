@@ -84,6 +84,8 @@ public class EnemyHealth : MonoBehaviour
 
     protected void Die()
     {
+        //€–S‰¹
+        _seManager.PlaySE("dead");
         // TODO: »ç¸Á ¾Ö´Ï¡¤ÆÄÆ¼Å¬¡¤½ºÄÚ¾E
         Destroy(gameObject);      // ÇÊ¿äÇÏ¸E¾Ö´Ï ÈÄ Destroy(gameObject,0.3f);
     }

@@ -260,6 +260,8 @@ MonoBehaviour:
     seClip: {fileID: 8300000, guid: 4f151bf9bb9fcca4b867d80ebadb00e4, type: 3}
   - seName: fall
     seClip: {fileID: 8300000, guid: 8278041d6a6b2f94780409f409a484dc, type: 3}
+  - seName: dead
+    seClip: {fileID: 8300000, guid: 0255bd79ba03b6444989ceb4e53f21c7, type: 3}
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0

@@ -238,6 +238,8 @@ public class Player_01_Control : MonoBehaviour
             {
                 playerStatus = PlayerStatus.Dead;
                 GameManager_01.CollGameOver();
+                //Ž€–S‰¹
+                _seManager.PlaySE("dead");
             }
         }
     }
