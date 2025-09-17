@@ -410,7 +410,7 @@ public class Player_01_Control : MonoBehaviour
 
                 IsJump = true;//アニメーションをジャンプに
 
-                //ジャンプ
+                //ジャンプ音
                 _seManager.PlaySE("jump");
             }
         }
@@ -902,6 +902,7 @@ public class Player_01_Control : MonoBehaviour
             //マネージャーにカメラ振動依頼
             CameraManager.SetShakeCamera();
 
+            //ダメージ音
             _seManager.PlaySE("damage");
         }
     }
