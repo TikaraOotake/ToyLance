@@ -524,12 +524,17 @@ public class Player_01_Control : MonoBehaviour
                 CameraManager.SetShakeCamera();
 
                 AtkTimer = 0.0f;//タイマーを0に
+
+                //落下攻撃音
+                _seManager.PlaySE("fall");
             }
 
             if (IsLanding != IsLanding_old && IsLanding == true)//着地した瞬間だけ
             {
                 CameraManager.SetShakeCamera();//カメラを揺らす
                 if (_rb) _rb.velocity = new Vector2(0.0f, 0.0f);//移動しない
+                //落下攻撃音
+                _seManager.PlaySE("fall");
             }
         }
     }
