@@ -11,9 +11,18 @@ public class EnemyHealth_ToySoldier : EnemyHealth
 
     private bool shieldJustBroke = false;   //盾が壊れているかのフラグ
 
+    private SEManager _seManager;
+
+    private Renderer _renderer;
+
     private void Start()
     {
         shieldScript = GetComponentInChildren<Enemy_shield>();
+
+        _seManager = Camera.main.GetComponent<SEManager>();
+        if (_seManager == null) Debug.Log("SEの取得に失敗");
+
+        _renderer = GetComponent<Renderer>();
     }
 
     public override void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
@@ -59,6 +68,12 @@ public class EnemyHealth_ToySoldier : EnemyHealth
                 rb.AddForce(dir * knockback, ForceMode2D.Impulse);
             }
 
+            if(IsVisible())
+            {
+                //ダメージ音
+                _seManager.PlaySE("damage");
+            }
+
             if (currentHP <= 0) Die();
         }
     }
@@ -74,5 +89,10 @@ public class EnemyHealth_ToySoldier : EnemyHealth
         // 1フレームだけ待って解除
         yield return null;
         shieldJustBroke = false;
+    }
+
+    private bool IsVisible()
+    {
+        return _renderer.isVisible;
     }
 }

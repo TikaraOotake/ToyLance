@@ -13,6 +13,8 @@ public class EnemyHealth : MonoBehaviour
     protected int currentHP_old;
     protected Rigidbody2D rb;
     protected bool invincible;
+    private SEManager _seManager;
+    private Renderer _renderer;
 
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ﾇﾇｰﾝ ｻ・ｺｯｰ豼・SpriteRenderer
@@ -27,6 +29,11 @@ public class EnemyHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         sr = GetComponent<SpriteRenderer>();                     // ｡ﾚﾃﾟｰ｡
+
+        _seManager = Camera.main.GetComponent<SEManager>();
+        if (_seManager == null) Debug.Log("SEの取得に失敗");
+
+        _renderer = GetComponent<Renderer>();
     }
 
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
@@ -45,6 +52,12 @@ public class EnemyHealth : MonoBehaviour
 
             rb.velocity = Vector2.zero;
             rb.AddForce(dir * knockback, ForceMode2D.Impulse);
+        }
+
+        if (IsVisible())
+        {
+            //ダメージ音
+            _seManager.PlaySE("damage");
         }
 
         if (currentHP <= 0) Die();
@@ -90,6 +103,11 @@ public class EnemyHealth : MonoBehaviour
     public int GetHP_old()
     {
         return currentHP_old;
+    }
+
+    private bool IsVisible()
+    {
+        return _renderer.isVisible;
     }
 
     // Start is called before the first frame update
