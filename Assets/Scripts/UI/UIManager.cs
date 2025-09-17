@@ -16,11 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject GameOver_UI;
 
-    public static UIManager Instance;
-
     private void Awake()
     {
-        Instance = this;
+        
     }
     void Start()
     {

@@ -255,6 +255,8 @@ MonoBehaviour:
     seClip: {fileID: 8300000, guid: 45e7eb08ad9facf42b9bb3bfc0327979, type: 3}
   - seName: checkpoint
     seClip: {fileID: 8300000, guid: 054b4b04b7de6fc4a9b407e19719aff2, type: 3}
+  - seName: gameover
+    seClip: {fileID: 8300000, guid: 4f151bf9bb9fcca4b867d80ebadb00e4, type: 3}
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0
