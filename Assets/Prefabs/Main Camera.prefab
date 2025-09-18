@@ -264,6 +264,8 @@ MonoBehaviour:
     seClip: {fileID: 8300000, guid: 0255bd79ba03b6444989ceb4e53f21c7, type: 3}
   - seName: get
     seClip: {fileID: 8300000, guid: 1f3da80c884e9a149b870a0232029c5d, type: 3}
+  - seName: rabbit
+    seClip: {fileID: 8300000, guid: a634393f9c9ba264baa7f510752b1d9b, type: 3}
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0
