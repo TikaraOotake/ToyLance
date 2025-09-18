@@ -10,7 +10,6 @@ public class CheckPoint : MonoBehaviour
 
     [SerializeField] Animator _anim;//
 
-    [SerializeField]
     private SEManager _seManager;
 
     [SerializeField]

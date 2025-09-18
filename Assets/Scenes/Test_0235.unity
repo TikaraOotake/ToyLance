@@ -11638,6 +11638,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6705255628988528019, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: seDatas.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705255628988528019, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: seDatas.Array.data[9].seClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f3da80c884e9a149b870a0232029c5d, type: 3}
+    - target: {fileID: -6705255628988528019, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: seDatas.Array.data[9].seName
+      value: get
+      objectReference: {fileID: 0}
     - target: {fileID: 2017339757884366284, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: player
       value: 

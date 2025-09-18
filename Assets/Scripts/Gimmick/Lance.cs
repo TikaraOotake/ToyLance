@@ -5,10 +5,13 @@ public class Lance : MonoBehaviour
 {
     private bool isTouched = false;
 
+    private SEManager _seManager;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+        _seManager = Camera.main.GetComponent<SEManager>();
+        if (_seManager == null) Debug.Log("SE‚ÌŽæ“¾‚ÉŽ¸”s");
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class Lance : MonoBehaviour
         Player_01_Control player = collision.gameObject.GetComponent<Player_01_Control>();
         if (player != null) 
         {
+            _seManager.PlaySE("get");
             player.SetLance(isTouched);
             player.SetLanceNum(999);
             Destroy(this.gameObject);
