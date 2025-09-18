@@ -91,6 +91,17 @@ public static class GameManager_01
             }
         }
     }
+    public static void ResetCameraPos()
+    {
+        if (Camera != null)
+        {
+            CameraControl _cc = Camera.GetComponent<CameraControl>();
+            if (_cc)
+            {
+                _cc.ResetCameraPos();
+            }
+        }
+    }
 
     public static void SetBlindFade(bool _flag)
     {

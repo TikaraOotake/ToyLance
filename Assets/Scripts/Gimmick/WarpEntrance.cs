@@ -124,7 +124,8 @@ public class WarpEntrance : MonoBehaviour
 
             //カメラの座標
             pos = ExitPos;
-            GameManager_01.SetCameraGazePos(pos);
+            //GameManager_01.SetCameraGazePos(pos);
+            GameManager_01.ResetCameraPos();
 
             //フェードインさせる
             GameManager_01.SetBlindFade(false);

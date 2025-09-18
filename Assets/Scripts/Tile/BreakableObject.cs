@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour
 {
+    Effecter effecter;
+
+    private void Start()
+    {
+        effecter = GetComponent<Effecter>();
+    }
     // 외부(플레이엉洑 공격)에서 이 함수를 호출하툈E
     public void Break()
     {
@@ -12,6 +18,11 @@ public class BreakableObject : MonoBehaviour
 
         //긇긽깋귩뾥귞궥
         CameraManager.SetShakeCamera();
+
+        if (effecter != null)
+        {
+            effecter.GenerateEffect();
+        }
 
         //렔릆귩봨딙
         Destroy(gameObject);

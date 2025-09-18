@@ -11,7 +11,7 @@ public class DestroyEffecter : MonoBehaviour
 
     private void OnDisable()
     {
-        //エフェクトの生成
+        /* //エフェクトの生成
         if (EffectPrefab != null)
         {
             int SpawnNam = Random.Range(SpawnRate_Min, SpawnRate_Max);
@@ -20,5 +20,7 @@ public class DestroyEffecter : MonoBehaviour
                 Instantiate(EffectPrefab, transform.position, Quaternion.identity);
             }
         }
+         */
+       
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CameraControl : MonoBehaviour
 {
@@ -120,6 +121,31 @@ public class CameraControl : MonoBehaviour
     {
         ShakeCamera_Update();
 
+        //目標座標をセット
+        Vector2 TargetPos =  GetTargetPos();
+
+        //注視点の座標計算
+        Vector2 pos = CameraGazePos;
+        float rate = 1.0f - Mathf.Pow(1.0f - ChaseRate, Time.deltaTime * 60f); // 秒間ChaseRateになるように
+        pos.x += (TargetPos.x - pos.x) * rate;
+        pos.y += (TargetPos.y - pos.y) * rate;
+        CameraGazePos = pos;
+
+        //Nanチェック
+        if(!(CameraGazePos.x + CameraGazePos.y >= 0.0f) &&
+           !(CameraGazePos.x + CameraGazePos.y <= 0.0f))
+        {
+            return;//Nanと思われる数値があったため終了
+        }
+
+        //カメラの座標をセット
+        float CameraZ = transform.position.z;//z軸情報が消えてしまうため保持
+        transform.position = CameraGazePos + cameraShakeOffset;
+        transform.position = new Vector3(transform.position.x, transform.position.y, CameraZ);//Z座標を戻す
+    }
+
+    private Vector2 GetTargetPos()
+    {
         Vector2 TargetPos = new Vector2(0.0f, 0.0f);
 
         //目標座標をセット
@@ -142,8 +168,6 @@ public class CameraControl : MonoBehaviour
                     TargetPos += new Vector2(tempVec.x, 0.0f) * AttractRate;
                 }
             }
-
-
         }
         else
         if (player)//通常時
@@ -152,24 +176,7 @@ public class CameraControl : MonoBehaviour
             TargetPos.x += AdjustCameraPosX * CameraWayX;
         }
 
-        //注視点の座標計算
-        Vector2 pos = CameraGazePos;
-        float rate = 1.0f - Mathf.Pow(1.0f - ChaseRate, Time.deltaTime * 60f); // 秒間ChaseRateになるように
-        pos.x += (TargetPos.x - pos.x) * rate;
-        pos.y += (TargetPos.y - pos.y) * rate;
-        CameraGazePos = pos;
-
-        //Nanチェック
-        if(!(CameraGazePos.x + CameraGazePos.y >= 0.0f) &&
-           !(CameraGazePos.x + CameraGazePos.y <= 0.0f))
-        {
-            return;//Nanと思われる数値があったため終了
-        }
-
-        //カメラの座標をセット
-        float CameraZ = transform.position.z;//z軸情報が消えてしまうため保持
-        transform.position = CameraGazePos + cameraShakeOffset;
-        transform.position = new Vector3(transform.position.x, transform.position.y, CameraZ);//Z座標を戻す
+        return TargetPos;
     }
 
     public void SetCameraArea(GameObject _area)
@@ -186,5 +193,22 @@ public class CameraControl : MonoBehaviour
         Vector3 cameraPos = _pos;
         cameraPos.z = transform.position.z;
         transform.position = cameraPos;
+    }
+
+    public void ResetCameraPos()
+    {
+        CameraGazePos = GetTargetPos();
+
+        //Nanチェック
+        if (!(CameraGazePos.x + CameraGazePos.y >= 0.0f) &&
+           !(CameraGazePos.x + CameraGazePos.y <= 0.0f))
+        {
+            return;//Nanと思われる数値があったため終了
+        }
+
+        //カメラの座標をセット
+        float CameraZ = transform.position.z;//z軸情報が消えてしまうため保持
+        transform.position = CameraGazePos + cameraShakeOffset;
+        transform.position = new Vector3(transform.position.x, transform.position.y, CameraZ);//Z座標を戻す
     }
 }
