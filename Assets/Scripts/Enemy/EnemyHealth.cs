@@ -17,9 +17,12 @@ public class EnemyHealth : MonoBehaviour
     private Renderer _renderer;
 
     [SerializeField]
-    private float DeadTime = 0.5f;//死亡時間
+    private float DeadTime = 1.0f;//死亡時間
     private float DeadTimer;//死亡タイマー
 
+    [SerializeField]
+    private bool IsRespawn = true;//復帰可能かのフラグ
+    private Vector2 RestartPos;
 
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ﾇﾇｰﾝ ｻ・ｺｯｰ豼・SpriteRenderer
@@ -40,6 +43,7 @@ public class EnemyHealth : MonoBehaviour
 
         _renderer = GetComponent<Renderer>();
     }
+
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
     public virtual void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
@@ -93,8 +97,13 @@ public class EnemyHealth : MonoBehaviour
     {
         //死亡音
         _seManager.PlaySE("dead");
+
+        //死亡状態としてマネージャーに登録
+        Enemy_Manager.Instance.SetDeadEnemy(this.gameObject);
+
         // TODO: ｻ邵ﾁ ｾﾖｴﾏ｡､ﾆﾄﾆｼﾅｬ｡､ｽｺﾄﾚｾ・
-        Destroy(gameObject);      // ﾇﾊｿ萇ﾏｸ・ｾﾖｴﾏ ﾈﾄ Destroy(gameObject,0.3f);
+        //Destroy(gameObject);      // ﾇﾊｿ萇ﾏｸ・ｾﾖｴﾏ ﾈﾄ Destroy(gameObject,0.3f);
+        this.gameObject.SetActive(false);//オブジェクトを非有効に
     }
 
     public void SetHP(int _HP)
@@ -119,17 +128,31 @@ public class EnemyHealth : MonoBehaviour
         return _renderer.isVisible;
     }
 
+    public bool CheckRespawn()//復帰可能かチェック
+    {
+        bool result = false;
+        result = !(Collision_Manager.IsPointInsideCollider(Camera.main.GetComponent<Collider2D>(), RestartPos));
+        if (result)
+        {
+            Debug.Log("復帰を開始");
+
+            //復帰処理
+            transform.position = RestartPos;//座標を再設定
+            currentHP = maxHP;//HPを回復
+            this.gameObject.SetActive(true);//オブジェクトを有効に
+        }
+        return result;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        RestartPos = transform.position;//初期値をリスポーン座標として記録
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
         //HPが0になった瞬間
         if (currentHP <= 0 && currentHP != currentHP_old)
         {

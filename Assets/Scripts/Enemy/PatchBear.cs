@@ -63,6 +63,7 @@ public class PatchBear : MonoBehaviour
     {
         Idol,//待機
         Walk,//歩行
+        Dead,//死亡
     }
     [SerializeField]
     private ActionStatus actionStatus;
@@ -121,7 +122,19 @@ public class PatchBear : MonoBehaviour
         {
             Walk();
         }
-       
+        else if (actionStatus == ActionStatus.Dead)
+        {
+            if (_eh != null)
+            {
+                int hp = _eh.GetHP();//HPを取得
+                if (hp > 0)
+                {
+                    AngerLevel = 0;
+                    actionStatus = ActionStatus.Idol;//待機状態に戻す
+                }
+            }
+        }
+
         SearchPlayer();
         SpownCotton();
         
@@ -145,6 +158,12 @@ public class PatchBear : MonoBehaviour
                 IsChase = true;                           //追跡状態に
                 CottonSpownFlag = true;                   //コットンの生成開始
             }
+
+            if(hp<=0.0f)//体力が0以下の場合
+            {
+                actionStatus = ActionStatus.Dead;//死亡状態に
+            }
+
             HP_old = hp;//体力を記録
         }
     }

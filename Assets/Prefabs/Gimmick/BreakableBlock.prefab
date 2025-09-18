@@ -159,5 +159,5 @@ MonoBehaviour:
   EffectPrefab: {fileID: 2018524149602447507, guid: 192ea0d3779a800409a80ffca0f37862, type: 3}
   SpawnPosObj: {fileID: 0}
   SpawnInterval: 0
-  SpawnRange_Max: 0
-  SpawnRange_Min: 0
+  SpawnRange_Max: 4
+  SpawnRange_Min: 6

@@ -33,4 +33,35 @@ public class Collision_Manager : MonoBehaviour
 
         return null;
     }
+
+    /// <summary>
+    /// 指定した座標が、指定したCollider2Dの範囲内にあるかどうかを返す
+    /// </summary>
+    /// <param name="collider">判定対象のCollider2D</param>
+    /// <param name="point">チェックしたい座標（ワールド座標）</param>
+    /// <returns>範囲内ならtrue、そうでなければfalse</returns>
+    public static bool IsPointInsideCollider(Collider2D collider, Vector2 point)
+    {
+        if (collider == null)
+            return false;
+
+        return collider.OverlapPoint(point);
+    }
+
+    /// <summary>
+    /// 2つのCollider2Dが接触していれば true を返す（Trigger設定は無視）
+    /// </summary>
+    public static bool AreCollidersTouchingAny(Collider2D colA, Collider2D colB)
+    {
+        if (colA == null || colB == null)
+            return false;
+
+        // ContactFilter2Dを作成し、すべての条件を通すように設定
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = true;         // ← Triggerでも反応する
+        filter.SetLayerMask(Physics2D.DefaultRaycastLayers);
+        filter.useLayerMask = true;
+
+        return Physics2D.IsTouching(colA, colB, filter);
+    }
 }

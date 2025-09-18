@@ -99,9 +99,10 @@ GameObject:
   - component: {fileID: 1916049121177630608}
   - component: {fileID: 4926838120625768016}
   - component: {fileID: -6705255628988528019}
+  - component: {fileID: 8659575338119335203}
   - component: {fileID: 475889176669946432}
-  - component: {fileID: -616572380014014386}
-  m_Layer: 7
+  - component: {fileID: 4404692644968608539}
+  m_Layer: 17
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -266,6 +267,18 @@ MonoBehaviour:
     seClip: {fileID: 8300000, guid: 1f3da80c884e9a149b870a0232029c5d, type: 3}
   - seName: rabbit
     seClip: {fileID: 8300000, guid: a634393f9c9ba264baa7f510752b1d9b, type: 3}
+--- !u!114 &8659575338119335203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461918166627603741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59810319643271247b4a60cd32c985c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &475889176669946432
 AudioSource:
   m_ObjectHideFlags: 0
@@ -362,15 +375,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-616572380014014386
-MonoBehaviour:
+--- !u!61 &4404692644968608539
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8461918166627603741}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54efd28024416941b869e7abd79272a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 27, y: 14}
+  m_EdgeRadius: 0

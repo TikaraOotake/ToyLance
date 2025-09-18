@@ -14713,6 +14713,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &1123291716
 Rigidbody2D:
   serializedVersion: 4
@@ -15324,6 +15326,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &1242616623
 Rigidbody2D:
   serializedVersion: 4
@@ -17532,6 +17536,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!1 &1764216057
 GameObject:
   m_ObjectHideFlags: 0
@@ -19844,11 +19850,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3486906173783126118, guid: 8228f360c4e5f9249a5a51d43f0620ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.98
+      value: -55.89
       objectReference: {fileID: 0}
     - target: {fileID: 3486906173783126118, guid: 8228f360c4e5f9249a5a51d43f0620ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.83
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3486906173783126118, guid: 8228f360c4e5f9249a5a51d43f0620ad, type: 3}
       propertyPath: m_LocalPosition.z
