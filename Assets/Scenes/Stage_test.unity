@@ -513,6 +513,7 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 0.5
 --- !u!50 &157520870
 Rigidbody2D:
   serializedVersion: 4
@@ -2657,6 +2658,8 @@ GameObject:
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
   - component: {fileID: 519420035}
+  - component: {fileID: 519420036}
+  - component: {fileID: 519420037}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2786,6 +2789,137 @@ MonoBehaviour:
   HP_UI: {fileID: 573422112}
   Blind_UI: {fileID: 0}
   GameOver_UI: {fileID: 0}
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07691fec28cf1754aafda4563a04eee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seDatas:
+  - seName: footsteps
+    seClip: {fileID: 8300000, guid: ba015a87ae979bb44aa2476fe2179d8b, type: 3}
+  - seName: jump
+    seClip: {fileID: 8300000, guid: 22f482c27fd0b0848bbcfd03d177ee55, type: 3}
+  - seName: damage
+    seClip: {fileID: 8300000, guid: ac2d17e4949a1dc41ad1441f243514a8, type: 3}
+  - seName: trust
+    seClip: {fileID: 8300000, guid: bd42b9e687243004dba670e48e4f1cf2, type: 3}
+  - seName: throw
+    seClip: {fileID: 8300000, guid: 45e7eb08ad9facf42b9bb3bfc0327979, type: 3}
+  - seName: checkpoint
+    seClip: {fileID: 8300000, guid: 054b4b04b7de6fc4a9b407e19719aff2, type: 3}
+  - seName: gameover
+    seClip: {fileID: 8300000, guid: 4f151bf9bb9fcca4b867d80ebadb00e4, type: 3}
+  - seName: fall
+    seClip: {fileID: 8300000, guid: 8278041d6a6b2f94780409f409a484dc, type: 3}
+  - seName: dead
+    seClip: {fileID: 8300000, guid: 0255bd79ba03b6444989ceb4e53f21c7, type: 3}
+  - seName: get
+    seClip: {fileID: 8300000, guid: 1f3da80c884e9a149b870a0232029c5d, type: 3}
+  - seName: rabbit
+    seClip: {fileID: 8300000, guid: a634393f9c9ba264baa7f510752b1d9b, type: 3}
+--- !u!82 &519420037
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &538308569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,6 +3345,7 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 0.5
 --- !u!50 &588585065
 Rigidbody2D:
   serializedVersion: 4
@@ -72522,7 +72657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1022049142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74519,7 +74654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9014430521119041444, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
       propertyPath: LanceMaxNam
-      value: 1000000
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -77731,6 +77866,7 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 0.5
 --- !u!50 &1838291288
 Rigidbody2D:
   serializedVersion: 4

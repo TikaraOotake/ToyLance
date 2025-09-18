@@ -115,10 +115,10 @@ public class Rabbit : MonoBehaviour
                 }
             }
 
-            if (MigrationProgress == 0.0f && IsVisible())
+            if (MigrationProgress == 0.0f)
             {
                 //ˆÚ“®‰¹
-                _seManager.PlaySE("rabbit");
+                _seManager.PlaySE("rabbit", transform.position);
             }
 
 

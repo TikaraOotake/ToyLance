@@ -124,8 +124,6 @@ public class Pause_Controller : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    
-
     //コンティニューボタンクリック時のイベント
     private void OnContinueButtonPushed()
     {

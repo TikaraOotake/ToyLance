@@ -13,8 +13,8 @@ public class EnemyHealth : MonoBehaviour
     protected int currentHP_old;
     protected Rigidbody2D rb;
     protected bool invincible;
-    private SEManager _seManager;
-    private Renderer _renderer;
+    protected SEManager _seManager;
+    protected Renderer _renderer;
 
     [SerializeField]
     private float DeadTime = 1.0f;//死亡時間
@@ -42,6 +42,8 @@ public class EnemyHealth : MonoBehaviour
         if (_seManager == null) Debug.Log("SEの取得に失敗");
 
         _renderer = GetComponent<Renderer>();
+
+        RestartPos = transform.position;//初期値をリスポーン座標として記録
     }
 
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
@@ -62,13 +64,8 @@ public class EnemyHealth : MonoBehaviour
             rb.AddForce(dir * knockback, ForceMode2D.Impulse);
         }
 
-        if (IsVisible())
-        {
-            //ダメージ音
-            _seManager.PlaySE("damage");
-        }
-
-        
+        //ダメージ音
+        _seManager.PlaySE("damage", transform.position);
     }
     public float GetDeadTimer()
     {
@@ -96,8 +93,8 @@ public class EnemyHealth : MonoBehaviour
     protected void Die()
     {
         //死亡音
-        _seManager.PlaySE("dead");
-
+        _seManager.PlaySE("dead", transform.position);
+            
         //死亡状態としてマネージャーに登録
         Enemy_Manager.Instance.SetDeadEnemy(this.gameObject);
 
@@ -123,7 +120,7 @@ public class EnemyHealth : MonoBehaviour
         return currentHP_old;
     }
 
-    private bool IsVisible()
+    protected bool IsVisible()
     {
         return _renderer.isVisible;
     }
@@ -147,11 +144,16 @@ public class EnemyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RestartPos = transform.position;//初期値をリスポーン座標として記録
+       
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Health_Update();
+    }
+
+    protected void Health_Update()
     {
         //HPが0になった瞬間
         if (currentHP <= 0 && currentHP != currentHP_old)
