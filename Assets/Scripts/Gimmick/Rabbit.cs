@@ -39,7 +39,6 @@ public class Rabbit : MonoBehaviour
     private Animator _anim;//アニメーター
 
     private SEManager _seManager;
-    private Renderer _renderer;
 
     void Start()
     {
@@ -64,8 +63,6 @@ public class Rabbit : MonoBehaviour
 
         _seManager = Camera.main.GetComponent<SEManager>();
         if (_seManager == null) Debug.Log("SEの取得に失敗");
-
-        _renderer = GetComponentInChildren<Renderer>();
     }
 
     // Update is called once per frame
@@ -240,10 +237,5 @@ public class Rabbit : MonoBehaviour
             SequencePointObj[0].transform.position = transform.position;
             SequencePointObj[0].name = "TargetPoint";
         }
-    }
-
-    private bool IsVisible()
-    {
-        return _renderer.isVisible;
     }
 }

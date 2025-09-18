@@ -14,7 +14,6 @@ public class EnemyHealth : MonoBehaviour
     protected Rigidbody2D rb;
     protected bool invincible;
     protected SEManager _seManager;
-    protected Renderer _renderer;
 
     [SerializeField]
     private float DeadTime = 1.0f;//死亡時間
@@ -40,8 +39,6 @@ public class EnemyHealth : MonoBehaviour
 
         _seManager = Camera.main.GetComponent<SEManager>();
         if (_seManager == null) Debug.Log("SEの取得に失敗");
-
-        _renderer = GetComponent<Renderer>();
 
         RestartPos = transform.position;//初期値をリスポーン座標として記録
     }
@@ -118,11 +115,6 @@ public class EnemyHealth : MonoBehaviour
     public int GetHP_old()
     {
         return currentHP_old;
-    }
-
-    protected bool IsVisible()
-    {
-        return _renderer.isVisible;
     }
 
     public bool CheckRespawn()//復帰可能かチェック

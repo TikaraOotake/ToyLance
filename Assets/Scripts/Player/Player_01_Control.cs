@@ -357,12 +357,13 @@ public class Player_01_Control : MonoBehaviour
             if (MoveWay > 0.0f)//‰EŒü‚«
             {
                 FlipX = true;
+                _sr.flipX = FlipX;
             }
             else if (MoveWay < 0.0f)//¶Œü‚«
             {
                 FlipX = false;
+                _sr.flipX = FlipX;
             }
-            _sr.flipX = FlipX;
         }
         if (FlipObj != null)
         {
