@@ -30,6 +30,7 @@ public class Lance : MonoBehaviour
         Player_01_Control player = collision.gameObject.GetComponent<Player_01_Control>();
         if (player != null) 
         {
+            //Žæ“¾‰¹
             _seManager.PlaySE("get");
             player.SetLance(isTouched);
             player.SetLanceNum(999);

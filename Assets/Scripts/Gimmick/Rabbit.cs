@@ -38,6 +38,9 @@ public class Rabbit : MonoBehaviour
     private GameObject SpriteBoard;//画像を表示するオブジェクト
     private Animator _anim;//アニメーター
 
+    private SEManager _seManager;
+    private Renderer _renderer;
+
     void Start()
     {
         Player = GameManager_01.GetPlayer();//プレイヤー取得
@@ -58,6 +61,11 @@ public class Rabbit : MonoBehaviour
                 TargetPos = TargetObj.transform.position;//目標座標設定
             }
         }
+
+        _seManager = Camera.main.GetComponent<SEManager>();
+        if (_seManager == null) Debug.Log("SEの取得に失敗");
+
+        _renderer = GetComponentInChildren<Renderer>();
     }
 
     // Update is called once per frame
@@ -107,10 +115,17 @@ public class Rabbit : MonoBehaviour
                 }
             }
 
+            if (MigrationProgress == 0.0f && IsVisible())
+            {
+                //移動音
+                _seManager.PlaySE("rabbit");
+            }
+
+
             //進行度に合わせてウサギを移動
             Vector2 TargetVec = TargetPos - DeparturePos;//目標までのベクトルを算出
             transform.position = TargetVec * MigrationProgress + DeparturePos;
-
+            
             //進行度更新
             MigrationProgress = Mathf.Min(1.0f, MigrationProgress + ProgressSpeed * Time.deltaTime);
         }
@@ -225,5 +240,10 @@ public class Rabbit : MonoBehaviour
             SequencePointObj[0].transform.position = transform.position;
             SequencePointObj[0].name = "TargetPoint";
         }
+    }
+
+    private bool IsVisible()
+    {
+        return _renderer.isVisible;
     }
 }
