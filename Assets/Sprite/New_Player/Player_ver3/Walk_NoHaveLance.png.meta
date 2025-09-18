@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46fceb5927aba16408d33c0165107c95
+guid: 006caa548f8c26649b7f6091f73c46fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle-Sheet_0
+      name: Walk_NoHaveLance_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75be7b6bdb34a484f84cd1c2865f5331
-      internalID: 286780021
+      spriteID: 0738da3aff53f5e4faca483a892e85b5
+      internalID: -2011434588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_1
+      name: Walk_NoHaveLance_1
       rect:
         serializedVersion: 2
         x: 64
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 150a18f843683dc4cb631e6821737351
-      internalID: 2041186823
+      spriteID: bc42fd0bac9b5e34cb9aeace8f08cc23
+      internalID: -1027014623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_2
+      name: Walk_NoHaveLance_2
       rect:
         serializedVersion: 2
         x: 128
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09d4c7c6cfe9fdd45818b3adefdc580c
-      internalID: -470359909
+      spriteID: 09a5b5645543faf4783b3123bb908dd2
+      internalID: -538549707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_3
+      name: Walk_NoHaveLance_3
       rect:
         serializedVersion: 2
         x: 192
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b2867b8aafd6b34296da2d4b720ec33
-      internalID: 1141329502
+      spriteID: 8945ce4b7541a3648a95a250ed4b53dc
+      internalID: 381300177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Sheet_4
+      name: Walk_NoHaveLance_4
       rect:
         serializedVersion: 2
         x: 256
@@ -195,8 +195,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd41eaefb2d3adc438cd528391eadcc6
-      internalID: 1766234188
+      spriteID: 204f917dc8af57c44a07c0b42a8ebd5c
+      internalID: -1940431280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_NoHaveLance_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e8c04d30d67434cb5e6ca1d9edff06
+      internalID: -1739871127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_NoHaveLance_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05c0c75388290374ea73cb4d48ee050b
+      internalID: 570677914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_NoHaveLance_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a16aec980a48266439977335ca517e9b
+      internalID: -125002455
       vertices: []
       indices: 
       edges: []
@@ -212,11 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle-Sheet_0: 286780021
-      Idle-Sheet_1: 2041186823
-      Idle-Sheet_2: -470359909
-      Idle-Sheet_3: 1141329502
-      Idle-Sheet_4: 1766234188
+      Walk_NoHaveLance_0: -2011434588
+      Walk_NoHaveLance_1: -1027014623
+      Walk_NoHaveLance_2: -538549707
+      Walk_NoHaveLance_3: 381300177
+      Walk_NoHaveLance_4: -1940431280
+      Walk_NoHaveLance_5: -1739871127
+      Walk_NoHaveLance_6: 570677914
+      Walk_NoHaveLance_7: -125002455
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
