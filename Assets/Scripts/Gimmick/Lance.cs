@@ -28,7 +28,7 @@ public class Lance : MonoBehaviour
         if (player != null) 
         {
             player.SetLance(isTouched);
-            player.SetLanceNum(3);
+            player.SetLanceNum(999);
             Destroy(this.gameObject);
         }
     }

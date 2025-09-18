@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa5edfc0bc4eab84dbaa658777e0fde6
+guid: af724001e17548041b99f14fff52dee8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,30 +93,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Poppy_0
+      name: "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +111,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d7f4b07ddc80cf4387ac11acc2488cf
-      internalID: -236387423
+      spriteID: 6cd4d112bd8be3c479bebd1c53937f8a
+      internalID: 248454459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_1"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e8a9e3617104848b76fbf9f88cd62e
+      internalID: 429601555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_2"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5de5b85907bbd4ba04adcf804f4489
+      internalID: -1631892850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_3"
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19009119d0bbde64f9127a1a9b946e35
+      internalID: 25566970
       vertices: []
       indices: 
       edges: []
@@ -141,7 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Poppy_0: -236387423
+      "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_0": 248454459
+      "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_1": 429601555
+      "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_2": -1631892850
+      "\u30AF\u30DE\u6B7B\u4EA1\u30A2\u30C8\u30E9\u30B9_3": 25566970
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
