@@ -280,11 +280,22 @@ public class PatchBear : MonoBehaviour
     {
         if(_anim)
         {
+            int Enemy_HP = 0;
+            if (_eh)
+            {
+                Enemy_HP = _eh.GetHP();//‘Ì—Í‚ð‹L˜^
+            } 
+
             //ˆê’Ufalse‚É
             _anim.SetBool("IsIdle", false);
             _anim.SetBool("IsWalk", false);
+            _anim.SetBool("IsDead", false);
 
-            if(actionStatus == ActionStatus.Walk)
+            if (Enemy_HP <= 0)
+            {
+                _anim.SetBool("IsDead", true);
+            }
+            else if (actionStatus == ActionStatus.Walk)
             {
                 _anim.SetBool("IsWalk", true);
             }

@@ -16,6 +16,11 @@ public class EnemyHealth : MonoBehaviour
     private SEManager _seManager;
     private Renderer _renderer;
 
+    [SerializeField]
+    private float DeadTime = 0.5f;//死亡時間
+    private float DeadTimer;//死亡タイマー
+
+
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ﾇﾇｰﾝ ｻ・ｺｯｰ豼・SpriteRenderer
     ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ */
@@ -35,7 +40,6 @@ public class EnemyHealth : MonoBehaviour
 
         _renderer = GetComponent<Renderer>();
     }
-
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
     public virtual void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
@@ -60,8 +64,11 @@ public class EnemyHealth : MonoBehaviour
             _seManager.PlaySE("damage");
         }
 
-        if (currentHP <= 0) Die();
-
+        
+    }
+    public float GetDeadTimer()
+    {
+        return DeadTimer;
     }
 
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
@@ -121,6 +128,22 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        //HPが0になった瞬間
+        if (currentHP <= 0 && currentHP != currentHP_old)
+        {
+            //タイマー設定
+            DeadTimer = DeadTime;
+        }
+
+        //HPが0以下のときタイマー終了で完全な死亡として処理
+        if (currentHP <= 0 && DeadTimer <= 0.0f) Die();
+
+        //タイマー更新
+        DeadTimer = Mathf.Max(0.0f, DeadTimer - Time.deltaTime);
+
+        //前の状態を記録
         currentHP_old = currentHP;
     }
 }

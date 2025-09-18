@@ -1,25 +1,25 @@
 using UnityEngine;
-using UnityEngine.UI; // UI(Image)∏¶ ¡¶æÓ«œ±‚ ¿ß«ÿ « ºˆ!
-using UnityEngine.Video; // VideoPlayer∏¶ ¡¶æÓ«œ±‚ ¿ß«ÿ « ºˆ!
-using UnityEngine.SceneManagement; // Scene¿ª ¿¸»Ø«œ±‚ ¿ß«ÿ « ºˆ!
+using UnityEngine.UI; // UI(Image)∏¶ ¡¶æ˚„œ±ÅE¿ß«ÿ « ºÅE
+using UnityEngine.Video; // VideoPlayer∏¶ ¡¶æ˚„œ±ÅE¿ß«ÿ « ºÅE
+using UnityEngine.SceneManagement; // Scene¿ª ¿ÅEØ«œ±ÅE¿ß«ÿ « ºÅE
 
 public class VideoIntroController : MonoBehaviour
 {
-    [Header("«ŸΩ… ƒƒ∆˜≥Õ∆Æ ø¨∞·")]
-    [Tooltip("¿Â∏Èø° ¿÷¥¬ ∫Òµø¿ «√∑π¿ÃæÓ ƒƒ∆˜≥Õ∆Æ∏¶ ø¨∞·«œººø‰.")]
+    [Header("«ŸΩ… ƒƒ∆˜≥Õ∆Æ ø¨∞ÅE")]
+    [Tooltip("¿Â∏Èø° ¿÷¥¬ ∫Òµø¿ «√∑π¿ÃæÅEƒƒ∆˜≥Õ∆Æ∏¶ ø¨∞·«œººøÅE")]
     public VideoPlayer videoPlayer;
 
-    [Tooltip("Ω∫≈µ ¡¯«‡∑¸¿ª «•Ω√«“ ø¯«¸ ¿ÃπÃ¡ˆ UI∏¶ ø¨∞·«œººø‰.")]
+    [Tooltip("Ω∫≈µ ¡¯«‡∑ÅEª «•Ω√«“ ø¯«ÅE¿ÃπÃ¡ÅEUI∏¶ ø¨∞·«œººøÅE")]
     public Image skipProgressUI;
 
     [Header("æ¿ π◊ Ω∫≈µ º≥¡§")]
-    [Tooltip("øµªÛ¿Ã ≥°≥≠ »ƒ ¿Ãµø«“ æ¿¿« ¿Ã∏ß¿ª ¡§»Æ«œ∞‘ ¿‘∑¬«œººø‰.")]
+    [Tooltip("øµªÛ¿Ã ≥°≥≠ »ƒ ¿Ãµø«“ æ¿¿« ¿Ã∏ß¿ª ¡§»Æ«œ∞‘ ¿‘∑¬«œººøÅE")]
     public string nextSceneName;
 
-    [Tooltip("Ω∫≈µ¿ª ¿ß«ÿ πˆ∆∞¿ª ¥©∏£∞Ì ¿÷æÓæﬂ «“ Ω√∞£(√ )¿‘¥œ¥Ÿ.")]
+    [Tooltip("Ω∫≈µ¿ª ¿ß«ÿ πˆ∆∞¿ª ¥©∏£∞ÅE¿÷æ˚⁄ﬂ «“ Ω√∞£(√ )¿‘¥œ¥Ÿ.")]
     public float skipHoldDuration = 2.5f;
 
-    // --- ≥ª∫Œ ∫Øºˆ ---
+    // --- ≥ª∫Œ ∫ØºÅE---
     private float holdTimer = 0f;
     private bool isLoadingNextScene = false;
 
@@ -36,16 +36,16 @@ public class VideoIntroController : MonoBehaviour
     // °⁄°⁄°⁄ ∫Ø∞Êµ» ∫Œ∫– Ω√¿€ °⁄°⁄°⁄
     void Update()
     {
-        // ¥Ÿ¿Ω æ¿¿∏∑Œ ≥—æÓ∞°¥¬ ¡ﬂ¿Ã∏È ¿‘∑¬¿ª πﬁ¡ˆ æ ¿Ω
+        // ¥Ÿ¿Ω æ¿¿∏∑Œ ≥—æ˚Ã°¥¬ ¡ﬂ¿Ã∏ÅE¿‘∑¬¿ª πﬁ¡ÅEæ ¿Ω
         if (isLoadingNextScene) return;
 
-        // 1. Ω∫≈µ πˆ∆∞¿Ã '¥≠∏Æ∞Ì ¿÷¥¬¡ˆ' ∏’¿˙ »Æ¿Œ (∆–µÂ Yπˆ∆∞ ∂«¥¬ ≈∞∫∏µÂ Y≈∞)
+        // 1. Ω∫≈µ πˆ∆∞¿Ã '¥≠∏Æ∞ÅE¿÷¥¬¡ÅE ∏’¿ÅE»Æ¿Œ (∆–µÅEYπˆ∆∞ ∂«¥¬ ≈∞∫∏µÅEY≈∞)
         bool isSkipButtonPressed = Input.GetButton("Joystick1Button3") || Input.GetKey(KeyCode.Y);
 
-        // 2. πˆ∆∞¿Ã ¥≠∏Æ∞Ì ¿÷¥Ÿ∏È ≈∏¿Ã∏”∏¶ ¡ı∞°Ω√≈∞∞Ì UI∏¶ æ˜µ•¿Ã∆Æ
+        // 2. πˆ∆∞¿Ã ¥≠∏Æ∞ÅE¿÷¥Ÿ∏ÅE≈∏¿Ã∏”∏¶ ¡ı∞°Ω√≈∞∞ÅEUI∏¶ æ˜µ•¿Ã∆Æ
         if (isSkipButtonPressed)
         {
-            // UI∞° ≤®¡Æ¿÷¥Ÿ∏È ƒ‘
+            // UI∞° ≤®¡Æ¿÷¥Ÿ∏ÅEƒ‘
             if (skipProgressUI != null && !skipProgressUI.gameObject.activeInHierarchy)
             {
                 skipProgressUI.gameObject.SetActive(true);
@@ -54,19 +54,19 @@ public class VideoIntroController : MonoBehaviour
             holdTimer += Time.deltaTime; // ≈∏¿Ã∏” ¡ı∞°
             if (skipProgressUI != null)
             {
-                // ø¯«¸ UI¿« √§øÚ ∞™¿ª æ˜µ•¿Ã∆Æ
+                // ø¯«ÅEUI¿« √§øÅE∞™¿ª æ˜µ•¿Ã∆Æ
                 skipProgressUI.fillAmount = holdTimer / skipHoldDuration;
             }
 
-            // ≈∏¿Ã∏”∞° º≥¡§µ» Ω√∞£¿ª √§øÏ∏È æ¿ ¿Ãµø
+            // ≈∏¿Ã∏”∞° º≥¡§µ» Ω√∞£¿ª √§øÅEÅEæ¿ ¿Ãµø
             if (holdTimer >= skipHoldDuration)
             {
                 LoadNextScene();
             }
         }
-        else // 3. πˆ∆∞¿ª ¥©∏£∞Ì ¿÷¡ˆ æ ¥Ÿ∏È ≈∏¿Ã∏”øÕ UI∏¶ √ ±‚»≠
+        else // 3. πˆ∆∞¿ª ¥©∏£∞ÅE¿÷¡ÅEæ ¥Ÿ∏ÅE≈∏¿Ã∏”øÕ UI∏¶ √ ±‚»≠
         {
-            if (holdTimer > 0) // ∫“« ø‰«— ∞ËªÍ¿ª ∏∑±‚ ¿ß«ÿ ≈∏¿Ã∏”∞° 0∫∏¥Ÿ ≈¨ ∂ß∏∏ √ ±‚»≠
+            if (holdTimer > 0) // ∫“« ø‰«— ∞ËªÅEª ∏∑±ÅE¿ß«ÿ ≈∏¿Ã∏”∞° 0∫∏¥Ÿ ≈¨ ∂ß∏∏ √ ±‚»≠
             {
                 holdTimer = 0f;
                 if (skipProgressUI != null)

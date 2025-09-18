@@ -11,6 +11,9 @@ public class Poppi : MonoBehaviour
 
     [SerializeField] private float ActionTimer;//行動タイマー
 
+    [SerializeField]
+    Animator Head_animator;//頭のアニメーター
+
     enum ActionStatus
     {
         Standby,//待機状態
@@ -65,18 +68,14 @@ public class Poppi : MonoBehaviour
                         actionStatus = ActionStatus.Attacking;
                         //攻撃時間設定
                         ActionTimer = 1.0f;
+
+                        if (Head_animator != null) Head_animator.SetBool("IsAppear", true);//出現アニメーションに設定
                     }
                 }
-
-                //エネミー状態を解除
-                this.gameObject.layer = LayerMask.NameToLayer("Default");
             }
             else
             {
                 //通常の処理
-
-                //エネミー状態に
-                this.gameObject.layer = LayerMask.NameToLayer("Enemy");
 
                 if (CheckPlayerOverlap(FindLength))
                 {
@@ -84,6 +83,8 @@ public class Poppi : MonoBehaviour
                     actionStatus = ActionStatus.Attacking;
                     //攻撃時間設定
                     ActionTimer = 1.0f;
+
+                    if (Head_animator != null) Head_animator.SetBool("IsAppear", true);//出現アニメーションに設定
                 }
             }
         }
@@ -94,7 +95,15 @@ public class Poppi : MonoBehaviour
                 //攻撃判定生成
                 if (EnemyAttackCollPrefab != null && EnemyAttackColl == null)
                 {
-                    EnemyAttackColl = Instantiate(EnemyAttackCollPrefab, transform.position, Quaternion.identity);
+                    Vector2 Pos = transform.position;
+                    if (Head != null) Pos = Head.transform.position;
+                    EnemyAttackColl = Instantiate(EnemyAttackCollPrefab, Pos, Quaternion.identity);
+
+                    //大きさを合わせる
+                    Vector2 Scale = EnemyAttackColl.transform.localScale;
+                    Scale.x *= transform.localScale.x;
+                    Scale.y *= transform.localScale.y;
+                    EnemyAttackColl.transform.localScale = Scale;
                 }
             }
             if (ActionTimer <= 0.0f)
@@ -111,6 +120,8 @@ public class Poppi : MonoBehaviour
 
                 //行動時間設定
                 ActionTimer = 2.0f;
+
+                if (Head_animator != null) Head_animator.SetBool("IsAppear", false);//閉じこもりアニメーションに設定
             }
         }
         else if (actionStatus == ActionStatus.Stoping)//行動停止
@@ -119,6 +130,12 @@ public class Poppi : MonoBehaviour
         }
         else if (actionStatus == ActionStatus.Returning)//復帰中
         {
+            //槍が突き刺さっているか確認
+            if (HasChildWithComponent<HalfHitFloor_Lance>() != null)
+            {
+                actionStatus = ActionStatus.Standby;//槍が刺さっている場合はすぐに待機状態に戻る
+            }
+
             if (ActionTimer <= 0.0f)
             {
                 actionStatus = ActionStatus.Standby;//待機状態に戻る
