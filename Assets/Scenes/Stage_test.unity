@@ -514,6 +514,7 @@ MonoBehaviour:
   iTime: 0.1
   currentHP: 0
   DeadTime: 0.5
+  IsRespawn: 1
 --- !u!50 &157520870
 Rigidbody2D:
   serializedVersion: 4
@@ -3346,6 +3347,7 @@ MonoBehaviour:
   iTime: 0.1
   currentHP: 0
   DeadTime: 0.5
+  IsRespawn: 1
 --- !u!50 &588585065
 Rigidbody2D:
   serializedVersion: 4
@@ -74598,7 +74600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030464273105642497, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.87
+      value: -52.74
       objectReference: {fileID: 0}
     - target: {fileID: 6030464273105642497, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -77867,6 +77869,7 @@ MonoBehaviour:
   iTime: 0.1
   currentHP: 0
   DeadTime: 0.5
+  IsRespawn: 1
 --- !u!50 &1838291288
 Rigidbody2D:
   serializedVersion: 4
