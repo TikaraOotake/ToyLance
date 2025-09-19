@@ -11,9 +11,13 @@ public class EnemyHealth_ToySoldier : EnemyHealth
 
     private bool shieldJustBroke = false;   //盾が壊れているかのフラグ
 
+    private Animator _anim;//アニメーター
+
     private void Start()
     {
         shieldScript = GetComponentInChildren<Enemy_shield>();
+
+        _anim = GetComponent<Animator>();
     }
 
     public override void TakeDamage(int dmg, Vector2 attackerPos, Collider2D _coll, bool doKnockback = true)
@@ -81,6 +85,7 @@ public class EnemyHealth_ToySoldier : EnemyHealth
     private void Update()
     {
         Health_Update();
+        SetAnim();
     }
 
     public void SetShieldJustBrokeFlag()
@@ -94,5 +99,25 @@ public class EnemyHealth_ToySoldier : EnemyHealth
         // 1フレームだけ待って解除
         yield return null;
         shieldJustBroke = false;
+    }
+
+    private void SetAnim()
+    {
+        if (_anim)
+        {
+            int Enemy_HP = 0;
+
+            Enemy_HP = GetHP();//体力を記録
+
+            //一旦falseに
+            
+            _anim.SetBool("IsDead", false);
+
+            if (Enemy_HP <= 0)
+            {
+                _anim.SetBool("IsDead", true);
+                shieldScript.BreakShield();
+            }
+        }
     }
 }

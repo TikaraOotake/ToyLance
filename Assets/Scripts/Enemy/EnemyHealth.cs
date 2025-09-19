@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
     protected int currentHP_old;
     protected Rigidbody2D rb;
     protected bool invincible;
-    protected SEManager _seManager;
 
     [SerializeField]
     private float DeadTime = 1.0f;//死亡時間
@@ -39,9 +38,6 @@ public class EnemyHealth : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>();                     // ｡ﾚﾃﾟｰ｡
 
-        _seManager = Camera.main.GetComponent<SEManager>();
-        if (_seManager == null) Debug.Log("SEの取得に失敗");
-
         RestartPos = transform.position;//初期値をリスポーン座標として記録
     }
 
@@ -66,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         //ダメージ音
-        _seManager.PlaySE("damage", transform.position);
+        SEManager.instance.PlaySE("damage", transform.position);
     }
 
     public virtual void TakeDamage(int dmg, Vector2 attackerPos, Collider2D _coll, bool doKnockback = true)
@@ -100,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
     protected void Die()
     {
         //死亡音
-        _seManager.PlaySE("dead", transform.position);
+        SEManager.instance.PlaySE("dead", transform.position);
 
         if (IsRespawn == false)//復活しない設定のため完全に削除する
         {

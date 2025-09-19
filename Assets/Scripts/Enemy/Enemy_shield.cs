@@ -71,7 +71,7 @@ public class Enemy_shield : MonoBehaviour
     }
 
     //‚‚Ì”j‰óˆ—
-    private void BreakShield()
+    public void BreakShield()
     {
         if (isBroken)
         {

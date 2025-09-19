@@ -38,8 +38,6 @@ public class Rabbit : MonoBehaviour
     private GameObject SpriteBoard;//画像を表示するオブジェクト
     private Animator _anim;//アニメーター
 
-    private SEManager _seManager;
-
     void Start()
     {
         Player = GameManager_01.GetPlayer();//プレイヤー取得
@@ -60,9 +58,6 @@ public class Rabbit : MonoBehaviour
                 TargetPos = TargetObj.transform.position;//目標座標設定
             }
         }
-
-        _seManager = Camera.main.GetComponent<SEManager>();
-        if (_seManager == null) Debug.Log("SEの取得に失敗");
     }
 
     // Update is called once per frame
@@ -115,7 +110,7 @@ public class Rabbit : MonoBehaviour
             if (MigrationProgress == 0.0f)
             {
                 //移動音
-                _seManager.PlaySE("rabbit", transform.position);
+                SEManager.instance.PlaySE("rabbit", transform.position);
             }
 
 

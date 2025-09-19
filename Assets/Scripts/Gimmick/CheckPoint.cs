@@ -10,16 +10,11 @@ public class CheckPoint : MonoBehaviour
 
     [SerializeField] Animator _anim;//
 
-    private SEManager _seManager;
-
     [SerializeField]
     private Effecter effecter;
     void Start()
     {
         _anim = GetComponent<Animator>();
-
-        _seManager = Camera.main.GetComponent<SEManager>();
-        if (_seManager == null) Debug.Log("SE‚ÌŽæ“¾‚ÉŽ¸”s");
     }
 
     // Update is called once per frame
@@ -50,7 +45,7 @@ public class CheckPoint : MonoBehaviour
             GameManager_01.SetCheckPoint(this.gameObject);
 
             //’Ê‰ß‰¹
-            _seManager.PlaySE("checkpoint");
+            SEManager.instance.PlaySE("checkpoint");
 
             if (SoftFlashPrefab != null)
             {

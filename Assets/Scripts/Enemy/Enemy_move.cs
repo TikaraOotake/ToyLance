@@ -22,6 +22,8 @@ public class Enemy_move : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1f;                       //ˆÚ“®‘¬“x
 
+    private EnemyHealth enemyHealth;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -31,6 +33,8 @@ public class Enemy_move : MonoBehaviour
         anim = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void FixedUpdate()
@@ -58,6 +62,11 @@ public class Enemy_move : MonoBehaviour
 
     void Think()
     {
+        if (enemyHealth.GetHP() <= 0) 
+        {
+            return;
+        }
+
         nextMove = Random.Range(-1, 2);
 
         anim.SetInteger("WalkSpeed", nextMove);

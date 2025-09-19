@@ -32,8 +32,6 @@ public class GameOver_Controller : MonoBehaviour
     [SerializeField]
     private RectTransform LanceUIRect;      //槍の矢印のUIの位置
 
-    private SEManager _seManager;
-
     void Start()
     {
         //親のオブジェクトは表示　子供は全て非表示
@@ -52,9 +50,6 @@ public class GameOver_Controller : MonoBehaviour
         //ボタンクリック時のイベントを登録
         endButton.onClick.AddListener(OnEndButtonPushed);
         continueButton.onClick.AddListener(OnContinueButtonPushed);
-
-        _seManager = Camera.main.GetComponent<SEManager>();
-        if (_seManager == null) Debug.Log("SEの取得に失敗");
     }
 
     // Update is called once per frame
@@ -83,7 +78,7 @@ public class GameOver_Controller : MonoBehaviour
         yield return StartCoroutine(FadeDrop(OverUI,OverUIRect));
 
         //ゲームオーバー音
-        _seManager.PlaySE("gameover");
+        SEManager.instance.PlaySE("gameover");
 
         //0.5秒待つ
         yield return new WaitForSeconds(0.5f);

@@ -100,7 +100,6 @@ public class Player_01_Control : MonoBehaviour
 
     PlayerStatus playerStatus;
 
-    private SEManager _seManager;
     [SerializeField]
     private float footstepInterval = 0.5f;      //鳴らす間隔
     private float footstepTimer = 0.0f;         //鳴らすタイマー
@@ -129,9 +128,6 @@ public class Player_01_Control : MonoBehaviour
 
         _sr = GetComponent<SpriteRenderer>();
         if (_anim == null) Debug.Log("アニメーターの取得に失敗");
-
-        _seManager = Camera.main.GetComponent<SEManager>();
-        if (_seManager == null) Debug.Log("SEの取得に失敗");
 
         HP = HP_Max;
     }
@@ -245,7 +241,7 @@ public class Player_01_Control : MonoBehaviour
                 playerStatus = PlayerStatus.Dead;
                 GameManager_01.CollGameOver();
                 //死亡音
-                _seManager.PlaySE("dead");
+                SEManager.instance.PlaySE("dead");
             }
         }
     }
@@ -295,7 +291,7 @@ public class Player_01_Control : MonoBehaviour
             atkStatus = AtkStatus.Thrust;
             AtkTimer = TrustAtkTimer;
             //刺突攻撃音
-            _seManager.PlaySE("trust");
+            SEManager.instance.PlaySE("trust");
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
@@ -338,7 +334,7 @@ public class Player_01_Control : MonoBehaviour
             if (footstepTimer <= 0.0f)
             {
                 //足音
-                _seManager.PlaySE("footsteps");
+                SEManager.instance.PlaySE("footsteps");
                 footstepTimer = footstepInterval;
             }
         }
@@ -421,7 +417,7 @@ public class Player_01_Control : MonoBehaviour
                 IsJump = true;//アニメーションをジャンプに
 
                 //ジャンプ音
-                _seManager.PlaySE("jump");
+                SEManager.instance.PlaySE("jump");
             }
         }
     }
@@ -467,7 +463,7 @@ public class Player_01_Control : MonoBehaviour
                 LanceList.Add(Lance);
 
                 //投げ攻撃音
-                _seManager.PlaySE("throw");
+                SEManager.instance.PlaySE("throw");
 
                 return;
             }
@@ -544,7 +540,7 @@ public class Player_01_Control : MonoBehaviour
                 AtkTimer = 0.0f;//タイマーを0に
 
                 //落下攻撃音
-                _seManager.PlaySE("fall");
+                SEManager.instance.PlaySE("fall");
             }
 
             if (IsLanding != IsLanding_old && IsLanding == true)//着地した瞬間だけ
@@ -552,7 +548,7 @@ public class Player_01_Control : MonoBehaviour
                 CameraManager.SetShakeCamera();//カメラを揺らす
                 if (_rb) _rb.velocity = new Vector2(0.0f, 0.0f);//移動しない
                 //落下攻撃音
-                _seManager.PlaySE("fall");
+                SEManager.instance.PlaySE("fall");
             }
         }
     }
@@ -930,7 +926,7 @@ public class Player_01_Control : MonoBehaviour
             CameraManager.SetShakeCamera();
 
             //ダメージ音
-            _seManager.PlaySE("damage");
+            SEManager.instance.PlaySE("damage");
         }
     }
 

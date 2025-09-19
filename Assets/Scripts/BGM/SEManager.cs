@@ -17,6 +17,8 @@ public class SEManager : MonoBehaviour
     private Dictionary<string, AudioClip> seDictionary;
     private AudioSource audioSource;
 
+    public static SEManager instance;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -33,6 +35,15 @@ public class SEManager : MonoBehaviour
             {
                 Debug.Log("SEÇ™èdï°");
             }
+        }
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
