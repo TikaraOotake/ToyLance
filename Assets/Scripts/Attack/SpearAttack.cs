@@ -60,7 +60,7 @@ public class SpearAttack : MonoBehaviour
             }
 
             HitStopManager.StartHitStop(0.1f);//ヒットストップ
-            _enemyHealth.TakeDamage(AttackValue, transform.position, true);
+            _enemyHealth.TakeDamage(AttackValue, transform.position, GetComponent<Collider2D>(), true);
         }
 
         

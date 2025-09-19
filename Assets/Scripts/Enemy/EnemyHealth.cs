@@ -68,6 +68,12 @@ public class EnemyHealth : MonoBehaviour
         //É_ÉÅÅ[ÉWâπ
         _seManager.PlaySE("damage", transform.position);
     }
+
+    public virtual void TakeDamage(int dmg, Vector2 attackerPos, Collider2D _coll, bool doKnockback = true)
+    {
+        TakeDamage(dmg, attackerPos, doKnockback);
+    }
+
     public float GetDeadTimer()
     {
         return DeadTimer;

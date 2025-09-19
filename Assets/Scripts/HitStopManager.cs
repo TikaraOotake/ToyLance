@@ -39,7 +39,7 @@ public class HitStopManager : MonoBehaviour
             timeLeft -= Time.unscaledDeltaTime;  // ゲームの時間に関係なくカウントダウン
             if (timeLeft <= 0)
             {
-                Debug.Log("時間を元に戻す");
+                //Debug.Log("時間を元に戻す");
                 IsHitStopActive = false;
                 Time.timeScale = 1f;  // 時間を元に戻す
             }
@@ -49,7 +49,7 @@ public class HitStopManager : MonoBehaviour
     // ヒットストップを開始する静的メソッド
     public static void StartHitStop(float duration)
     {
-        Debug.Log("ヒットストップを開始");
+        //Debug.Log("ヒットストップを開始");
 
         if (IsHitStopActive) return;  // すでにヒットストップ中は開始しない
 

@@ -269,7 +269,7 @@ MonoBehaviour:
   PushSpeed: 5
   RadioList: []
   mode: 0
-  ReceptionCoolTime: 0
+  ReceptionCoolTime: 0.1
   ReceptionCoolTimer: 0
 --- !u!61 &8489244105186874335
 BoxCollider2D:

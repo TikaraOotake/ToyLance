@@ -94,10 +94,20 @@ public class Enemy_shield : MonoBehaviour
         }
 
         //”ñ•\¦
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        StartCoroutine(DelaySetActive(false));
 
         //6•bŒã‚É‚‚ğÄ¶
         Invoke(nameof(RestoreShield), 6f);
+    }
+
+    IEnumerator DelaySetActive(bool _flag)
+    {
+        yield return null;
+        yield return null;
+
+        //”FŒã‚É”ñ—LŒø‚É
+        gameObject.SetActive(_flag);
     }
 
     //‚‚ÌÄ¶ˆ—

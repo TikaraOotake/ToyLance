@@ -16,8 +16,37 @@ public class EnemyHealth_ToySoldier : EnemyHealth
         shieldScript = GetComponentInChildren<Enemy_shield>();
     }
 
-    public override void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
+    public override void TakeDamage(int dmg, Vector2 attackerPos, Collider2D _coll, bool doKnockback = true)
     {
+
+        if (Shield == null || _coll == null)//盾か攻撃の当たり判定がない
+        {
+            TakeDamage(dmg, attackerPos, doKnockback);
+            Debug.Log("盾か攻撃の当たり判定がありません");
+            return;
+        }
+
+        if (Shield.activeSelf == false)//盾が非アクティブ
+        {
+            TakeDamage(dmg, attackerPos, doKnockback);
+            Debug.Log("盾が有効ではありません");
+            return;
+        }
+
+        //盾と攻撃が重なっているか
+        bool result = false;
+        Collider2D Shield_Coll = Shield.GetComponent<Collider2D>();
+        if (Shield_Coll != null && _coll != null)
+        {
+            result = Collision_Manager.AreCollidersTouchingAny(Shield_Coll, _coll);
+            if (result == false) 
+            {
+                TakeDamage(dmg, attackerPos, doKnockback);
+                Debug.Log("盾と攻撃判定は衝突していません");
+                return;
+            }
+        }
+
         if (shieldJustBroke)
         {
             return;
@@ -44,25 +73,8 @@ public class EnemyHealth_ToySoldier : EnemyHealth
         if (!isShieldBetween)
         {
             //ダメージ処理
-            if (invincible) return;
-            StartCoroutine(IFrame());
-
-            currentHP -= dmg;
-            StartCoroutine(HitFlash());            // ｸﾂﾀｻ ｶｧ ｻ｡ｰ｣ｻ・ﾀｯﾁ・
-            /* ｦ｡ ｳﾋｹ・ｿｩｺﾎｸｦ ﾅｴ/ｱﾙﾁ｢ｿ｡ ｵ郞・ｼｱﾅﾃ ｦ｡ */
-            if (doKnockback)
-            {
-                float side = (transform.position.x < attackerPos.x) ? -1f : 1f;
-                Vector2 dir = new Vector2(side, 0f);       // ｼ・ｳﾋｹ・
-
-                rb.velocity = Vector2.zero;
-                rb.AddForce(dir * knockback, ForceMode2D.Impulse);
-            }
-
-            //ダメージ音
-            _seManager.PlaySE("damage", transform.position);
-
-            if (currentHP <= 0) Die();
+            TakeDamage(dmg, attackerPos, doKnockback);
+            return;
         }
     }
 

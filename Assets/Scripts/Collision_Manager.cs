@@ -49,16 +49,16 @@ public class Collision_Manager : MonoBehaviour
     }
 
     /// <summary>
-    /// 2つのCollider2Dが接触していれば true を返す（Trigger設定は無視）
+    /// 2つの Collider2D が接触していれば true を返す（Trigger も含む）
     /// </summary>
     public static bool AreCollidersTouchingAny(Collider2D colA, Collider2D colB)
     {
         if (colA == null || colB == null)
             return false;
 
-        // ContactFilter2Dを作成し、すべての条件を通すように設定
+        // ContactFilter2D を作成し、すべての条件を通すように設定
         ContactFilter2D filter = new ContactFilter2D();
-        filter.useTriggers = true;         // ← Triggerでも反応する
+        filter.useTriggers = true; // Trigger も反応するように設定
         filter.SetLayerMask(Physics2D.DefaultRaycastLayers);
         filter.useLayerMask = true;
 
