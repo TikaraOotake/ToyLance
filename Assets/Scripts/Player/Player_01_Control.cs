@@ -49,6 +49,7 @@ public class Player_01_Control : MonoBehaviour
     //アニメーション変数
     [SerializeField] private bool IsJump = false;
     [SerializeField] private bool IsMove = false;
+    private bool IsMove_old = false;
     [SerializeField] private bool IsThrustAtk = false;
     [SerializeField] private bool IsThrowAtk = false;
     [SerializeField] private bool IsFallAtk = false;
@@ -158,6 +159,11 @@ public class Player_01_Control : MonoBehaviour
             Input.GetKey(KeyCode.LeftArrow))
         {
             KeyboardInputTimer = 1.0f;
+        }
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            _anim.Play("Throw_Move", 0, 0.0f);
         }
 
        
@@ -342,6 +348,7 @@ public class Player_01_Control : MonoBehaviour
         }
 
         //アニメーションの変更
+        IsMove_old = IsMove;
         if (MoveWay != 0.0f)
         {
             IsMove = true;
@@ -769,7 +776,24 @@ public class Player_01_Control : MonoBehaviour
         }
         else if (IsThrowTimer > 0.0f)
         {
-            _anim.SetBool("IsThrowAttack", true);
+            //_anim.SetBool("IsThrowAttack", true);
+
+            // 再生中のステート情報を取得（レイヤー0の場合）
+            AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(0);
+            // normalizedTime はループアニメーションの場合、1以上の値も入ることがあるので注意
+            float progress = stateInfo.normalizedTime % 1f;
+
+            if (IsMove != IsMove_old)
+            {
+                if (IsMove)
+                {
+                    _anim.Play("Throw_Move", 0, progress);//移動
+                }
+                else
+                {
+                    _anim.Play("Throw", 0, progress);//停止
+                }
+            }
         }
         else if (KnockBackTimer > 0.0f)//被弾状態
         {

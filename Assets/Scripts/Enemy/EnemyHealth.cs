@@ -138,8 +138,12 @@ public class EnemyHealth : MonoBehaviour
     public bool CheckRespawn()//復帰可能かチェック
     {
         bool result = false;
-        result = !(Collision_Manager.IsPointInsideCollider(Camera.main.GetComponent<Collider2D>(), RestartPos));
-        if (result)
+
+        //カメラ範囲の当たり判定取得
+        Collider2D CameraCollider = Camera.main.GetComponent<Collider2D>();
+
+        result = !(Collision_Manager.IsPointInsideCollider(CameraCollider, RestartPos));
+        if (result && CameraCollider == true)//カメラ外の時かつカメラ範囲が有効である場合
         {
             Debug.Log("復帰を開始");
 
