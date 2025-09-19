@@ -23,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
     private bool IsRespawn = true;//復帰可能かのフラグ
     private Vector2 RestartPos;
 
+    private int Layer;
+
     /* ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡
    ｡ﾚﾃﾟｰ｡ : ﾇﾇｰﾝ ｻ・ｺｯｰ豼・SpriteRenderer
     ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ */
@@ -46,10 +48,12 @@ public class EnemyHealth : MonoBehaviour
     /// <summary> ﾇﾃｷｹﾀﾌｾ錞｡ｰﾔ ｸﾂｾﾒﾀｻ ｶｧ ﾈ｣ﾃ・</summary>
     public virtual void TakeDamage(int dmg, Vector2 attackerPos, bool doKnockback = true)
     {
+        if (currentHP <= 0) return;
         if (invincible) return;
         StartCoroutine(IFrame());
 
-        currentHP -= dmg;
+        currentHP = Mathf.Max(0, currentHP - dmg);
+
         StartCoroutine(HitFlash());            // ｸﾂﾀｻ ｶｧ ｻ｡ｰ｣ｻ・ﾀｯﾁ・
         /* ｦ｡ ｳﾋｹ・ｿｩｺﾎｸｦ ﾅｴ/ｱﾙﾁ｢ｿ｡ ｵ郞・ｼｱﾅﾃ ｦ｡ */
         if (doKnockback)
@@ -91,6 +95,14 @@ public class EnemyHealth : MonoBehaviour
     {
         //死亡音
         _seManager.PlaySE("dead", transform.position);
+
+        if (IsRespawn == false)//復活しない設定のため完全に削除する
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        
             
         //死亡状態としてマネージャーに登録
         Enemy_Manager.Instance.SetDeadEnemy(this.gameObject);
@@ -129,6 +141,8 @@ public class EnemyHealth : MonoBehaviour
             transform.position = RestartPos;//座標を再設定
             currentHP = maxHP;//HPを回復
             this.gameObject.SetActive(true);//オブジェクトを有効に
+            //レイヤー変更
+            this.gameObject.layer = Layer;
         }
         return result;
     }
@@ -152,6 +166,10 @@ public class EnemyHealth : MonoBehaviour
         {
             //タイマー設定
             DeadTimer = DeadTime;
+
+            //レイヤー変更
+            Layer = this.gameObject.layer;
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
         //HPが0以下のときタイマー終了で完全な死亡として処理

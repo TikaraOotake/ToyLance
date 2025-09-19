@@ -89,4 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeFlag: 0
-  FadeSpeed: 5
+  FadeSpeed: 2.5

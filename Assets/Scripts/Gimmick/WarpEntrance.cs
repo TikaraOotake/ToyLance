@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class WarpEntrance : MonoBehaviour
 {
@@ -125,10 +126,7 @@ public class WarpEntrance : MonoBehaviour
             //カメラの座標
             pos = ExitPos;
             //GameManager_01.SetCameraGazePos(pos);
-            GameManager_01.ResetCameraPos();
-
-            //フェードインさせる
-            GameManager_01.SetBlindFade(false);
+            StartCoroutine(CollResetCameraPos());
 
             //プレイヤーに移動終了を伝える
             Player_01_Control playerControl=Player.GetComponent<Player_01_Control>();
@@ -148,6 +146,18 @@ public class WarpEntrance : MonoBehaviour
 
         //プレイヤーの登録解除
         Player = null;
+    }
+
+    IEnumerator CollResetCameraPos()
+    {
+        yield return null;
+        yield return null;
+
+        //フェードインさせる
+        GameManager_01.SetBlindFade(false);
+
+        //カメラの座標をリセット
+        GameManager_01.ResetCameraPos();
     }
     public void SetDoorLock(bool _flag)
     {
@@ -188,7 +198,7 @@ public class WarpEntrance : MonoBehaviour
         Player = _Player;
 
         //タイマーセット
-        TransferStartTimer = 0.2f;
+        TransferStartTimer = 0.4f;
 
         //フェードアウトさせる
         if (Camera)
