@@ -40,7 +40,7 @@ public class VideoIntroController : MonoBehaviour
         if (isLoadingNextScene) return;
 
         // 1. ｽｺﾅｵ ｹｰﾀﾌ 'ｴｭｸｮｰ・ﾀﾖｴﾂﾁ・ ｸﾕﾀ・ﾈｮﾀﾎ (ﾆﾐｵ・Yｹｰ ｶﾇｴﾂ ﾅｰｺｸｵ・Yﾅｰ)
-        bool isSkipButtonPressed = Input.GetButton("Joystick1Button3") || Input.GetKey(KeyCode.Y);
+        bool isSkipButtonPressed = Input.GetKey(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Y);
 
         // 2. ｹｰﾀﾌ ｴｭｸｮｰ・ﾀﾖｴﾙｸ・ﾅｸﾀﾌｸﾓｸｦ ﾁ｡ｽﾃﾅｰｰ・UIｸｦ ｾ･ﾀﾌﾆｮ
         if (isSkipButtonPressed)

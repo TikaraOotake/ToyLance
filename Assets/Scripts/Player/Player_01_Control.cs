@@ -4,6 +4,7 @@ using UnityEngine;
 using AttackTypeEnums;
 using UnityEngine.SceneManagement;
 using PlayerStatusEnum;
+using System.Linq;
 
 public class Player_01_Control : MonoBehaviour
 {
@@ -105,6 +106,8 @@ public class Player_01_Control : MonoBehaviour
     private float footstepTimer = 0.0f;         //鳴らすタイマー
 
     [SerializeField] private GameObject EdgeColl;//落下攻撃時に使う尖ったコリジョン
+
+    float progress;
 
     enum AtkStatus
     {
@@ -455,7 +458,10 @@ public class Player_01_Control : MonoBehaviour
                 Rigidbody2D _rb = Lance.GetComponent<Rigidbody2D>();//物理コンポ取得
                 if (_rb != null) _rb.velocity = ThrowVec;//速度代入
 
-                IsThrowTimer = 0.8f;//アニメーションタイマーセット
+                IsThrowTimer = 0.3f;//アニメーションタイマーセット
+
+                string nextAnim = IsMove ? "Throw_Move" : "Throw";
+                _anim.Play(nextAnim, 0, 0.0f);
 
                 ThrowCooltimer = ThrowCooltime;//クールタイマーセット
 
@@ -772,23 +778,16 @@ public class Player_01_Control : MonoBehaviour
         }
         else if (IsThrowTimer > 0.0f)
         {
-            //_anim.SetBool("IsThrowAttack", true);
+            _anim.SetBool("IsThrowAttack", true);
 
-            // 再生中のステート情報を取得（レイヤー0の場合）
+            // 今の進行度を常に更新しておく
             AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(0);
-            // normalizedTime はループアニメーションの場合、1以上の値も入ることがあるので注意
-            float progress = stateInfo.normalizedTime % 1f;
+            progress = stateInfo.normalizedTime % 1f;
 
             if (IsMove != IsMove_old)
             {
-                if (IsMove)
-                {
-                    _anim.Play("Throw_Move", 0, progress);//移動
-                }
-                else
-                {
-                    _anim.Play("Throw", 0, progress);//停止
-                }
+                string nextAnim = IsMove ? "Throw_Move" : "Throw";
+                _anim.Play(nextAnim, 0, progress);
             }
         }
         else if (KnockBackTimer > 0.0f)//被弾状態

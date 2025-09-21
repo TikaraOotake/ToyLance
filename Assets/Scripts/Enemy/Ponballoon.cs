@@ -31,6 +31,8 @@ public class Ponballoon : MonoBehaviour
     [SerializeField]
     private Animator _anim;
     private Rigidbody2D _rb;
+
+    private Vector3 Scale;
    
 
     private void Awake()
@@ -61,6 +63,8 @@ public class Ponballoon : MonoBehaviour
             // 親子関係を解除（worldPositionStays = true でワールド座標を保持）
             HangLift.transform.SetParent(null, true);
         }
+
+        Scale = transform.localScale;//大きさを取得
     }
 
     // Update is called once per frame
@@ -100,6 +104,11 @@ public class Ponballoon : MonoBehaviour
             {
                 _rb.bodyType = RigidbodyType2D.Dynamic;//重力有効化
             }
+
+            if (IsBreak <= 0)
+            {
+                transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            }
         }
         else
         {
@@ -119,6 +128,11 @@ public class Ponballoon : MonoBehaviour
             {
                 _rb.bodyType = RigidbodyType2D.Kinematic;//重力無効化
                 _rb.velocity = Vector2.zero;//速度初期化
+            }
+
+            if (IsBreak <= 0)
+            {
+                transform.localScale = Scale;
             }
         }
 

@@ -175,7 +175,7 @@ public class EnemyHealth : MonoBehaviour
 
             //レイヤー変更
             Layer = this.gameObject.layer;
-            this.gameObject.layer = LayerMask.NameToLayer("Default");
+            this.gameObject.layer = LayerMask.NameToLayer("EnemySensor");
         }
 
         //HPが0以下のときタイマー終了で完全な死亡として処理

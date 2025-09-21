@@ -12,9 +12,15 @@ public class ThrowLance_01 : MonoBehaviour
 
     private GameObject Player;//プレイヤー
 
+    private Effecter _effecter;
+
     private void Awake()
     {
         Player = GameManager_01.GetPlayer();//仮取得
+    }
+    private void Start()
+    {
+        _effecter = GetComponent<Effecter>();
     }
 
     //槍リストを引き継がせる
@@ -52,6 +58,7 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
+        Ponballoon ponballoon = collision.GetComponent<Ponballoon>();
         Poppi poppi = collision.GetComponent<Poppi>();
         Enemy_shield shield = collision.GetComponent<Enemy_shield>();
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform") ||
@@ -61,17 +68,21 @@ public class ThrowLance_01 : MonoBehaviour
             //槍足場の生成
             GenerateLancePlatform(collision.gameObject);
 
+            if (_effecter) _effecter.GenerateEffect();//エフェクト生成
+
             Destroy(this.gameObject);
             return;
         }
 
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" ||
+            ponballoon != null)
         {
+            if (_effecter) _effecter.GenerateEffect();//エフェクト生成
             Destroy(this.gameObject);
             return;
         }
 
-        EnemyHealth enemyHealth= collision.GetComponent<EnemyHealth>();
+        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
         if(enemyHealth)
         {
             Destroy(this.gameObject);
