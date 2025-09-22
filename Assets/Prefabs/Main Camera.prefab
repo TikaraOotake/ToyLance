@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   CameraArea: {fileID: 0}
-  ChaseRate: 0.04
+  ChaseRate: 0.08
   AdjustCameraPosX: 0
   CameraWayX: 0
   CameraGazePos: {x: 0, y: 0}
@@ -250,13 +250,13 @@ MonoBehaviour:
   - seName: footsteps
     seClip: {fileID: 8300000, guid: ba015a87ae979bb44aa2476fe2179d8b, type: 3}
   - seName: jump
-    seClip: {fileID: 8300000, guid: 22f482c27fd0b0848bbcfd03d177ee55, type: 3}
+    seClip: {fileID: 8300000, guid: 1b0ed7ec5084fe247ab9a35a455fd3de, type: 3}
   - seName: damage
-    seClip: {fileID: 8300000, guid: ac2d17e4949a1dc41ad1441f243514a8, type: 3}
+    seClip: {fileID: 8300000, guid: 49eb277e8052b8743a2700d12c9094f5, type: 3}
   - seName: trust
-    seClip: {fileID: 8300000, guid: bd42b9e687243004dba670e48e4f1cf2, type: 3}
+    seClip: {fileID: 0}
   - seName: throw
-    seClip: {fileID: 8300000, guid: 45e7eb08ad9facf42b9bb3bfc0327979, type: 3}
+    seClip: {fileID: 8300000, guid: 4a85506417c01f54a8b74f19e15d3f14, type: 3}
   - seName: checkpoint
     seClip: {fileID: 8300000, guid: 054b4b04b7de6fc4a9b407e19719aff2, type: 3}
   - seName: gameover

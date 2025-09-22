@@ -243,6 +243,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &157520870
 Rigidbody2D:
   serializedVersion: 4
@@ -329,6 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!95 &157520873
 Animator:
@@ -814,7 +817,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2125929091
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1219,6 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f7fd15715797b45bac30a7da03a131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TitleSceneName: 
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,6 +1258,7 @@ MonoBehaviour:
   Text_UI: {fileID: 0}
   HP_UI: {fileID: 0}
   Blind_UI: {fileID: 0}
+  GameOver_UI: {fileID: 0}
 --- !u!1001 &526490356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1430,6 +1435,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &588585065
 Rigidbody2D:
   serializedVersion: 4
@@ -1516,6 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!95 &588585068
 Animator:
@@ -1729,7 +1737,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2125929091
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.9375, y: 0, z: 0}
@@ -13917,6 +13925,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &1123291716
 Rigidbody2D:
   serializedVersion: 4
@@ -14003,6 +14013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!95 &1123291719
 Animator:
@@ -14462,6 +14473,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &1242616623
 Rigidbody2D:
   serializedVersion: 4
@@ -14548,6 +14561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!95 &1242616626
 Animator:
@@ -16532,6 +16546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!50 &1749825126
 Rigidbody2D:
@@ -16621,6 +16636,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!1 &1800426299
 GameObject:
   m_ObjectHideFlags: 0
@@ -16690,6 +16707,8 @@ MonoBehaviour:
   knockback: 18
   iTime: 0.1
   currentHP: 0
+  DeadTime: 1
+  IsRespawn: 1
 --- !u!50 &1838291288
 Rigidbody2D:
   serializedVersion: 4
@@ -16776,6 +16795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 1
   enemyshield: {fileID: 0}
+  enemyshieldflipper: {fileID: 0}
   moveSpeed: 1
 --- !u!95 &1838291291
 Animator:
@@ -17100,7 +17120,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2125929091
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -17476,7 +17496,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2125929091
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 466cd374577fe3d4685834accb24c914, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -18251,7 +18271,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2125929091
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -18919,10 +18939,6 @@ PrefabInstance:
     - target: {fileID: 7974809287086638784, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
       propertyPath: m_Name
       value: Player01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974809287086638784, guid: eb6a06fbb2f699c4b87a5747aedd53de, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
