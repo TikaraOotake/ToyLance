@@ -47,7 +47,7 @@ public class GameManager_01:MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             //ÉVÅ[Éìì«Ç›çûÇ›
-            //GameManager_01.LoadScene(TitleSceneName);
+            LoadScene(TitleSceneName);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
