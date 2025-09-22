@@ -382,6 +382,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1850263152}
     m_Modifications:
     - target: {fileID: 4688907747897138208, guid: 4f92da450b45fdd40bca2795898801e8, type: 3}
+      propertyPath: FadeFlag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4688907747897138208, guid: 4f92da450b45fdd40bca2795898801e8, type: 3}
       propertyPath: FadeSpeed
       value: 0.6666667
       objectReference: {fileID: 0}
