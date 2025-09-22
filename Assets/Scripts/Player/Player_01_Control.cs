@@ -941,7 +941,7 @@ public class Player_01_Control : MonoBehaviour
     {
         playerStatus = PlayerStatus.IsGettingItem;
         GettingItemSequence = 1;
-        AtkTimer = 1.0f;
+        AtkTimer = 2.0f;
 
         if (_rb) _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
     }
