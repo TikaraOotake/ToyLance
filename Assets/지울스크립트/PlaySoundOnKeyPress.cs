@@ -1,37 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // ¡Ú¡Ú¡Ú ¾À °ü¸®¸¦ À§ÇØ Ãß°¡ ¡Ú¡Ú¡Ú
-// ÀÌ ½ºÅ©¸³Æ®¸¦ ³ÖÀ¸¸é AudioSource°¡ ÀÚµ¿À¸·Î Ãß°¡µË´Ï´Ù.
+using UnityEngine.SceneManagement; // ¡Ú¡Ú¡Ú ¾À °E®¸¦ À§ÇØ Ãß°¡ ¡Ú¡Ú¡Ú
+// ÀÌ ½ºÅ©¸³Æ®¸¦ ³ÖÀ¸¸EAudioSource°¡ ÀÚµ¿À¸·Î Ãß°¡µË´Ï´Ù.
 [RequireComponent(typeof(AudioSource))]
 public class PlaySoundOnKeyPress : MonoBehaviour
 {
-    [Header("»ç¿îµå ¼³Á¤")]
+    [Header("»ç¿ûÑE¼³Á¤")]
     [Tooltip("Àç»ýÇÒ ¿Àµð¿À Å¬¸³ÀÔ´Ï´Ù.")]
     public AudioClip soundToPlay;
 
-    [Tooltip("»ç¿îµåÀÇ Å©±âÀÔ´Ï´Ù. (0.0 ~ 1.0)")]
+    [Tooltip("»ç¿ûÑåÀÇ Å©±âÀÔ´Ï´Ù. (0.0 ~ 1.0)")]
     [Range(0f, 1f)]
     public float volume = 1.0f;
 
     [Header("ÄðÅ¸ÀÓ ¼³Á¤")]
-    [Tooltip("»ç¿îµå°¡ ´Ù½Ã Àç»ýµÇ±â±îÁö ÇÊ¿äÇÑ ½Ã°£(ÃÊ)ÀÔ´Ï´Ù.")]
+    [Tooltip("»ç¿ûÑå°¡ ´Ù½Ã Àç»ýµÇ±â±ûÝEÇÊ¿äÇÑ ½Ã°£(ÃÊ)ÀÔ´Ï´Ù.")]
     public float cooldownTime = 1.0f;
 
     // ¡Ú¡Ú¡Ú Ãß°¡µÈ ºÎºÐ ½ÃÀÛ ¡Ú¡Ú¡Ú
-    [Header("¾À ½ÃÀÛ ½Ã ¼Ò¸® ²û ¼³Á¤")]
+    [Header("¾À ½ÃÀÛ ½Ã ¼Ò¸® ²E¼³Á¤")]
     [Tooltip("ÀÌ ¾ÀÀÌ ½ÃÀÛµÉ ¶§ ¾Æ·¡ ¼³Á¤µÈ ½Ã°£ µ¿¾È ¼Ò¸®¸¦ ²û±é´Ï´Ù.")]
     public string sceneNameToMute;
 
-    [Tooltip("¾ÀÀÌ ½ÃÀÛµÈ ÈÄ ¼Ò¸®°¡ ³ªÁö ¾ÊÀ» ½Ã°£(ÃÊ)ÀÔ´Ï´Ù.")]
+    [Tooltip("¾ÀÀÌ ½ÃÀÛµÈ ÈÄ ¼Ò¸®°¡ ³ªÁE¾ÊÀ» ½Ã°£(ÃÊ)ÀÔ´Ï´Ù.")]
     public float initialMuteDuration = 15.0f;
     // ¡Ú¡Ú¡Ú Ãß°¡µÈ ºÎºÐ ³¡ ¡Ú¡Ú¡Ú
 
 
-    // --- ³»ºÎ º¯¼ö ---
+    // --- ³»ºÎ º¯¼E---
     private AudioSource audioSource;
     private float lastPlayTime = -1f;
-    private bool isMutedBySceneStart = false; // ¾À ½ÃÀÛÀ¸·Î ÀÎÇØ ¼Ò¸®°¡ ²¨Á³´ÂÁö È®ÀÎ
+    private bool isMutedBySceneStart = false; // ¾À ½ÃÀÛÀ¸·Î ÀÎÇØ ¼Ò¸®°¡ ²¨Á³´ÂÁEÈ®ÀÎ
 
     void Awake()
     {
@@ -39,10 +39,10 @@ public class PlaySoundOnKeyPress : MonoBehaviour
         lastPlayTime = -cooldownTime;
 
         // ¡Ú¡Ú¡Ú Ãß°¡µÈ ºÎºÐ ¡Ú¡Ú¡Ú
-        // ÇöÀç ¾ÀÀÇ ÀÌ¸§ÀÌ ÀÎ½ºÆåÅÍ¿¡¼­ ÁöÁ¤ÇÑ ¾À ÀÌ¸§°ú °°ÀºÁö È®ÀÎ
+        // ÇöÀE¾ÀÀÇ ÀÌ¸§ÀÌ ÀÎ½ºÆåÅÍ¿¡¼­ ÁöÁ¤ÇÑ ¾À ÀÌ¸§°E°°ÀºÁEÈ®ÀÎ
         if (SceneManager.GetActiveScene().name == sceneNameToMute)
         {
-            // °°´Ù¸é, ¼³Á¤µÈ ½Ã°£ µ¿¾È ¼Ò¸®¸¦ ²ô´Â ÄÚ·çÆ¾À» ½ÃÀÛ
+            // °°´Ù¸E ¼³Á¤µÈ ½Ã°£ µ¿¾È ¼Ò¸®¸¦ ²ô´Â ÄÚ·çÆ¾À» ½ÃÀÛ
             StartCoroutine(InitialMuteCoroutine());
         }
     }
@@ -50,23 +50,23 @@ public class PlaySoundOnKeyPress : MonoBehaviour
     // ¡Ú¡Ú¡Ú Ãß°¡µÈ ÄÚ·çÆ¾ ¡Ú¡Ú¡Ú
     IEnumerator InitialMuteCoroutine()
     {
-        // 1. ¾À ½ÃÀÛ ½Ã ¼Ò¸®°¡ ³ªÁö ¾Êµµ·Ï »óÅÂ¸¦ º¯°æ
+        // 1. ¾À ½ÃÀÛ ½Ã ¼Ò¸®°¡ ³ªÁE¾Êµµ·Ï »óÅÂ¸¦ º¯°E
         isMutedBySceneStart = true;
 
         // 2. ÀÎ½ºÆåÅÍ¿¡¼­ ¼³Á¤ÇÑ ½Ã°£¸¸Å­ ±â´Ù¸²
         yield return new WaitForSeconds(initialMuteDuration);
 
-        // 3. ½Ã°£ÀÌ Áö³ª¸é ´Ù½Ã ¼Ò¸®°¡ ³¯ ¼ö ÀÖµµ·Ï »óÅÂ¸¦ ¿ø»ó º¹±¸
+        // 3. ½Ã°£ÀÌ Áö³ª¸E´Ù½Ã ¼Ò¸®°¡ ³¯ ¼EÀÖµµ·Ï »óÅÂ¸¦ ¿ø»Eº¹±¸
         isMutedBySceneStart = false;
     }
 
     void Update()
     {
         // ¡Ú¡Ú¡Ú º¯°æµÈ ºÎºÐ ¡Ú¡Ú¡Ú
-        // ÀÔ·ÂÀÌ ÀÖ°í "±×¸®°í" ¾À ½ÃÀÛÀ¸·Î ÀÎÇØ ¼Ò¸®°¡ ²¨Áø »óÅÂ°¡ "¾Æ´Ò ¶§"¸¸
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("joystick button 5")) && !isMutedBySceneStart)
+        // ÀÔ·ÂÀÌ ÀÖ°E"±×¸®°E ¾À ½ÃÀÛÀ¸·Î ÀÎÇØ ¼Ò¸®°¡ ²¨ÁE»óÅÂ°¡ "¾Æ´Ò ¶§"¸¸
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Joystick1Button5)) && !isMutedBySceneStart)
         {
-            // ÄðÅ¸ÀÓ È®ÀÎ ·ÎÁ÷
+            // ÄðÅ¸ÀÓ È®ÀÎ ·ÎÁE
             if (Time.time >= lastPlayTime + cooldownTime)
             {
                 lastPlayTime = Time.time;

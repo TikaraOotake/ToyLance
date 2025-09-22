@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -9,72 +10,82 @@ public class MovingPlatform : MonoBehaviour
     [Tooltip("ÇÃ·§ÆûÀÌ ÀÌµ¿ÇÒ ¸ñÇ¥ ÁöÁ¡ÀÔ´Ï´Ù.")]
     public Transform pointB;
 
-    [Header("ÇÃ·§Æû ¼³Á¤")]
+    [Header("ÇÃ·§ÆE¼³Á¤")]
     [Tooltip("ÇÃ·§ÆûÀÇ ÀÌµ¿ ¼ÓµµÀÔ´Ï´Ù.")]
     public float speed = 2.0f;
 
     // ¡Ú¡Ú¡Ú Ãß°¡µÈ ºÎºĞ ¡Ú¡Ú¡Ú
-    [Header("ÇÃ·¹ÀÌ¾î °¨Áö ¼³Á¤")]
-    [Tooltip("ÇÃ·¹ÀÌ¾î·Î ÀÎ½ÄÇÒ ·¹ÀÌ¾î¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.")]
+    [Header("ÇÃ·¹ÀÌ¾E°¨ÁE¼³Á¤")]
+    [Tooltip("ÇÃ·¹ÀÌ¾ûÓÎ ÀÎ½ÄÇÒ ·¹ÀÌ¾ûÔ¦ ¼±ÅÃÇØÁÖ¼¼¿E")]
     public LayerMask playerLayer;
     // ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú
 
-    // --- ³»ºÎ º¯¼ö ---
+    // --- ³»ºÎ º¯¼E---
     private Transform currentTarget;
-    private Transform currentlyCarryingPlayer = null; // ÇöÀç ÅÂ¿ì°í ÀÖ´Â ÇÃ·¹ÀÌ¾î
-    private BoxCollider2D platformCollider; // ¹ßÆÇÀÇ Äİ¶óÀÌ´õ
+    private Transform currentlyCarryingPlayer = null; // ÇöÀEÅÂ¿EEÀÖ´Â ÇÃ·¹ÀÌ¾E
+    private BoxCollider2D platformCollider; // ¹ßÆÇÀÇ Äİ¶óÀÌ´E
 
     void Start()
     {
-        transform.position = pointA.position;
-        currentTarget = pointB;
+        if (pointA != null) transform.position = pointA.position;
+        if (pointB != null) currentTarget = pointB;
         platformCollider = GetComponent<BoxCollider2D>(); // ¹ßÆÇÀÇ BoxCollider2D¸¦ Ã£¾Æ¿È
     }
 
     void FixedUpdate()
     {
-        // --- 1. ÇÃ·§Æû ÀÌµ¿ ·ÎÁ÷ (±âÁ¸°ú µ¿ÀÏ) ---
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, speed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, currentTarget.position) < 0.01f)
+        if (currentTarget != null)
         {
-            currentTarget = (currentTarget == pointB) ? pointA : pointB;
+            // --- 1. ÇÃ·§ÆEÀÌµ¿ ·ÎÁE(±âÁ¸°Eµ¿ÀÏ) ---
+            transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, speed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, currentTarget.position) < 0.01f)
+            {
+                currentTarget = (currentTarget == pointB) ? pointA : pointB;
+            }
         }
 
-        // --- 2. ÇÃ·¹ÀÌ¾î °¨Áö ¹× Å¾½Â Ã³¸® ·ÎÁ÷ (»õ·Î¿î ¹æ½Ä) ---
+        // --- 2. ÇÃ·¹ÀÌ¾E°¨ÁE¹× Å¾½Â Ã³¸® ·ÎÁE(»õ·Î¿E¹æ½Ä) ---
         DetectAndCarryPlayer();
     }
 
-    // ¡Ú¡Ú¡Ú ÇÙ½É ·ÎÁ÷: ¹ßÆÇ À§¸¦ È®ÀÎÇÏ¿© ÇÃ·¹ÀÌ¾î¸¦ ÅÂ¿ì°Å³ª ³»¸®°Ô ÇÔ ¡Ú¡Ú¡Ú
+    // ¡Ú¡Ú¡Ú ÇÙ½É ·ÎÁE ¹ßÆÇ À§¸¦ È®ÀÎÇÏ¿© ÇÃ·¹ÀÌ¾ûÔ¦ ÅÂ¿EÅ³ª ³»¸®°Ô ÇÔ ¡Ú¡Ú¡Ú
     void DetectAndCarryPlayer()
     {
-        // ¹ßÆÇÀÇ À­¸é Áß¾Ó¿¡¼­ ¹ßÆÇ ³Êºñ¸¸Å­ À§·Î ÂªÀº »óÀÚ ¸ğ¾çÀÇ ·¹ÀÌ(BoxCast)¸¦ ½ô
+        if (platformCollider == null)
+        {
+            Debug.LogWarning("platformCollider is not assigned!");
+            return;
+        }
+
+        // BoxCast‚ÌŒ´“_‚ÆƒTƒCƒY‚ÌŒvZ
         Vector2 boxCastOrigin = new Vector2(platformCollider.bounds.center.x, platformCollider.bounds.max.y);
-        Vector2 boxCastSize = new Vector2(platformCollider.bounds.size.x * 0.9f, 0.1f); // ³Êºñ´Â »ìÂ¦ Á¼°Ô, ³ôÀÌ´Â Âª°Ô
+        Vector2 boxCastSize = new Vector2(platformCollider.bounds.size.x * 0.9f, 0.1f);
+
+        // RaycastHit2D ‚ğˆÀ‘S‚Éæ“¾
         RaycastHit2D hit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.up, 0.1f, playerLayer);
 
-        // ¸¸¾à ·¹ÀÌ°¡ ÇÃ·¹ÀÌ¾î¿Í ºÎµúÇû´Ù¸é,
         if (hit.collider != null)
         {
-            // ¾ÆÁ÷ ÀÌ ÇÃ·¹ÀÌ¾î¸¦ ÅÂ¿ì°í ÀÖÁö ¾Ê´Ù¸é,
+            // ƒvƒŒƒCƒ„[‚ªŒ»İƒLƒƒƒŠ[‚³‚ê‚Ä‚¢‚È‚¢ê‡A‚Ü‚½‚Íˆá‚¤ƒvƒŒƒCƒ„[‚ğ‚Á‚Ä‚¢‚éê‡
             if (currentlyCarryingPlayer != hit.transform)
             {
-                // ÇÃ·¹ÀÌ¾î¸¦ ÀÚ½ÄÀ¸·Î ¸¸µé¾î ÅÂ¿ó´Ï´Ù.
+                // ƒvƒŒƒCƒ„[‚ğeƒIƒuƒWƒFƒNƒg‚Éİ’è
                 hit.transform.SetParent(this.transform);
                 currentlyCarryingPlayer = hit.transform;
             }
         }
-        else // ·¹ÀÌ¿¡ ¾Æ¹«°Íµµ ´êÁö ¾Ê¾Ò´Ù¸é (ÇÃ·¹ÀÌ¾î°¡ ³»·È´Ù¸é),
+        else
         {
-            // ÀÌÀü¿¡ ÅÂ¿ì°í ÀÖ´ø ÇÃ·¹ÀÌ¾î°¡ ÀÖ´Ù¸é,
+            // ƒvƒŒƒCƒ„[‚ªŒŸo‚³‚ê‚Ä‚¢‚È‚¢ê‡
             if (currentlyCarryingPlayer != null)
             {
-                // ÀÚ½Ä °ü°è¸¦ ÇØÁ¦ÇÏ¿© ÀÚÀ¯·Ó°Ô ¸¸µì´Ï´Ù.
+                // ƒvƒŒƒCƒ„[‚ğeƒIƒuƒWƒFƒNƒg‚©‚ç‰ğ•ú
                 currentlyCarryingPlayer.SetParent(null);
                 currentlyCarryingPlayer = null;
             }
         }
     }
 
-    // OnCollisionEnter2D¿Í OnCollisionExit2D´Â ´õ ÀÌ»ó »ç¿ëÇÏÁö ¾ÊÀ¸¹Ç·Î »èÁ¦ÇÕ´Ï´Ù.
+    // OnCollisionEnter2D¿Í OnCollisionExit2D´Â ´EÀÌ»E»ç¿EÏÁE¾ÊÀ¸¹Ç·Î »èÁ¦ÇÕ´Ï´Ù.
 }
