@@ -29,7 +29,7 @@ public class BlindFadeControl : MonoBehaviour
 
         //êFÇë„ì¸
         Color color = _image.color;
-        _image.color = new Color(0.0f, 0.0f, 0.0f, AlphaValue);
+        _image.color = new Color(color.r, color.g, color.b, AlphaValue);
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class BlindFadeControl : MonoBehaviour
         if(_image)
         {
             Color color = _image.color;
-            _image.color = new Color(0.0f, 0.0f, 0.0f, AlphaValue);
+            _image.color = new Color(color.r, color.g, color.b, AlphaValue);
         }
     }
 
