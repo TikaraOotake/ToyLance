@@ -3273,6 +3273,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4926838120625768016, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: HP_UI
+      value: 
+      objectReference: {fileID: 573422112}
     - target: {fileID: 8461918166627603741, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: m_Name
       value: Main Camera
