@@ -12,9 +12,11 @@ public class GameManager_01:MonoBehaviour
 
     private static GameObject CheckPoint;
 
+    private static string TitleSceneName;
 
-	// シングルトンのインスタンス
-	private static HitStopManager _instance;
+
+    // シングルトンのインスタンス
+    private static HitStopManager _instance;
 
 	// インスタンスの取得
 	public static HitStopManager Instance
@@ -42,12 +44,17 @@ public class GameManager_01:MonoBehaviour
             Debug.Log("ゲームマネージャーテスト");
 		}
 
-		if (Input.GetKeyDown(KeyCode.F1))
-		{
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            //シーン読み込み
+            //GameManager_01.LoadScene(TitleSceneName);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            RespawnPlayer();
+        }
 
-		}
-
-		if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			// エディタの場合は再生停止
 #if UNITY_EDITOR
@@ -97,8 +104,6 @@ public class GameManager_01:MonoBehaviour
                 StartPlayerPos = Player.transform.position;
             }
         }
-
-
 
         //フラグを初期化
         SettingPlayerPosFlag = false;
@@ -275,5 +280,10 @@ public class GameManager_01:MonoBehaviour
                 player.SetIsPause(_flag);
             }
         }
+    }
+
+    public static void SetTitleSceneName(string _name)
+    {
+        TitleSceneName = _name;
     }
 }

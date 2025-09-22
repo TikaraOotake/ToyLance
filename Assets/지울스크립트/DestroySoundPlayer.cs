@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroySoundPlayer : MonoBehaviour
 {
-    [Header("»ç¿îµå ¼³Á¤")]
+    [Header("»ç¿ûÑE¼³Á¤")]
     public AudioClip destroySoundClip;
     [Range(0f, 1f)]
     public float volume = 1.0f;
@@ -14,7 +14,12 @@ public class DestroySoundPlayer : MonoBehaviour
 
     void OnDestroy()
     {
-        // SceneManagerHelper°¡ ¾À ÀüÈ¯ ÁßÀÌ¶ó°í ¾Ë·ÁÁÖ¸é ¿©±â¼­ ÇÔ¼ö¸¦ ³¡³¿
+        //‚±‚±‚Åˆ—‚ğ‚·‚é‚ÆƒGƒ‰[‚ª‹N‚«‚é‚½‚ßˆÚ“®
+    }
+
+    public void PlaySound()
+    {
+        // SceneManagerHelper°¡ ¾À ÀE¯ ÁßÀÌ¶ó°E¾Ë·ÁÁÖ¸E¿©±â¼­ ÇÔ¼ö¸¦ ³¡³¿
         if (SceneManagerHelper.IsSwitchingScene)
         {
             return;
@@ -22,7 +27,7 @@ public class DestroySoundPlayer : MonoBehaviour
 
         if (!Application.isPlaying || destroySoundClip == null) return;
 
-        // ÀÓ½Ã »ç¿îµå ¿ÀºêÁ§Æ® »ı¼º ¹× Àç»ı
+        // ÀÓ½Ã »ç¿ûÑE¿ÀºE§Æ® »ı¼º ¹× Àç»ı
         GameObject soundPlayerObject = new GameObject("TempAudio");
         soundPlayerObject.transform.position = transform.position;
 
@@ -35,7 +40,7 @@ public class DestroySoundPlayer : MonoBehaviour
 
         float duration = (playDuration > 0) ? playDuration : destroySoundClip.length;
 
-        // ¾À ÀüÈ¯ ½Ã ÀÓ½Ã ¿ÀºêÁ§Æ®°¡ ÆÄ±«µÇ´Â °ÍÀ» ¸·±â À§ÇØ Ãß°¡
+        // ¾À ÀE¯ ½Ã ÀÓ½Ã ¿ÀºE§Æ®°¡ ÆÄ±«µÇ´Â °ÍÀ» ¸·±EÀ§ÇØ Ãß°¡
         DontDestroyOnLoad(soundPlayerObject);
         Destroy(soundPlayerObject, duration);
     }

@@ -5,10 +5,12 @@ using UnityEngine;
 public class BreakableObject : MonoBehaviour
 {
     Effecter effecter;
+    DestroySoundPlayer soundPlayer;
 
     private void Start()
     {
         effecter = GetComponent<Effecter>();
+        soundPlayer = GetComponent<DestroySoundPlayer>();
     }
     // 외부(플레이엉洑 공격)에서 이 함수를 호출하툈E
     public void Break()
@@ -23,6 +25,8 @@ public class BreakableObject : MonoBehaviour
         {
             effecter.GenerateEffect();
         }
+
+        if (soundPlayer != null) soundPlayer.PlaySound();
 
         //렔릆귩봨딙
         Destroy(gameObject);

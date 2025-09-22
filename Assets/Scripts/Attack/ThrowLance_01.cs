@@ -58,6 +58,12 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
+        BreakableObject breakable = collision.GetComponent<BreakableObject>();
+        if (breakable != null)
+        {
+            return;
+        }
+
         Ponballoon ponballoon = collision.GetComponent<Ponballoon>();
         Poppi poppi = collision.GetComponent<Poppi>();
         Enemy_shield shield = collision.GetComponent<Enemy_shield>();

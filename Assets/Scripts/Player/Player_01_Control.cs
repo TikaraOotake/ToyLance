@@ -160,22 +160,6 @@ public class Player_01_Control : MonoBehaviour
             KeyboardInputTimer = 1.0f;
         }
 
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            _anim.Play("Throw_Move", 0, 0.0f);
-        }
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			// エディタの場合は再生停止
-#if UNITY_EDITOR
-			UnityEditor.EditorApplication.isPlaying = false;
-#else
-            // ビルド実行時はアプリ終了
-            Application.Quit();
-#endif
-			Debug.Log("Game Exit triggered by ESC key");
-		}
-
 
 		if (playerStatus == PlayerStatus.Fine)
         {
