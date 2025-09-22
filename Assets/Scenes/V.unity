@@ -832,6 +832,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8236972979159763388, guid: 8a4b2d85d6d659c45b8462905548c07e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236972979159763388, guid: 8a4b2d85d6d659c45b8462905548c07e, type: 3}
       propertyPath: sceneForKeyF1
       value: Title
       objectReference: {fileID: 0}
