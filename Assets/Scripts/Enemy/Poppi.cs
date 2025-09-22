@@ -30,14 +30,31 @@ public class Poppi : MonoBehaviour
     [SerializeField] private GameObject EnemyAttackColl;
     [SerializeField] private GameObject Head;//“ª
 
+    private EnemyHealth health;
+
     void Start()
     {
         Player =  GameManager_01.GetPlayer();
+        health = GetComponent<EnemyHealth>();
     }
 
 
     void Update()
     {
+        if (health != null)
+        {
+            if (health.GetHP() <= 0.0f)//Ž€–Só‘Ô‚©ƒ`ƒFƒbƒN
+            {
+                //UŒ‚”»’è‚ð”jŠü
+                if (EnemyAttackColl != null)
+                {
+                    Destroy(EnemyAttackColl);
+                    EnemyAttackColl = null;
+                }
+                return;
+            }
+        }
+
         if (actionStatus == ActionStatus.Standby)//‘Ò‹@
         {
             //‘„‚ª“Ë‚«Žh‚³‚Á‚Ä‚¢‚é‚©Šm”F

@@ -8,5 +8,6 @@ namespace PlayerStatusEnum
         HitDamage,
         Dead,
         Pause,
+        IsGettingItem,
     }
 }

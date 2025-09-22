@@ -59,6 +59,8 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField] private bool IsWallGrab = false;
     [SerializeField] private bool IsWallGrab_jamp = false;
 
+    [SerializeField] private int GettingItemSequence;//取得段階
+
     [SerializeField] private bool IsLanding = false;//着地中か判定する
     [SerializeField] private bool IsLanding_old = false;
 
@@ -81,6 +83,7 @@ public class Player_01_Control : MonoBehaviour
     private float ThrowCooltime = 1.0f;//投槍のクールタイム
     private float ThrowCooltimer;
 
+    [SerializeField]
     private float AtkTimer;//攻撃タイマー
     private float TrustAtkTimer = 0.7f;//突き攻撃時間
 
@@ -161,9 +164,8 @@ public class Player_01_Control : MonoBehaviour
         }
 
 
-		if (playerStatus == PlayerStatus.Fine)
+        if (playerStatus == PlayerStatus.Fine)
         {
-
             if (atkStatus == AtkStatus.None)
             {
                 //基本動作
@@ -181,8 +183,6 @@ public class Player_01_Control : MonoBehaviour
 
                 WallGrab();
             }
-
-
         }
         else if (playerStatus == PlayerStatus.Dead)//死亡状態
         {
@@ -191,6 +191,10 @@ public class Player_01_Control : MonoBehaviour
                 _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
             }
             //GameManager_01.RespawnPlayer();//ゲームオーバー画面ができるまではここで処理する
+        }
+        else if (playerStatus == PlayerStatus.IsGettingItem)
+        {
+            GettingItem();
         }
 
 
@@ -761,6 +765,7 @@ public class Player_01_Control : MonoBehaviour
         _anim.SetBool("IsDead", false);
         _anim.SetBool("IsThrowAttack", false);
         _anim.SetBool("IsWallGrab", false);
+        _anim.SetInteger("IsGettingItemSequence", 0);
 
         //優先な物ほど上にならべる
         if (playerStatus == PlayerStatus.Dead)
@@ -770,6 +775,10 @@ public class Player_01_Control : MonoBehaviour
         else if (IsDoorEnter)
         {
             _anim.SetBool("IsDoorEnter", true);
+        }
+        else if(playerStatus == PlayerStatus.IsGettingItem)
+        {
+            _anim.SetInteger("IsGettingItemSequence", GettingItemSequence);
         }
         else if (IsThrowTimer > 0.0f)
         {
@@ -927,6 +936,36 @@ public class Player_01_Control : MonoBehaviour
     public void SetLance(bool _flag)
     {
         HaveLance = _flag;
+    }
+    public void SetGetItem()
+    {
+        playerStatus = PlayerStatus.IsGettingItem;
+        GettingItemSequence = 1;
+        AtkTimer = 1.0f;
+
+        if (_rb) _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
+    }
+    private void GettingItem()
+    {
+        if (playerStatus == PlayerStatus.IsGettingItem)
+        {
+            if (AtkTimer <= 0.0f && GettingItemSequence == 1)//取得状態開始
+            {
+                GettingItemSequence = 2;
+                AtkTimer = 2.0f;
+            }
+            else if (AtkTimer <= 0.0f && GettingItemSequence == 2)//取得状態ループ
+            {
+                GettingItemSequence = 3;
+                AtkTimer = 0.4f;
+            }
+            else if (AtkTimer <= 0.0f && GettingItemSequence == 3)//取得状態終了
+            {
+                GettingItemSequence = 0;
+                AtkTimer = 0.0f;
+                playerStatus = PlayerStatus.Fine;//通常に戻す
+            }
+        }
     }
     public void SetIsPause(bool _flag)
     {
