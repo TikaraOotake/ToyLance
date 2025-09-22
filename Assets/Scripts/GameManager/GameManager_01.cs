@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class GameManager_01
+public class GameManager_01:MonoBehaviour
 {
     private static GameObject Player;
     private static GameObject Camera;
@@ -12,8 +12,56 @@ public static class GameManager_01
 
     private static GameObject CheckPoint;
 
-    // ゲーム開始時に初期化するメソッド
-    public static void Initialize()
+
+	// シングルトンのインスタンス
+	private static HitStopManager _instance;
+
+	// インスタンスの取得
+	public static HitStopManager Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				// シーン内にHitStopManagerオブジェクトがない場合、新しく作成する
+				_instance = FindObjectOfType<HitStopManager>();
+
+				if (_instance == null)
+				{
+					GameObject hitStopObject = new GameObject("HitStopManager");
+					_instance = hitStopObject.AddComponent<HitStopManager>();
+				}
+			}
+			return _instance;
+		}
+	}
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.T))
+		{
+            Debug.Log("ゲームマネージャーテスト");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F1))
+		{
+
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			// エディタの場合は再生停止
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
+            // ビルド実行時はアプリ終了
+            Application.Quit();
+#endif
+			Debug.Log("Game Exit triggered by ESC key");
+		}
+	}
+
+	// ゲーム開始時に初期化するメソッド
+	public static void Initialize()
     {
         // Cameraを取得
         Camera = GameObject.Find("Main Camera");
