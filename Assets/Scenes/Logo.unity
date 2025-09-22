@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ff38e63e393594ba05dd30d148f2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TitleSceneName: 
+  TitleSceneName: Title
   EventTimer: 0
   FadeoutTime: 4.5
   ChangeSceneTime: 6
@@ -296,6 +296,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1916049121177630608, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: TitleSceneName
+      value: Logo
+      objectReference: {fileID: 0}
     - target: {fileID: 2258234548023016423, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: m_LocalScale.x
       value: 30

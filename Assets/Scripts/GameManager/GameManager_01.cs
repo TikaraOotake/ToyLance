@@ -12,7 +12,7 @@ public class GameManager_01:MonoBehaviour
 
     private static GameObject CheckPoint;
 
-    private static string TitleSceneName;
+    private static string[] TitleSceneName = new string[5];
 
 
     // シングルトンのインスタンス
@@ -47,11 +47,31 @@ public class GameManager_01:MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             //シーン読み込み
-            LoadScene(TitleSceneName);
+            LoadScene(TitleSceneName[0]);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             RespawnPlayer();
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            //シーン読み込み
+            LoadScene(TitleSceneName[1]);
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            //シーン読み込み
+            LoadScene(TitleSceneName[2]);
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            //シーン読み込み
+            LoadScene(TitleSceneName[3]);
+        }
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            //シーン読み込み
+            LoadScene(TitleSceneName[4]);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -282,8 +302,15 @@ public class GameManager_01:MonoBehaviour
         }
     }
 
-    public static void SetTitleSceneName(string _name)
+    public static void SetTitleSceneName(string[] _name)
     {
-        TitleSceneName = _name;
+        if (_name.Length == 5)
+        {
+            TitleSceneName = _name;
+        }
+        else
+        {
+            Debug.Log("配列のサイズ違う");
+        }
     }
 }

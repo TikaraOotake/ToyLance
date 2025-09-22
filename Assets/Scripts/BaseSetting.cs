@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseSetting : MonoBehaviour
 {
-    [SerializeField] private string TitleSceneName;
+    [SerializeField] private string[] TitleSceneName;
     private void Awake()
     {
         GameManager_01.Initialize();//マネージャー初期化

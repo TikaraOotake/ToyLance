@@ -217,7 +217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f7fd15715797b45bac30a7da03a131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TitleSceneName: Title
+  TitleSceneName:
+  - Logo
+  - Title
+  - V
+  - Stage_test
+  - Stage_test_02
 --- !u!114 &4926838120625768016
 MonoBehaviour:
   m_ObjectHideFlags: 0
