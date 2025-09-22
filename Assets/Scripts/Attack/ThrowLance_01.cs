@@ -74,22 +74,16 @@ public class ThrowLance_01 : MonoBehaviour
             return;
         }
 
-        if (collision.gameObject.tag == "Enemy" ||
-            ponballoon != null)
-        {
-            if (_effecter) _effecter.GenerateEffect();//エフェクト生成
-            Destroy(this.gameObject);
-            return;
-        }
+		EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+		if (enemyHealth != null ||
+			ponballoon != null)
+		{
+			if (_effecter) _effecter.GenerateEffect();//エフェクト生成
+			Destroy(this.gameObject);
+			return;
+		}
 
-        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-        if(enemyHealth)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        if (collision.CompareTag("DestructionTriggerTag"))
+		if (collision.CompareTag("DestructionTriggerTag"))
         {
             // ﾆｮｸｮｰﾅﾀﾇ ﾆﾄｱｫ ﾇﾔｼｦ ﾈ｣ﾃ・
             collision.GetComponent<DestructionTrigger>()?.TriggerDestruction();
