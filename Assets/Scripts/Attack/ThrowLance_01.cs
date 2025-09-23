@@ -14,6 +14,8 @@ public class ThrowLance_01 : MonoBehaviour
 
     private Effecter _effecter;
 
+    [SerializeField]
+    private SpriteBoard _spriteBoard;//インスペクター上でアタッチ
     private void Awake()
     {
         Player = GameManager_01.GetPlayer();//仮取得
@@ -61,6 +63,7 @@ public class ThrowLance_01 : MonoBehaviour
         BreakableObject breakable = collision.GetComponent<BreakableObject>();
         if (breakable != null)
         {
+            if (_spriteBoard) _spriteBoard.SetShakeSprite();//槍を振動させる
             return;
         }
 

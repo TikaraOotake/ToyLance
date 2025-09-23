@@ -17,7 +17,7 @@ public class Lance : MonoBehaviour
         if (player != null) 
         {
             //Žæ“¾‰¹
-            SEManager.instance.PlaySE("get");
+            // SEManager.instance.PlaySE("get");
             player.SetLance(isTouched);
             player.SetGetItem();
             player.SetLanceNum(999);

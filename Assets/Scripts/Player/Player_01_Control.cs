@@ -112,6 +112,9 @@ public class Player_01_Control : MonoBehaviour
 
     float progress;
 
+    [SerializeField] private GameObject LanceImageObjPrefab;//取得した槍を表示する
+    [SerializeField] private GameObject LanceImageObj;
+
     enum AtkStatus
     {
         None,//無し
@@ -143,6 +146,14 @@ public class Player_01_Control : MonoBehaviour
         playerStatus = PlayerStatus.Fine;//ステータスを通常に
 
         if (EdgeColl != null) EdgeColl.SetActive(false);//コリジョン無効化
+
+        //右側を向かせる
+        if(_sr)
+        {
+            _sr.flipX = true;
+            FlipX = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -320,14 +331,13 @@ public class Player_01_Control : MonoBehaviour
         bool isMoving = false;
         if (Input.GetKey(KeyCode.D) || (Input.GetAxis("Horizontal") > 0.1f && KeyboardInputTimer <= 0.0f))
         {
-            MoveWay = +1.0f;
-            isMoving = true;
+            MoveWay += 1.0f;
         }
         if (Input.GetKey(KeyCode.A) || (Input.GetAxis("Horizontal") < -0.1f && KeyboardInputTimer <= 0.0f))
         {
-            MoveWay = -1.0f;
-            isMoving = true;
+            MoveWay -= 1.0f;
         }
+        if (MoveWay != 0.0f) isMoving = true;
 
         //移動中かつ接地中
         if (isMoving && IsLanding)
@@ -951,11 +961,28 @@ public class Player_01_Control : MonoBehaviour
         {
             if (AtkTimer <= 0.0f && GettingItemSequence == 1)//取得状態開始
             {
+                //槍アイテム画像の表示
+                if (LanceImageObjPrefab != null && LanceImageObj == null)
+                {
+                    LanceImageObj = Instantiate(LanceImageObjPrefab, transform.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+                }
+                //取得音
+                SEManager.instance.PlaySE("get");
+
                 GettingItemSequence = 2;
                 AtkTimer = 2.0f;
             }
             else if (AtkTimer <= 0.0f && GettingItemSequence == 2)//取得状態ループ
             {
+                //槍アイテム画像の破棄
+                if (LanceImageObj != null)
+                {
+                    if (LanceImageObj != null)
+                    {
+                        Destroy(LanceImageObj);
+                        LanceImageObj = null;
+                    }
+                }
                 GettingItemSequence = 3;
                 AtkTimer = 0.4f;
             }

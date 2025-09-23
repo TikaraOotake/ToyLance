@@ -33,6 +33,17 @@ public class CameraControl : MonoBehaviour
 
     private void Awake()
     {
+        
+
+        //カメラManagerにカメラをセット
+        CameraManager.SetCamera(this.gameObject);
+
+    }
+    void Start()
+    {
+        if (player == null) player = GameManager_01.GetPlayer();//プレイヤーを取得
+        if (player == null) Debug.Log("プレイヤーが設定されていません");
+
         //カメラの初期座標をプレイヤーの位置に設定
         if (player != null)
         {
@@ -43,14 +54,6 @@ public class CameraControl : MonoBehaviour
 
         //注視座標をセット
         CameraGazePos = transform.position;
-
-        //カメラManagerにカメラをセット
-        CameraManager.SetCamera(this.gameObject);
-
-    }
-    void Start()
-    {
-        if (player == null) Debug.Log("プレイヤーが設定されていません");
     }
 
     void Update()
@@ -91,7 +94,7 @@ public class CameraControl : MonoBehaviour
         }
 
         //角度を加算して回転（毎フレーム）
-        ShakeRot_Angle += ShakeRot_Speed * Time.deltaTime * 360f; //1秒で1回転
+        ShakeRot_Angle += ShakeRot_Speed * Time.unscaledDeltaTime * 360f; //1秒で1回転
         if (ShakeRot_Angle >= 360f)
         {
             ShakeRot_Angle -= 360f;
@@ -102,7 +105,7 @@ public class CameraControl : MonoBehaviour
         ShakeRot_Vec = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * ShakeRot_Length;
 
         //減衰させる
-        ShakeRot_Length = Mathf.Lerp(ShakeRot_Length, 0f, ShakeRot_LowValue * Time.deltaTime);
+        ShakeRot_Length = Mathf.Lerp(ShakeRot_Length, 0f, ShakeRot_LowValue * Time.unscaledDeltaTime);
 
         //カメラの位置に振動を加える
         cameraShakeOffset = (Vector3)ShakeRot_Vec;

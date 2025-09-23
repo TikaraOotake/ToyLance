@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coll: {fileID: 530405940824680137}
   HalfHitGroundLancePrefab: {fileID: 1291408483413174425, guid: 39588a3d3ad03b940a06503b140335dc, type: 3}
+  _spriteBoard: {fileID: 1186948261431234000}
 --- !u!50 &589599384940989499
 Rigidbody2D:
   serializedVersion: 4
@@ -154,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8057759067759055228}
   - component: {fileID: 8997928236497080197}
+  - component: {fileID: 1186948261431234000}
   m_Layer: 0
   m_Name: SpriteBoard
   m_TagString: Untagged
@@ -228,3 +230,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1186948261431234000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3606591563729274036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1a725cc93e50e4591c98e89f4f73c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeRot_Speed: 1
+  ShakeRot_LowValue: 1

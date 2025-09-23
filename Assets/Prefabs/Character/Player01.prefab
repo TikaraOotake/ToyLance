@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 9014430521119041444}
   - component: {fileID: 3963887274349027439}
   - component: {fileID: 2408312724956366307}
-  - component: {fileID: 1802933286017077906}
   - component: {fileID: 2697970706183424778}
   m_Layer: 7
   m_Name: Player01
@@ -485,6 +484,7 @@ MonoBehaviour:
   IsThrowTimer: 0
   IsWallGrab: 0
   IsWallGrab_jamp: 0
+  GettingItemSequence: 0
   IsLanding: 0
   IsLanding_old: 0
   LandingCheckCollider: {fileID: 7767720296120950642}
@@ -494,12 +494,15 @@ MonoBehaviour:
   KonokBackTime: 0.5
   InvincibleTime: 1
   ThrowCooltime: 1
+  AtkTimer: 0
   TrustAttackValue: 3
   ThrowAttackValue: 1
   FallAttackValue: 3
   TestRot: 0
   footstepInterval: 0.5
   EdgeColl: {fileID: 5736440977160021102}
+  LanceImageObjPrefab: {fileID: 7660636299634036922, guid: 98bc9cc777c4f0840ac351c5e8be3182, type: 3}
+  LanceImageObj: {fileID: 0}
 --- !u!50 &3963887274349027439
 Rigidbody2D:
   serializedVersion: 4
@@ -548,51 +551,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &1802933286017077906
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7974809287086638784}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05183655}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.31, y: 0.7236731}
-  m_EdgeRadius: 0
 --- !u!70 &2697970706183424778
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -626,5 +584,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.06}
-  m_Size: {x: 0.38, y: 0.69}
+  m_Size: {x: 0.29, y: 0.73}
   m_Direction: 0

@@ -77,8 +77,8 @@ public class SwitchButton : MonoBehaviour
             }
         }
 
-            //フラグが変更された場合
-            if (SwitchFlag != SwitchFlag_old)
+        //フラグが変更された場合
+        if (SwitchFlag != SwitchFlag_old)
         {
             //オンの際ラジオリストに登録されているスイッチを全てオフ
             if (SwitchFlag == true)
@@ -88,8 +88,12 @@ public class SwitchButton : MonoBehaviour
                     RadioList[i].SetSwitchFlag(false);
                 }
             }
+        }
 
-
+        if (ReceptionCoolTimer > 0.0f && ReceptionCoolTimer_old <= 0.0f)//押された瞬間
+        {
+            //SEを再生
+            SEManager.instance.PlaySE("break");
         }
 
         //色更新
@@ -126,7 +130,7 @@ public class SwitchButton : MonoBehaviour
 
         //ボタンを押した状態(非表示)に
         SpriteRenderer _This_sr = GetComponent<SpriteRenderer>();
-        if (_This_sr&&false)
+        if (_This_sr && false)
         {
             if (ReceptionCoolTimer > 0.0f)
             {
@@ -148,11 +152,11 @@ public class SwitchButton : MonoBehaviour
             Vector2 Scale = Button.transform.localScale;//取得
             if (ReceptionCoolTimer > 0.0f)
             {
-                Scale.y = Mathf.Max(0.0f, Scale.y - PushSpeed * Time.deltaTime);
+                Scale.y = Mathf.Max(0.0f, Scale.y - PushSpeed * Time.deltaTime);//押されていない状態
             }
             else
             {
-                Scale.y = Mathf.Min(1.0f, Scale.y + PushSpeed * Time.deltaTime);
+                Scale.y = Mathf.Min(1.0f, Scale.y + PushSpeed * Time.deltaTime);//押されている状態
             }
             Button.transform.localScale = Scale;//代入
         }
