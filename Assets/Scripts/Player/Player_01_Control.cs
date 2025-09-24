@@ -545,7 +545,7 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //着地判定が敵と接触したらキャンセル処理
-            if (GetTouchingObjectWithLayer(LandingCheckCollider, "Enemy"))
+            if (GetTouchingObjectWithLayer(LandingCheckCollider, "Enemy") && AtkTimer <= 0.8f)
             {
                 if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 1.5f);//通常ジャンプより少し高く跳ねる
 
@@ -786,7 +786,7 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("IsDoorEnter", true);
         }
-        else if(playerStatus == PlayerStatus.IsGettingItem)
+        else if (playerStatus == PlayerStatus.IsGettingItem)
         {
             _anim.SetInteger("IsGettingItemSequence", GettingItemSequence);
         }
@@ -824,7 +824,7 @@ public class Player_01_Control : MonoBehaviour
         {
             _anim.SetBool("isDownAttacking", true);
         }
-        else if (IsJump)//ジャンプ
+        else if (IsJump || !IsLanding)//ジャンプ
         {
             _anim.SetBool("isJumping", true);
         }

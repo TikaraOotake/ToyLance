@@ -35,6 +35,13 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //プレイヤーのHPを回復させる
+        Player_01_Control player = collision.GetComponent<Player_01_Control>();
+        if (player != null)
+        {
+            player.SetPlayerHP(player.GetPlayerHP_Max());
+        }
+
         if (IsActive) return;//既に有効状態なので終了
 
         if (collision.tag == "Player")
@@ -46,6 +53,7 @@ public class CheckPoint : MonoBehaviour
 
             //通過音
             SEManager.instance.PlaySE("checkpoint");
+
 
             if (SoftFlashPrefab != null)
             {
