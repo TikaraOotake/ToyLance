@@ -39,10 +39,18 @@ public class GameManager_01:MonoBehaviour
 	}
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.T))
-		{
-            Debug.Log("ゲームマネージャーテスト");
-		}
+        //HPのUIを更新
+        if (Camera != null && Player != null)
+        {
+            UIManager uiMNG = Camera.GetComponent<UIManager>();
+            Player_01_Control player = Player.GetComponent<Player_01_Control>();
+            if (uiMNG != null && player != null)
+            {
+                float HP = player.GetPlayerHP();
+                float HP_Max = player.GetPlayerHP_Max();
+                uiMNG.SetHP_UI(HP, HP_Max);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.F1))
         {

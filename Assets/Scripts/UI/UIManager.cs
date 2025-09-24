@@ -57,6 +57,17 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    public void SetHP_UI(float _HP, float _HP_Max)
+    {
+        if (HP_UI)
+        {
+            HP_Gauge_UI _HP_Gauge = HP_UI.GetComponent<HP_Gauge_UI>();
+            if (_HP_Gauge != null)
+            {
+                _HP_Gauge.SetHP(_HP, _HP_Max);
+            }
+        }
+    }
 
     public void SetBlindFade(bool _flag)
     {

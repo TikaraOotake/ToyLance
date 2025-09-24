@@ -40,6 +40,12 @@ public class CheckPoint : MonoBehaviour
         if (player != null)
         {
             player.SetPlayerHP(player.GetPlayerHP_Max());
+
+            //キラキラのエフェクトを出す
+            if (effecter != null)
+            {
+                effecter.GenerateEffect();
+            }
         }
 
         if (IsActive) return;//既に有効状態なので終了
@@ -54,15 +60,10 @@ public class CheckPoint : MonoBehaviour
             //通過音
             SEManager.instance.PlaySE("checkpoint");
 
-
+            //明るくするエフェクト
             if (SoftFlashPrefab != null)
             {
                 Instantiate(SoftFlashPrefab, transform.position, Quaternion.identity);
-            }
-
-            if (effecter != null)
-            {
-                effecter.GenerateEffect();
             }
         }
     }
