@@ -49,8 +49,8 @@ public class Enemy_move : MonoBehaviour
 
         //壁のチェック
         Vector2 wallCheck = new Vector2(nextMove, 0);
-        Debug.DrawRay(rigid.position, wallCheck * 0.5f, Color.red);
-        RaycastHit2D wallHit = Physics2D.Raycast(rigid.position, wallCheck, 0.5f, LayerMask.GetMask("Platform"));
+        Debug.DrawRay(rigid.position, wallCheck * 1.0f, Color.red);
+        RaycastHit2D wallHit = Physics2D.Raycast(rigid.position, wallCheck, 1.0f, LayerMask.GetMask("Platform"));
 
         if ((rayHit.collider == null || wallHit.collider != null) && !spriteRenderer.flipY) 
         {

@@ -12,7 +12,35 @@ public class AnyKeyToSceneLoader : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene(sceneNameToLoad);
+            StartCoroutine(BlindFade());
         }
+    }
+
+    IEnumerator BlindFade()
+    {
+        yield return null;
+        GameManager_01.SetBlindFade(true);
+
+        float duration = 2.0f;
+        float time = 0.0f;
+        float startVolume = BGMManager.instance.baseVolume;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float newVolume = Mathf.Lerp(startVolume, 0.0f, time / duration);
+            BGMManager.instance.baseVolume = newVolume;
+            yield return null;
+        }
+
+        BGMManager.instance.baseVolume = 0.0f;
+
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(sceneNameToLoad);
     }
 }
