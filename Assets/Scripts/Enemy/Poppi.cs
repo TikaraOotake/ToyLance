@@ -14,6 +14,9 @@ public class Poppi : MonoBehaviour
     [SerializeField]
     Animator Head_animator;//頭のアニメーター
 
+    [SerializeField]
+    Animator animator;//自身のアニメーター
+
     enum ActionStatus
     {
         Standby,//待機状態
@@ -36,6 +39,8 @@ public class Poppi : MonoBehaviour
     {
         Player =  GameManager_01.GetPlayer();
         health = GetComponent<EnemyHealth>();
+
+        animator = GetComponent<Animator>();
     }
 
 
@@ -60,6 +65,8 @@ public class Poppi : MonoBehaviour
             //槍が突き刺さっているか確認
             if (HasChildWithComponent<HalfHitFloor_Lance>() != null)
             {
+                if (animator != null) animator.SetBool("IsActive", false);//アニメーションを非活性状態に
+
                 if (JampColl != null)
                 {
                     //プレイヤーがジャンプ判定に衝突しているか判定
@@ -93,6 +100,7 @@ public class Poppi : MonoBehaviour
             else
             {
                 //通常の処理
+                if (animator != null) animator.SetBool("IsActive", true);//アニメーションを活性状態に
 
                 if (CheckPlayerOverlap(FindLength))
                 {
@@ -107,6 +115,8 @@ public class Poppi : MonoBehaviour
         }
         else if (actionStatus == ActionStatus.Attacking)//攻撃
         {
+            if (animator != null) animator.SetBool("IsActive", false);//アニメーションを非活性状態に
+
             if (ActionTimer <= 0.5f)
             {
                 //攻撃判定生成
