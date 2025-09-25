@@ -19,7 +19,7 @@ public class DemoPlay : MonoBehaviour
 
     IEnumerator BlindFade()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(30.0f);
         GameManager_01.SetBlindFade(true);
 
         float duration = 2.0f;
