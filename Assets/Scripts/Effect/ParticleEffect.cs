@@ -12,6 +12,7 @@ public class ParticleEffect : MonoBehaviour
     public float GravityScale;       // 重力加速度スケール
 
     public float DeleteTime = 1.0f;//削除時間
+    public float AddRandamDeleteTimeRange;//削除までの時間をランダムでばらけさせる範囲
     private float DeleteTimer;
 
     private Vector2 SpeedVec;         // 現在の速度ベクトル
@@ -28,7 +29,7 @@ public class ParticleEffect : MonoBehaviour
         SpeedVec = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * speed;
 
         //タイマー設定
-        DeleteTimer = DeleteTime;
+        DeleteTimer = DeleteTime + Random.Range(-AddRandamDeleteTimeRange, AddRandamDeleteTimeRange);
     }
 
     private void Update()

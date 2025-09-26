@@ -51,6 +51,7 @@ MonoBehaviour:
   RandSpeed: 4
   GravityScale: 2.6
   DeleteTime: 1
+  AddRandamDeleteTimeRange: 0.2
 --- !u!212 &2559402247053993947
 SpriteRenderer:
   m_ObjectHideFlags: 0

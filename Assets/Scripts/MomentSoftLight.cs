@@ -64,7 +64,7 @@ public class MomentSoftLight : MonoBehaviour
         //“§‰ß—¦‚ª0‚ğ‰º‰ñ‚Á‚½‚çíœ
         if (AlphaRate <= 0.0f)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
