@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9170507100367089325}
   - component: {fileID: 7414064872805952723}
+  - component: {fileID: 5796837154421157603}
+  - component: {fileID: 5949619014229922538}
   m_Layer: 0
   m_Name: SpearSpriteBoard
   m_TagString: Untagged
@@ -84,3 +86,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5796837154421157603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660636299634036922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20226aee2e6dba7459767c0183fe77d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectPrefab: {fileID: 7190140900777956260, guid: ddebeb6c84244c34392d96dd1bde1d68, type: 3}
+  SpawnPosObj: {fileID: 0}
+  SpawnInterval: 0
+  SpawnRange_Max: 2
+  SpawnRange_Min: 2
+  IsStartSpawnFlag: 1
+--- !u!114 &5949619014229922538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660636299634036922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20226aee2e6dba7459767c0183fe77d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectPrefab: {fileID: 2018524149602447507, guid: 4d634ef81c034504a96c5c2f83830459, type: 3}
+  SpawnPosObj: {fileID: 0}
+  SpawnInterval: 0
+  SpawnRange_Max: 5
+  SpawnRange_Min: 8
+  IsStartSpawnFlag: 1

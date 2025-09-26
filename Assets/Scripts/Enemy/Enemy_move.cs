@@ -28,13 +28,15 @@ public class Enemy_move : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
 
-        Invoke("Think", 5);
-
         anim = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         enemyHealth = GetComponent<EnemyHealth>();
+    }
+    void OnEnable()
+    {
+        Invoke("Think", 5);
     }
 
     void FixedUpdate()

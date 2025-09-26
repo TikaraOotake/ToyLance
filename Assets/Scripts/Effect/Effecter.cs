@@ -17,9 +17,23 @@ public class Effecter : MonoBehaviour
     [SerializeField]
     private int SpawnRange_Min;
 
+    [SerializeField]
+    private bool IsStartSpawnFlag;
+
     void Start()
     {
-        if (EffectPrefab == null) Debug.Log("Effectのプレハブがありません");
+        if (EffectPrefab != null)
+        {
+            if (IsStartSpawnFlag == true)
+            {
+                GenerateEffect();
+            }
+        }
+        else
+        { 
+            Debug.Log("Effectのプレハブがありません");
+        }
+
     }
 
     void Update()
