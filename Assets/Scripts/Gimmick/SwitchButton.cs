@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SwitchButton : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class SwitchButton : MonoBehaviour
     [SerializeField] private float ReceptionCoolTime = 0.1f;//値の変更から指定した時間は変更を受け付けない
     [SerializeField] private float ReceptionCoolTimer;//計測用
     private float ReceptionCoolTimer_old;//計測用
+
+    [SerializeField] private Animator anim_Button;//実際に押されるボタンのアニメーション
+    [SerializeField] private Animator anim_Base;//台座のアニメーション
+
 
     void Start()
     {
@@ -115,51 +120,31 @@ public class SwitchButton : MonoBehaviour
 
     private void Color_Update()
     {
-        //色を変更
-        if (_sr)
+        if (anim_Base != null)
         {
             if (SwitchFlag != ReversingResult)
             {
-                _sr.color = new Color(0.75f, 0.75f, 0.008f, 1.0f);//黄色
+                anim_Base.SetBool("IsActive", true);//有効
             }
             else
             {
-                _sr.color = new Color(0.5f, 0.0f, 0.0f, 1.0f);//赤黒
+                anim_Base.SetBool("IsActive", false);//非有効
             }
         }
 
-        //ボタンを押した状態(非表示)に
-        SpriteRenderer _This_sr = GetComponent<SpriteRenderer>();
-        if (_This_sr && false)
+        if (anim_Button != null)
         {
             if (ReceptionCoolTimer > 0.0f)
             {
-                Color color = _This_sr.color;
-                color.a = 0.0f;//非表示
-
-                _This_sr.color = color;//代入
+                anim_Button.SetBool("IsActive", true);//押されている状態
             }
             else
             {
-                Color color = _This_sr.color;
-                color.a = 1.0f;//表示
+                anim_Button.SetBool("IsActive", false);//押されていない状態
+            }
+        }
+        
 
-                _This_sr.color = color;//代入
-            }
-        }
-        if (Button != null)
-        {
-            Vector2 Scale = Button.transform.localScale;//取得
-            if (ReceptionCoolTimer > 0.0f)
-            {
-                Scale.y = Mathf.Max(0.0f, Scale.y - PushSpeed * Time.deltaTime);//押されていない状態
-            }
-            else
-            {
-                Scale.y = Mathf.Min(1.0f, Scale.y + PushSpeed * Time.deltaTime);//押されている状態
-            }
-            Button.transform.localScale = Scale;//代入
-        }
     }
 
     private void CheckPushSwitch()
