@@ -271,7 +271,7 @@ MonoBehaviour:
   - seName: dead
     seClip: {fileID: 8300000, guid: 0255bd79ba03b6444989ceb4e53f21c7, type: 3}
   - seName: get
-    seClip: {fileID: 8300000, guid: 763b2054a6432934f99b1fb330d5c810, type: 3}
+    seClip: {fileID: 8300000, guid: 1b63dd32da0baa14a9f57e8bd31db9dd, type: 3}
   - seName: rabbit
     seClip: {fileID: 8300000, guid: a634393f9c9ba264baa7f510752b1d9b, type: 3}
   - seName: break
