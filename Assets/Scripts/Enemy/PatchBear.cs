@@ -73,6 +73,11 @@ public class PatchBear : MonoBehaviour
         BaseScale = transform.localScale;//BaseScaleİ’è
         BaseSpeed = MoveValue;
     }
+
+    private void OnEnable()
+    {
+        CottonSpownFlag = false;//‰Šú‰»
+    }
     void Start()
     {
         //æ“¾

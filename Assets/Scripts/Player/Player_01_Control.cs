@@ -355,8 +355,25 @@ public class Player_01_Control : MonoBehaviour
             footstepTimer = 0.0f;
         }
 
-        //アニメーションの変更
-        IsMove_old = IsMove;
+        Collider2D col = GetComponent<Collider2D>();
+        //動いていない
+        if (!isMoving)
+        {
+            if (col != null && col.sharedMaterial != null)
+            {
+                //col.sharedMaterial.friction = 1.0f;  // 新しい摩擦値をセット
+            }
+        }
+        else
+        {
+            if (col != null && col.sharedMaterial != null)
+            {
+                //col.sharedMaterial.friction = 0.0f;  // 新しい摩擦値をセット
+            }
+        }
+
+            //アニメーションの変更
+            IsMove_old = IsMove;
         if (MoveWay != 0.0f)
         {
             IsMove = true;
@@ -712,6 +729,16 @@ public class Player_01_Control : MonoBehaviour
                 }
             }
         }
+    }
+    public float GetPlayerDirection()
+    {
+        //移動方向の取得
+        float Way = -1.0f;
+        if (_sr)
+        {
+            if (_sr.flipX) Way *= -1.0f;
+        }
+        return Way;
     }
     public void DoorExit()
     {

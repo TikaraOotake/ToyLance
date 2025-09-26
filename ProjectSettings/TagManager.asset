@@ -32,7 +32,7 @@ TagManager:
   - PlayerPlatform
   - OnlyTouchPlatform
   - Camera
-  - 
+  - Gimmick
   - 
   - 
   - 
@@ -59,14 +59,20 @@ TagManager:
   - name: Platforms
     uniqueID: 2169038205
     locked: 0
+  - name: Effect
+    uniqueID: 3365062617
+    locked: 0
+  - name: Gimmick
+    uniqueID: 2073975339
+    locked: 0
+  - name: Item
+    uniqueID: 1950776287
+    locked: 0
   - name: Player
     uniqueID: 1049473361
     locked: 0
   - name: Enemy
     uniqueID: 3247429605
-    locked: 0
-  - name: Item
-    uniqueID: 1950776287
     locked: 0
   - name: UI
     uniqueID: 3255242567

@@ -137,6 +137,7 @@ public class CameraControl : MonoBehaviour
         if(!(CameraGazePos.x + CameraGazePos.y >= 0.0f) &&
            !(CameraGazePos.x + CameraGazePos.y <= 0.0f))
         {
+            CameraGazePos = transform.position;//Nanを無くすためカメラ自身の座標を代入
             return;//Nanと思われる数値があったため終了
         }
 
@@ -157,7 +158,7 @@ public class CameraControl : MonoBehaviour
             if (_cameraScrollArea)
             {
                 //カメラスクロールエリア
-                TargetPos = _cameraScrollArea.GetCameraPos();
+                TargetPos = _cameraScrollArea.GetCameraPos(1.0f);
             }
             else
             {
@@ -205,6 +206,7 @@ public class CameraControl : MonoBehaviour
         if (!(CameraGazePos.x + CameraGazePos.y >= 0.0f) &&
            !(CameraGazePos.x + CameraGazePos.y <= 0.0f))
         {
+            CameraGazePos = transform.position;//Nanを無くすためカメラ自身の座標を代入
             return;//Nanと思われる数値があったため終了
         }
 

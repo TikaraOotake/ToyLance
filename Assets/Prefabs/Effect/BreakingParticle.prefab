@@ -49,8 +49,8 @@ MonoBehaviour:
   RandScatterAngle: 360
   BaseSpeed: 3
   RandSpeed: 2.38
-  GravityScale: 10
-  DeleteTime: 1
+  GravityScale: 5
+  DeleteTime: 0.8
 --- !u!212 &2559402247053993947
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,8 +89,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -929904679
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1069335677, guid: 87bf7b94b0ea61d4eb4b4a4130d348e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

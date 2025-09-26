@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2073975339
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 716348718, guid: d2192779a7af82d419d034a5bddfc1fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoftFlashPrefab: {fileID: 7190140900777956260, guid: a69b99a0cf0649c44a2ee9db37196112, type: 3}
   _anim: {fileID: 0}
-  _seManager: {fileID: 0}
   effecter: {fileID: 7911113440212417709}
 --- !u!50 &1200183522007163269
 Rigidbody2D:
@@ -215,3 +214,4 @@ MonoBehaviour:
   SpawnInterval: 0
   SpawnRange_Max: 8
   SpawnRange_Min: 5
+  IsStartSpawnFlag: 0

@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1049473361
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1473531710, guid: 9cc127075c7082d4992e5c90f1d76479, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46201127034961544}
   - component: {fileID: 7536708360368926829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rabbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

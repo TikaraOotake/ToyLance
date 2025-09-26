@@ -27,13 +27,13 @@ public class CameraLockArea : MonoBehaviour
             {
                 if (Player)
                 {
-                    _camera_cs.SetCameraArea(this.gameObject);
+                    //_camera_cs.SetCameraArea(this.gameObject);
                 }
                 else
                 {
                     if (_camera_cs.GetCameraArea() == this.gameObject)
                     {
-                        _camera_cs.SetCameraArea(null);
+                        //_camera_cs.SetCameraArea(null);
                     }
                 }
             }
@@ -47,11 +47,42 @@ public class CameraLockArea : MonoBehaviour
             Player = collision.gameObject;
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            if (Camera != null)
+            {
+                CameraControl _camera_cs = Camera.GetComponent<CameraControl>();
+                if (_camera_cs)
+                {
+                    //íNÇ‡ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁé©êgÇìoò^
+                    if (_camera_cs.GetCameraArea() == null)
+                    {
+                        _camera_cs.SetCameraArea(this.gameObject);
+                    }
+                }
+            }
+                
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject == Player)
         {
-            Player = null;
+            //Player = null;
+            if (Camera != null)
+            {
+                CameraControl _camera_cs = Camera.GetComponent<CameraControl>();
+                if (_camera_cs)
+                {
+                    //é©êgÇ™ìoò^Ç≥ÇÍÇƒÇ¢ÇΩèÍçáâèú
+                    if (_camera_cs.GetCameraArea() == this.gameObject)
+                    {
+                        _camera_cs.SetCameraArea(null);
+                    }
+                }
+            }
         }
     }
 }

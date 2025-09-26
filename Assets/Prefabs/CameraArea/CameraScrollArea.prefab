@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 782008681759801118}
   PointB: {fileID: 2556377395075245583}
+  OffsetLength: 1.5
 --- !u!212 &8675520527769498595
 SpriteRenderer:
   m_ObjectHideFlags: 0

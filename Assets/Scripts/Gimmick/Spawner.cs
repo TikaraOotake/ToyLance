@@ -5,7 +5,10 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject SpawnObjectPrefab; // 生成するオブジェクト
     [SerializeField] private float SpawnCycleTime = 1.0f; // スポーン間隔
+    [SerializeField] private float AddRandamCycleTimeScale = 0.0f; // スポーン間隔にランダムな補正値を加える量
     private float SpawnCycleTimer;
+
+    [SerializeField] private Vector2 RandamSpawnPosOffset;//ランダムでスポーン地点をずらす量
 
     [SerializeField]
     private Vector2 SpawnVel;//生成したオブジェクトに加える(リジットボディがある場合)
@@ -32,7 +35,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        SpawnCycleTimer = SpawnCycleTime;
+        SpawnCycleTimer = SpawnCycleTime + Random.Range(0.0f, AddRandamCycleTimeScale);
     }
 
     void Update()
@@ -59,7 +62,7 @@ public class Spawner : MonoBehaviour
             if (SpawnCycleTimer <= 0.0f)
             {
                 SpawnObject();
-                SpawnCycleTimer = SpawnCycleTime;
+                SpawnCycleTimer = SpawnCycleTime + Random.Range(0.0f, AddRandamCycleTimeScale);
             }
         }
         else if (mode == SpawnMode.SemiAuto)
@@ -98,8 +101,13 @@ public class Spawner : MonoBehaviour
     {
         if (SpawnObjectPrefab == null) return;
 
+        //出現座標を設定
+        Vector2 SpawnPos = transform.position;
+        SpawnPos.x += Random.Range(-RandamSpawnPosOffset.x, RandamSpawnPosOffset.x);
+        SpawnPos.y += Random.Range(-RandamSpawnPosOffset.y, RandamSpawnPosOffset.y);
+
         //オブジェクト生成
-        GameObject newObj = Instantiate(SpawnObjectPrefab, transform.position, Quaternion.identity);
+        GameObject newObj = Instantiate(SpawnObjectPrefab, SpawnPos, Quaternion.identity);
 
         //リジットボディがある場合は速度を与える
         Rigidbody2D _rb = newObj.GetComponent<Rigidbody2D>();
