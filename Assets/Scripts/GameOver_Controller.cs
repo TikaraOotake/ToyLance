@@ -160,7 +160,7 @@ public class GameOver_Controller : MonoBehaviour
     private void OnEndButtonPushed()
     {
         //シーン遷移
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Logo");
     }
 
     //コンティニューボタンクリック時のイベント

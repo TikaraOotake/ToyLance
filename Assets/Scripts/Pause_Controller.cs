@@ -121,7 +121,7 @@ public class Pause_Controller : MonoBehaviour
         //通常時間
         Time.timeScale = 1.0f;
         //シーン遷移
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Logo");
     }
 
     //コンティニューボタンクリック時のイベント
