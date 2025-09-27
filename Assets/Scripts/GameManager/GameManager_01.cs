@@ -81,12 +81,23 @@ public class GameManager_01:MonoBehaviour
             //シーン読み込み
             LoadScene(TitleSceneName[4]);
         }
-
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            //無敵モード
+            if (Player != null)
+            {
+                Player_01_Control player_Control = Player.GetComponent<Player_01_Control>();
+                if (player_Control != null)
+                {
+                    player_Control.FlipInvincibleMode();
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			// エディタの場合は再生停止
+        {
+            // エディタの場合は再生停止
 #if UNITY_EDITOR
-			UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
             // ビルド実行時はアプリ終了
             Application.Quit();

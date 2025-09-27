@@ -5,6 +5,7 @@ using AttackTypeEnums;
 using UnityEngine.SceneManagement;
 using PlayerStatusEnum;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Player_01_Control : MonoBehaviour
 {
@@ -77,6 +78,7 @@ public class Player_01_Control : MonoBehaviour
     [SerializeField]
     private float InvincibleTime = 1.0f;//無敵時間
     private float InvincibleTimer = 0.0f;//無敵タイマー
+    private bool IsInvincibleMode = false;//無敵モード
     private float BlinkingTimer = 0.0f;//点滅タイマー
 
     [SerializeField]
@@ -917,10 +919,14 @@ public class Player_01_Control : MonoBehaviour
             _sr.flipY = false;
         }
     }
+    public void FlipInvincibleMode()
+    {
+        IsInvincibleMode = !IsInvincibleMode;//フラグを反転
+    }
 
     private void SetDamage(GameObject _Enemy)
     {
-        if (InvincibleTimer > 0.0f)
+        if (InvincibleTimer > 0.0f || IsInvincibleMode == true)
         {
             return;//無敵時間中は処理を行わず終了
         }
