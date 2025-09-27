@@ -235,7 +235,7 @@ public class Player_01_Control : MonoBehaviour
 
         //“ü—Í‚ð‹L˜^
         IsInputDown_old = IsInputDown;
-        IsInputDown = Input.GetAxis("Vertical") < -0.1f;
+        IsInputDown = Input.GetAxis("Vertical") < -0.5f;
         StickInputValue_old.x = Input.GetAxis("Horizontal");//‰¡Ž²
         StickInputValue_old.y = Input.GetAxis("Vertical");//cŽ²
 
@@ -905,6 +905,8 @@ public class Player_01_Control : MonoBehaviour
         HP = HP_Max;//‘Ì—Í‰Šú‰»
         playerStatus = PlayerStatus.Fine;
         if (AttackObj != null) Destroy(AttackObj);//UŒ‚”»’è‚Ì”jŠü
+
+        InvincibleTimer = 1.0f;//–³“GŽžŠÔ‚ð•t—^
 
         if (_rb)
         {
