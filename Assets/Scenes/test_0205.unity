@@ -20571,10 +20571,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 97144553108170495, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: orthographic size
+      value: 6.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2017339757884366284, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 127492374}
+    - target: {fileID: 2495115018200734505, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_AssetsPPU
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495115018200734505, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_CropFrameX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495115018200734505, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_CropFrameY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495115018200734505, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_RefResolutionX
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495115018200734505, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_RefResolutionY
+      value: 720
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49.09
@@ -20614,6 +20650,10 @@ PrefabInstance:
     - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043408274735586983, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4926838120625768016, guid: a4a1903af97b48d498ba614490614c09, type: 3}
       propertyPath: HP_UI
