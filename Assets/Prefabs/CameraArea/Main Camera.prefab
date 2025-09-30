@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f7fd15715797b45bac30a7da03a131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   TitleSceneName:
   - Logo
   - Title
@@ -428,7 +429,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 27, y: 14}
+  m_Size: {x: 30, y: 17}
   m_EdgeRadius: 0
 --- !u!114 &4562998793739184837
 MonoBehaviour:

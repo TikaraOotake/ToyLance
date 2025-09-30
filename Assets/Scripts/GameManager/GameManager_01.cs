@@ -112,10 +112,12 @@ public class GameManager_01:MonoBehaviour
         // Cameraを取得
         Camera = GameObject.Find("Main Camera");
 
-        CheckPoint = null;//チェックポイント初期化
+
+        //CheckPoint = null;//チェックポイント初期化
 
         Debug.Log("ゲームマネージャーの初期化");
         Debug.Log(SettingPlayerPosFlag);
+
         if (SettingPlayerPosFlag == true)
         {
             // 初期位置設定（例: Playerが見つかった場合）
@@ -147,6 +149,16 @@ public class GameManager_01:MonoBehaviour
         //フラグを初期化
         SettingPlayerPosFlag = false;
     }
+    private static void RestartPosSetting()
+    {
+        if (Player != null && CheckPoint == null)
+        {
+            CheckPoint = null;//チェックポイント初期化
+            CheckPoint = new GameObject();//仮チェックポイントを生成
+            CheckPoint.name = "tempPoint";
+            CheckPoint.transform.position = Player.transform.position;
+        }
+    }
 
     public static GameObject GetPlayer()
     {
@@ -156,6 +168,8 @@ public class GameManager_01:MonoBehaviour
     public static void SetPlayer(GameObject _player)
     {
         Player = _player;
+
+        RestartPosSetting();
     }
     public static GameObject GetCamera()
     {
@@ -249,6 +263,12 @@ public class GameManager_01:MonoBehaviour
             if (_cp)
             {
                 _cp.SetActive(false);//既にあったものはオフ状態に
+            }
+
+            //仮のチェックポイントだったら削除
+            if (CheckPoint.name == "tempPoint")
+            {
+                Destroy(CheckPoint);
             }
         }
 

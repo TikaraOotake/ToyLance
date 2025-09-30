@@ -14,7 +14,11 @@ public class CheckPoint : MonoBehaviour
     private Effecter effecter;
     void Start()
     {
-        _anim = GetComponent<Animator>();
+        if (_anim == null)
+        {
+            _anim = GetComponent<Animator>();
+        }
+
     }
 
     // Update is called once per frame
@@ -46,6 +50,9 @@ public class CheckPoint : MonoBehaviour
             {
                 effecter.GenerateEffect();
             }
+
+            //通過音
+            SEManager.instance.PlaySE("checkpoint");
         }
 
         if (IsActive) return;//既に有効状態なので終了
@@ -57,9 +64,7 @@ public class CheckPoint : MonoBehaviour
             SetActive(true);
             GameManager_01.SetCheckPoint(this.gameObject);
 
-            //通過音
-            SEManager.instance.PlaySE("checkpoint");
-
+            
             //明るくするエフェクト
             if (SoftFlashPrefab != null)
             {
