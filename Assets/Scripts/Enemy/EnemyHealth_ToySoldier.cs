@@ -13,11 +13,15 @@ public class EnemyHealth_ToySoldier : EnemyHealth
 
     private Animator _anim;//アニメーター
 
+    GameObject Player;
+
     private void Start()
     {
         shieldScript = GetComponentInChildren<Enemy_shield>();
 
         _anim = GetComponent<Animator>();
+
+        Player = GameManager_01.GetPlayer();
     }
 
     public override void TakeDamage(int dmg, Vector2 attackerPos, Collider2D _coll, bool doKnockback = true)
@@ -56,29 +60,30 @@ public class EnemyHealth_ToySoldier : EnemyHealth
             return;
         }
 
-        GameObject Player = GameManager_01.GetPlayer();
-        float PlayerPosX = 0.0f;
-        float EnemyPosX = 0.0f;
-        float ShieldPosX = 0.0f;
+        float PlayerPosX = 0.0f;    //プレイヤーのx座標
+        float EnemyPosX = 0.0f;     //敵のx座標
+        float ShieldPosX = 0.0f;    //盾のx座標
 
         if (Player != null && Shield != null && !shieldScript.isBroken) 
         {
+            //それぞれのx座標を取得
             PlayerPosX = Player.transform.position.x;
             EnemyPosX = transform.position.x;
             ShieldPosX = Shield.transform.position.x;
         }
 
-        float minX = Mathf.Min(PlayerPosX, EnemyPosX);
-        float maxX = Mathf.Max(PlayerPosX, EnemyPosX);
+        //プレイヤーのx座標と敵のx座標から
+        float minX = Mathf.Min(PlayerPosX, EnemyPosX);      //最小値
+        float maxX = Mathf.Max(PlayerPosX, EnemyPosX);      //最大値
 
+        //盾のx座標がプレイヤーと敵の間にあるか
         bool isShieldBetween = ShieldPosX > minX && ShieldPosX < maxX;
 
-        //プレイヤーと敵の間に盾がなかったら
+        //盾のx座標がプレイヤーと敵の間にない場合
         if (!isShieldBetween)
         {
             //ダメージ処理
             TakeDamage(dmg, attackerPos, doKnockback);
-            return;
         }
     }
 

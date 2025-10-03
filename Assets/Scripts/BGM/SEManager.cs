@@ -47,13 +47,15 @@ public class SEManager : MonoBehaviour
         }
     }
 
-    
+    //w’è‚µ‚½SE‚ğÄ¶‚·‚é
     public void PlaySE(string seName)
     {
         if (audioSource == null) Debug.Log("audioSource‚ªnull");
 
+        //SE–¼‚É‘Î‰‚·‚éAudioClip‚ğæ“¾
         if (seDictionary.TryGetValue(seName, out AudioClip clip))
         {
+            //Ä¶
             audioSource.PlayOneShot(clip);
         }
         else
@@ -62,13 +64,16 @@ public class SEManager : MonoBehaviour
         }
     }
 
+    //‰æ–Ê“à‚É‚ ‚éSE‚ğÄ¶‚·‚é
     public void PlaySE(string seName, Vector2 targetObject)
+    {
+        //‰æ–Ê“à‚É‚ ‚éê‡
+        if(Collision_Manager.IsPointInsideCollider(Camera.main.GetComponent<Collider2D>(), targetObject))
         {
-            if(Collision_Manager.IsPointInsideCollider(Camera.main.GetComponent<Collider2D>(), targetObject))
-            {
-                PlaySE(seName);
-            }
+            //Ä¶
+            PlaySE(seName);
         }
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -13,6 +13,10 @@ public class Enemy_shield : MonoBehaviour
 
     [SerializeField] private GameObject Enemy;
 
+    GameObject Player;
+
+    SpearAttack spear;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -21,6 +25,8 @@ public class Enemy_shield : MonoBehaviour
         {
             enemyMove = GetComponentInParent<Enemy_move>();
         }
+
+        Player = GameManager_01.GetPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,31 +37,33 @@ public class Enemy_shield : MonoBehaviour
         }
 
         //槍を取得
-        SpearAttack spear = collision.GetComponent<SpearAttack>();
+        spear = collision.GetComponent<SpearAttack>();
         if (spear != null) 
         {
             AttackType attackType= spear.GetAttackType();
             //突き攻撃なら
             if (attackType == AttackType.Trust) 
             {
-                GameObject Player = GameManager_01.GetPlayer();
-                float PlayerPosX = 0.0f;
-                float EnemyPosX = 0.0f;
-                float ShieldPosX = 0.0f;
+                float PlayerPosX = 0.0f;    //プレイヤーのx座標
+                float EnemyPosX = 0.0f;     //敵のx座標
+                float ShieldPosX = 0.0f;    //盾のx座標
 
                 if (Player != null && Enemy != null)
                 {
+                    //それぞれのx座標を取得
                     PlayerPosX = Player.transform.position.x;
                     EnemyPosX = Enemy.transform.position.x;
                     ShieldPosX = transform.position.x;
                 }
 
-                float minX = Mathf.Min(PlayerPosX, ShieldPosX);
-                float maxX = Mathf.Max(PlayerPosX, ShieldPosX);
+                //プレイヤーのx座標と盾のx座標から
+                float minX = Mathf.Min(PlayerPosX, ShieldPosX);     //最小値
+                float maxX = Mathf.Max(PlayerPosX, ShieldPosX);     //最大値
 
+                //敵のx座標がプレイヤーと盾の間にあるか
                 bool isEnemyBetween = EnemyPosX > minX && EnemyPosX < maxX;
 
-                //プレイヤーと敵の間に盾があったら
+                //敵のx座標がプレイヤーと盾の間にない場合
                 if (!isEnemyBetween)
                 {
                     //盾の破壊処理
