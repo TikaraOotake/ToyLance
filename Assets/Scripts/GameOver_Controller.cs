@@ -100,8 +100,6 @@ public class GameOver_Controller : MonoBehaviour
         //UI‚ð•\Ž¦
         LanceUI.alpha = 1.0f;
 
-        //0.5•b‘Ò‚Â
-        //yield return new WaitForSeconds(0.5f);
         //UI‚ð•\Ž¦
         ContinueUI.alpha = 1.0f;
     }

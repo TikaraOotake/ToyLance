@@ -8,6 +8,7 @@ public class DemoPlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //フェードさせるコルーチンを開始
         StartCoroutine(BlindFade());
     }
 
@@ -17,8 +18,10 @@ public class DemoPlay : MonoBehaviour
         
     }
 
+    //フェードさせるコルーチン
     IEnumerator BlindFade()
     {
+        //30秒待つ
         yield return new WaitForSeconds(30.0f);
         GameManager_01.SetBlindFade(true);
 
@@ -26,6 +29,7 @@ public class DemoPlay : MonoBehaviour
         float time = 0.0f;
         float startVolume = BGMManager.instance.baseVolume;
 
+        //音量をフェードする
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -34,13 +38,17 @@ public class DemoPlay : MonoBehaviour
             yield return null;
         }
 
+        //音量を0に
         BGMManager.instance.baseVolume = 0.0f;
 
+        //デモを再生させるコルーチンを開始
         StartCoroutine(PlayDemo());
     }
 
+    //デモを再生させるコルーチン
     IEnumerator PlayDemo()
     {
+        //0.5秒待つ
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Demo");
     }

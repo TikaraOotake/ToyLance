@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class seData
 {
-    public string seName;
-    public AudioClip seClip;
+    public string seName;       //SE–¼
+    public AudioClip seClip;    //SE‰¹
 }
 
 public class SEManager : MonoBehaviour
@@ -17,6 +17,7 @@ public class SEManager : MonoBehaviour
     private Dictionary<string, AudioClip> seDictionary;
     private AudioSource audioSource;
 
+    //ƒVƒ“ƒOƒ‹ƒgƒ“
     public static SEManager instance;
 
     private void Awake()

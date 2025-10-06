@@ -9,13 +9,14 @@ public class Enemy_shield : MonoBehaviour
 
     public bool isBroken = false;   //壊れているかのフラグ
 
-    Animator anim;
+    Animator anim;                  //アニメーター
 
-    [SerializeField] private GameObject Enemy;
-
-    GameObject Player;
+    [SerializeField] 
+    private GameObject Enemy;       //敵
 
     SpearAttack spear;
+
+    EnemyHealth_ToySoldier enemyHealth;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class Enemy_shield : MonoBehaviour
             enemyMove = GetComponentInParent<Enemy_move>();
         }
 
-        Player = GameManager_01.GetPlayer();
+        enemyHealth = GetComponentInParent<EnemyHealth_ToySoldier>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,6 +45,8 @@ public class Enemy_shield : MonoBehaviour
             //突き攻撃なら
             if (attackType == AttackType.Trust) 
             {
+                GameObject Player = GameManager_01.GetPlayer();
+
                 float PlayerPosX = 0.0f;    //プレイヤーのx座標
                 float EnemyPosX = 0.0f;     //敵のx座標
                 float ShieldPosX = 0.0f;    //盾のx座標
@@ -89,7 +92,6 @@ public class Enemy_shield : MonoBehaviour
         //壊れている
         isBroken = true;
 
-        var enemyHealth = GetComponentInParent<EnemyHealth_ToySoldier>();
         if (enemyHealth != null)
         {
             enemyHealth.SetShieldJustBrokeFlag();
@@ -102,7 +104,6 @@ public class Enemy_shield : MonoBehaviour
         }
 
         //非表示
-        //gameObject.SetActive(false);
         StartCoroutine(DelaySetActive(false));
 
         //6秒後に盾を再生
