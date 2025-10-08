@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: NewScrew_Y
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 1281591663, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: -386025911, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: -1111394149, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: 1137557328, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: -1415918454, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: -1411249243, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: -18468423, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: 952641038, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 1
+  m_TileColliderType: 1
+  m_TileAnimationFlags: 0
