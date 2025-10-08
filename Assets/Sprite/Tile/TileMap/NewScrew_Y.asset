@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: NewScrew_Y
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1281591663, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: -386025911, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: -1111394149, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: 1137557328, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: -1415918454, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: -1411249243, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: -18468423, guid: b958bc981911b53428fa71113fd271ac, type: 3}
-  - {fileID: 952641038, guid: b958bc981911b53428fa71113fd271ac, type: 3}
+  - {fileID: 994080074, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: 1823338020, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: 1885324362, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: 1879287893, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: 1785563596, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: 1722192672, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: -1182616004, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
+  - {fileID: -1771200069, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
   m_MinSpeed: 5
   m_MaxSpeed: 5
   m_AnimationStartTime: 0
