@@ -73,7 +73,7 @@ public class Enemy_move : MonoBehaviour
             return;
         }
 
-        nextMove = Random.Range(-1, 2);
+        nextMove = (Random.value < 0.5f) ? -1 : 1;
 
         anim.SetInteger("WalkSpeed", nextMove);
 

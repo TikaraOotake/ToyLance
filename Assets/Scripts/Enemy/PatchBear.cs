@@ -275,27 +275,27 @@ public class PatchBear : MonoBehaviour
         //一旦リセット
         IsWalk = false;
 
+        //if (0.5f >= Random.Range(0.0f, 1.0f))
+        //{
+        //    //待機
+        //    actionStatus = ActionStatus.Idol;
+        //    MoveWay = 0.0f;
+        //}
+        //else
+        //{
+        //移動
+        actionStatus = ActionStatus.Walk;
         if (0.5f >= Random.Range(0.0f, 1.0f))
         {
-            //待機
-            actionStatus = ActionStatus.Idol;
-            MoveWay = 0.0f;
+            //右移動
+            MoveWay = +1.0f;
         }
         else
         {
-            //移動
-            actionStatus = ActionStatus.Walk;
-            if (0.5f >= Random.Range(0.0f, 1.0f))
-            {
-                //右移動
-                MoveWay = +1.0f;
-            }
-            else
-            {
-                //左移動
-                MoveWay = -1.0f;
-            }
+            //左移動
+            MoveWay = -1.0f;
         }
+        //}
 
         //時間セット
         ActionTimer = Random.Range(1.0f, 3.0f);
