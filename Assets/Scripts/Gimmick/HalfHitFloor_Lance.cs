@@ -86,6 +86,12 @@ public class HalfHitFloor_Lance : HalfHitFloor
                 transform.Translate(new Vector2(0.0f, -Time.deltaTime));
             }
         }
+
+        if (FloorCollider == null)
+        {
+            //‘„‚Ì‘«ê”»’è‚ªÁ‚¦‚Ä‚¢‚½ê‡©g‚ğíœ
+            Destroy(this.gameObject);
+        }
     }
 
     private void GenerateReturnLance()

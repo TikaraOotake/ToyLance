@@ -104,7 +104,12 @@ public class Enemy_shield : MonoBehaviour
         }
 
         //”ñ•\¦
-        StartCoroutine(DelaySetActive(false));
+        //gameObject.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(DelaySetActive(false));
+        }
+        
 
         //6•bŒã‚É‚‚ğÄ¶
         Invoke(nameof(RestoreShield), 6f);

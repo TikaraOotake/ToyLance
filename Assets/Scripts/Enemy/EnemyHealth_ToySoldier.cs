@@ -92,7 +92,10 @@ public class EnemyHealth_ToySoldier : EnemyHealth
     public void SetShieldJustBrokeFlag()
     {
         shieldScript.isBroken = true;
-        StartCoroutine(ResetShieldBreakFlag());
+        if(gameObject.activeSelf)
+        {
+            StartCoroutine(ResetShieldBreakFlag());
+        }
     }
 
     private IEnumerator ResetShieldBreakFlag()
