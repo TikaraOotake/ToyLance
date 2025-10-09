@@ -1364,6 +1364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3061105679682817229, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
+      propertyPath: EffectPrefab
+      value: 
+      objectReference: {fileID: 2018524149602447507, guid: a9659cb8c29c84941842e16fc82b1080, type: 3}
     - target: {fileID: 891124082274500740, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1417,6 +1421,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
+--- !u!20 &319407569 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 97144553108170495, guid: a4a1903af97b48d498ba614490614c09, type: 3}
+  m_PrefabInstance: {fileID: 708118829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &375809195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,6 +1465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3061105679682817229, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
+      propertyPath: EffectPrefab
+      value: 
+      objectReference: {fileID: 2018524149602447507, guid: a9659cb8c29c84941842e16fc82b1080, type: 3}
     - target: {fileID: 891124082274500740, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11917,7 +11930,7 @@ Tilemap:
       - {fileID: 1722192672, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
       - {fileID: -1182616004, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
       - {fileID: -1771200069, guid: 77b3d83cf1c4b8a47836f48c4108a0b2, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 7, y: 4, z: 0}
@@ -12451,6 +12464,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8449044425773943287, guid: 346d2aee9eefaaf478e3dbf25b3fac38, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12941,7 +12958,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 319407569}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -13762,7 +13779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06513035
+      value: 0.129
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13955,6 +13972,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3061105679682817229, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
+      propertyPath: EffectPrefab
+      value: 
+      objectReference: {fileID: 2018524149602447507, guid: a9659cb8c29c84941842e16fc82b1080, type: 3}
     - target: {fileID: 891124082274500740, guid: 21bb98323ef805d4c9ab8b8a1c497ba2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -16678,7 +16699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06513035
+      value: 0.129
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17384,7 +17405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06513035
+      value: 0.129
       objectReference: {fileID: 0}
     - target: {fileID: 952342141634879679, guid: f2b7f8b837f81624587752da834e8947, type: 3}
       propertyPath: m_LocalPosition.z

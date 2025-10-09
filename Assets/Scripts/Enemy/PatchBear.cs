@@ -174,9 +174,10 @@ public class PatchBear : MonoBehaviour
     }
     private void Walk()
     {
-        if (CliffCheckColl != null && MoveFlipCoolTimer <= 0.0f)
+        if (CliffCheckColl != null && WallCheckColl != null && MoveFlipCoolTimer <= 0.0f) 
         {
-            if (!Collision_Manager.GetTouchingObjectWithLayer(CliffCheckColl, "Platform"))
+            if (!Collision_Manager.GetTouchingObjectWithLayer(CliffCheckColl, "Platform")
+                || Collision_Manager.GetTouchingObjectWithLayer(WallCheckColl, "Platform")) 
             {
                 MoveFlipCoolTimer = MoveFlipCoolTime;//タイマーセット
                 MoveWay *= -1;//移動方向反転
