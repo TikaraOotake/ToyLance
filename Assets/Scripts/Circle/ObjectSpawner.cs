@@ -6,10 +6,10 @@ public class ObjectSpawner : MonoBehaviour
 {
     public static ObjectSpawner instance;
 
-    [Header("½ºÆù ¼³Á¤")]
+    [Header("½ºÆE¼³Á¤")]
     public GameObject objectToSpawn;
     public Transform[] spawnPoints;
-    public float spawnInterval = 1f; // ½ºÅ©¸°¼¦À» º¸´Ï 1ÃÊ·Î ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+    public float spawnInterval = 1f; // ½ºÅ©¸°¼¦À» º¸´Ï 1ÃÊ·Î ¼³Á¤µÇ¾EÀÖ½À´Ï´Ù.
 
     void Awake()
     {
@@ -19,7 +19,7 @@ public class ObjectSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Áßº¹µÈ ObjectSpawner°¡ ¹ß°ßµÇ¾î »õ·Î »ı±ä °ÍÀ» ÆÄ±«ÇÕ´Ï´Ù.");
+            Debug.LogWarning("Áßº¹µÈ ObjectSpawner°¡ ¹ß°ßµÇ¾E»õ·Î »ı±E°ÍÀ» ÆÄ±«ÇÕ´Ï´Ù.");
             Destroy(gameObject);
             return;
         }
@@ -29,7 +29,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         if (objectToSpawn == null || spawnPoints == null || spawnPoints.Length == 0)
         {
-            Debug.LogError("ObjectSpawner ½ºÅ©¸³Æ®¿¡ ÇÊ¿äÇÑ ¿ÀºêÁ§Æ®³ª ½ºÆù À§Ä¡°¡ ÁöÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("ObjectSpawner ½ºÅ©¸³Æ®¿¡ ÇÊ¿äÇÑ ¿ÀºE§Æ®³ª ½ºÆEÀ§Ä¡°¡ ÁöÁ¤µÇÁE¾Ê¾Ò½À´Ï´Ù.");
             return;
         }
 
@@ -48,10 +48,10 @@ public class ObjectSpawner : MonoBehaviour
     // ¡Ú¡Ú¡Ú ÀÌ ºÎºĞÀÌ ¼öÁ¤µÈ ÇÔ¼öÀÔ´Ï´Ù ¡Ú¡Ú¡Ú
     void SpawnObject()
     {
-        // 'spawnPoints' ¸ñ·Ï¿¡ ÀÖ´Â ¸ğµç ÁöÁ¡À» ¼øÈ¸ÇÕ´Ï´Ù.
+        // 'spawnPoints' ¸ñ·Ï¿¡ ÀÖ´Â ¸ğµEÁöÁ¡À» ¼øÈ¸ÇÕ´Ï´Ù.
         foreach (Transform point in spawnPoints)
         {
-            // °¢ ÁöÁ¡(point)ÀÇ À§Ä¡¿¡ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÕ´Ï´Ù.
+            // °¢ ÁöÁ¡(point)ÀÇ À§Ä¡¿¡ ¿ÀºE§Æ®¸¦ »ı¼ºÇÕ´Ï´Ù.
             if (point != null)
             {
                 Instantiate(objectToSpawn, point.position, point.rotation);
