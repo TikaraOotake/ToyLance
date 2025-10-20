@@ -41,11 +41,11 @@ public class StageName_UI : MonoBehaviour
         //表示タイマーが切れたら徐々に透明化
         if (DisplayTimer <= 0.0f)
         {
-            alpha = Mathf.Max(0.0f, alpha - Time.deltaTime * 0.5f);
+            alpha = Mathf.Max(0.0f, alpha - Time.deltaTime * 1.0f);
         }
         else if(DisplayTimer >= 4.0f)
         {
-            alpha = Mathf.Min(1.0f, alpha + Time.deltaTime * 0.5f);
+            alpha = Mathf.Min(1.0f, alpha + Time.deltaTime * 1.0f);
         }
     }
 }
