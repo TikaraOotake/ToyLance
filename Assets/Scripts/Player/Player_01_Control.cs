@@ -564,17 +564,25 @@ public class Player_01_Control : MonoBehaviour
             }
 
             //着地判定が敵と接触したらキャンセル処理
-            if (GetTouchingObjectWithLayer(LandingCheckCollider, "Enemy") && AtkTimer <= 0.8f)
+            if (AttackObj != null)//nullチェック
             {
-                if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 1.5f);//通常ジャンプより少し高く跳ねる
+                Collider2D coll = AttackObj.GetComponent<Collider2D>();
+                if (coll != null)
+                {
+                    //敵と接触しているか調べる
+                    if (GetTouchingObjectWithLayer(coll, "Enemy") && AtkTimer <= 0.8f)
+                    {
+                        if (_rb) _rb.velocity = new Vector2(0.0f, JumpValue * 1.5f);//通常ジャンプより少し高く跳ねる
 
-                //マネージャーにカメラ振動依頼
-                CameraManager.SetShakeCamera();
+                        //マネージャーにカメラ振動依頼
+                        CameraManager.SetShakeCamera();
 
-                AtkTimer = 0.0f;//タイマーを0に
+                        AtkTimer = 0.0f;//タイマーを0に
 
-                //落下攻撃音
-                SEManager.instance.PlaySE("fall");
+                        //落下攻撃音
+                        SEManager.instance.PlaySE("fall");
+                    }
+                }
             }
 
             if (IsLanding != IsLanding_old && IsLanding == true)//着地した瞬間だけ
@@ -606,6 +614,22 @@ public class Player_01_Control : MonoBehaviour
             {
                 IsThrustAtk = true;//刺突攻撃Anim
             }
+
+            //攻撃判定が敵と接触していたら移動量を(ほぼ)0に
+            if (AttackObj != null)//nullチェック
+            {
+                Collider2D coll = AttackObj.GetComponent<Collider2D>();
+                if (coll != null)
+                {
+                    //敵と接触しているか調べる
+                    if (GetTouchingObjectWithLayer(coll, "Enemy"))
+                    {
+                        //移動量を極端に減衰させる
+                        AttackMoveValue = Mathf.Max(0.0f, AttackMoveValue - AttackMoveValueDecayRate * Time.deltaTime * 2.0f);
+                    }
+                }
+            }
+
 
             if (AtkTimer <= 0.9f)
             {
