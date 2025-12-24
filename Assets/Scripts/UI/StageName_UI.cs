@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class StageName_UI : MonoBehaviour
 {
     private Image image;
+    private Text text;
+    private Outline outline;
 
     [SerializeField]
     private float alpha = 0.0f;
@@ -16,12 +18,25 @@ public class StageName_UI : MonoBehaviour
     {
         //イメージコンポ取得
         image = GetComponent<Image>();
+        text = GetComponent<Text>();
+        outline = GetComponent<Outline>();
 
-        if (image != null)
+        if (image != null) 
         {
             Color color = image.color;
             color.a = alpha;
             image.color = color;
+        }
+
+        if(text != null || outline != null)
+        {
+            Color textcolor = text.color;
+            textcolor.a = alpha;
+            text.color = textcolor;
+
+            Color outlinecolor = outline.effectColor;
+            outlinecolor.a = alpha;
+            outline.effectColor = outlinecolor;
         }
     }
 
@@ -31,11 +46,22 @@ public class StageName_UI : MonoBehaviour
         //タイマー更新
         DisplayTimer = Mathf.Max(0.0f, DisplayTimer - Time.deltaTime);
 
-        if (image != null)
+        if (image != null) 
         {
             Color color = image.color;
             color.a = alpha;
             image.color = color;
+        }
+
+        if(text != null || outline != null)
+        {
+            Color textcolor = text.color;
+            textcolor.a = alpha;
+            text.color = textcolor;
+
+            Color outlinecolor = outline.effectColor;
+            outlinecolor.a = alpha;
+            outline.effectColor = outlinecolor;
         }
 
         //表示タイマーが切れたら徐々に透明化
